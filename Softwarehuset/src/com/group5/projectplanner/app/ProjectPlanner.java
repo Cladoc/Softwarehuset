@@ -1,4 +1,4 @@
-package ProjectPlanner;
+package com.group5.projectplanner.app;
 
 public class ProjectPlanner {
 	// Hej Casper
