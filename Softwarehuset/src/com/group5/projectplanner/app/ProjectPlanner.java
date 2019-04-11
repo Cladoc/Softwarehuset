@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ProjectPlanner {
 	List developers; //list of developers
 	List projects; //list of projects
-	public static void addDeveloper() {
+	public static void addDeveloper(Developer developer) {
 		
 	}
 	public static void addProject() {
