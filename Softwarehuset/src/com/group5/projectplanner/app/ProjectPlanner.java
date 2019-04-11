@@ -10,9 +10,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 
-//import Developer
-//import Project
-
 public class ProjectPlanner {
 	private Calendar calendar;
 	private List<Developer> developers = new ArrayList<>(); //list of developers
@@ -33,6 +30,7 @@ public class ProjectPlanner {
 		projectMapping.put(project, projectID);
 		System.out.println(projectMapping.get(project));
 	}
+	
 	public boolean checkProjectExist(Project project) {
 		return projectMapping.containsKey(project);
 	}

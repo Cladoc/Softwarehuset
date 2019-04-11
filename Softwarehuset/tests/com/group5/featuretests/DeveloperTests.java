@@ -28,15 +28,20 @@ public class DeveloperTests {
 	}
 
 	@When("the developer adds a project with the name {string} and start year of {int}")
-	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String string, Integer int1) {
+	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String name, int year) {
 	    project = new Project();
+	    project.setName(name);
+		project.setStartYear(year);
 	    projectPlanner.addProject(project);
 	    assertTrue(projectPlanner.checkProjectExist(project));
 	}
 
 	@Then("the project with the name {string} and start year of {int} is added to the project planner")
-	public void theProjectWithTheNameAndStartYearOfIsAddedToTheProjectPlanner(String string, Integer int1) {
+	public void theProjectWithTheNameAndStartYearOfIsAddedToTheProjectPlanner(String name, int year) {
 	    // Write code here that turns the phrase above into concrete actions
+	    assertTrue(project.getName().equals(name));
+		assertTrue(project.getStartYear()==year);
+		assertTrue(projectPlanner.checkProjectExist(project));
 	    throw new cucumber.api.PendingException();
 	}
 
@@ -68,7 +73,5 @@ public class DeveloperTests {
 	public void heGetsAnErrorMessageOf(String string) {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
-	}
-	
-	
+	}	
 }
