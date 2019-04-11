@@ -4,6 +4,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.group5.projectplanner.app.ProjectPlanner;
@@ -28,7 +29,11 @@ public class DeveloperTests {
 	}
 
 	@When("the developer adds a project with the name {string} and start year of {int}")
-	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String string, Integer int1) {
+	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String name, Integer year) {
+		project = new Project();
+		project.setName(name);
+		project.setStartYear(year);
+		projectPlanner.addProject(project);
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
@@ -36,6 +41,9 @@ public class DeveloperTests {
 	@Then("the project with the name {string} and start year of {int} is added to the project planner")
 	public void theProjectWithTheNameAndStartYearOfIsAddedToTheProjectPlanner(String string, Integer int1) {
 	    // Write code here that turns the phrase above into concrete actions
+		assertEquals(title, project.getName());
+		assertEquals(author, project.getStartYear());
+		assertTrue(projectPlanner.checkProjectExist(project));
 	    throw new cucumber.api.PendingException();
 	}
 

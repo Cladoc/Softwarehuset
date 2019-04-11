@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ProjectPlanner {
 	private List<Developer> developers = new ArrayList<>(); //list of developers
-	//List projects //list of projects
+	private List<Project> projects = new ArrayList<>();//List projects //list of projects
 	public void addDeveloper(Developer developer) {
 		developers.add(developer);
 	}
@@ -17,11 +17,11 @@ public class ProjectPlanner {
 		return(developers.contains(developer));
 	}
 	
-	public static void addProject() {
-		
+	public void addProject(Project project) {
+		projects.add(project);
 	}
-	public static void checkProjectExist() {
-		
+	public boolean checkProjectExist(Project project) {
+		return(projects.contains(project));
 	}
 	
 }
