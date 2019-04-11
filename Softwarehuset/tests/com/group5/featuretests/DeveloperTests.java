@@ -5,13 +5,13 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static org.junit.Assert.assertTrue;
-
-import com.group5.projectplanner.app.ProjectPlanner;
-import com.group5.projectplanner.app.Developer;
+import static org.junit.Assert.assertFalse;
+import com.group5.projectplanner.app.*;
 
 public class DeveloperTests {
-	Developer developer;
 	ProjectPlanner projectPlanner;
+	Developer developer;
+	Project project;
 	
 	public DeveloperTests(ProjectPlanner projectPlanner){
 		this.projectPlanner = projectPlanner;
@@ -29,8 +29,9 @@ public class DeveloperTests {
 
 	@When("the developer adds a project with the name {string} and start year of {int}")
 	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String string, Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    project = new Project();
+	    projectPlanner.addProject(project);
+	    assertTrue(projectPlanner.checkProjectExist(project));
 	}
 
 	@Then("the project with the name {string} and start year of {int} is added to the project planner")

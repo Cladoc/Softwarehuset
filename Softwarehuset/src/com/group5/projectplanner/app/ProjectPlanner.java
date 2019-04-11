@@ -1,14 +1,25 @@
 package com.group5.projectplanner.app;
 import java.util.List;
+import java.util.Map;
+
+import javax.xml.ws.Holder;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 
 //import Developer
 //import Project
 
 public class ProjectPlanner {
+	private Calendar calendar;
 	private List<Developer> developers = new ArrayList<>(); //list of developers
-	//List projects //list of projects
+	private Map<Project, Integer> projectMapping = new HashMap<Project, Integer>(); 
+	private int serial = 0;
+	private int year = 0;
+	
 	public void addDeveloper(Developer developer) {
 		developers.add(developer);
 	}
@@ -17,11 +28,25 @@ public class ProjectPlanner {
 		return(developers.contains(developer));
 	}
 	
-	public static void addProject() {
-		
+	public void addProject(Project project) {
+		Integer projectID = computeProjectID();
+		projectMapping.put(project, projectID);
+		System.out.println(projectMapping.get(project));
 	}
-	public static void checkProjectExist() {
-		
+	public boolean checkProjectExist(Project project) {
+		return projectMapping.containsKey(project);
+	}
+	
+	Integer computeProjectID(){
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR); 
+		if(year < currentYear){
+			serial = 0;
+			year = currentYear;
+		}
+		int number = currentYear*100 + serial;
+		serial++;
+		Integer projectID = new Integer(number);
+		return projectID;
 	}
 	
 }
