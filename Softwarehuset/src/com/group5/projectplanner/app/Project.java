@@ -10,7 +10,7 @@ public class Project {
 	public List<Activity> activities = new ArrayList<Activity> ();
 	
 	public boolean checkProjectLeader(){
-		// 
+		// yo please work
 		return true;
 	}
 	
