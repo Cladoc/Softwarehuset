@@ -7,18 +7,21 @@ import java.util.ArrayList;
 //import Project
 
 public class ProjectPlanner {
-	List developers; //list of developers
-	List projects; //list of projects
-	public static void addDeveloper(Developer developer) {
-		
+	private List<Developer> developers = new ArrayList<>(); //list of developers
+	//List projects //list of projects
+	public void addDeveloper(Developer developer) {
+		developers.add(developer);
 	}
+	
+	public boolean checkDeveloperExist(Developer developer) {
+		return(developers.contains(developer));
+	}
+	
 	public static void addProject() {
 		
 	}
 	public static void checkProjectExist() {
 		
 	}
-	public static void checkDeveloperExist() {
-		
-	}
+	
 }

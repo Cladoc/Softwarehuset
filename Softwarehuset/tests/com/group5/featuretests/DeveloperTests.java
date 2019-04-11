@@ -4,13 +4,27 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class developerTests {
+import static org.junit.Assert.assertTrue;
 
+import com.group5.projectplanner.app.ProjectPlanner;
+import com.group5.projectplanner.app.Developer;
 
+public class DeveloperTests {
+	Developer developer;
+	ProjectPlanner projectPlanner;
+	
+	public DeveloperTests(ProjectPlanner projectPlanner){
+		this.projectPlanner = projectPlanner;
+	}
+	
 	@Given("that a developer is registered in the project planner")
 	public void thatADeveloperIsRegisteredInTheProjectPlanner() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+		developer = new Developer();
+		developer.setID("abcd");
+		assertTrue(developer.getID().equals("abcd"));
+		projectPlanner.addDeveloper(developer);
+		assertTrue(projectPlanner.checkDeveloperExist(developer));
+		return;
 	}
 
 	@When("the developer adds a project with the name {string} and start year of {int}")
