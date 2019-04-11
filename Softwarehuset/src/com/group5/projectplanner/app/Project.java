@@ -9,4 +9,8 @@ public class Project {
 	public int end;
 	public List<Activity> activities = new ArrayList<Activity> ();
 	
+	public boolean checkProjectLeader(){
+		// 
+		return true;
+	}
 }
