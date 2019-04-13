@@ -1,7 +1,7 @@
 package com.group5.projectplanner.app;
 
 
-public class Activity {
+public abstract class Activity {
 	String name;
 	double hours;
 	int startDate;

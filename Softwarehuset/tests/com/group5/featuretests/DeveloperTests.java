@@ -12,9 +12,11 @@ public class DeveloperTests {
 	ProjectPlanner projectPlanner;
 	Developer developer;
 	Project project;
+	ErrorMessageHolder errorMessageHolder;
 	
-	public DeveloperTests(ProjectPlanner projectPlanner){
+	public DeveloperTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder){
 		this.projectPlanner = projectPlanner;
+		this.errorMessageHolder = errorMessageHolder;
 	}
 	
 	@Given("that a developer is registered in the project planner")
@@ -27,51 +29,46 @@ public class DeveloperTests {
 		return;
 	}
 
-	@When("the developer adds a project with the name {string} and start year of {int}")
-	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String name, int year) {
-	    project = new Project();
+	@When("the developer adds a project with the name {string} and start year of {string}")
+	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String name, String year) throws Exception, FormattingException, OperationNotAllowedException {
+		project = new Project();
 	    project.setName(name);
-		project.setStartYear(year);
-	    projectPlanner.addProject(project);
-	    assertTrue(projectPlanner.checkProjectExist(project));
+	    try{
+	    	project.setStartYear(year);
+	    }catch (FormattingException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	    try{
+	    	projectPlanner.addProject(project, developer);
+	    }catch (OperationNotAllowedException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
 	}
-
+	
+	
 	@Then("the project with the name {string} and start year of {int} is added to the project planner")
 	public void theProjectWithTheNameAndStartYearOfIsAddedToTheProjectPlanner(String name, int year) {
-	    // Write code here that turns the phrase above into concrete actions
 	    assertTrue(project.getName().equals(name));
 		assertTrue(project.getStartYear()==year);
 		assertTrue(projectPlanner.checkProjectExist(project));
-	    throw new cucumber.api.PendingException();
-	}
-
-	@When("the developer adds a project with the name {string} and start year of {string}")
-	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String string, String string2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
 	}
 
 	@Then("he gets the error message {string}")
-	public void heGetsTheErrorMessage(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	public void heGetsTheErrorMessage(String error) {
+	    assertTrue(errorMessageHolder.getErrorMessage().equals(error));
 	}
 
-	@Given("a project is registered with the name {string} When the developer adds a project with the name {string} and start year of {int}")
-	public void aProjectIsRegisteredWithTheNameWhenTheDeveloperAddsAProjectWithTheNameAndStartYearOf(String string, String string2, Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	@Given("a project is registered with the name {string}")
+	public void aProjectIsRegisteredWithTheName(String name) throws Exception, FormattingException, OperationNotAllowedException {
+		project = new Project();
+	    project.setName(name);
+	    project.setStartYear("2020");
+	    projectPlanner.addProject(project, developer);
 	}
-
+	
 	@Given("that a developer is not registered in the project planner")
 	public void thatADeveloperIsNotRegisteredInTheProjectPlanner() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    developer = new Developer();
+	    developer.setID("abcd");
 	}
-
-	@Then("he gets an error message of {string}")
-	public void heGetsAnErrorMessageOf(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
-	}	
 }

@@ -13,7 +13,7 @@ import cucumber.api.junit.Cucumber;
 	snippets = SnippetType.CAMELCASE, 
 	glue = { "com.group5.featuretests"})
 
-public class TestRunner {
+public class ProjTestRunner {
 	
 	}
 

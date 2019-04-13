@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
-
+//Author: Casper Egholm Jørgensen (s163950)
 public class ProjectPlanner {
 	private Calendar calendar;
 	private List<Developer> developers = new ArrayList<>(); //list of developers
@@ -25,10 +25,18 @@ public class ProjectPlanner {
 		return(developers.contains(developer));
 	}
 	
-	public void addProject(Project project) {
-		Integer projectID = computeProjectID();
-		projectMapping.put(project, projectID);
-		System.out.println(projectMapping.get(project));
+	public void addProject(Project project, Developer developer) throws OperationNotAllowedException{
+		if(checkDeveloperExist(developer)){
+			if(projectAlreadyExists(project.getName())){
+				throw new OperationNotAllowedException("A project with the specified name is already registered");
+			}else{
+				Integer projectID = computeProjectID();
+				projectMapping.put(project, projectID);
+			}
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+		
 	}
 	
 	public boolean checkProjectExist(Project project) {
@@ -45,6 +53,15 @@ public class ProjectPlanner {
 		serial++;
 		Integer projectID = new Integer(number);
 		return projectID;
+	}
+	
+	public boolean projectAlreadyExists(String name){
+		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
+			if(entry.getKey().getName().equalsIgnoreCase(name)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

@@ -2,12 +2,11 @@ package com.group5.projectplanner.app;
 import java.util.*;
 
 public class Project {
-	public int projectID;
-	public String projectName;
-	public Developer leader;
-	public int startYear;
-	public int end;
-	public List<Activity> activities = new ArrayList<Activity> ();
+	private int projectID;
+	private String projectName;
+	private Developer leader;
+	private int startYear;
+	private List<Activity> activities = new ArrayList<Activity> ();
 	
 	public void setID(int id) {
 		this.projectID = id;
@@ -17,8 +16,17 @@ public class Project {
 		this.projectName = name;
 	}
 	
-	public void setStartYear(int start) {
-		this.startYear = start;
+	public void setStartYear(String start) throws Exception, FormattingException {
+		try{
+			int number = Integer.parseInt(start);
+			if(number < 1000 || number > 9999)
+			{
+				throw new FormattingException("Incorrect date format");
+			}
+			this.startYear = number;
+		}catch (Exception e){
+			throw new FormattingException("Incorrect date format");
+		}
 	}
 	
 	public int getID() {
@@ -33,8 +41,6 @@ public class Project {
 		return this.startYear;
 	}
 	
-	
-	
 	public boolean checkProjectLeader(Developer developer){
 		if(this.leader == developer) {
 			return true;
@@ -43,39 +49,4 @@ public class Project {
 			return false; 
 		}
 	}
-	
-	public void addActivity() {
-		// adds activity to the activity list
-	}
-	
-	public boolean checkActivityExist() {
-		// Checks if an activity exists
-		// return(developers.contains(developer));
-		return true;
-	}
-	
-	public void editActivityStartDate() {
-		// Edits the start date of a given activity
-	}
-	
-	public void editActivityEndDate() {
-		
-	}
-	
-	public void addDeveloperToActivity() {
-		
-	}
-	
-	public void setActivityComplete() {
-		
-	}
-	
-	public void checkIncompleteACtivities() {
-		
-	}
-	
-	public void setExpectedWorkHours() {
-		
-	}
-
 }
