@@ -19,6 +19,7 @@ public class DeveloperTests {
 		this.errorMessageHolder = errorMessageHolder;
 	}
 
+	//CreateProject
 	@Given("that a developer is registered in the project planner")
 	public void thatADeveloperIsRegisteredInTheProjectPlanner() {
 		developer = new Developer();
@@ -71,4 +72,48 @@ public class DeveloperTests {
 	    developer = new Developer();
 	    developer.setID("abcd");
 	}
+	
+	//SetProjectLeader
+	
+	@Given("a developer with ID {string} is registered in the project planner")
+	public void aDeveloperWithIDIsRegisteredInTheProjectPlanner(String id) {
+		developer = new Developer();
+		developer.setID(id);
+		assertTrue(developer.getID().equals(id));
+		projectPlanner.addDeveloper(developer);
+		assertTrue(projectPlanner.checkDeveloperExist(developer));
+		return;
+	}
+	
+	@Given("a project is registered in the project planner")
+	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException {
+	    project = new Project();
+	    project.setName("Test");
+	    project.setStartYear("2020");
+	    projectPlanner.addProject(project, developer);
+	    assertTrue(projectPlanner.checkProjectExist(project));
+	}
+
+	@When("the developer sets himself as project leader on the project")
+	public void theDeveloperSetsHimselfAsProjectLeaderOnTheProject() throws OperationNotAllowedException, Exception, FormattingException {
+	    projectPlanner.setProjectLeader(project, developer);
+	}
+
+	@Then("the project has project leader with ID {string}")
+	public void theProjectHasProjectLeaderWithID(String string) throws Exception, FormattingException {
+	    assertTrue(projectPlanner.isProjectLeader(project, developer));
+	}
+	
+	@When("the developer sets developer with ID {string} as project leader in the project")
+	public void theDeveloperSetsDeveloperWithIDAsProjectLeaderInTheProject(String badID) throws Exception, FormattingException {
+	    Developer badDeveloper = new Developer();
+	    badDeveloper.setID(badID);
+	    try{
+	    	projectPlanner.setProjectLeader(project, badDeveloper);
+	    } catch (OperationNotAllowedException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	}
+	
+	
 }

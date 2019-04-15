@@ -22,7 +22,7 @@ public class ProjectPlanner {
 	}
 	
 	public boolean checkDeveloperExist(Developer developer) {
-		return(developers.contains(developer));
+		return developers.contains(developer);
 	}
 	
 	public void addProject(Project project, Developer developer) throws OperationNotAllowedException{
@@ -55,7 +55,41 @@ public class ProjectPlanner {
 		return projectID;
 	}
 	
-	public boolean projectAlreadyExists(String name){
+	
+	
+	public void setProjectLeader(Project project, Developer developer) throws Exception, FormattingException, OperationNotAllowedException {
+		if(checkDeveloperExist(developer)){
+			Project projectRef = getProjectRef(project);
+			if(projectRef.getID() == -1 && projectRef.getName() == "null"){
+				throw new OperationNotAllowedException("Project does not exist");
+			}else{
+				projectRef.setProjectLeader(developer);
+			}
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+	
+	public boolean isProjectLeader(Project project, Developer developer) throws Exception, FormattingException {
+		Project projectRef = getProjectRef(project);
+		return projectRef.isProjectLeader(developer);
+	}
+	
+	//Helper methods
+	private Project getProjectRef(Project project) throws Exception, FormattingException{
+		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
+			if(entry.getKey().getName().equalsIgnoreCase(project.getName())){
+				return entry.getKey();
+			}
+		}
+		Project nullProject = new Project();
+		project.setID(-1);
+		project.setName("null");
+		project.setStartYear("null");
+		return nullProject;
+	}
+	
+	private boolean projectAlreadyExists(String name){
 		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
 			if(entry.getKey().getName().equalsIgnoreCase(name)){
 				return true;
@@ -63,5 +97,9 @@ public class ProjectPlanner {
 		}
 		return false;
 	}
+
+	
+
+	
 	
 }

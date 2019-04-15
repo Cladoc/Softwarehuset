@@ -49,4 +49,12 @@ public class Project {
 			return false; 
 		}
 	}
+
+	public void setProjectLeader(Developer developer) {
+		leader = developer;
+	}
+
+	public boolean isProjectLeader(Developer developer) {
+		return leader.getID().equals(developer.getID());
+	}
 }
