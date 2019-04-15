@@ -13,12 +13,12 @@ public class DeveloperTests {
 	Developer developer;
 	Project project;
 	ErrorMessageHolder errorMessageHolder;
-	
+
 	public DeveloperTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder){
 		this.projectPlanner = projectPlanner;
 		this.errorMessageHolder = errorMessageHolder;
 	}
-	
+
 	@Given("that a developer is registered in the project planner")
 	public void thatADeveloperIsRegisteredInTheProjectPlanner() {
 		developer = new Developer();
@@ -65,7 +65,7 @@ public class DeveloperTests {
 	    project.setStartYear("2020");
 	    projectPlanner.addProject(project, developer);
 	}
-	
+
 	@Given("that a developer is not registered in the project planner")
 	public void thatADeveloperIsNotRegisteredInTheProjectPlanner() {
 	    developer = new Developer();
