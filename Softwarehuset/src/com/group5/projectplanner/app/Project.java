@@ -12,8 +12,16 @@ public class Project {
 		this.projectID = id;
 	}
 	
+	public int getID() {
+		return this.projectID;
+	}
+	
 	public void setName(String name) {
 		this.projectName = name;
+	}
+	
+	public String getName() {
+		return this.projectName;
 	}
 	
 	//Author: Casper (s163950)
@@ -30,34 +38,15 @@ public class Project {
 		}
 	}
 	
-	
-	public int getID() {
-		return this.projectID;
-	}
-	
-	public String getName() {
-		return this.projectName;
-	}
-	
 	public int getStartYear() {
 		return this.startYear;
-	}
-	
-	public boolean checkProjectLeader(Developer developer){
-		if(this.leader == developer) {
-			return true;
-		}
-		else {
-			return false; 
-		}
 	}
 
 	public void setProjectLeader(Developer developer) {
 		leader = developer;
 	}
 
-	//Author: Casper (s163950)
 	public boolean isProjectLeader(Developer developer) {
-		return leader.getID().equals(developer.getID());
+		return leader.equals(developer);
 	}
 }

@@ -27,6 +27,7 @@ public class ProjectPlanner {
 	}
 	
 	public boolean checkDeveloperExist(Developer developer) {
+		//contains() uses object's equals() method
 		return developers.contains(developer);
 	}
 	
@@ -42,35 +43,25 @@ public class ProjectPlanner {
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
-		
 	}
 	
 	public boolean checkProjectExist(Project project) {
 		return projectMapping.containsKey(project);
 	}
 	
-	//Author: Anders (s163952)
-	Integer computeProjectID(){
-		int currentYear = Calendar.getInstance().get(Calendar.YEAR); 
-		if(year < currentYear){
-			serial = 0;
-			year = currentYear;
-		}
-		int number = currentYear*100 + serial;
-		serial++;
-		Integer projectID = new Integer(number);
-		return projectID;
-	}
-	
-	
+
 	//Author: Casper (s163950)
 	public void setProjectLeader(Project project, Developer developer) throws Exception, FormattingException, OperationNotAllowedException {
 		if(checkDeveloperExist(developer)){
-			Project projectRef = getProjectRef(project);
-			if(projectRef.getID() == -1 && projectRef.getName() == "null"){
+			boolean leaderSet = false;
+			for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
+				if(entry.getKey().getName().equalsIgnoreCase(project.getName())){
+					entry.getKey().setProjectLeader(developer);
+					leaderSet = true;
+				}
+			}
+			if(!leaderSet){
 				throw new OperationNotAllowedException("Project does not exist");
-			}else{
-				projectRef.setProjectLeader(developer);
 			}
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
@@ -78,25 +69,32 @@ public class ProjectPlanner {
 	}
 	
 	public boolean isProjectLeader(Project project, Developer developer) throws Exception, FormattingException {
-		Project projectRef = getProjectRef(project);
-		return projectRef.isProjectLeader(developer);
-	}
-	
-	//Helper methods:------------------------------------
-	
-	//Author: Casper (s163950)
-	private Project getProjectRef(Project project) throws Exception, FormattingException{
 		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
 			if(entry.getKey().getName().equalsIgnoreCase(project.getName())){
-				return entry.getKey();
+				return entry.getKey().isProjectLeader(developer);
 			}
 		}
-		Project nullProject = new Project();
-		project.setID(-1);
-		project.setName("null");
-		project.setStartYear("null");
-		return nullProject;
+		return false;
 	}
+	
+	
+	//Internal methods:----------------------------------
+	//Author: Anders (s163952)
+		private Integer computeProjectID(){
+			int currentYear = Calendar.getInstance().get(Calendar.YEAR); 
+			if(year < currentYear){
+				serial = 0;
+				year = currentYear;
+			}
+			int number = currentYear*100 + serial;
+			serial++;
+			Integer projectID = new Integer(number);
+			return projectID;
+		}
+	
+	
+	
+	//Helper methods:------------------------------------
 	
 	//Author: Casper (s163950)
 	private boolean projectAlreadyExists(String name){
