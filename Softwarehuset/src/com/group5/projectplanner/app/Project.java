@@ -16,6 +16,7 @@ public class Project {
 		this.projectName = name;
 	}
 	
+	//Author: Casper (s163950)
 	public void setStartYear(String start) throws Exception, FormattingException {
 		try{
 			int number = Integer.parseInt(start);
@@ -28,6 +29,7 @@ public class Project {
 			throw new FormattingException("Incorrect date format");
 		}
 	}
+	
 	
 	public int getID() {
 		return this.projectID;
@@ -54,6 +56,7 @@ public class Project {
 		leader = developer;
 	}
 
+	//Author: Casper (s163950)
 	public boolean isProjectLeader(Developer developer) {
 		return leader.getID().equals(developer.getID());
 	}

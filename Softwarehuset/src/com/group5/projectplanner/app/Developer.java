@@ -5,13 +5,13 @@ public class Developer {
 
 	public void setID(String string) {
 		this.developerID = string;
-		return; //????
 	}
 
 	public String getID() {
 		return this.developerID;
 	}
 	
+	//Author: Casper (s163950)
 	@Override
 	public boolean equals(Object obj){
 		if(obj instanceof Developer){

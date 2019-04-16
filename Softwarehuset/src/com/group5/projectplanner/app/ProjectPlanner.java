@@ -17,14 +17,20 @@ public class ProjectPlanner {
 	private int serial = 0;
 	private int year = 0;
 	
-	public void addDeveloper(Developer developer) {
-		developers.add(developer);
+	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
+		if(checkDeveloperExist(developer)){
+			throw new OperationNotAllowedException("ID already exists");
+		}else{
+			developers.add(developer);
+		}
+		
 	}
 	
 	public boolean checkDeveloperExist(Developer developer) {
 		return developers.contains(developer);
 	}
 	
+	//Author: Casper (s163950)
 	public void addProject(Project project, Developer developer) throws OperationNotAllowedException{
 		if(checkDeveloperExist(developer)){
 			if(projectAlreadyExists(project.getName())){
@@ -43,6 +49,7 @@ public class ProjectPlanner {
 		return projectMapping.containsKey(project);
 	}
 	
+	//Author: Anders (s163952)
 	Integer computeProjectID(){
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR); 
 		if(year < currentYear){
@@ -56,7 +63,7 @@ public class ProjectPlanner {
 	}
 	
 	
-	
+	//Author: Casper (s163950)
 	public void setProjectLeader(Project project, Developer developer) throws Exception, FormattingException, OperationNotAllowedException {
 		if(checkDeveloperExist(developer)){
 			Project projectRef = getProjectRef(project);
@@ -75,7 +82,9 @@ public class ProjectPlanner {
 		return projectRef.isProjectLeader(developer);
 	}
 	
-	//Helper methods
+	//Helper methods:------------------------------------
+	
+	//Author: Casper (s163950)
 	private Project getProjectRef(Project project) throws Exception, FormattingException{
 		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
 			if(entry.getKey().getName().equalsIgnoreCase(project.getName())){
@@ -89,6 +98,7 @@ public class ProjectPlanner {
 		return nullProject;
 	}
 	
+	//Author: Casper (s163950)
 	private boolean projectAlreadyExists(String name){
 		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
 			if(entry.getKey().getName().equalsIgnoreCase(name)){
@@ -98,8 +108,5 @@ public class ProjectPlanner {
 		return false;
 	}
 
-	
 
-	
-	
 }
