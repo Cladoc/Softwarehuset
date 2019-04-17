@@ -1,3 +1,9 @@
 1)
 Set Project Leader() & checkProjectLeader returns reference. 
 Try to find a pattern that calls these methods in the list without duplicating for loop code and returning reference
+
+Possible patterns to use (add if you find something nice):
+Here is a list: https://www.tutorialspoint.com/design_pattern/index.htm
+1) Singleton pattern for project planner (very simple)
+2) Filter pattern when searching for project
+3) Null Object Pattern (in case needed)
