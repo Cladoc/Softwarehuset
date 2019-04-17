@@ -10,5 +10,6 @@ Here is a list: https://www.tutorialspoint.com/design_pattern/index.htm
 4) Strategy pattern for distinguishing between Developer and Project Leader?
 5) Observer pattern for interface
 6) Decorator pattern for separating checks on Developer ID check and actions
+  - https://stackoverflow.com/questions/20443074/is-there-a-good-design-pattern-for-checking-permissions-when-running-a-method
 
 We've unknowingly used the facade pattern for LibraryApp and ProjectPlanner. Look it up 
