@@ -13,10 +13,14 @@ public class DeveloperTests {
 	Developer developer;
 	Project project;
 	ErrorMessageHolder errorMessageHolder;
+	ProjectHelper projectHelper;
+	DeveloperHelper developerHelper;
 
-	public DeveloperTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder){
+	public DeveloperTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder, ProjectHelper projectHelper, DeveloperHelper developerHelper){
 		this.projectPlanner = projectPlanner;
 		this.errorMessageHolder = errorMessageHolder;
+		this.projectHelper = projectHelper;
+		this.developerHelper = developerHelper;
 	}
 
 	//Add Developer:-----------------------------------------------
@@ -53,9 +57,8 @@ public class DeveloperTests {
 	
 	//Author: Casper (s163950)
 	@Given("that a developer is registered in the project planner")
-	public void thatADeveloperIsRegisteredInTheProjectPlanner() throws OperationNotAllowedException {
-		developer = new Developer();
-		developer.setID("abcd");
+	public void thatADeveloperIsRegisteredInTheProjectPlanner() throws OperationNotAllowedException, Exception, FormattingException {
+		developer = developerHelper.getDeveloper();
 		assertTrue(developer.getID().equals("abcd"));
 		projectPlanner.addDeveloper(developer);
 		assertTrue(projectPlanner.checkDeveloperExist(developer));
@@ -123,9 +126,7 @@ public class DeveloperTests {
 	//Author: Casper (s163950)
 	@Given("a project is registered in the project planner")
 	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException {
-	    project = new Project();
-	    project.setName("Test");
-	    project.setStartYear("2020");
+		project = projectHelper.getProject();
 	    projectPlanner.addProject(project, developer);
 	    assertTrue(projectPlanner.checkProjectExist(project));
 	}

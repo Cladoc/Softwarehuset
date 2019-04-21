@@ -53,7 +53,11 @@ public class Project extends AbstractProject {
 	}
 
 	public boolean isProjectLeader(Developer developer) {
-		return leader.equals(developer);
+		if(leader == null){
+			return false;
+		}else{
+			return leader.equals(developer);
+		}
 	}
 	
 	@Override

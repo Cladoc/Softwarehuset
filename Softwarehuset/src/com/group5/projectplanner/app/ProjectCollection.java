@@ -46,7 +46,11 @@ public class ProjectCollection {
 		AbstractProject abstProj = getProjectRef(project);
 		if(!abstProj.isNil()){
 			Project proj = (Project) abstProj;
-			proj.addProjectActivity(projectActivity);
+			if(proj.isProjectLeader(developer)){
+				proj.addProjectActivity(projectActivity);
+			}else{
+				throw new OperationNotAllowedException("ID not project leader");
+			}
 		}else{
 			throw new NullObjectException("Project does not exist");
 		}

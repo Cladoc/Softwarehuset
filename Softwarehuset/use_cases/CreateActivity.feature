@@ -17,5 +17,5 @@ Scenario: Developer is not project leader
 Given that a developer is registered in the project planner
 And a project is registered in the project planner
 And that he is not project leader on the project
-#When the developer adds an activity with the name "refactoring"
-#Then he gets the error message "ID not project leader"
+When the developer tries to add an activity with the name "refactoring"
+Then he gets the error message "ID not project leader"

@@ -18,15 +18,17 @@ public class LeaderTests {
 	ProjectPlanner projectPlanner;
 	ErrorMessageHolder errorMessageHolder;
 	ProjectHelper projectHelper;
+	DeveloperHelper developerHelper;
 	Developer developer;
 	Project project;
 	ProjectActivity projectActivity;
 	
 	
-	public LeaderTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder, ProjectHelper projectHelper){
+	public LeaderTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder, ProjectHelper projectHelper, DeveloperHelper developerHelper){
 		this.projectPlanner = projectPlanner;
 		this.errorMessageHolder = errorMessageHolder;
-		this. projectHelper = projectHelper;
+		this.projectHelper = projectHelper;
+		this.developerHelper = developerHelper;
 	}
 	
 	@Given("a developer is project leader on a project registered in the project planner")
@@ -72,12 +74,21 @@ public class LeaderTests {
 	    }catch (OperationNotAllowedException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
-	    
 	}
 	
 	@Given("that he is not project leader on the project")
-	public void thatHeIsNotProjectLeaderOnTheProject(){
+	public void thatHeIsNotProjectLeaderOnTheProject() throws Exception, FormattingException{
+		project = projectHelper.getProject();
+		developer = developerHelper.getDeveloper();
 	    assertFalse(projectPlanner.isProjectLeader(project, developer));
 	}
 	
+	@When("the developer tries to add an activity with the name {string}")
+	public void theDeveloperTriesToAddAnActivityWithTheName(String string) throws NullObjectException, OperationNotAllowedException {
+		try{
+			projectPlanner.addActivity(projectActivity, project, developer);
+		}catch (OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
 }
