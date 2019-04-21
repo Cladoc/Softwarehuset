@@ -1,5 +1,6 @@
 package com.group5.projectplanner.app;
 
+//Author: Casper (s163950)
 public abstract class AbstractProject {
 	
 	public abstract void setID(int id);
@@ -10,4 +11,6 @@ public abstract class AbstractProject {
 	public abstract int getStartYear();
 	public abstract boolean equals(Object obj);
 	public abstract boolean isNil();
+	public abstract void setProjectLeader(Developer developer);
+	public abstract boolean isProjectLeader(Developer developer);
 }
