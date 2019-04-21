@@ -42,6 +42,26 @@ public class ProjectCollection {
 		return getProjectRef(project).isProjectLeader(developer);
 	}
 	
+	public void addActivity(ProjectActivity projectActivity, Project project, Developer developer) throws NullObjectException, OperationNotAllowedException{
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			proj.addProjectActivity(projectActivity);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+	
+	public boolean checkActivityExists(ProjectActivity projectActivity, Project project) throws NullObjectException{
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.checkActivityExist(projectActivity);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+	
 	//Internal helper methods
 	private int computeProjectID(){
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR); 
@@ -63,4 +83,10 @@ public class ProjectCollection {
 		}
 		return new NullProject();
 	}
+
+	
+
+	
+
+	
 }

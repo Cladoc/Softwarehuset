@@ -13,4 +13,5 @@ public abstract class AbstractProject {
 	public abstract boolean isNil();
 	public abstract void setProjectLeader(Developer developer);
 	public abstract boolean isProjectLeader(Developer developer);
+
 }

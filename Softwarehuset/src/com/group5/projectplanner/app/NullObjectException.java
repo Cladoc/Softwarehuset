@@ -1,13 +1,14 @@
 package com.group5.projectplanner.app;
-//Author: Casper Egholm Jørgensen (s163950)
-public class OperationNotAllowedException extends Throwable {
+
+public class NullObjectException extends Throwable{
 	String errorMessage = "";
 	
-	public OperationNotAllowedException(String errorMessage){
+	public NullObjectException(String errorMessage){
 		this.errorMessage = errorMessage;
 	}
 	
 	public String getMessage(){
 		return errorMessage;
 	}
+	
 }

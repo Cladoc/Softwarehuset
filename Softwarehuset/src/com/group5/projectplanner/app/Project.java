@@ -2,7 +2,7 @@ package com.group5.projectplanner.app;
 import java.util.*;
 
 public class Project extends AbstractProject {
-	private List<Activity> activities = new ArrayList<Activity> ();
+	private ActivityCollection activities = new ActivityCollection();
 	private int projectID;
 	private String projectName;
 	private Developer leader;
@@ -66,9 +66,16 @@ public class Project extends AbstractProject {
 		}
 	}
 	
-	
 	@Override
 	public boolean isNil(){
 		return false;
+	}
+
+	public void addProjectActivity(ProjectActivity projectActivity) throws OperationNotAllowedException{
+		activities.addActivity(projectActivity);
+	}
+	
+	public boolean checkActivityExist(ProjectActivity projectActivity) {
+		return activities.checkActivityExists(projectActivity);
 	}
 }

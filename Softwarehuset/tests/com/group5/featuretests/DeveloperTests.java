@@ -122,7 +122,7 @@ public class DeveloperTests {
 	}
 	//Author: Casper (s163950)
 	@Given("a project is registered in the project planner")
-	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException {
+	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException {
 	    project = new Project();
 	    project.setName("Test");
 	    project.setStartYear("2020");
@@ -131,7 +131,7 @@ public class DeveloperTests {
 	}
 	//Author: Casper (s163950)
 	@When("the developer sets himself as project leader on the project")
-	public void theDeveloperSetsHimselfAsProjectLeaderOnTheProject() throws OperationNotAllowedException, Exception, FormattingException {
+	public void theDeveloperSetsHimselfAsProjectLeaderOnTheProject() throws Exception, FormattingException, OperationNotAllowedException {
 	    projectPlanner.setProjectLeader(project, developer);
 	}
 	//Author: Casper (s163950)

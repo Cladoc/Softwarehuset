@@ -48,4 +48,13 @@ public class ProjectPlanner {
 		return projects.isProjectLeader(project, developer);
 	}
 
+	public void addActivity(ProjectActivity projectActivity, Project project, Developer developer) throws NullObjectException, OperationNotAllowedException {
+		if(checkDeveloperExist(developer)){
+			projects.addActivity(projectActivity, project, developer);
+		}
+	}
+
+	public boolean checkActivityExists(ProjectActivity projectActivity, Project project) throws NullObjectException {
+		return projects.checkActivityExists(projectActivity, project);
+	}
 }
