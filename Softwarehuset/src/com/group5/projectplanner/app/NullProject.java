@@ -1,10 +1,7 @@
 package com.group5.projectplanner.app;
 
+//Author: Casper (s163950)
 public class NullProject extends AbstractProject{
-	private int projectID;
-	private String projectName;
-	private Developer leader;
-	private int startYear;
 	
 	@Override
 	public void setID(int id) {}
@@ -39,7 +36,12 @@ public class NullProject extends AbstractProject{
 		return true;
 	}
 	
+	@Override
+	public void setProjectLeader(Developer developer){}
 	
-	
+	@Override
+	public boolean isProjectLeader(Developer developer){
+		return false;
+	}
 	
 }

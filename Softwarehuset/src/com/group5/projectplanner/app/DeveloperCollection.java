@@ -3,6 +3,7 @@ package com.group5.projectplanner.app;
 import java.util.ArrayList;
 import java.util.List;
 
+//Author: Casper (s163950)
 public class DeveloperCollection {
 
 	private List<Developer> developers = new ArrayList<>();

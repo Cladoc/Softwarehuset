@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+//Author: Casper (s163950)
 public class ProjectCollection {
 	private int year = 0;
 	private int serial = 0;
@@ -20,35 +21,25 @@ public class ProjectCollection {
 	}
 
 	public boolean checkProjectExist(Project project) {
-		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
-			if(entry.getKey().equals(project)){
-				return true;
-			}
+		if(!getProjectRef(project).isNil()){
+			return true;
+		}else{
+			return false;
 		}
-		return false;
 	}
 	
 	
 	public void setProjectLeader(Project project, Developer developer) throws OperationNotAllowedException {
-		boolean leaderSet = false;
-		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
-			if(entry.getKey().getName().equalsIgnoreCase(project.getName())){
-				entry.getKey().setProjectLeader(developer);
-				leaderSet = true;
-			}
-		}
-		if(!leaderSet){
+		AbstractProject projectToTest = getProjectRef(project);
+		if(!projectToTest.isNil()){
+			projectToTest.setProjectLeader(developer);
+		}else{
 			throw new OperationNotAllowedException("Project does not exist");
 		}
 	}
 	
 	public boolean isProjectLeader(Project project, Developer developer){
-		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
-			if(entry.getKey().getName().equalsIgnoreCase(project.getName())){
-				return entry.getKey().isProjectLeader(developer);
-			}
-		}
-		return false;
+		return getProjectRef(project).isProjectLeader(developer);
 	}
 	
 	//Internal helper methods
@@ -64,4 +55,12 @@ public class ProjectCollection {
 		return projectID;
 	}
 	
+	private AbstractProject getProjectRef(Project project){
+		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
+			if(entry.getKey().equals(project)){
+				return entry.getKey();
+			}
+		}
+		return new NullProject();
+	}
 }

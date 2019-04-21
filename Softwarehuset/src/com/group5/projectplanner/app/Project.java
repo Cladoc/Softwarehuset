@@ -66,8 +66,9 @@ public class Project extends AbstractProject {
 		}
 	}
 	
+	
 	@Override
 	public boolean isNil(){
-		return true;
+		return false;
 	}
 }
