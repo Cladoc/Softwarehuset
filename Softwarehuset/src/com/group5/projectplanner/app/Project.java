@@ -52,6 +52,7 @@ public class Project extends AbstractProject {
 		leader = developer;
 	}
 
+	//Author: Casper (s163950)
 	public boolean isProjectLeader(Developer developer) {
 		if(leader == null){
 			return false;

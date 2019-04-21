@@ -10,6 +10,7 @@ public class ProjectCollection {
 	private int serial = 0;
 	private Map<Project, Integer> projectMapping = new HashMap<Project, Integer>(); //Swap key and value for semantics?
 
+	//Author: Casper (s163950)
 	public void addProject(Project project, Developer developer) throws OperationNotAllowedException {
 		// TODO Auto-generated method stub
 		if(checkProjectExist(project)){
@@ -20,6 +21,7 @@ public class ProjectCollection {
 		}
 	}
 
+	//Author: Casper (s163950)
 	public boolean checkProjectExist(Project project) {
 		if(!getProjectRef(project).isNil()){
 			return true;
@@ -28,7 +30,7 @@ public class ProjectCollection {
 		}
 	}
 	
-	
+	//Author: Casper (s163950)
 	public void setProjectLeader(Project project, Developer developer) throws OperationNotAllowedException {
 		AbstractProject projectToTest = getProjectRef(project);
 		if(!projectToTest.isNil()){
@@ -38,10 +40,12 @@ public class ProjectCollection {
 		}
 	}
 	
+	//Author: Casper (s163950)
 	public boolean isProjectLeader(Project project, Developer developer){
 		return getProjectRef(project).isProjectLeader(developer);
 	}
 	
+	//Author: Casper (s163950)
 	public void addActivity(ProjectActivity projectActivity, Project project, Developer developer) throws NullObjectException, OperationNotAllowedException{
 		AbstractProject abstProj = getProjectRef(project);
 		if(!abstProj.isNil()){
@@ -56,6 +60,7 @@ public class ProjectCollection {
 		}
 	}
 	
+	//Author: Casper (s163950)
 	public boolean checkActivityExists(ProjectActivity projectActivity, Project project) throws NullObjectException{
 		AbstractProject abstProj = getProjectRef(project);
 		if(!abstProj.isNil()){
@@ -79,6 +84,7 @@ public class ProjectCollection {
 		return projectID;
 	}
 	
+	//Author: Casper (s163950)
 	private AbstractProject getProjectRef(Project project){
 		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
 			if(entry.getKey().equals(project)){
@@ -87,10 +93,5 @@ public class ProjectCollection {
 		}
 		return new NullProject();
 	}
-
-	
-
-	
-
 	
 }

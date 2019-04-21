@@ -2,6 +2,7 @@ package com.group5.featuretests;
 import com.group5.projectplanner.app.FormattingException;
 import com.group5.projectplanner.app.Project;
 
+//Author: Casper (s163950)
 public class ProjectHelper {
 	private Project project;
 	

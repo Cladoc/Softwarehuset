@@ -31,6 +31,7 @@ public class LeaderTests {
 		this.developerHelper = developerHelper;
 	}
 	
+	//Author: Casper (s163950)
 	@Given("a developer is project leader on a project registered in the project planner")
 	public void aDeveloperIsProjectLeaderOnAProjectRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException {
 	    developer = new Developer();
@@ -44,6 +45,7 @@ public class LeaderTests {
 	    assertTrue(projectPlanner.isProjectLeader(project, developer));
 	}
 	
+	//Author: Casper (s163950)
 	@When("the project leader adds an activity with the name {string}")
 	public void theProjectLeaderAddsAnActivityWithTheName(String name) throws NullObjectException, OperationNotAllowedException {
 	    projectActivity = new ProjectActivity();
@@ -52,11 +54,13 @@ public class LeaderTests {
 	    projectPlanner.addActivity(projectActivity, project, developer);
 	}
 
+	//Author: Casper (s163950)
 	@Then("the activity with name {string} is added to the project")
 	public void theActivityWithNameIsAddedToTheProject(String string) throws NullObjectException {
 	    assertTrue(projectPlanner.checkActivityExists(projectActivity, project));
 	}
 	
+	//Author: Casper (s163950)
 	@Given("an activity is registered with the name {string}")
 	public void anActivityIsRegisteredWithTheName(String name) throws NullObjectException, OperationNotAllowedException {
 	    projectActivity = new ProjectActivity();
@@ -65,6 +69,7 @@ public class LeaderTests {
 	    assertTrue(projectPlanner.checkActivityExists(projectActivity, project));
 	}
 
+	//Author: Casper (s163950)
 	@When("the project leader adds an activity with the name {string} again")
 	public void theProjectLeaderAddsAnActivityWithTheNameAgain(String name) throws NullObjectException, OperationNotAllowedException{
 	    ProjectActivity projectActivity2 = new ProjectActivity();
@@ -76,6 +81,7 @@ public class LeaderTests {
 	    }
 	}
 	
+	//Author: Casper (s163950)
 	@Given("that he is not project leader on the project")
 	public void thatHeIsNotProjectLeaderOnTheProject() throws Exception, FormattingException{
 		project = projectHelper.getProject();
@@ -83,6 +89,7 @@ public class LeaderTests {
 	    assertFalse(projectPlanner.isProjectLeader(project, developer));
 	}
 	
+	//Author: Casper (s163950)
 	@When("the developer tries to add an activity with the name {string}")
 	public void theDeveloperTriesToAddAnActivityWithTheName(String string) throws NullObjectException, OperationNotAllowedException {
 		try{

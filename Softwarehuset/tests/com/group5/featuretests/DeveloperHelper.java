@@ -5,6 +5,7 @@ import com.group5.projectplanner.app.Developer;
 
 public class DeveloperHelper {
 
+//Author: Casper (s163950)
 private Developer developer;
 	
 	public Developer getDeveloper() throws Exception, FormattingException {

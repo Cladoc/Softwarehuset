@@ -1,5 +1,5 @@
 package com.group5.projectplanner.app;
-//Author: Casper Egholm Jørgensen (s163950)
+//Author: Casper (s163950)
 public class FormattingException extends Throwable {
 	String errorMessage = "";
 	

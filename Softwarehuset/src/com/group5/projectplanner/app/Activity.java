@@ -23,6 +23,7 @@ public abstract class Activity {
 		return this.hours;
 	}
 	
+	//Author: Casper (s163950)
 	@Override
 	public boolean equals(Object obj){
 		if(obj instanceof Activity){

@@ -24,6 +24,7 @@ public class DeveloperTests {
 	}
 
 	//Add Developer:-----------------------------------------------
+	//Author: Casper (s163950)
 	@Given("that a developer with the ID {string} exists")
 	public void thatADeveloperWithTheIDExists(String id) {
 	    developer = new Developer();
@@ -31,21 +32,25 @@ public class DeveloperTests {
 	    assertTrue(developer.getID().equals(id));
 	}
 
+	//Author: Casper (s163950)
 	@When("the developer is added to the project planner")
 	public void theDeveloperIsAddedToTheProjectPlanner() throws OperationNotAllowedException {
 	    	projectPlanner.addDeveloper(developer);
 	}
 
+	//Author: Casper (s163950)
 	@Then("the developer is added to the project planner successfully")
 	public void theDeveloperIsAddedToTheProjectPlannerSuccessfully() {
 	    assertTrue(projectPlanner.checkDeveloperExist(developer));
 	}
 	
+	//Author: Casper (s163950)
 	@Given("the developer is registered in the project planner")
 	public void theDeveloperIsRegisteredInTheProjectPlanner() throws OperationNotAllowedException{
 	    projectPlanner.addDeveloper(developer);
 	}
 	
+	//Author: Casper (s163950)
 	@When("the developer is added again")
 	public void theDeveloperIsAddedAgain() throws OperationNotAllowedException{
 		try{
