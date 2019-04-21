@@ -16,7 +16,7 @@ public class Developer {
 	public boolean equals(Object obj){
 		if(obj instanceof Developer){
 			Developer dev = (Developer) obj;
-			return this.developerID.equals(dev.getID());
+			return this.developerID.equalsIgnoreCase(dev.getID());
 		}else{
 			return false;
 		}

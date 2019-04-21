@@ -49,4 +49,14 @@ public class Project {
 	public boolean isProjectLeader(Developer developer) {
 		return leader.equals(developer);
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		if(obj instanceof Project){
+			Project proj = (Project) obj;
+			return this.projectName.equalsIgnoreCase(proj.getName());
+		}else{
+			return false;
+		}
+	}
 }
