@@ -52,6 +52,8 @@ public class ProjectPlanner {
 	public void addActivity(ProjectActivity projectActivity, Project project, Developer developer) throws NullObjectException, OperationNotAllowedException {
 		if(checkDeveloperExist(developer)){
 			projects.addActivity(projectActivity, project, developer);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
 
@@ -59,4 +61,13 @@ public class ProjectPlanner {
 	public boolean checkActivityExists(ProjectActivity projectActivity, Project project) throws NullObjectException {
 		return projects.checkActivityExists(projectActivity, project);
 	}
+
+	/*
+	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
+		if(checkDeveloperExist(devLeader) && checkDeveloperExist(assignedDeveloper)){
+			projects.assignDeveloper(projectActivity, project, devLeader, assignedDeveloper);
+		}
+		
+	}
+	*/
 }

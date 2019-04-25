@@ -83,4 +83,15 @@ public class Project extends AbstractProject {
 	public boolean checkActivityExist(ProjectActivity projectActivity) {
 		return activities.checkActivityExists(projectActivity);
 	}
+
+
+	/*
+	public void assignDeveloper(ProjectActivity projectActivity, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException {
+		if(isProjectLeader(devLeader)){
+			activities.assignDeveloper(projectActivity, assignedDeveloper);
+		}else{
+			throw new OperationNotAllowedException("Id is not leader");
+		}
+	}
+	*/
 }

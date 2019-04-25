@@ -3,13 +3,16 @@ package com.group5.projectplanner.app;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
 
 //Author: Casper (s163950)
 public class ProjectCollection {
 	private int year = 0;
 	private int serial = 0;
-	private Map<Project, Integer> projectMapping = new HashMap<Project, Integer>(); //Swap key and value for semantics?
-
+	private List<Project> projects = new ArrayList<>();
+	
 	//Author: Casper (s163950)
 	public void addProject(Project project, Developer developer) throws OperationNotAllowedException {
 		// TODO Auto-generated method stub
@@ -17,7 +20,8 @@ public class ProjectCollection {
 			throw new OperationNotAllowedException("A project with the specified name is already registered");
 		}else{
 			Integer projectID = computeProjectID();
-			projectMapping.put(project, projectID);
+			project.setID(projectID);
+			projects.add(project);
 		}
 	}
 
@@ -71,6 +75,19 @@ public class ProjectCollection {
 		}
 	}
 	
+	/*
+	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader,
+			Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			proj.assignDeveloper(projectActivity, devLeader, assignedDeveloper);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+	*/
+	
 	//Internal helper methods
 	private int computeProjectID(){
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR); 
@@ -84,14 +101,16 @@ public class ProjectCollection {
 		return projectID;
 	}
 	
-	//Author: Casper (s163950)
+
 	private AbstractProject getProjectRef(Project project){
-		for(Map.Entry<Project, Integer> entry : projectMapping.entrySet()){
-			if(entry.getKey().equals(project)){
-				return entry.getKey();
+		for(Project listProject : projects){
+			if(listProject.equals(project)){
+				return listProject;
 			}
 		}
 		return new NullProject();
 	}
+
+	
 	
 }
