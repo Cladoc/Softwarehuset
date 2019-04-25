@@ -85,13 +85,17 @@ public class Project extends AbstractProject {
 	}
 
 
-	/*
-	public void assignDeveloper(ProjectActivity projectActivity, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException {
+	
+	public void assignDeveloper(ProjectActivity projectActivity, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException {
 		if(isProjectLeader(devLeader)){
 			activities.assignDeveloper(projectActivity, assignedDeveloper);
 		}else{
 			throw new OperationNotAllowedException("Id is not leader");
 		}
 	}
-	*/
+
+	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Developer assignedDeveloper) throws NullObjectException {
+		return activities.checkDeveloperAssigned(projectActivity, assignedDeveloper);
+	}
+	
 }

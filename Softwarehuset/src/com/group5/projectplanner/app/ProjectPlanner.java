@@ -62,12 +62,23 @@ public class ProjectPlanner {
 		return projects.checkActivityExists(projectActivity, project);
 	}
 
-	/*
+	
 	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
 		if(checkDeveloperExist(devLeader) && checkDeveloperExist(assignedDeveloper)){
 			projects.assignDeveloper(projectActivity, project, devLeader, assignedDeveloper);
+		}else{
+			throw new OperationNotAllowedException("Developer not registered in project planner");
 		}
 		
 	}
-	*/
+
+	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Project project, Developer testDeveloper) throws OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(testDeveloper)){
+			return projects.checkDeveloperAssigned(projectActivity, project, testDeveloper);
+		}else{
+			System.out.println(testDeveloper.getID());
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+	
 }

@@ -75,7 +75,7 @@ public class ProjectCollection {
 		}
 	}
 	
-	/*
+	
 	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader,
 			Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException {
 		AbstractProject abstProj = getProjectRef(project);
@@ -86,7 +86,16 @@ public class ProjectCollection {
 			throw new NullObjectException("Project does not exist");
 		}
 	}
-	*/
+	
+	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Project project, Developer assignedDeveloper) throws NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.checkDeveloperAssigned(projectActivity, assignedDeveloper);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
 	
 	//Internal helper methods
 	private int computeProjectID(){
@@ -110,6 +119,8 @@ public class ProjectCollection {
 		}
 		return new NullProject();
 	}
+
+	
 
 	
 	

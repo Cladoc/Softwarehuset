@@ -40,7 +40,7 @@ public class LeaderTests {
 		devLeader = new Developer();
 		devLeader.setID("abcd");
 		project = new Project();
-		project.setName("Test");
+		project.setName("test");
 		project.setStartYear("2020");
 		projectPlanner.addDeveloper(devLeader);
 		projectPlanner.addProject(project, devLeader);
@@ -115,6 +115,32 @@ public class LeaderTests {
 		projectActivity.setName(activityName);
 		projectPlanner.addActivity(projectActivity, project, devLeader);
 		assertTrue(projectPlanner.checkActivityExists(projectActivity, project));
+	}
+	
+	@When("the project leader assigns a developer to the activity")
+	public void theProjectLeaderAssignsADeveloperToTheActivity() throws NullObjectException, OperationNotAllowedException {
+	    testDeveloper = new Developer();
+	    testDeveloper.setID("test");
+	    projectPlanner.addDeveloper(testDeveloper);
+	    projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	}
+	
+	@Then("the developer is assigned to the activity")
+	public void theDeveloperIsAssignedToTheActivity() throws OperationNotAllowedException, NullObjectException {
+	    assertTrue(projectPlanner.checkDeveloperAssigned(projectActivity, project, testDeveloper));
+	}
+	
+	@When("the project leader assigns a developer to an activity under the project where he is already assigned")
+	public void theProjectLeaderAssignsADeveloperToAnActivityUnderTheProjectWhereHeIsAlreadyAssigned() throws NullObjectException, OperationNotAllowedException {
+	    testDeveloper = new Developer();
+	    testDeveloper.setID("test");
+		projectPlanner.addDeveloper(testDeveloper);
+		projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	    try{
+	    	projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	    }catch (OperationNotAllowedException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }  
 	}
 
 }
