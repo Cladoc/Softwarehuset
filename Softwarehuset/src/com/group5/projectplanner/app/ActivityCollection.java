@@ -64,6 +64,26 @@ public class ActivityCollection {
 		}
 	}
 	
+	public void setActivityComplete(ProjectActivity projectActivity) throws NullObjectException {
+		Activity abstActivity = getActivityRef(projectActivity);
+		if(!abstActivity.isNil()){
+			ProjectActivity projActivity = (ProjectActivity) abstActivity;
+			projActivity.setActivityComplete();
+		}else{
+			throw new NullObjectException("Activity does not exist");
+		}
+	}
+	
+	public boolean isActivityComplete(ProjectActivity projectActivity) throws NullObjectException {
+		Activity abstActivity = getActivityRef(projectActivity);
+		if(!abstActivity.isNil()){
+			ProjectActivity projActivity = (ProjectActivity) abstActivity;
+			return projActivity.isActivityComplete();
+		}else{
+			throw new NullObjectException("Activity does not exist");
+		}
+	}
+	
 	//Internal helper functions
 	private Activity getActivityRef(ProjectActivity projectActivity){
 		for(ProjectActivity projAct : projectActivities){
@@ -73,6 +93,10 @@ public class ActivityCollection {
 		}
 		return new NullActivity();
 	}
+
+	
+
+	
 
 	
 

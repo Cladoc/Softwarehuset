@@ -15,7 +15,6 @@ public class ProjectCollection {
 	
 	//Author: Casper (s163950)
 	public void addProject(Project project, Developer developer) throws OperationNotAllowedException {
-		// TODO Auto-generated method stub
 		if(checkProjectExist(project)){
 			throw new OperationNotAllowedException("A project with the specified name is already registered");
 		}else{
@@ -117,6 +116,26 @@ public class ProjectCollection {
 		}
 	}
 	
+	public void setActivityComplete(ProjectActivity projectActivity, Project project, Developer devLeader) throws NullObjectException, OperationNotAllowedException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			proj.setActivityComplete(projectActivity, devLeader);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+	
+	public boolean isActivityComplete(ProjectActivity projectActivity, Project project) throws NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.isActivityComplete(projectActivity);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+	
 	//Internal helper methods
 	private int computeProjectID(){
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR); 
@@ -140,6 +159,10 @@ public class ProjectCollection {
 		}
 		return new NullProject();
 	}
+
+	
+
+	
 
 	
 

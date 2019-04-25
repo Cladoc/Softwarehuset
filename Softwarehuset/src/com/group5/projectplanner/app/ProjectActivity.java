@@ -68,6 +68,16 @@ public class ProjectActivity extends Activity {
 	public double getExpectedWorkHours() {
 		return this.totalExpectedHours;
 	}
+
+
+	public void setActivityComplete() {
+		this.complete = true;
+	}
+
+
+	public boolean isActivityComplete() {
+		return this.complete;
+	}
 	
 	
 }

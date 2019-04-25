@@ -162,5 +162,17 @@ public class LeaderTests {
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
 	}
+	
+	//Set activity complete feature------------------------------------------------
+	
+	@When("the project leader sets the activity as complete")
+	public void theProjectLeaderSetsTheActivityAsComplete() throws OperationNotAllowedException, NullObjectException {
+	    projectPlanner.setActivityComplete(projectActivity, project, devLeader);
+	}
+
+	@Then("the activity is registered as completed")
+	public void theActivityIsRegisteredAsCompleted() throws NullObjectException {
+		assertTrue(projectPlanner.isActivityComplete(projectActivity, project, devLeader));
+	}
 
 }

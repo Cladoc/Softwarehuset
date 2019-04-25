@@ -92,5 +92,18 @@ public class ProjectPlanner {
 	public double getExpectedHours(ProjectActivity projectActivity, Project project) throws NullObjectException {
 		return projects.getExpectedHours(projectActivity, project);
 	}
+
+	public void setActivityComplete(ProjectActivity projectActivity, Project project, Developer devLeader) throws OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(devLeader)){
+			projects.setActivityComplete(projectActivity, project, devLeader);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+
+	public boolean isActivityComplete(ProjectActivity projectActivity, Project project, Developer devLeader) throws NullObjectException {
+		return projects.isActivityComplete(projectActivity, project);
+		
+	}
 	
 }
