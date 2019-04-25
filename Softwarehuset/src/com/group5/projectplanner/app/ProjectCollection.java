@@ -97,6 +97,26 @@ public class ProjectCollection {
 		}
 	}
 	
+	public void SetExpectedHours(ProjectActivity projectActivity, Project project, Developer devLeader, String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			proj.setExpectedHours(projectActivity, devLeader, hours);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+	
+	public double getExpectedHours(ProjectActivity projectActivity, Project project) throws NullObjectException{
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.getExpectedHours(projectActivity);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+	
 	//Internal helper methods
 	private int computeProjectID(){
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR); 
@@ -111,6 +131,7 @@ public class ProjectCollection {
 	}
 	
 
+	
 	private AbstractProject getProjectRef(Project project){
 		for(Project listProject : projects){
 			if(listProject.equals(project)){
@@ -119,6 +140,10 @@ public class ProjectCollection {
 		}
 		return new NullProject();
 	}
+
+	
+
+	
 
 	
 

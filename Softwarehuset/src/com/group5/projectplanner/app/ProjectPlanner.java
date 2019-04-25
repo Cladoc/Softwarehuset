@@ -76,9 +76,21 @@ public class ProjectPlanner {
 		if(checkDeveloperExist(testDeveloper)){
 			return projects.checkDeveloperAssigned(projectActivity, project, testDeveloper);
 		}else{
-			System.out.println(testDeveloper.getID());
 			throw new OperationNotAllowedException("Invalid ID");
 		}
+	}
+
+	public void setExpectedHours(ProjectActivity projectActivity, Project project, Developer devLeader,
+			String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		if(checkDeveloperExist(devLeader)){
+			projects.SetExpectedHours(projectActivity, project, devLeader, hours);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+
+	public double getExpectedHours(ProjectActivity projectActivity, Project project) throws NullObjectException {
+		return projects.getExpectedHours(projectActivity, project);
 	}
 	
 }

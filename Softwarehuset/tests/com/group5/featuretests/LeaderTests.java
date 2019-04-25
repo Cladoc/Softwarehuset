@@ -142,5 +142,25 @@ public class LeaderTests {
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }  
 	}
+	
+	//Set expected work hours feature-----------------------------------------------------------
+	@When("the project leader sets expected work hours to {string} in the activity")
+	public void theProjectLeaderSetsExpectedWorkHoursToInTheActivity(String hours) throws OperationNotAllowedException, NullObjectException, NumberFormatException, FormattingException {
+	    projectPlanner.setExpectedHours(projectActivity, project, devLeader, hours);
+	}
+	
+	@Then("the activity has expected work hours set to {double}")
+	public void theActivityHasExpectedWorkHoursSetTo(double hours) throws NullObjectException {
+	    assertTrue(projectPlanner.getExpectedHours(projectActivity, project) == hours);
+	}
+	
+	@When("the project leader sets expected work hours to {string}")
+	public void theProjectLeaderSetsExpectedWorkHoursTo(String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
+	    try{
+	    	projectPlanner.setExpectedHours(projectActivity, project, devLeader, hours);
+	    } catch (FormattingException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	}
 
 }

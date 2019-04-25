@@ -44,8 +44,27 @@ public class ActivityCollection {
 		}
 	}
 	
-	//Internal helper functions
+	public void setExpectedHours(ProjectActivity projectActivity, String hours) throws NullObjectException, FormattingException {
+		Activity abstActivity = getActivityRef(projectActivity);
+		if(!abstActivity.isNil()){
+			ProjectActivity projActivity = (ProjectActivity) abstActivity;
+			projActivity.setExpectedWorkHours(hours);
+		}else{
+			throw new NullObjectException("Activity does not exist");
+		}
+	}
 	
+	public double getExpectedHours(ProjectActivity projectActivity) throws NullObjectException {
+		Activity abstActivity = getActivityRef(projectActivity);
+		if(!abstActivity.isNil()){
+			ProjectActivity projActivity = (ProjectActivity) abstActivity;
+			return projActivity.getExpectedWorkHours();
+		}else{
+			throw new NullObjectException("Activity does not exist");
+		}
+	}
+	
+	//Internal helper functions
 	private Activity getActivityRef(ProjectActivity projectActivity){
 		for(ProjectActivity projAct : projectActivities){
 			if(projAct.equals(projectActivity)){
@@ -54,6 +73,10 @@ public class ActivityCollection {
 		}
 		return new NullActivity();
 	}
+
+	
+
+	
 
 	
 	

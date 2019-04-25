@@ -97,5 +97,17 @@ public class Project extends AbstractProject {
 	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Developer assignedDeveloper) throws NullObjectException {
 		return activities.checkDeveloperAssigned(projectActivity, assignedDeveloper);
 	}
+
+	public void setExpectedHours(ProjectActivity projectActivity, Developer devLeader, String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		if(isProjectLeader(devLeader)){
+			activities.setExpectedHours(projectActivity, hours);
+		}else{
+			throw new OperationNotAllowedException("Id is not leader");
+		}
+	}
+
+	public double getExpectedHours(ProjectActivity projectActivity) throws NullObjectException {
+		return activities.getExpectedHours(projectActivity);
+	}
 	
 }

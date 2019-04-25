@@ -44,7 +44,6 @@ public class ProjectActivity extends Activity {
 	public void assignDeveloper(Developer assignedDeveloper) throws OperationNotAllowedException {
 		if(!developers.checkDeveloperExist(assignedDeveloper))
 		{
-			System.out.println(assignedDeveloper.getID());
 			developers.addDeveloper(assignedDeveloper);
 		}else{
 			throw new OperationNotAllowedException("Developer already assigned");
@@ -54,6 +53,20 @@ public class ProjectActivity extends Activity {
 
 	public boolean checkDeveloperAssigned(Developer assignedDeveloper) {
 		return developers.checkDeveloperExist(assignedDeveloper);
+	}
+
+
+	public void setExpectedWorkHours(String hours) throws FormattingException{
+		try{
+			this.totalExpectedHours = Double.valueOf(hours);
+		}catch (NumberFormatException e){
+			throw new FormattingException("Work hours incorrect format");
+		}
+	}
+
+
+	public double getExpectedWorkHours() {
+		return this.totalExpectedHours;
 	}
 	
 	
