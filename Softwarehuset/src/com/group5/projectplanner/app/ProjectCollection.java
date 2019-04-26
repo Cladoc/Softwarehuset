@@ -34,13 +34,18 @@ public class ProjectCollection {
 	}
 	
 	//Author: Casper (s163950)
-	public void setProjectLeader(Project project, Developer developer) throws OperationNotAllowedException {
-		AbstractProject projectToTest = getProjectRef(project);
-		if(!projectToTest.isNil()){
-			projectToTest.setProjectLeader(developer);
+	public void setProjectLeader(Project project, Developer developer) throws OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			proj.setProjectLeader(developer);
 		}else{
-			throw new OperationNotAllowedException("Project does not exist");
+			throw new NullObjectException("Project does not exist");
 		}
+		//doWithObject(projectId, p => p.setProjectLeder(developer));
+	    //doWithObject(projectId, new AbstractChange() { public void change(AbstractProject p) { p.setProjectLeader(developer) });
+//		AbstractProject project = getProject(projectId);
+	//  project.setProjectLeader(developer);
 	}
 	
 	//Author: Casper (s163950)
@@ -161,15 +166,9 @@ public class ProjectCollection {
 	}
 
 	
-
-	
-
-	
-
-	
-
-	
-
-	
+	//doWithObject(projectId, p => p.setProjectLeder(developer));
+    //doWithObject(projectId, new AbstractChange() { public void change(AbstractProject p) { p.setProjectLeader(developer) });
+//	AbstractProject project = getProject(projectId);
+//  project.setProjectLeader(developer);
 	
 }

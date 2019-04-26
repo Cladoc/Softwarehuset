@@ -17,6 +17,7 @@ public class ActivityCollection {
 		}
 	}
 
+	
 	public boolean checkActivityExists(ProjectActivity projectActivity) {
 		//contains(obj o) uses object's equals() method
 		return projectActivities.contains(projectActivity);
@@ -63,6 +64,7 @@ public class ActivityCollection {
 			throw new NullObjectException("Activity does not exist");
 		}
 	}
+	
 	
 	public void setActivityComplete(ProjectActivity projectActivity) throws NullObjectException {
 		Activity abstActivity = getActivityRef(projectActivity);

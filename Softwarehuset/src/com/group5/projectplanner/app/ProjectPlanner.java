@@ -36,9 +36,9 @@ public class ProjectPlanner {
 	
 
 	//Author: Casper (s163950)
-	public void setProjectLeader(Project project, Developer developer) throws Exception, FormattingException, OperationNotAllowedException {
+	public void setProjectLeader(Project project, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(developer)){
-			projects.setProjectLeader(project, developer);	
+			projects.setProjectLeader(project, developer);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
