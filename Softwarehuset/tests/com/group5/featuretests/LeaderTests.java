@@ -36,7 +36,7 @@ public class LeaderTests {
 	// Author: Casper (s163950)
 	@Given("a developer is project leader on a project registered in the project planner")
 	public void aDeveloperIsProjectLeaderOnAProjectRegisteredInTheProjectPlanner()
-			throws Exception, FormattingException, OperationNotAllowedException {
+			throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		devLeader = new Developer();
 		devLeader.setID("abcd");
 		project = new Project();

@@ -93,7 +93,7 @@ public class ProjectCollection {
 		}
 	}
 	
-	public void SetExpectedHours(ProjectActivity projectActivity, Project project, Developer devLeader, String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
+	public void setExpectedHours(ProjectActivity projectActivity, Project project, Developer devLeader, String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
 		AbstractProject abstProj = getProjectRef(project);
 		if(!abstProj.isNil()){
 			Project proj = (Project) abstProj;
