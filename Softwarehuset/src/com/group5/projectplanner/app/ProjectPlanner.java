@@ -57,6 +57,49 @@ public class ProjectPlanner {
 		}
 	}
 
+	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
+		if(checkDeveloperExist(devLeader) && checkDeveloperExist(assignedDeveloper)){
+			projects.assignDeveloper(projectActivity, project, devLeader, assignedDeveloper);
+		}else{
+			throw new OperationNotAllowedException("Developer not registered in project planner");
+		}
+		
+	}
+
+	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Project project, Developer testDeveloper) throws OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(testDeveloper)){
+			return projects.checkDeveloperAssigned(projectActivity, project, testDeveloper);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+
+	public void setExpectedHours(ProjectActivity projectActivity, Project project, Developer devLeader,
+			String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		if(checkDeveloperExist(devLeader)){
+			projects.setExpectedHours(projectActivity, project, devLeader, hours);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+
+	public double getExpectedHours(ProjectActivity projectActivity, Project project) throws NullObjectException {
+		return projects.getExpectedHours(projectActivity, project);
+	}
+
+	public void setActivityComplete(ProjectActivity projectActivity, Project project, Developer devLeader) throws OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(devLeader)){
+			projects.setActivityComplete(projectActivity, project, devLeader);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+
+	public boolean isActivityComplete(ProjectActivity projectActivity, Project project, Developer devLeader) throws NullObjectException {
+		return projects.isActivityComplete(projectActivity, project, devLeader);
+		
+	}
+	
 	//Author: Casper (s163950)
 	public boolean checkActivityExists(ProjectActivity projectActivity, Project project) throws NullObjectException {
 		return projects.checkActivityExists(projectActivity, project);
@@ -124,14 +167,4 @@ public class ProjectPlanner {
 	
 	
 }
-	/*
-	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
-		if(checkDeveloperExist(devLeader) && checkDeveloperExist(assignedDeveloper)){
-			projects.assignDeveloper(projectActivity, project, devLeader, assignedDeveloper);
-		}
-		
-	}
-	*/
-
-	
 

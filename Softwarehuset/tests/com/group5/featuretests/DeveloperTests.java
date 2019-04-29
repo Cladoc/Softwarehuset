@@ -137,7 +137,7 @@ public class DeveloperTests {
 	}
 	//Author: Casper (s163950)
 	@When("the developer sets himself as project leader on the project")
-	public void theDeveloperSetsHimselfAsProjectLeaderOnTheProject() throws Exception, FormattingException, OperationNotAllowedException {
+	public void theDeveloperSetsHimselfAsProjectLeaderOnTheProject() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 	    projectPlanner.setProjectLeader(project, developer);
 	}
 	//Author: Casper (s163950)
@@ -147,7 +147,7 @@ public class DeveloperTests {
 	}
 	//Author: Casper (s163950)
 	@When("the developer sets developer with ID {string} as project leader in the project")
-	public void theDeveloperSetsDeveloperWithIDAsProjectLeaderInTheProject(String badID) throws Exception, FormattingException {
+	public void theDeveloperSetsDeveloperWithIDAsProjectLeaderInTheProject(String badID) throws Exception, FormattingException, NullObjectException {
 	    Developer badDeveloper = new Developer();
 	    badDeveloper.setID(badID);
 	    try{

@@ -175,13 +175,41 @@ public class Project extends AbstractProject {
 	}
 
 
-	/*
-	public void assignDeveloper(ProjectActivity projectActivity, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException {
+	
+	public void assignDeveloper(ProjectActivity projectActivity, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException {
 		if(isProjectLeader(devLeader)){
 			activities.assignDeveloper(projectActivity, assignedDeveloper);
 		}else{
 			throw new OperationNotAllowedException("Id is not leader");
 		}
 	}
-	*/
+
+	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Developer assignedDeveloper) throws NullObjectException {
+		return activities.checkDeveloperAssigned(projectActivity, assignedDeveloper);
+	}
+
+	public void setExpectedHours(ProjectActivity projectActivity, Developer devLeader, String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		if(isProjectLeader(devLeader)){
+			activities.setExpectedHours(projectActivity, hours);
+		}else{
+			throw new OperationNotAllowedException("Id is not leader");
+		}
+	}
+
+	public double getExpectedHours(ProjectActivity projectActivity) throws NullObjectException {
+		return activities.getExpectedHours(projectActivity);
+	}
+
+	public void setActivityComplete(ProjectActivity projectActivity, Developer devLeader) throws NullObjectException, OperationNotAllowedException {
+		if(isProjectLeader(devLeader)){
+			activities.setActivityComplete(projectActivity);
+		}else{
+			throw new OperationNotAllowedException("Id is not leader");
+		}
+	}
+
+	public boolean isActivityComplete(ProjectActivity projectActivity) throws NullObjectException {
+		return activities.isActivityComplete(projectActivity);
+	}
+	
 }

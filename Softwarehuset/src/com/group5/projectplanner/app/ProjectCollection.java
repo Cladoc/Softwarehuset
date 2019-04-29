@@ -42,8 +42,11 @@ public class ProjectCollection {
 		}else{
 			throw new OperationNotAllowedException("Project does not exist");
 		}
+		//doWithObject(projectId, p => p.setProjectLeder(developer));
+	    //doWithObject(projectId, new AbstractChange() { public void change(AbstractProject p) { p.setProjectLeader(developer) });
+//		AbstractProject project = getProject(projectId);
+	//  project.setProjectLeader(developer);	}
 	}
-	
 	//Author: Casper (s163950)
 	public boolean isProjectLeader(Project project, Developer developer){
 		return getProjectRef(project).isProjectLeader(developer);
@@ -171,9 +174,7 @@ public class ProjectCollection {
 		}	
 	}
 	
-	/*
-	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader,
-			Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException {
+	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
 		AbstractProject abstProj = getProjectRef(project);
 		if(!abstProj.isNil()){
 			Project proj = (Project) abstProj;
@@ -181,8 +182,60 @@ public class ProjectCollection {
 		}else{
 			throw new NullObjectException("Project does not exist");
 		}
+		
 	}
-	*/
+
+	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Project project, Developer testDeveloper) throws OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.checkDeveloperAssigned(projectActivity, testDeveloper);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+
+	public void setExpectedHours(ProjectActivity projectActivity, Project project, Developer devLeader,
+			String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			proj.setExpectedHours(projectActivity, devLeader, hours);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+
+	public double getExpectedHours(ProjectActivity projectActivity, Project project) throws NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.getExpectedHours(projectActivity);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+
+	public void setActivityComplete(ProjectActivity projectActivity, Project project, Developer devLeader) throws OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			proj.setActivityComplete(projectActivity, devLeader);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+	}
+
+	public boolean isActivityComplete(ProjectActivity projectActivity, Project project, Developer devLeader) throws NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.isActivityComplete(projectActivity);
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}
+		
+	}
 	
 	//Internal helper methods
 	private int computeProjectID(){

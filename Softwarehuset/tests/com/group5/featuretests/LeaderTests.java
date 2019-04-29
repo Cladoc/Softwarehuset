@@ -207,5 +207,64 @@ public class LeaderTests {
 	    // Write code here that turns the phrase above into concrete actions
 		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
 	}
+	
+	@When("the project leader assigns a developer to the activity")
+	public void theProjectLeaderAssignsADeveloperToTheActivity() throws NullObjectException, OperationNotAllowedException {
+	    testDeveloper = new Developer();
+	    testDeveloper.setID("test");
+	    projectPlanner.addDeveloper(testDeveloper);
+	    projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	}
+	
+	@Then("the developer is assigned to the activity")
+	public void theDeveloperIsAssignedToTheActivity() throws OperationNotAllowedException, NullObjectException {
+	    assertTrue(projectPlanner.checkDeveloperAssigned(projectActivity, project, testDeveloper));
+	}
+	
+	@When("the project leader assigns a developer to an activity under the project where he is already assigned")
+	public void theProjectLeaderAssignsADeveloperToAnActivityUnderTheProjectWhereHeIsAlreadyAssigned() throws NullObjectException, OperationNotAllowedException {
+	    testDeveloper = new Developer();
+	    testDeveloper.setID("test");
+		projectPlanner.addDeveloper(testDeveloper);
+		projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	    try{
+	    	projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	    }catch (OperationNotAllowedException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }  
+	}
+	
+	//Set expected work hours feature-----------------------------------------------------------
+	@When("the project leader sets expected work hours to {string} in the activity")
+	public void theProjectLeaderSetsExpectedWorkHoursToInTheActivity(String hours) throws OperationNotAllowedException, NullObjectException, NumberFormatException, FormattingException {
+	    projectPlanner.setExpectedHours(projectActivity, project, devLeader, hours);
+	}
+	
+	@Then("the activity has expected work hours set to {double}")
+	public void theActivityHasExpectedWorkHoursSetTo(double hours) throws NullObjectException {
+	    assertTrue(projectPlanner.getExpectedHours(projectActivity, project) == hours);
+	}
+	
+	@When("the project leader sets expected work hours to {string}")
+	public void theProjectLeaderSetsExpectedWorkHoursTo(String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
+	    try{
+	    	projectPlanner.setExpectedHours(projectActivity, project, devLeader, hours);
+	    } catch (FormattingException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	}
+	
+	//Set activity complete feature------------------------------------------------
+	
+	@When("the project leader sets the activity as complete")
+	public void theProjectLeaderSetsTheActivityAsComplete() throws OperationNotAllowedException, NullObjectException {
+	    projectPlanner.setActivityComplete(projectActivity, project, devLeader);
+	}
+
+	@Then("the activity is registered as completed")
+	public void theActivityIsRegisteredAsCompleted() throws NullObjectException {
+		assertTrue(projectPlanner.isActivityComplete(projectActivity, project, devLeader));
+	}
+
 
 }

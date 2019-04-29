@@ -19,6 +19,7 @@ public class DeveloperCollection {
 	
 	//Author: Casper (s163950)
 	public boolean checkDeveloperExist(Developer developer){
+		//contains() uses object's equals() method
 		return developers.contains(developer);
 	}
 }
