@@ -155,6 +155,7 @@ public class DeveloperTests {
 	    } catch (OperationNotAllowedException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
+<<<<<<< HEAD
 	}
 	
 	@When("the developer sets registered developer with ID {string} as project leader in the project")
@@ -169,3 +170,7 @@ public class DeveloperTests {
 	    }
 	}
 }
+=======
+	}	
+}
+>>>>>>> refs/remotes/origin/master

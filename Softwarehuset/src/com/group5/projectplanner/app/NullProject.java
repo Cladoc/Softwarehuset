@@ -23,7 +23,32 @@ public class NullProject extends AbstractProject{
 	public void setStartYear(String start) throws Exception, FormattingException {}
 	
 	@Override
+	public void setStartWeek(String start) throws Exception, FormattingException {}
+	
+	@Override
+	public void setEndYear(String start) throws Exception, FormattingException {}
+	
+	@Override
+	public void setEndWeek(String start) throws Exception, FormattingException {}
+	
+	
+	@Override
 	public int getStartYear() {
+		return -1;
+	}
+	
+	@Override
+	public int getStartWeek() {
+		return -1;
+	}
+	
+	@Override
+	public int getEndYear() {
+		return -1;
+	}
+	
+	@Override
+	public int getEndWeek() {
 		return -1;
 	}
 	@Override

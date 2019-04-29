@@ -36,9 +36,9 @@ public class ProjectPlanner {
 	
 
 	//Author: Casper (s163950)
-	public void setProjectLeader(Project project, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	public void setProjectLeader(Project project, Developer developer) throws Exception, FormattingException, OperationNotAllowedException {
 		if(checkDeveloperExist(developer)){
-			projects.setProjectLeader(project, developer);
+			projects.setProjectLeader(project, developer);	
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
@@ -57,12 +57,6 @@ public class ProjectPlanner {
 		}
 	}
 
-	//Author: Casper (s163950)
-	public boolean checkActivityExists(ProjectActivity projectActivity, Project project) throws NullObjectException {
-		return projects.checkActivityExists(projectActivity, project);
-	}
-
-	
 	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
 		if(checkDeveloperExist(devLeader) && checkDeveloperExist(assignedDeveloper)){
 			projects.assignDeveloper(projectActivity, project, devLeader, assignedDeveloper);
@@ -83,7 +77,7 @@ public class ProjectPlanner {
 	public void setExpectedHours(ProjectActivity projectActivity, Project project, Developer devLeader,
 			String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
 		if(checkDeveloperExist(devLeader)){
-			projects.SetExpectedHours(projectActivity, project, devLeader, hours);
+			projects.setExpectedHours(projectActivity, project, devLeader, hours);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
@@ -102,8 +96,75 @@ public class ProjectPlanner {
 	}
 
 	public boolean isActivityComplete(ProjectActivity projectActivity, Project project, Developer devLeader) throws NullObjectException {
-		return projects.isActivityComplete(projectActivity, project);
+		return projects.isActivityComplete(projectActivity, project, devLeader);
 		
 	}
 	
+	//Author: Casper (s163950)
+	public boolean checkActivityExists(ProjectActivity projectActivity, Project project) throws NullObjectException {
+		return projects.checkActivityExists(projectActivity, project);
+	}
+	
+	public void setStartYear(Project project, String year, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(developer)) {
+			projects.setStartYear(project, year, developer);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+
+	public void setStartWeek(Project project, String week, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(developer)) {
+			projects.setStartWeek(project, week, developer);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+	
+	public int getStartWeek(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {	
+		return projects.getStartWeek(project);
+	}
+	
+	public int getStartYear(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	
+		return projects.getStartYear(project);
+	}
+	
+	public void setEndYear(Project project, String year, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(developer)) {
+			projects.setEndYear(project, year, developer);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+
+	public void setEndWeek(Project project, String week, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(developer)) {
+			projects.setEndWeek(project, week, developer);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+	
+	public int getEndWeek(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {	
+		return projects.getEndWeek(project);
+	}
+	
+	public int getEndYear(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	
+		return projects.getEndYear(project);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
