@@ -37,7 +37,9 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
-	public void setProjectLeader(Developer developer){}
+	public void setProjectLeader(Developer developer) throws NullObjectException{
+		throw new NullObjectException("Project does not exist");
+	}
 	
 	@Override
 	public boolean isProjectLeader(Developer developer){

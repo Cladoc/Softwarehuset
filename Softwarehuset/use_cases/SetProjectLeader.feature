@@ -13,3 +13,8 @@ Given a developer with ID "abcd" is registered in the project planner
 And a project is registered in the project planner
 When the developer sets developer with ID "bbbb" as project leader in the project 
 Then he gets the error message "Invalid ID"
+
+Scenario: Assign project leader to a project that does not exist
+Given a developer with ID "abcd" is registered in the project planner
+When the developer sets registered developer with ID "bbbb" as project leader in the project
+Then he gets the error message "Project does not exist"

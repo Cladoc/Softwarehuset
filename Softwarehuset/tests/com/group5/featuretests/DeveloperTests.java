@@ -155,5 +155,17 @@ public class DeveloperTests {
 	    } catch (OperationNotAllowedException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
-	}	
+	}
+	
+	@When("the developer sets registered developer with ID {string} as project leader in the project")
+	public void theDeveloperSetsRegisteredDeveloperWithIDAsProjectLeaderInTheProject(String badID) throws Exception, FormattingException, NullObjectException, OperationNotAllowedException {
+	    Developer badDeveloper = new Developer();
+	    badDeveloper.setID(badID);
+	    projectPlanner.addDeveloper(badDeveloper);
+	    try{
+	    	projectPlanner.setProjectLeader(project, badDeveloper);
+	    } catch (NullObjectException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	}
 }

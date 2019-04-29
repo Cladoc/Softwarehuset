@@ -11,7 +11,7 @@ public abstract class AbstractProject {
 	public abstract int getStartYear();
 	public abstract boolean equals(Object obj);
 	public abstract boolean isNil();
-	public abstract void setProjectLeader(Developer developer);
+	public abstract void setProjectLeader(Developer developer) throws NullObjectException;
 	public abstract boolean isProjectLeader(Developer developer);
 
 }
