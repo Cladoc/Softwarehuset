@@ -61,7 +61,69 @@ public class ProjectPlanner {
 	public boolean checkActivityExists(ProjectActivity projectActivity, Project project) throws NullObjectException {
 		return projects.checkActivityExists(projectActivity, project);
 	}
+	
+	public void setStartYear(Project project, String year, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(developer)) {
+			projects.setStartYear(project, year, developer);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
 
+	public void setStartWeek(Project project, String week, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(developer)) {
+			projects.setStartWeek(project, week, developer);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+	
+	public int getStartWeek(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {	
+		return projects.getStartWeek(project);
+	}
+	
+	public int getStartYear(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	
+		return projects.getStartYear(project);
+	}
+	
+	public void setEndYear(Project project, String year, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(developer)) {
+			projects.setEndYear(project, year, developer);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+
+	public void setEndWeek(Project project, String week, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		if(checkDeveloperExist(developer)) {
+			projects.setEndWeek(project, week, developer);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
+	
+	public int getEndWeek(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {	
+		return projects.getEndWeek(project);
+	}
+	
+	public int getEndYear(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	
+		return projects.getEndYear(project);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
 	/*
 	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
 		if(checkDeveloperExist(devLeader) && checkDeveloperExist(assignedDeveloper)){
@@ -70,4 +132,6 @@ public class ProjectPlanner {
 		
 	}
 	*/
-}
+
+	
+

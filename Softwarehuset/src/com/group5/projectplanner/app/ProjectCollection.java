@@ -75,6 +75,102 @@ public class ProjectCollection {
 		}
 	}
 	
+	public void setStartYear(Project project, String year, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			if(proj.isProjectLeader(developer)){
+				proj.setStartYear(year);
+			}else{
+				throw new OperationNotAllowedException("ID not project leader");
+			}
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}	
+	}
+	
+	public void setStartWeek(Project project, String week, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			if(proj.isProjectLeader(developer)){
+				proj.setStartWeek(week);
+			}else{
+				throw new OperationNotAllowedException("ID not project leader");
+			}
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}	
+	}
+	
+	public int getStartWeek(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.getStartWeek();
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}	
+	}
+	
+	public int getStartYear(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.getStartYear();
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}	
+	}
+	
+	public void setEndYear(Project project, String year, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			if(proj.isProjectLeader(developer)){
+				proj.setEndYear(year);
+			}else{
+				throw new OperationNotAllowedException("ID not project leader");
+			}
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}	
+	}
+	
+	public void setEndWeek(Project project, String week, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			if(proj.isProjectLeader(developer)){
+				proj.setEndWeek(week);
+			}else{
+				throw new OperationNotAllowedException("ID not project leader");
+			}
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}	
+	}
+	
+	public int getEndWeek(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.getEndWeek();
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}	
+	}
+	
+	public int getEndYear(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		AbstractProject abstProj = getProjectRef(project);
+		if(!abstProj.isNil()){
+			Project proj = (Project) abstProj;
+			return proj.getEndYear();
+		}else{
+			throw new NullObjectException("Project does not exist");
+		}	
+	}
+	
 	/*
 	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader,
 			Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException {
@@ -110,6 +206,7 @@ public class ProjectCollection {
 		}
 		return new NullProject();
 	}
+
 
 	
 	

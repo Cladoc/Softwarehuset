@@ -116,5 +116,96 @@ public class LeaderTests {
 		projectPlanner.addActivity(projectActivity, project, devLeader);
 		assertTrue(projectPlanner.checkActivityExists(projectActivity, project));
 	}
+	
+	@When("the project leader sets start date of week {string} and year {string}")
+	public void theProjectLeaderSetsStartDateOfWeekAndYear(String week, String year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		try {
+			projectPlanner.setStartYear(project, year, devLeader);
+			projectPlanner.setStartWeek(project, week, devLeader);
+		} catch (Exception e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+		
+		// project.setEndWeek(week);
+	   
+	}
+
+	@Then("the project has start date week {int} and year {int}")
+	public void theProjectHasStartDateWeekAndYear(Integer week, Integer year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		assertTrue(year == projectPlanner.getStartYear(project));
+		assertTrue(week == projectPlanner.getStartWeek(project));
+	}
+	
+	@Given("the project has end date of week {string} and year {string}")
+	public void theProjectHasEndDateOfWeekAndYear(String week, String year) throws FormattingException, OperationNotAllowedException, NullObjectException {
+		try {
+			projectPlanner.setEndYear(project, year, devLeader);
+			projectPlanner.setEndWeek(project, week, devLeader);
+		} catch (Exception e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@When("the project leader sets an invalid start date of week {string} and year {string}")
+	public void theProjectLeaderSetsAnInvalidStartDateOfWeekAndYear(String week, String year) throws FormattingException, OperationNotAllowedException, NullObjectException, Exception {
+		try {
+			projectPlanner.setStartYear(project, year, devLeader);
+			projectPlanner.setStartWeek(project, week, devLeader);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}	    
+	}
+
+	@Then("he gets the invalid date error message {string}")
+	public void heGetsTheInvalidDateErrorMessage(String error) {
+	    // Write code here that turns the phrase above into concrete actions
+		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
+	}
+	
+	@When("the Project leader sets end date of week {string} and year {string}")
+	public void theProjectLeaderSetsEndDateOfWeekAndYear(String week, String year) throws FormattingException, OperationNotAllowedException, NullObjectException {
+		try {
+			projectPlanner.setEndYear(project, year, devLeader);
+			projectPlanner.setEndWeek(project, week, devLeader);
+		} catch (Exception e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+
+	@Then("the project has end date of week {int} and year {int}")
+	public void theProjectHasEndDateOfWeekAndYear(Integer week, Integer year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		assertTrue(year == projectPlanner.getEndYear(project));
+		assertTrue(week == projectPlanner.getEndWeek(project));
+	}
+
+	@Given("the project has start date of week {string} and year {string}")
+	public void theProjectHasStartDateOfWeekAndYear(String week, String year) throws Exception, OperationNotAllowedException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		try {
+			projectPlanner.setStartYear(project, year, devLeader);
+			projectPlanner.setStartWeek(project, week, devLeader);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@When("the project leader sets invalid end date of week {string} and year {string}")
+	public void theProjectLeaderSetsInvalidEndDateOfWeekAndYear(String week, String year) throws FormattingException, OperationNotAllowedException, NullObjectException, Exception {
+		try {
+			projectPlanner.setEndYear(project, year, devLeader);
+			projectPlanner.setEndWeek(project, week, devLeader);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@Then("he gets the invalid end date error message {string}")
+	public void heGetsTheInvalidEndDateErrorMessage(String error) {
+	    // Write code here that turns the phrase above into concrete actions
+		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
+	}
 
 }
