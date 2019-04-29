@@ -26,64 +26,34 @@ public class ActivityCollection {
 	
 	public void assignDeveloper(ProjectActivity projectActivity, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException {
 		Activity abstActivity = getActivityRef(projectActivity);
-		if(!abstActivity.isNil()){
-			ProjectActivity projActivity = (ProjectActivity) abstActivity;
-			projActivity.assignDeveloper(assignedDeveloper);
-		}else{
-			throw new NullObjectException("Activity does not exist");
-		}
+		abstActivity.assignDeveloper(assignedDeveloper);
 	}
 	
 	
 	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Developer assignedDeveloper) throws NullObjectException {
 		Activity abstActivity = getActivityRef(projectActivity);
-		if(!abstActivity.isNil()){
-			ProjectActivity projActivity = (ProjectActivity) abstActivity;
-			return projActivity.checkDeveloperAssigned(assignedDeveloper);
-		}else{
-			throw new NullObjectException("Activity does not exist");
-		}
+		return abstActivity.checkDeveloperAssigned(assignedDeveloper);
 	}
 	
 	public void setExpectedHours(ProjectActivity projectActivity, String hours) throws NullObjectException, FormattingException {
 		Activity abstActivity = getActivityRef(projectActivity);
-		if(!abstActivity.isNil()){
-			ProjectActivity projActivity = (ProjectActivity) abstActivity;
-			projActivity.setExpectedWorkHours(hours);
-		}else{
-			throw new NullObjectException("Activity does not exist");
-		}
+		abstActivity.setExpectedWorkHours(hours);
 	}
 	
 	public double getExpectedHours(ProjectActivity projectActivity) throws NullObjectException {
 		Activity abstActivity = getActivityRef(projectActivity);
-		if(!abstActivity.isNil()){
-			ProjectActivity projActivity = (ProjectActivity) abstActivity;
-			return projActivity.getExpectedWorkHours();
-		}else{
-			throw new NullObjectException("Activity does not exist");
-		}
+		return abstActivity.getExpectedWorkHours();
 	}
 	
 	
 	public void setActivityComplete(ProjectActivity projectActivity) throws NullObjectException {
 		Activity abstActivity = getActivityRef(projectActivity);
-		if(!abstActivity.isNil()){
-			ProjectActivity projActivity = (ProjectActivity) abstActivity;
-			projActivity.setActivityComplete();
-		}else{
-			throw new NullObjectException("Activity does not exist");
-		}
+		abstActivity.setActivityComplete();
 	}
 	
 	public boolean isActivityComplete(ProjectActivity projectActivity) throws NullObjectException {
 		Activity abstActivity = getActivityRef(projectActivity);
-		if(!abstActivity.isNil()){
-			ProjectActivity projActivity = (ProjectActivity) abstActivity;
-			return projActivity.isActivityComplete();
-		}else{
-			throw new NullObjectException("Activity does not exist");
-		}
+		return abstActivity.isActivityComplete();
 	}
 	
 	//Internal helper functions

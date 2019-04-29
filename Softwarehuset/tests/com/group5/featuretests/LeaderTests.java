@@ -55,7 +55,7 @@ public class LeaderTests {
 		projectActivity = new ProjectActivity();
 		projectActivity.setName(name);
 		assertTrue(projectActivity.getName().equals(name));
-		projectPlanner.addActivity(projectActivity, project, devLeader);
+		projectPlanner.addProjectActivity(projectActivity, project, devLeader);
 	}
 
 	// Author: Casper (s163950)
@@ -70,7 +70,7 @@ public class LeaderTests {
 			throws NullObjectException, OperationNotAllowedException {
 		projectActivity = new ProjectActivity();
 		projectActivity.setName(name);
-		projectPlanner.addActivity(projectActivity, project, devLeader);
+		projectPlanner.addProjectActivity(projectActivity, project, devLeader);
 		assertTrue(projectPlanner.checkActivityExists(projectActivity, project));
 	}
 
@@ -81,7 +81,7 @@ public class LeaderTests {
 		ProjectActivity projectActivity2 = new ProjectActivity();
 		projectActivity2.setName(name);
 		try {
-			projectPlanner.addActivity(projectActivity2, project, devLeader);
+			projectPlanner.addProjectActivity(projectActivity2, project, devLeader);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -89,7 +89,7 @@ public class LeaderTests {
 
 	// Author: Casper (s163950)
 	@Given("that he is not project leader on the project")
-	public void thatHeIsNotProjectLeaderOnTheProject() throws Exception, FormattingException {
+	public void thatHeIsNotProjectLeaderOnTheProject() throws Exception, FormattingException, NullObjectException {
 		project = projectHelper.getProject();
 		devLeader = developerHelper.getDeveloper();
 		assertFalse(projectPlanner.isProjectLeader(project, devLeader));
@@ -100,7 +100,7 @@ public class LeaderTests {
 	public void theDeveloperTriesToAddAnActivityWithTheName(String string)
 			throws NullObjectException, OperationNotAllowedException {
 		try {
-			projectPlanner.addActivity(projectActivity, project, devLeader);
+			projectPlanner.addProjectActivity(projectActivity, project, devLeader);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -113,7 +113,7 @@ public class LeaderTests {
 			throws NullObjectException, OperationNotAllowedException {
 		projectActivity = new ProjectActivity();
 		projectActivity.setName(activityName);
-		projectPlanner.addActivity(projectActivity, project, devLeader);
+		projectPlanner.addProjectActivity(projectActivity, project, devLeader);
 		assertTrue(projectPlanner.checkActivityExists(projectActivity, project));
 	}
 	

@@ -33,14 +33,11 @@ public class Project extends AbstractProject {
 	
 	//Author: Casper (s163950)
 	@Override
-	public void setStartYear(String start) throws Exception, FormattingException {
+	public void setStartYear(String start) throws Exception, FormattingException, NullObjectException {
+		
 		int number = 0;
 		try{
-			
 			number = Integer.parseInt(start);
-			System.out.println("startYear is :" + this.startYear);
-			System.out.println("endYear is :" + this.endYear);
-			System.out.println("Number is :" + number);
 			if(number < 1000 || number > 9999)
 			{
 				throw new FormattingException("Incorrect date format");
@@ -50,70 +47,72 @@ public class Project extends AbstractProject {
 			}
 			this.startYear = number;
 		}catch (Exception e){
-			System.out.println("Im in the right place");
 				throw new FormattingException("Incorrect date format");			
 		}
+		
 	}
 	
 	@Override
-	public void setStartWeek(String start) throws Exception, FormattingException {
-		int number = 0;
-		try{
-			number = Integer.parseInt(start);
-			if(number < 1 || number > 54)
-			{
-				
-				System.out.println("startYear is :" + this.startYear);
-				System.out.println("endYear is :" + this.endYear);
-				System.out.println("Number is :" + number);
+	public void setStartWeek(String start, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException {
+		if(isProjectLeader(devLeader)){
+			int number = 0;
+			try{
+				number = Integer.parseInt(start);
+				if(number < 1 || number > 54)
+				{
+					throw new FormattingException("Incorrect date format");
+				}
+				if((this.startYear == this.endYear && this.endWeek <= number)) {
+					throw new FormattingException("An invalid start date was entered");
+				}
+				this.startWeek = number;
+			}catch (Exception e){
 				throw new FormattingException("Incorrect date format");
 			}
-			if((this.startYear == this.endYear && this.endWeek <= number)) {
-				throw new FormattingException("An invalid start date was entered");
-			}
-			this.startWeek = number;
-		}catch (Exception e){
-			throw new FormattingException("Incorrect date format");
-			//System.out.println("Im here yo (aswell)!");
-			/*if((this.startYear == this.endYear && this.endWeek <= number) && number >= 1 && number <= 54 ) {
-				throw new FormattingException("An invalid start date was entered");
-			}else {
-				throw new FormattingException("Incorrect date format");
-			}*/
-			
+		}else{
+			throw new OperationNotAllowedException("ID not project leader");
 		}
+		
 	}
 	
-	public void setEndYear(String start) throws Exception, FormattingException {
-		try{
-			int number = Integer.parseInt(start);
-			if(number < 1000 || number > 9999)
-			{
+	public void setEndYear(String start, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException {
+		if(isProjectLeader(devLeader)){
+			try{
+				int number = Integer.parseInt(start);
+				if(number < 1000 || number > 9999)
+				{
+					throw new FormattingException("Incorrect date format");
+				}
+				if(this.startYear > number) {
+					throw new FormattingException("An invalid end date was entered");
+				}
+				this.endYear = number;
+			}catch (Exception e){
 				throw new FormattingException("Incorrect date format");
 			}
-			if(this.startYear > number) {
-				throw new FormattingException("An invalid end date was entered");
-			}
-			this.endYear = number;
-		}catch (Exception e){
-			throw new FormattingException("Incorrect date format");
+		}else{
+			throw new OperationNotAllowedException("ID not project leader");
 		}
 	}
 	
 	@Override
-	public void setEndWeek(String start) throws Exception, FormattingException {
-		try{
-			int number = Integer.parseInt(start);
-			if(number < 1 || number > 54 )
-			{
+	public void setEndWeek(String start, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException {
+		if(isProjectLeader(devLeader)){
+			try{
+				int number = Integer.parseInt(start);
+				if(number < 1 || number > 54 )
+				{
+					throw new FormattingException("Incorrect date format");
+				}
+				if((this.startYear == this.endYear && this.startWeek > number)) {
+					throw new FormattingException("An invalid end date was entered");
+				}
+				this.endWeek = number;
+			}catch (Exception e){
 				throw new FormattingException("Incorrect date format");
 			}
-			if((this.startYear == this.endYear && this.startWeek > number)) {
-				throw new FormattingException("An invalid end date was entered");
-			}
-			this.endWeek = number;
-		}catch (Exception e){
-			throw new FormattingException("Incorrect date format");
+		}else{
+			throw new OperationNotAllowedException("ID not project leader");
 		}
 	}
 	
@@ -166,16 +165,19 @@ public class Project extends AbstractProject {
 		return false;
 	}
 
-	public void addProjectActivity(ProjectActivity projectActivity) throws OperationNotAllowedException{
-		activities.addActivity(projectActivity);
+	@Override
+	public void addProjectActivity(ProjectActivity projectActivity, Developer devLeader) throws OperationNotAllowedException{
+		if(isProjectLeader(devLeader)){
+			activities.addActivity(projectActivity);
+		}else{
+			throw new OperationNotAllowedException("ID not project leader");
+		}
 	}
 	
 	public boolean checkActivityExist(ProjectActivity projectActivity) {
 		return activities.checkActivityExists(projectActivity);
 	}
 
-
-	
 	public void assignDeveloper(ProjectActivity projectActivity, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException {
 		if(isProjectLeader(devLeader)){
 			activities.assignDeveloper(projectActivity, assignedDeveloper);
@@ -188,7 +190,7 @@ public class Project extends AbstractProject {
 		return activities.checkDeveloperAssigned(projectActivity, assignedDeveloper);
 	}
 
-	public void setExpectedHours(ProjectActivity projectActivity, Developer devLeader, String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
+	public void setExpectedHours(ProjectActivity projectActivity, Developer devLeader, String hours) throws OperationNotAllowedException, FormattingException, NullObjectException {
 		if(isProjectLeader(devLeader)){
 			activities.setExpectedHours(projectActivity, hours);
 		}else{

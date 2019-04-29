@@ -72,7 +72,7 @@ public class DeveloperTests {
 
 	//Author: Casper (s163950)
 	@When("the developer adds a project with the name {string} and start year of {string}")
-	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String name, String year) throws Exception, FormattingException, OperationNotAllowedException {
+	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String name, String year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = new Project();
 	    project.setName(name);
 	    try{
@@ -103,7 +103,7 @@ public class DeveloperTests {
 
 	//Author: Casper (s163950)
 	@Given("a project is registered with the name {string}")
-	public void aProjectIsRegisteredWithTheName(String name) throws Exception, FormattingException, OperationNotAllowedException {
+	public void aProjectIsRegisteredWithTheName(String name) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = new Project();
 	    project.setName(name);
 	    project.setStartYear("2020");
@@ -130,7 +130,7 @@ public class DeveloperTests {
 	}
 	//Author: Casper (s163950)
 	@Given("a project is registered in the project planner")
-	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException {
+	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = projectHelper.getProject();
 	    projectPlanner.addProject(project, developer);
 	    assertTrue(projectPlanner.checkProjectExist(project));

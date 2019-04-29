@@ -42,7 +42,7 @@ public class ProjectActivity extends Activity {
 
 
 	public void assignDeveloper(Developer assignedDeveloper) throws OperationNotAllowedException {
-		if(!developers.checkDeveloperExist(assignedDeveloper))
+		if(!developers.devAssigned(assignedDeveloper))
 		{
 			developers.addDeveloper(assignedDeveloper);
 		}else{
@@ -52,7 +52,7 @@ public class ProjectActivity extends Activity {
 
 
 	public boolean checkDeveloperAssigned(Developer assignedDeveloper) {
-		return developers.checkDeveloperExist(assignedDeveloper);
+		return developers.devAssigned(assignedDeveloper);
 	}
 
 

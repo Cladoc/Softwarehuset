@@ -10,7 +10,7 @@ public class DeveloperCollection {
 	
 	//Author: Casper (s163950)
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
-		if(checkDeveloperExist(developer)){
+		if(devAssigned(developer)){
 			throw new OperationNotAllowedException("ID already exists");
 		}else{
 			developers.add(developer);
@@ -18,7 +18,7 @@ public class DeveloperCollection {
 	}
 	
 	//Author: Casper (s163950)
-	public boolean checkDeveloperExist(Developer developer){
+	public boolean devAssigned(Developer developer){
 		//contains() uses object's equals() method
 		return developers.contains(developer);
 	}

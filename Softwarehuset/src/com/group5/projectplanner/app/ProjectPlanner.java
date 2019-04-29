@@ -18,7 +18,7 @@ public class ProjectPlanner {
 	
 	public boolean checkDeveloperExist(Developer developer) {
 		//contains() uses object's equals() method
-		return developers.checkDeveloperExist(developer);
+		return developers.devAssigned(developer);
 	}
 	
 	//Author: Casper (s163950)
@@ -49,9 +49,9 @@ public class ProjectPlanner {
 	}
 
 	//Author: Casper (s163950)
-	public void addActivity(ProjectActivity projectActivity, Project project, Developer developer) throws NullObjectException, OperationNotAllowedException {
-		if(checkDeveloperExist(developer)){
-			projects.addActivity(projectActivity, project, developer);
+	public void addProjectActivity(ProjectActivity projectActivity, Project project, Developer devLeader) throws NullObjectException, OperationNotAllowedException {
+		if(checkDeveloperExist(devLeader)){
+			projects.addProjectActivity(projectActivity, project, devLeader);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
@@ -107,7 +107,7 @@ public class ProjectPlanner {
 	
 	public void setStartYear(Project project, String year, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(developer)) {
-			projects.setStartYear(project, year, developer);
+			projects.setStartYear(project, year);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
