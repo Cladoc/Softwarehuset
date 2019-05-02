@@ -13,6 +13,7 @@ public abstract class AbstractProject {
 	public abstract int getStartWeek() throws NullObjectException;
 	public abstract int getEndYear() throws NullObjectException;
 	public abstract int getEndWeek() throws NullObjectException;
+	
 	public abstract void setStartWeek(String start, Developer devLeader) throws Exception, FormattingException, NullObjectException, OperationNotAllowedException;
 	public abstract void setEndWeek(String start, Developer devLeader) throws Exception, FormattingException, NullObjectException, OperationNotAllowedException;
 	public abstract boolean equals(Object obj);
@@ -27,4 +28,5 @@ public abstract class AbstractProject {
 	public abstract double getExpectedHours(ProjectActivity projectActivity) throws NullObjectException;
 	public abstract void setActivityComplete(ProjectActivity projectActivity, Developer devLeader) throws NullObjectException, OperationNotAllowedException;
 	public abstract boolean isActivityComplete(ProjectActivity projectActivity) throws NullObjectException;
+	public abstract String getProjectInformation(Developer devLeader) throws OperationNotAllowedException, NullObjectException;
 }

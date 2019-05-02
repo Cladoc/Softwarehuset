@@ -155,7 +155,10 @@ public class ProjectPlanner {
 		return projects.getEndYear(project);
 	}
 	
-	
+	public String getProjectInformation(Project project, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		
+		return projects.getProjectInformation(project, devLeader);
+	}
 	
 	
 	

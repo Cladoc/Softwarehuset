@@ -24,6 +24,7 @@ public class LeaderTests {
 	Developer testDeveloper;
 	Project project;
 	ProjectActivity projectActivity;
+	String projectInformation;
 
 	public LeaderTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder,
 			ProjectHelper projectHelper, DeveloperHelper developerHelper) {
@@ -265,6 +266,42 @@ public class LeaderTests {
 	public void theActivityIsRegisteredAsCompleted() throws NullObjectException {
 		assertTrue(projectPlanner.isActivityComplete(projectActivity, project, devLeader));
 	}
+	
+	@When("the project leader sets start date as letters of week {string} and year {string}")
+	public void theProjectLeaderSetsStartDateAsLettersOfWeekAndYear(String week, String year) throws Exception, OperationNotAllowedException, NullObjectException {
+		try {
+			projectPlanner.setStartYear(project, year, devLeader);
+			projectPlanner.setStartWeek(project, week, devLeader);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@When("the project leader sets end date as letters of week {string} and year {string}")
+	public void theProjectLeaderSetsEndDateAsLettersOfWeekAndYear(String week, String year) throws Exception, OperationNotAllowedException, NullObjectException {
+		try {
+			projectPlanner.setEndYear(project, year, devLeader);
+			projectPlanner.setEndWeek(project, week, devLeader);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@When("the project leader asks for the project information")
+	public void theProjectLeaderAsksForTheProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+	    projectInformation = projectPlanner.getProjectInformation(project, devLeader);
+	}
+
+	@Then("projectInformation is {string}")
+	public void projectinformationIs(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		System.out.println(projectInformation);
+		assertTrue(projectInformation.equals(string));
+	}
+
+
+
 
 
 }

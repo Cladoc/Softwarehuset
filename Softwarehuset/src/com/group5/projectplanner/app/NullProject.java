@@ -46,6 +46,11 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
+	public String getProjectInformation(Developer devLeader) throws NullObjectException{
+		throw new NullObjectException("Project does not exist");
+	}
+	
+	@Override
 	public int getStartWeek() throws NullObjectException{
 		throw new NullObjectException("Project does not exist");
 	}

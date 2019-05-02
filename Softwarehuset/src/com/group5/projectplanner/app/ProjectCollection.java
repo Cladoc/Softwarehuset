@@ -127,6 +127,10 @@ public class ProjectCollection {
 		AbstractProject abstProj = getProjectRef(project);
 		return abstProj.getEndYear();
 	}
+	public String getProjectInformation(Project project, Developer devLeader) throws NullObjectException, OperationNotAllowedException {
+		AbstractProject abstProj = getProjectRef(project);
+		return abstProj.getProjectInformation(devLeader);
+	}
 	
 	//Internal helper methods
 	private int computeProjectID(){

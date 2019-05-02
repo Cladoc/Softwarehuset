@@ -24,3 +24,12 @@ And the project has start date of week "42" and year "2020"
 When the project leader sets invalid end date of week "41" and year "2020"
 Then he gets the invalid end date error message "An invalid end date was entered"
 
+Scenario: Give a letter as a start date of project
+Given a developer is project leader on a project registered in the project planner
+When the project leader sets start date as letters of week "twenty" and year "twentytwenty"
+Then he gets the error message "Incorrect date format"	
+
+Scenario: Give a letter as an end date of project
+Given a developer is project leader on a project registered in the project planner
+When the project leader sets end date as letters of week "twenty" and year "twentytwenty"
+Then he gets the error message "Incorrect date format"

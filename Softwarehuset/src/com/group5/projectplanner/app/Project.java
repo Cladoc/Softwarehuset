@@ -128,6 +128,15 @@ public class Project extends AbstractProject {
 		return this.startWeek;
 	}
 	
+	@Override
+	public String getProjectInformation(Developer devLeader) throws OperationNotAllowedException {
+		if(isProjectLeader(devLeader)){
+			return "project information";
+		}else{
+			throw new OperationNotAllowedException("ID not project leader");
+		}
+	}
+	
 	public int getEndYear() {
 		return this.endYear;
 	}
