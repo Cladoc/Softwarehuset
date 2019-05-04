@@ -2,23 +2,25 @@ package com.group5.projectplanner.app;
 
 import javax.xml.ws.Holder;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 //Author: Casper Egholm Jørgensen (s163950)
 public class ProjectPlanner {
 	private Calendar calendar;
-	private DeveloperCollection developers = new DeveloperCollection();
+	private DeveloperRepository devRepo = new DeveloperRepository();
 	private ProjectRepository projectsRepo = new ProjectRepository();
 
 	
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
-		developers.addDeveloper(developer);
+		devRepo.addDeveloper(developer);
 	}
 	
 	public boolean checkDeveloperExist(Developer developer) {
 		//contains() uses object's equals() method
-		return developers.devAssigned(developer);
+		return devRepo.checkDeveloperExists(developer);
 	}
 	
 	//Author: Casper (s163950)
@@ -176,10 +178,6 @@ public class ProjectPlanner {
 		AbstractProject proj = projectsRepo.getProjectRef(project);
 		return proj.getProjectInformation(devLeader);
 	}
-
-//	public boolean checkActivityAssigned(ProjectActivity projectActivity, Project project, Developer testDeveloper) {
-//		developers.checkActivityAssigned(projectActivity, project, testDeveloper);
-//	}
 	
 	
 	

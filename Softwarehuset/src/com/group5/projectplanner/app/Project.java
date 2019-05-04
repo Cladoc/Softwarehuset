@@ -2,7 +2,7 @@ package com.group5.projectplanner.app;
 import java.util.*;
 
 public class Project extends AbstractProject {
-	private ActivityCollection activities = new ActivityCollection();
+	private ActivityRepository activityRepo = new ActivityRepository();
 	private int projectID;
 	private String projectName;
 	private Developer leader;
@@ -177,50 +177,56 @@ public class Project extends AbstractProject {
 	@Override
 	public void addProjectActivity(ProjectActivity projectActivity, Developer devLeader) throws OperationNotAllowedException{
 		if(isProjectLeader(devLeader)){
-			activities.addActivity(projectActivity, this);
+			activityRepo.addActivity(projectActivity, this);
 		}else{
 			throw new OperationNotAllowedException("ID not project leader");
 		}
 	}
 	
 	public boolean checkActivityExists(ProjectActivity projectActivity) {
-		return activities.checkActivityExists(projectActivity);
+		return activityRepo.checkActivityExists(projectActivity);
 	}
 
 	public void assignDeveloper(ProjectActivity projectActivity, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException {
 		if(isProjectLeader(devLeader)){
-			activities.assignDeveloper(projectActivity, assignedDeveloper);
+			Activity abstractActivity = activityRepo.getActivity(projectActivity);
+			abstractActivity.assignDeveloper(assignedDeveloper);
 		}else{
 			throw new OperationNotAllowedException("Id is not leader");
 		}
 	}
 
 	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Developer assignedDeveloper) throws NullObjectException {
-		return activities.checkDeveloperAssigned(projectActivity, assignedDeveloper);
+		Activity abstractActivity = activityRepo.getActivity(projectActivity);
+		return abstractActivity.checkDeveloperAssigned(assignedDeveloper);
 	}
 
 	public void setExpectedHours(ProjectActivity projectActivity, Developer devLeader, String hours) throws OperationNotAllowedException, FormattingException, NullObjectException {
 		if(isProjectLeader(devLeader)){
-			activities.setExpectedHours(projectActivity, hours);
+			Activity abstractActivity = activityRepo.getActivity(projectActivity);
+			abstractActivity.setExpectedWorkHours(hours);
 		}else{
 			throw new OperationNotAllowedException("Id is not leader");
 		}
 	}
 
 	public double getExpectedHours(ProjectActivity projectActivity) throws NullObjectException {
-		return activities.getExpectedHours(projectActivity);
+		Activity abstractActivity = activityRepo.getActivity(projectActivity);
+		return abstractActivity.getExpectedWorkHours();
 	}
 
 	public void setActivityComplete(ProjectActivity projectActivity, Developer devLeader) throws NullObjectException, OperationNotAllowedException {
 		if(isProjectLeader(devLeader)){
-			activities.setActivityComplete(projectActivity);
+			Activity abstractActivity = activityRepo.getActivity(projectActivity);
+			abstractActivity.setActivityComplete();
 		}else{
 			throw new OperationNotAllowedException("Id is not leader");
 		}
 	}
 
 	public boolean isActivityComplete(ProjectActivity projectActivity) throws NullObjectException {
-		return activities.isActivityComplete(projectActivity);
+		Activity abstractActivity = activityRepo.getActivity(projectActivity);
+		return abstractActivity.isActivityComplete();
 	}
 	
 }

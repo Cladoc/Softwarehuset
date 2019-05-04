@@ -6,7 +6,7 @@ import java.util.List;
 public class ProjectActivity extends Activity {
 	
 	private String name = "";
-	private DeveloperCollection developers = new DeveloperCollection();
+	private DeveloperRepository developers = new DeveloperRepository();
 	private Project parentProject;
 	private double totalExpectedHours;
 	private boolean complete;
@@ -42,7 +42,7 @@ public class ProjectActivity extends Activity {
 
 
 	public void assignDeveloper(Developer assignedDeveloper) throws OperationNotAllowedException {
-		if(!developers.devAssigned(assignedDeveloper))
+		if(!developers.checkDeveloperExists(assignedDeveloper))
 		{
 			developers.addDeveloper(assignedDeveloper);
 		}else{
@@ -52,7 +52,7 @@ public class ProjectActivity extends Activity {
 
 
 	public boolean checkDeveloperAssigned(Developer assignedDeveloper) {
-		return developers.devAssigned(assignedDeveloper);
+		return developers.checkDeveloperExists(assignedDeveloper);
 	}
 
 
