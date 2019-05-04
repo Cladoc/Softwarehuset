@@ -4,11 +4,11 @@ package com.group5.projectplanner.app;
 public class NullProject extends AbstractProject{
 	
 	@Override
-	public void setID(int id) {}
+	public void setID(ProjectID projectID) {}
 	
 	@Override
-	public int getID() {
-		return 0;
+	public ProjectID getID() {
+		return null;
 	}
 	
 	@Override

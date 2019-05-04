@@ -3,8 +3,8 @@ package com.group5.projectplanner.app;
 //Author: Casper (s163950)
 public abstract class AbstractProject {
 	
-	public abstract void setID(int id);
-	public abstract int getID();
+	public abstract void setID(ProjectID projectID);
+	public abstract ProjectID getID();
 	public abstract void setName(String name);
 	public abstract String getName();
 	public abstract void setStartYear(String start)  throws Exception, FormattingException, NullObjectException;
@@ -13,7 +13,6 @@ public abstract class AbstractProject {
 	public abstract int getStartWeek() throws NullObjectException;
 	public abstract int getEndYear() throws NullObjectException;
 	public abstract int getEndWeek() throws NullObjectException;
-	
 	public abstract void setStartWeek(String start, Developer devLeader) throws Exception, FormattingException, NullObjectException, OperationNotAllowedException;
 	public abstract void setEndWeek(String start, Developer devLeader) throws Exception, FormattingException, NullObjectException, OperationNotAllowedException;
 	public abstract boolean equals(Object obj);

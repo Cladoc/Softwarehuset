@@ -12,6 +12,7 @@ public class DeveloperTests {
 	ProjectPlanner projectPlanner;
 	Developer developer;
 	Project project;
+	ProjectID projectID;
 	ErrorMessageHolder errorMessageHolder;
 	ProjectHelper projectHelper;
 	DeveloperHelper developerHelper;
@@ -74,7 +75,8 @@ public class DeveloperTests {
 	@When("the developer adds a project with the name {string} and start year of {string}")
 	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String name, String year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = new Project();
-	    project.setName(name);
+		projectID = new ProjectID(name);
+		project.setID(projectID);
 	    try{
 	    	project.setStartYear(year);
 	    }catch (FormattingException e){
@@ -86,13 +88,13 @@ public class DeveloperTests {
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
 	}
-	
+		
 	//Author: Casper (s163950)
 	@Then("the project with the name {string} and start year of {int} is added to the project planner")
 	public void theProjectWithTheNameAndStartYearOfIsAddedToTheProjectPlanner(String name, int year) {
 	    assertTrue(project.getName().equals(name));
 		assertTrue(project.getStartYear()==year);
-		assertTrue(projectPlanner.checkProjectExist(project));
+		assertTrue(projectPlanner.checkProjectExist(projectID));
 	}
 
 	//Author: Casper (s163950)
@@ -105,9 +107,11 @@ public class DeveloperTests {
 	@Given("a project is registered with the name {string}")
 	public void aProjectIsRegisteredWithTheName(String name) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = new Project();
-	    project.setName(name);
+		projectID = new ProjectID(name);
+		project.setID(projectID);
 	    project.setStartYear("2020");
 	    projectPlanner.addProject(project, developer);
+	    projectPlanner.checkProjectExist(projectID);
 	}
 
 	//Author: Casper (s163950)
@@ -116,7 +120,7 @@ public class DeveloperTests {
 	    developer = new Developer();
 	    developer.setID("abcd");
 	}
-	
+
 	//SetProjectLeader:------------------------
 	//Author: Casper (s163950)
 	@Given("a developer with ID {string} is registered in the project planner")
@@ -132,18 +136,19 @@ public class DeveloperTests {
 	@Given("a project is registered in the project planner")
 	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = projectHelper.getProject();
+		projectID = project.getID();
 	    projectPlanner.addProject(project, developer);
-	    assertTrue(projectPlanner.checkProjectExist(project));
+	    assertTrue(projectPlanner.checkProjectExist(projectID));
 	}
 	//Author: Casper (s163950)
 	@When("the developer sets himself as project leader on the project")
 	public void theDeveloperSetsHimselfAsProjectLeaderOnTheProject() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	    projectPlanner.setProjectLeader(project, developer);
+	    projectPlanner.setProjectLeader(projectID, developer);
 	}
 	//Author: Casper (s163950)
 	@Then("the project has project leader with ID {string}")
 	public void theProjectHasProjectLeaderWithID(String string) throws Exception, FormattingException {
-	    assertTrue(projectPlanner.isProjectLeader(project, developer));
+	    assertTrue(projectPlanner.isProjectLeader(projectID, developer));
 	}
 	//Author: Casper (s163950)
 	@When("the developer sets developer with ID {string} as project leader in the project")
@@ -151,7 +156,7 @@ public class DeveloperTests {
 	    Developer badDeveloper = new Developer();
 	    badDeveloper.setID(badID);
 	    try{
-	    	projectPlanner.setProjectLeader(project, badDeveloper);
+	    	projectPlanner.setProjectLeader(projectID, badDeveloper);
 	    } catch (OperationNotAllowedException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
@@ -163,7 +168,7 @@ public class DeveloperTests {
 	    badDeveloper.setID(badID);
 	    projectPlanner.addDeveloper(badDeveloper);
 	    try{
-	    	projectPlanner.setProjectLeader(project, badDeveloper);
+	    	projectPlanner.setProjectLeader(projectID, badDeveloper);
 	    } catch (NullObjectException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }

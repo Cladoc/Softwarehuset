@@ -3,8 +3,7 @@ import java.util.*;
 
 public class Project extends AbstractProject {
 	private ActivityRepository activityRepo = new ActivityRepository();
-	private int projectID;
-	private String projectName;
+	private ProjectID projectID;
 	private Developer leader;
 	private int startYear;
 	private int startWeek;
@@ -12,23 +11,23 @@ public class Project extends AbstractProject {
 	private int endWeek;
 
 	@Override
-	public void setID(int id) {
-		this.projectID = id;
+	public void setID(ProjectID projectID) {
+		this.projectID = projectID;
 	}
 	
 	@Override
-	public int getID() {
+	public ProjectID getID() {
 		return this.projectID;
 	}
 	
 	@Override
 	public void setName(String name) {
-		this.projectName = name;
+		this.projectID.setName(name);
 	}
 	
 	@Override
 	public String getName() {
-		return this.projectName;
+		return this.projectID.getName();
 	}
 	
 	//Author: Casper (s163950)
@@ -161,9 +160,10 @@ public class Project extends AbstractProject {
 	
 	@Override
 	public boolean equals(Object obj){
-		if(obj instanceof Project){
-			Project proj = (Project) obj;
-			return this.projectName.equalsIgnoreCase(proj.getName());
+		if(obj instanceof ProjectID){
+			ProjectID projectID = (ProjectID) obj;
+			return projectID.getName().equalsIgnoreCase(this.projectID.getName());
+			//return this.projectName.equalsIgnoreCase(proj.getName());
 		}else{
 			return false;
 		}

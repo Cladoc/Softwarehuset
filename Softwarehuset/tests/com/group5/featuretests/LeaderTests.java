@@ -5,6 +5,7 @@ import com.group5.projectplanner.app.Developer;
 import com.group5.projectplanner.app.FormattingException;
 import com.group5.projectplanner.app.NullObjectException;
 import com.group5.projectplanner.app.Project;
+import com.group5.projectplanner.app.ProjectID;
 import com.group5.projectplanner.app.ProjectActivity;
 import com.group5.projectplanner.app.OperationNotAllowedException;
 
@@ -23,6 +24,7 @@ public class LeaderTests {
 	Developer devLeader;
 	Developer testDeveloper;
 	Project project;
+	ProjectID projectID;
 	ProjectActivity projectActivity;
 	String projectInformation;
 
@@ -40,13 +42,14 @@ public class LeaderTests {
 			throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		devLeader = new Developer();
 		devLeader.setID("abcd");
+		projectID = new ProjectID("Test");
 		project = new Project();
-		project.setName("Test");
+		project.setID(projectID);
 		project.setStartYear("2020");
 		projectPlanner.addDeveloper(devLeader);
 		projectPlanner.addProject(project, devLeader);
-		projectPlanner.setProjectLeader(project, devLeader);
-		assertTrue(projectPlanner.isProjectLeader(project, devLeader));
+		projectPlanner.setProjectLeader(projectID, devLeader);
+		assertTrue(projectPlanner.isProjectLeader(projectID, devLeader));
 	}
 
 	// Author: Casper (s163950)
@@ -56,13 +59,13 @@ public class LeaderTests {
 		projectActivity = new ProjectActivity();
 		projectActivity.setName(name);
 		assertTrue(projectActivity.getName().equals(name));
-		projectPlanner.addProjectActivity(projectActivity, project, devLeader);
+		projectPlanner.addProjectActivity(projectActivity, projectID, devLeader);
 	}
 
 	// Author: Casper (s163950)
 	@Then("the activity with name {string} is added to the project")
 	public void theActivityWithNameIsAddedToTheProject(String string) throws NullObjectException {
-		assertTrue(projectPlanner.checkActivityExists(projectActivity, project));
+		assertTrue(projectPlanner.checkActivityExists(projectActivity, projectID));
 	}
 
 	// Author: Casper (s163950)
@@ -71,8 +74,8 @@ public class LeaderTests {
 			throws NullObjectException, OperationNotAllowedException {
 		projectActivity = new ProjectActivity();
 		projectActivity.setName(name);
-		projectPlanner.addProjectActivity(projectActivity, project, devLeader);
-		assertTrue(projectPlanner.checkActivityExists(projectActivity, project));
+		projectPlanner.addProjectActivity(projectActivity, projectID, devLeader);
+		assertTrue(projectPlanner.checkActivityExists(projectActivity, projectID));
 	}
 
 	// Author: Casper (s163950)
@@ -82,7 +85,7 @@ public class LeaderTests {
 		ProjectActivity projectActivity2 = new ProjectActivity();
 		projectActivity2.setName(name);
 		try {
-			projectPlanner.addProjectActivity(projectActivity2, project, devLeader);
+			projectPlanner.addProjectActivity(projectActivity2, projectID, devLeader);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -92,8 +95,9 @@ public class LeaderTests {
 	@Given("that he is not project leader on the project")
 	public void thatHeIsNotProjectLeaderOnTheProject() throws Exception, FormattingException, NullObjectException {
 		project = projectHelper.getProject();
+		projectID = project.getID();
 		devLeader = developerHelper.getDeveloper();
-		assertFalse(projectPlanner.isProjectLeader(project, devLeader));
+		assertFalse(projectPlanner.isProjectLeader(projectID, devLeader));
 	}
 
 	// Author: Casper (s163950)
@@ -101,7 +105,7 @@ public class LeaderTests {
 	public void theDeveloperTriesToAddAnActivityWithTheName(String string)
 			throws NullObjectException, OperationNotAllowedException {
 		try {
-			projectPlanner.addProjectActivity(projectActivity, project, devLeader);
+			projectPlanner.addProjectActivity(projectActivity, projectID, devLeader);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -114,8 +118,8 @@ public class LeaderTests {
 			throws NullObjectException, OperationNotAllowedException {
 		projectActivity = new ProjectActivity();
 		projectActivity.setName(activityName);
-		projectPlanner.addProjectActivity(projectActivity, project, devLeader);
-		assertTrue(projectPlanner.checkActivityExists(projectActivity, project));
+		projectPlanner.addProjectActivity(projectActivity, projectID, devLeader);
+		assertTrue(projectPlanner.checkActivityExists(projectActivity, projectID));
 	}
 	
 	@When("the project leader assigns a developer to the activity")
@@ -123,12 +127,12 @@ public class LeaderTests {
 	    testDeveloper = new Developer();
 	    testDeveloper.setID("test");
 	    projectPlanner.addDeveloper(testDeveloper);
-	    projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	    projectPlanner.assignDeveloper(projectActivity, projectID, devLeader, testDeveloper);
 	}
 	
 	@Then("the developer is assigned to the activity")
 	public void theDeveloperIsAssignedToTheActivity() throws OperationNotAllowedException, NullObjectException {
-	    assertTrue(projectPlanner.checkDeveloperAssigned(projectActivity, project, testDeveloper));
+	    assertTrue(projectPlanner.checkDeveloperAssigned(projectActivity, projectID, testDeveloper));
 	}
 	
 	@When("the project leader assigns a developer to an activity under the project where he is already assigned")
@@ -136,9 +140,9 @@ public class LeaderTests {
 	    testDeveloper = new Developer();
 	    testDeveloper.setID("test");
 		projectPlanner.addDeveloper(testDeveloper);
-		projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+		projectPlanner.assignDeveloper(projectActivity, projectID, devLeader, testDeveloper);
 	    try{
-	    	projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	    	projectPlanner.assignDeveloper(projectActivity, projectID, devLeader, testDeveloper);
 	    }catch (OperationNotAllowedException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }  
@@ -154,8 +158,8 @@ public class LeaderTests {
 	@When("the project leader sets start date of week {string} and year {string}")
 	public void theProjectLeaderSetsStartDateOfWeekAndYear(String week, String year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		try {
-			projectPlanner.setStartYear(project, year, devLeader);
-			projectPlanner.setStartWeek(project, week, devLeader);
+			projectPlanner.setStartYear(projectID, year, devLeader);
+			projectPlanner.setStartWeek(projectID, week, devLeader);
 		} catch (Exception e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}   
@@ -164,15 +168,15 @@ public class LeaderTests {
 	@Then("the project has start date week {int} and year {int}")
 	public void theProjectHasStartDateWeekAndYear(Integer week, Integer year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 	    // Write code here that turns the phrase above into concrete actions
-		assertTrue(year == projectPlanner.getStartYear(project));
-		assertTrue(week == projectPlanner.getStartWeek(project));
+		assertTrue(year == projectPlanner.getStartYear(projectID));
+		assertTrue(week == projectPlanner.getStartWeek(projectID));
 	}
 	
 	@Given("the project has end date of week {string} and year {string}")
 	public void theProjectHasEndDateOfWeekAndYear(String week, String year) throws FormattingException, OperationNotAllowedException, NullObjectException {
 		try {
-			projectPlanner.setEndYear(project, year, devLeader);
-			projectPlanner.setEndWeek(project, week, devLeader);
+			projectPlanner.setEndYear(projectID, year, devLeader);
+			projectPlanner.setEndWeek(projectID, week, devLeader);
 		} catch (Exception e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -181,8 +185,8 @@ public class LeaderTests {
 	@When("the project leader sets an invalid start date of week {string} and year {string}")
 	public void theProjectLeaderSetsAnInvalidStartDateOfWeekAndYear(String week, String year) throws FormattingException, OperationNotAllowedException, NullObjectException, Exception {
 		try {
-			projectPlanner.setStartYear(project, year, devLeader);
-			projectPlanner.setStartWeek(project, week, devLeader);
+			projectPlanner.setStartYear(projectID, year, devLeader);
+			projectPlanner.setStartWeek(projectID, week, devLeader);
 		} catch (FormattingException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}	    
@@ -197,8 +201,8 @@ public class LeaderTests {
 	@When("the Project leader sets end date of week {string} and year {string}")
 	public void theProjectLeaderSetsEndDateOfWeekAndYear(String week, String year) throws FormattingException, OperationNotAllowedException, NullObjectException {
 		try {
-			projectPlanner.setEndYear(project, year, devLeader);
-			projectPlanner.setEndWeek(project, week, devLeader);
+			projectPlanner.setEndYear(projectID, year, devLeader);
+			projectPlanner.setEndWeek(projectID, week, devLeader);
 		} catch (Exception e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -208,16 +212,16 @@ public class LeaderTests {
 	@Then("the project has end date of week {int} and year {int}")
 	public void theProjectHasEndDateOfWeekAndYear(Integer week, Integer year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 	    // Write code here that turns the phrase above into concrete actions
-		assertTrue(year == projectPlanner.getEndYear(project));
-		assertTrue(week == projectPlanner.getEndWeek(project));
+		assertTrue(year == projectPlanner.getEndYear(projectID));
+		assertTrue(week == projectPlanner.getEndWeek(projectID));
 	}
 
 	@Given("the project has start date of week {string} and year {string}")
 	public void theProjectHasStartDateOfWeekAndYear(String week, String year) throws Exception, OperationNotAllowedException, NullObjectException {
 	    // Write code here that turns the phrase above into concrete actions
 		try {
-			projectPlanner.setStartYear(project, year, devLeader);
-			projectPlanner.setStartWeek(project, week, devLeader);
+			projectPlanner.setStartYear(projectID, year, devLeader);
+			projectPlanner.setStartWeek(projectID, week, devLeader);
 		} catch (FormattingException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -226,8 +230,8 @@ public class LeaderTests {
 	@When("the project leader sets invalid end date of week {string} and year {string}")
 	public void theProjectLeaderSetsInvalidEndDateOfWeekAndYear(String week, String year) throws FormattingException, OperationNotAllowedException, NullObjectException, Exception {
 		try {
-			projectPlanner.setEndYear(project, year, devLeader);
-			projectPlanner.setEndWeek(project, week, devLeader);
+			projectPlanner.setEndYear(projectID, year, devLeader);
+			projectPlanner.setEndWeek(projectID, week, devLeader);
 		} catch (FormattingException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -244,18 +248,18 @@ public class LeaderTests {
 	//Set expected work hours feature-----------------------------------------------------------
 	@When("the project leader sets expected work hours to {string} in the activity")
 	public void theProjectLeaderSetsExpectedWorkHoursToInTheActivity(String hours) throws OperationNotAllowedException, NullObjectException, NumberFormatException, FormattingException {
-	    projectPlanner.setExpectedHours(projectActivity, project, devLeader, hours);
+	    projectPlanner.setExpectedHours(projectActivity, projectID, devLeader, hours);
 	}
 	
 	@Then("the activity has expected work hours set to {double}")
 	public void theActivityHasExpectedWorkHoursSetTo(double hours) throws NullObjectException {
-	    assertTrue(projectPlanner.getExpectedHours(projectActivity, project) == hours);
+	    assertTrue(projectPlanner.getExpectedHours(projectActivity, projectID) == hours);
 	}
 	
 	@When("the project leader sets expected work hours to {string}")
 	public void theProjectLeaderSetsExpectedWorkHoursTo(String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
 	    try{
-	    	projectPlanner.setExpectedHours(projectActivity, project, devLeader, hours);
+	    	projectPlanner.setExpectedHours(projectActivity, projectID, devLeader, hours);
 	    } catch (FormattingException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
@@ -265,19 +269,19 @@ public class LeaderTests {
 	
 	@When("the project leader sets the activity as complete")
 	public void theProjectLeaderSetsTheActivityAsComplete() throws OperationNotAllowedException, NullObjectException {
-	    projectPlanner.setActivityComplete(projectActivity, project, devLeader);
+	    projectPlanner.setActivityComplete(projectActivity, projectID, devLeader);
 	}
 
 	@Then("the activity is registered as completed")
 	public void theActivityIsRegisteredAsCompleted() throws NullObjectException {
-		assertTrue(projectPlanner.isActivityComplete(projectActivity, project, devLeader));
+		assertTrue(projectPlanner.isActivityComplete(projectActivity, projectID, devLeader));
 	}
 	
 	@When("the project leader sets start date as letters of week {string} and year {string}")
 	public void theProjectLeaderSetsStartDateAsLettersOfWeekAndYear(String week, String year) throws Exception, OperationNotAllowedException, NullObjectException {
 		try {
-			projectPlanner.setStartYear(project, year, devLeader);
-			projectPlanner.setStartWeek(project, week, devLeader);
+			projectPlanner.setStartYear(projectID, year, devLeader);
+			projectPlanner.setStartWeek(projectID, week, devLeader);
 		} catch (FormattingException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -286,8 +290,8 @@ public class LeaderTests {
 	@When("the project leader sets end date as letters of week {string} and year {string}")
 	public void theProjectLeaderSetsEndDateAsLettersOfWeekAndYear(String week, String year) throws Exception, OperationNotAllowedException, NullObjectException {
 		try {
-			projectPlanner.setEndYear(project, year, devLeader);
-			projectPlanner.setEndWeek(project, week, devLeader);
+			projectPlanner.setEndYear(projectID, year, devLeader);
+			projectPlanner.setEndWeek(projectID, week, devLeader);
 		} catch (FormattingException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -295,7 +299,7 @@ public class LeaderTests {
 
 	@When("the project leader asks for the project information")
 	public void theProjectLeaderAsksForTheProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	    projectInformation = projectPlanner.getProjectInformation(project, devLeader);
+	    projectInformation = projectPlanner.getProjectInformation(projectID, devLeader);
 	}
 
 	@Then("projectInformation is {string}")
