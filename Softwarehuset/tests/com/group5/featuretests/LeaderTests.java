@@ -107,7 +107,7 @@ public class LeaderTests {
 		}
 	}
 
-	// -------Assign developer
+	// -------Assign developer feature--------------
 	// Author: Casper (s163950)
 	@Given("an activity with the name {string} is added to the project")
 	public void anActivityWithTheNameIsAddedToTheProject(String activityName)
@@ -118,6 +118,39 @@ public class LeaderTests {
 		assertTrue(projectPlanner.checkActivityExists(projectActivity, project));
 	}
 	
+	@When("the project leader assigns a developer to the activity")
+	public void theProjectLeaderAssignsADeveloperToTheActivity() throws NullObjectException, OperationNotAllowedException {
+	    testDeveloper = new Developer();
+	    testDeveloper.setID("test");
+	    projectPlanner.addDeveloper(testDeveloper);
+	    projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	}
+	
+	@Then("the developer is assigned to the activity")
+	public void theDeveloperIsAssignedToTheActivity() throws OperationNotAllowedException, NullObjectException {
+	    assertTrue(projectPlanner.checkDeveloperAssigned(projectActivity, project, testDeveloper));
+	}
+	
+	@When("the project leader assigns a developer to an activity under the project where he is already assigned")
+	public void theProjectLeaderAssignsADeveloperToAnActivityUnderTheProjectWhereHeIsAlreadyAssigned() throws NullObjectException, OperationNotAllowedException {
+	    testDeveloper = new Developer();
+	    testDeveloper.setID("test");
+		projectPlanner.addDeveloper(testDeveloper);
+		projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	    try{
+	    	projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
+	    }catch (OperationNotAllowedException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }  
+	}
+	
+//	@Then("the activity is added to the developer's list of activities")
+//	public void theActivityIsAddedToTheDeveloperSListOfActivities() {
+//	    assertTrue(projectPlanner.checkActivityAssigned(projectActivity, project, testDeveloper));
+//	}
+	
+	//Edit date features
+	
 	@When("the project leader sets start date of week {string} and year {string}")
 	public void theProjectLeaderSetsStartDateOfWeekAndYear(String week, String year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		try {
@@ -125,10 +158,7 @@ public class LeaderTests {
 			projectPlanner.setStartWeek(project, week, devLeader);
 		} catch (Exception e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
-		}
-		
-		// project.setEndWeek(week);
-	   
+		}   
 	}
 
 	@Then("the project has start date week {int} and year {int}")
@@ -209,31 +239,7 @@ public class LeaderTests {
 		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
 	}
 	
-	@When("the project leader assigns a developer to the activity")
-	public void theProjectLeaderAssignsADeveloperToTheActivity() throws NullObjectException, OperationNotAllowedException {
-	    testDeveloper = new Developer();
-	    testDeveloper.setID("test");
-	    projectPlanner.addDeveloper(testDeveloper);
-	    projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
-	}
 	
-	@Then("the developer is assigned to the activity")
-	public void theDeveloperIsAssignedToTheActivity() throws OperationNotAllowedException, NullObjectException {
-	    assertTrue(projectPlanner.checkDeveloperAssigned(projectActivity, project, testDeveloper));
-	}
-	
-	@When("the project leader assigns a developer to an activity under the project where he is already assigned")
-	public void theProjectLeaderAssignsADeveloperToAnActivityUnderTheProjectWhereHeIsAlreadyAssigned() throws NullObjectException, OperationNotAllowedException {
-	    testDeveloper = new Developer();
-	    testDeveloper.setID("test");
-		projectPlanner.addDeveloper(testDeveloper);
-		projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
-	    try{
-	    	projectPlanner.assignDeveloper(projectActivity, project, devLeader, testDeveloper);
-	    }catch (OperationNotAllowedException e){
-	    	errorMessageHolder.setErrorMessage(e.getMessage());
-	    }  
-	}
 	
 	//Set expected work hours feature-----------------------------------------------------------
 	@When("the project leader sets expected work hours to {string} in the activity")
@@ -289,14 +295,11 @@ public class LeaderTests {
 
 	@When("the project leader asks for the project information")
 	public void theProjectLeaderAsksForTheProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	    // Write code here that turns the phrase above into concrete actions
 	    projectInformation = projectPlanner.getProjectInformation(project, devLeader);
 	}
 
 	@Then("projectInformation is {string}")
 	public void projectinformationIs(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-		System.out.println(projectInformation);
 		assertTrue(projectInformation.equals(string));
 	}
 

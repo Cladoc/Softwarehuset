@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 public class ProjectPlanner {
 	private Calendar calendar;
 	private DeveloperCollection developers = new DeveloperCollection();
-	private ProjectCollection projects = new ProjectCollection();
+	private ProjectRepository projectsRepo = new ProjectRepository();
 
 	
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
@@ -24,34 +24,38 @@ public class ProjectPlanner {
 	//Author: Casper (s163950)
 	public void addProject(Project project, Developer developer) throws OperationNotAllowedException{
 		if(checkDeveloperExist(developer)){
-			projects.addProject(project, developer);
+			projectsRepo.addProject(project, developer);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
 	
 	public boolean checkProjectExist(Project project) {
-		return projects.checkProjectExist(project);
+		AbstractProject proj = projectsRepo.getProjectRef(project);
+		return !proj.isNil();
 	}
 	
 
 	//Author: Casper (s163950)
 	public void setProjectLeader(Project project, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(developer)){
-			projects.setProjectLeader(project, developer);	
+			AbstractProject proj = projectsRepo.getProjectRef(project);
+			proj.setProjectLeader(developer);	
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
 	
 	public boolean isProjectLeader(Project project, Developer developer){
-		return projects.isProjectLeader(project, developer);
+		AbstractProject proj = projectsRepo.getProjectRef(project);
+		return proj.isProjectLeader(developer);
 	}
 
 	//Author: Casper (s163950)
 	public void addProjectActivity(ProjectActivity projectActivity, Project project, Developer devLeader) throws NullObjectException, OperationNotAllowedException {
 		if(checkDeveloperExist(devLeader)){
-			projects.addProjectActivity(projectActivity, project, devLeader);
+			AbstractProject proj = projectsRepo.getProjectRef(project);
+			proj.addProjectActivity(projectActivity, devLeader);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
@@ -59,7 +63,8 @@ public class ProjectPlanner {
 
 	public void assignDeveloper(ProjectActivity projectActivity, Project project, Developer devLeader, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
 		if(checkDeveloperExist(devLeader) && checkDeveloperExist(assignedDeveloper)){
-			projects.assignDeveloper(projectActivity, project, devLeader, assignedDeveloper);
+			AbstractProject proj = projectsRepo.getProjectRef(project);
+			proj.assignDeveloper(projectActivity, devLeader, assignedDeveloper);
 		}else{
 			throw new OperationNotAllowedException("Developer not registered in project planner");
 		}
@@ -68,7 +73,8 @@ public class ProjectPlanner {
 
 	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Project project, Developer testDeveloper) throws OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(testDeveloper)){
-			return projects.checkDeveloperAssigned(projectActivity, project, testDeveloper);
+			AbstractProject proj = projectsRepo.getProjectRef(project);
+			return proj.checkDeveloperAssigned(projectActivity, testDeveloper);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
@@ -77,37 +83,43 @@ public class ProjectPlanner {
 	public void setExpectedHours(ProjectActivity projectActivity, Project project, Developer devLeader,
 			String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
 		if(checkDeveloperExist(devLeader)){
-			projects.setExpectedHours(projectActivity, project, devLeader, hours);
+			AbstractProject proj = projectsRepo.getProjectRef(project);
+			proj.setExpectedHours(projectActivity, devLeader, hours);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
 
 	public double getExpectedHours(ProjectActivity projectActivity, Project project) throws NullObjectException {
-		return projects.getExpectedHours(projectActivity, project);
+		AbstractProject proj = projectsRepo.getProjectRef(project);
+		return proj.getExpectedHours(projectActivity);
 	}
 
 	public void setActivityComplete(ProjectActivity projectActivity, Project project, Developer devLeader) throws OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(devLeader)){
-			projects.setActivityComplete(projectActivity, project, devLeader);
+			AbstractProject proj = projectsRepo.getProjectRef(project);
+			proj.setActivityComplete(projectActivity, devLeader);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
 
 	public boolean isActivityComplete(ProjectActivity projectActivity, Project project, Developer devLeader) throws NullObjectException {
-		return projects.isActivityComplete(projectActivity, project);
+		AbstractProject proj = projectsRepo.getProjectRef(project);
+		return proj.isActivityComplete(projectActivity);
 		
 	}
 	
 	//Author: Casper (s163950)
 	public boolean checkActivityExists(ProjectActivity projectActivity, Project project) throws NullObjectException {
-		return projects.checkActivityExists(projectActivity, project);
+		AbstractProject proj = projectsRepo.getProjectRef(project);
+		return proj.checkActivityExists(projectActivity);
 	}
 	
 	public void setStartYear(Project project, String year, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(developer)) {
-			projects.setStartYear(project, year);
+			AbstractProject proj = projectsRepo.getProjectRef(project);
+			proj.setStartYear(year);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
@@ -115,24 +127,27 @@ public class ProjectPlanner {
 
 	public void setStartWeek(Project project, String week, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(developer)) {
-			projects.setStartWeek(project, week, developer);
+			AbstractProject proj = projectsRepo.getProjectRef(project);
+			proj.setStartWeek(week, developer);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
 	
 	public int getStartWeek(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {	
-		return projects.getStartWeek(project);
+		AbstractProject proj = projectsRepo.getProjectRef(project);
+		return proj.getStartWeek();
 	}
 	
 	public int getStartYear(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	
-		return projects.getStartYear(project);
+		AbstractProject proj = projectsRepo.getProjectRef(project);
+		return proj.getStartYear();
 	}
 	
 	public void setEndYear(Project project, String year, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(developer)) {
-			projects.setEndYear(project, year, developer);
+			AbstractProject proj = projectsRepo.getProjectRef(project);
+			proj.setEndYear(year, developer);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
@@ -140,25 +155,31 @@ public class ProjectPlanner {
 
 	public void setEndWeek(Project project, String week, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(developer)) {
-			projects.setEndWeek(project, week, developer);
+			AbstractProject proj = projectsRepo.getProjectRef(project);
+			proj.setEndWeek(week, developer);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
 	
 	public int getEndWeek(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {	
-		return projects.getEndWeek(project);
+		AbstractProject proj = projectsRepo.getProjectRef(project);
+		return proj.getEndWeek();
 	}
 	
 	public int getEndYear(Project project) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	
-		return projects.getEndYear(project);
+		AbstractProject proj = projectsRepo.getProjectRef(project);
+		return proj.getEndYear();
 	}
 	
 	public String getProjectInformation(Project project, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-		
-		return projects.getProjectInformation(project, devLeader);
+		AbstractProject proj = projectsRepo.getProjectRef(project);
+		return proj.getProjectInformation(devLeader);
 	}
+
+//	public boolean checkActivityAssigned(ProjectActivity projectActivity, Project project, Developer testDeveloper) {
+//		developers.checkActivityAssigned(projectActivity, project, testDeveloper);
+//	}
 	
 	
 	

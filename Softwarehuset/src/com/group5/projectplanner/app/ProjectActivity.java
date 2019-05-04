@@ -6,8 +6,8 @@ import java.util.List;
 public class ProjectActivity extends Activity {
 	
 	private String name = "";
-	//private List<Developer> developers = new ArrayList<>();
 	private DeveloperCollection developers = new DeveloperCollection();
+	private Project parentProject;
 	private double totalExpectedHours;
 	private boolean complete;
 	
@@ -77,6 +77,11 @@ public class ProjectActivity extends Activity {
 
 	public boolean isActivityComplete() {
 		return this.complete;
+	}
+
+
+	public void setParentProject(Project parentProject) {
+		this.parentProject = parentProject;
 	}
 	
 	

@@ -22,4 +22,11 @@ public class DeveloperCollection {
 		//contains() uses object's equals() method
 		return developers.contains(developer);
 	}
+
+	public void checkActivityAssigned(ProjectActivity projectActivity, Project project, Developer testDeveloper) {
+		
+	}
+	
+	
+	
 }

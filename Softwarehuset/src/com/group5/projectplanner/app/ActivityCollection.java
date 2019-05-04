@@ -8,9 +8,10 @@ import java.util.Map;
 public class ActivityCollection {
 
 	private List<ProjectActivity> projectActivities = new ArrayList<ProjectActivity>();
-
-	public void addActivity(ProjectActivity projectActivity) throws OperationNotAllowedException {
+	
+	public void addActivity(ProjectActivity projectActivity, Project parentProject) throws OperationNotAllowedException {
 		if(!checkActivityExists(projectActivity)){
+			projectActivity.setParentProject(parentProject);
 			projectActivities.add(projectActivity);
 		}else{
 			throw new OperationNotAllowedException("Activity already exists");

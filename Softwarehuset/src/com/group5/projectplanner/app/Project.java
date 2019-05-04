@@ -177,13 +177,13 @@ public class Project extends AbstractProject {
 	@Override
 	public void addProjectActivity(ProjectActivity projectActivity, Developer devLeader) throws OperationNotAllowedException{
 		if(isProjectLeader(devLeader)){
-			activities.addActivity(projectActivity);
+			activities.addActivity(projectActivity, this);
 		}else{
 			throw new OperationNotAllowedException("ID not project leader");
 		}
 	}
 	
-	public boolean checkActivityExist(ProjectActivity projectActivity) {
+	public boolean checkActivityExists(ProjectActivity projectActivity) {
 		return activities.checkActivityExists(projectActivity);
 	}
 

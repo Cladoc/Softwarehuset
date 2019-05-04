@@ -91,7 +91,7 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
-	public boolean checkActivityExist(ProjectActivity projectActivity) throws NullObjectException {
+	public boolean checkActivityExists(ProjectActivity projectActivity) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 		
 	}

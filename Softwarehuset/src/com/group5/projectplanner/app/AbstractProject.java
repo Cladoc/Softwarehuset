@@ -21,7 +21,7 @@ public abstract class AbstractProject {
 	public abstract void setProjectLeader(Developer developer) throws NullObjectException;
 	public abstract boolean isProjectLeader(Developer developer);
 	public abstract void addProjectActivity(ProjectActivity projectActivity, Developer devLeader) throws OperationNotAllowedException, NullObjectException;
-	public abstract boolean checkActivityExist(ProjectActivity projectActivity) throws NullObjectException;
+	public abstract boolean checkActivityExists(ProjectActivity projectActivity) throws NullObjectException;
 	public abstract void assignDeveloper(ProjectActivity projectActivity, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException;
 	public abstract boolean checkDeveloperAssigned(ProjectActivity projectActivity, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException;
 	public abstract void setExpectedHours(ProjectActivity projectActivity, Developer devLeader, String hours) throws OperationNotAllowedException, NullObjectException, FormattingException;
