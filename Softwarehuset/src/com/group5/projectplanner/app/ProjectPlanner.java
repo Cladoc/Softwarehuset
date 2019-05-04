@@ -9,8 +9,11 @@ import java.util.List;
 
 //Author: Casper Egholm Jørgensen (s163950)
 public class ProjectPlanner {
+	//private Developer currentSignedInDeveloper;
 	private DeveloperRepository devRepo = new DeveloperRepository();
 	private ProjectRepository projectsRepo = new ProjectRepository();
+	//private Project currentWorkingProject;
+	//private ProjectActivity currentWorkingActivity;
 
 	
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
