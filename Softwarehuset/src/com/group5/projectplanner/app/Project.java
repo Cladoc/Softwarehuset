@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Project extends AbstractProject {
 	private ActivityRepository activityRepo = new ActivityRepository();
-	private ProjectID projectID;
+	private ProjectID projectID = new ProjectID();
 	private Developer leader;
 	private int startYear;
 	private int startWeek;
@@ -163,7 +163,6 @@ public class Project extends AbstractProject {
 		if(obj instanceof ProjectID){
 			ProjectID projectID = (ProjectID) obj;
 			return projectID.getName().equalsIgnoreCase(this.projectID.getName());
-			//return this.projectName.equalsIgnoreCase(proj.getName());
 		}else{
 			return false;
 		}
@@ -183,49 +182,49 @@ public class Project extends AbstractProject {
 		}
 	}
 	
-	public boolean checkActivityExists(ProjectActivity projectActivity) {
-		return activityRepo.checkActivityExists(projectActivity);
+	public boolean checkActivityExists(ActivityID activityID) {
+		return activityRepo.checkActivityExists(activityID);
 	}
 
-	public void assignDeveloper(ProjectActivity projectActivity, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException {
+	public void assignDeveloper(ActivityID activityID, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException {
 		if(isProjectLeader(devLeader)){
-			Activity abstractActivity = activityRepo.getActivity(projectActivity);
+			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.assignDeveloper(assignedDeveloper);
 		}else{
 			throw new OperationNotAllowedException("Id is not leader");
 		}
 	}
 
-	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Developer assignedDeveloper) throws NullObjectException {
-		Activity abstractActivity = activityRepo.getActivity(projectActivity);
+	public boolean checkDeveloperAssigned(ActivityID activityID, Developer assignedDeveloper) throws NullObjectException {
+		Activity abstractActivity = activityRepo.getActivity(activityID);
 		return abstractActivity.checkDeveloperAssigned(assignedDeveloper);
 	}
 
-	public void setExpectedHours(ProjectActivity projectActivity, Developer devLeader, String hours) throws OperationNotAllowedException, FormattingException, NullObjectException {
+	public void setExpectedHours(ActivityID activityID, Developer devLeader, String hours) throws OperationNotAllowedException, FormattingException, NullObjectException {
 		if(isProjectLeader(devLeader)){
-			Activity abstractActivity = activityRepo.getActivity(projectActivity);
+			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setExpectedWorkHours(hours);
 		}else{
 			throw new OperationNotAllowedException("Id is not leader");
 		}
 	}
 
-	public double getExpectedHours(ProjectActivity projectActivity) throws NullObjectException {
-		Activity abstractActivity = activityRepo.getActivity(projectActivity);
+	public double getExpectedHours(ActivityID activityID) throws NullObjectException {
+		Activity abstractActivity = activityRepo.getActivity(activityID);
 		return abstractActivity.getExpectedWorkHours();
 	}
 
-	public void setActivityComplete(ProjectActivity projectActivity, Developer devLeader) throws NullObjectException, OperationNotAllowedException {
+	public void setActivityComplete(ActivityID activityID, Developer devLeader) throws NullObjectException, OperationNotAllowedException {
 		if(isProjectLeader(devLeader)){
-			Activity abstractActivity = activityRepo.getActivity(projectActivity);
+			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setActivityComplete();
 		}else{
 			throw new OperationNotAllowedException("Id is not leader");
 		}
 	}
 
-	public boolean isActivityComplete(ProjectActivity projectActivity) throws NullObjectException {
-		Activity abstractActivity = activityRepo.getActivity(projectActivity);
+	public boolean isActivityComplete(ActivityID activityID) throws NullObjectException {
+		Activity abstractActivity = activityRepo.getActivity(activityID);
 		return abstractActivity.isActivityComplete();
 	}
 	

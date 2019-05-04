@@ -7,6 +7,7 @@ import com.group5.projectplanner.app.NullObjectException;
 import com.group5.projectplanner.app.Project;
 import com.group5.projectplanner.app.ProjectID;
 import com.group5.projectplanner.app.ProjectActivity;
+import com.group5.projectplanner.app.ActivityID;
 import com.group5.projectplanner.app.OperationNotAllowedException;
 
 import cucumber.api.java.en.Given;
@@ -26,6 +27,7 @@ public class LeaderTests {
 	Project project;
 	ProjectID projectID;
 	ProjectActivity projectActivity;
+	ActivityID activityID;
 	String projectInformation;
 
 	public LeaderTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder,
@@ -56,8 +58,9 @@ public class LeaderTests {
 	@When("the project leader adds an activity with the name {string}")
 	public void theProjectLeaderAddsAnActivityWithTheName(String name)
 			throws NullObjectException, OperationNotAllowedException {
-		projectActivity = new ProjectActivity();
-		projectActivity.setName(name);
+		activityID = new ActivityID();
+		activityID.setName(name);
+		projectActivity = new ProjectActivity(activityID);
 		assertTrue(projectActivity.getName().equals(name));
 		projectPlanner.addProjectActivity(projectActivity, projectID, devLeader);
 	}
@@ -65,17 +68,18 @@ public class LeaderTests {
 	// Author: Casper (s163950)
 	@Then("the activity with name {string} is added to the project")
 	public void theActivityWithNameIsAddedToTheProject(String string) throws NullObjectException {
-		assertTrue(projectPlanner.checkActivityExists(projectActivity, projectID));
+		assertTrue(projectPlanner.checkActivityExists(activityID, projectID));
 	}
 
 	// Author: Casper (s163950)
-	@Given("an activity is registered with the name {string}")
-	public void anActivityIsRegisteredWithTheName(String name)
+	@Given("an activity with the name {string} is added to the project")
+	public void anActivityWithTheNameIsAddedToTheProject(String name)
 			throws NullObjectException, OperationNotAllowedException {
-		projectActivity = new ProjectActivity();
-		projectActivity.setName(name);
+		activityID = new ActivityID();
+		activityID.setName(name);
+		projectActivity = new ProjectActivity(activityID);
 		projectPlanner.addProjectActivity(projectActivity, projectID, devLeader);
-		assertTrue(projectPlanner.checkActivityExists(projectActivity, projectID));
+		assertTrue(projectPlanner.checkActivityExists(activityID, projectID));
 	}
 
 	// Author: Casper (s163950)
@@ -112,27 +116,18 @@ public class LeaderTests {
 	}
 
 	// -------Assign developer feature--------------
-	// Author: Casper (s163950)
-	@Given("an activity with the name {string} is added to the project")
-	public void anActivityWithTheNameIsAddedToTheProject(String activityName)
-			throws NullObjectException, OperationNotAllowedException {
-		projectActivity = new ProjectActivity();
-		projectActivity.setName(activityName);
-		projectPlanner.addProjectActivity(projectActivity, projectID, devLeader);
-		assertTrue(projectPlanner.checkActivityExists(projectActivity, projectID));
-	}
 	
 	@When("the project leader assigns a developer to the activity")
 	public void theProjectLeaderAssignsADeveloperToTheActivity() throws NullObjectException, OperationNotAllowedException {
 	    testDeveloper = new Developer();
 	    testDeveloper.setID("test");
 	    projectPlanner.addDeveloper(testDeveloper);
-	    projectPlanner.assignDeveloper(projectActivity, projectID, devLeader, testDeveloper);
+	    projectPlanner.assignDeveloper(activityID, projectID, devLeader, testDeveloper);
 	}
 	
 	@Then("the developer is assigned to the activity")
 	public void theDeveloperIsAssignedToTheActivity() throws OperationNotAllowedException, NullObjectException {
-	    assertTrue(projectPlanner.checkDeveloperAssigned(projectActivity, projectID, testDeveloper));
+	    assertTrue(projectPlanner.checkDeveloperAssigned(activityID, projectID, testDeveloper));
 	}
 	
 	@When("the project leader assigns a developer to an activity under the project where he is already assigned")
@@ -140,18 +135,13 @@ public class LeaderTests {
 	    testDeveloper = new Developer();
 	    testDeveloper.setID("test");
 		projectPlanner.addDeveloper(testDeveloper);
-		projectPlanner.assignDeveloper(projectActivity, projectID, devLeader, testDeveloper);
+		projectPlanner.assignDeveloper(activityID, projectID, devLeader, testDeveloper);
 	    try{
-	    	projectPlanner.assignDeveloper(projectActivity, projectID, devLeader, testDeveloper);
+	    	projectPlanner.assignDeveloper(activityID, projectID, devLeader, testDeveloper);
 	    }catch (OperationNotAllowedException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }  
 	}
-	
-//	@Then("the activity is added to the developer's list of activities")
-//	public void theActivityIsAddedToTheDeveloperSListOfActivities() {
-//	    assertTrue(projectPlanner.checkActivityAssigned(projectActivity, project, testDeveloper));
-//	}
 	
 	//Edit date features
 	
@@ -248,18 +238,18 @@ public class LeaderTests {
 	//Set expected work hours feature-----------------------------------------------------------
 	@When("the project leader sets expected work hours to {string} in the activity")
 	public void theProjectLeaderSetsExpectedWorkHoursToInTheActivity(String hours) throws OperationNotAllowedException, NullObjectException, NumberFormatException, FormattingException {
-	    projectPlanner.setExpectedHours(projectActivity, projectID, devLeader, hours);
+	    projectPlanner.setExpectedHours(activityID, projectID, devLeader, hours);
 	}
 	
 	@Then("the activity has expected work hours set to {double}")
 	public void theActivityHasExpectedWorkHoursSetTo(double hours) throws NullObjectException {
-	    assertTrue(projectPlanner.getExpectedHours(projectActivity, projectID) == hours);
+	    assertTrue(projectPlanner.getExpectedHours(activityID, projectID) == hours);
 	}
 	
 	@When("the project leader sets expected work hours to {string}")
 	public void theProjectLeaderSetsExpectedWorkHoursTo(String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
 	    try{
-	    	projectPlanner.setExpectedHours(projectActivity, projectID, devLeader, hours);
+	    	projectPlanner.setExpectedHours(activityID, projectID, devLeader, hours);
 	    } catch (FormattingException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
@@ -269,12 +259,12 @@ public class LeaderTests {
 	
 	@When("the project leader sets the activity as complete")
 	public void theProjectLeaderSetsTheActivityAsComplete() throws OperationNotAllowedException, NullObjectException {
-	    projectPlanner.setActivityComplete(projectActivity, projectID, devLeader);
+	    projectPlanner.setActivityComplete(activityID, projectID, devLeader);
 	}
 
 	@Then("the activity is registered as completed")
 	public void theActivityIsRegisteredAsCompleted() throws NullObjectException {
-		assertTrue(projectPlanner.isActivityComplete(projectActivity, projectID, devLeader));
+		assertTrue(projectPlanner.isActivityComplete(activityID, projectID, devLeader));
 	}
 	
 	@When("the project leader sets start date as letters of week {string} and year {string}")

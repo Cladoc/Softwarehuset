@@ -91,41 +91,41 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
-	public boolean checkActivityExists(ProjectActivity projectActivity) throws NullObjectException {
+	public boolean checkActivityExists(ActivityID activityID) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 		
 	}
 
 	@Override
-	public void assignDeveloper(ProjectActivity projectActivity, Developer devLeader, Developer assignedDeveloper)
+	public void assignDeveloper(ActivityID activityID, Developer devLeader, Developer assignedDeveloper)
 			throws OperationNotAllowedException, NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 
 	@Override
-	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, Developer assignedDeveloper) throws NullObjectException {
+	public boolean checkDeveloperAssigned(ActivityID activityID, Developer assignedDeveloper) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 
 	@Override
-	public void setExpectedHours(ProjectActivity projectActivity, Developer devLeader, String hours)
+	public void setExpectedHours(ActivityID activityID, Developer devLeader, String hours)
 			throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 
 	@Override
-	public double getExpectedHours(ProjectActivity projectActivity) throws NullObjectException {
+	public double getExpectedHours(ActivityID activityID) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 
 	@Override
-	public void setActivityComplete(ProjectActivity projectActivity, Developer devLeader)
+	public void setActivityComplete(ActivityID activityID, Developer devLeader)
 			throws NullObjectException{
 		throw new NullObjectException("Project does not exist");
 	}
 
 	@Override
-	public boolean isActivityComplete(ProjectActivity projectActivity) throws NullObjectException {
+	public boolean isActivityComplete(ActivityID activityID) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 	

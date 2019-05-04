@@ -7,24 +7,28 @@ public class ActivityRepository {
 	
 	private List<ProjectActivity> projectActivities = new ArrayList<ProjectActivity>();
 	
-	public void addActivity(ProjectActivity projectActivity, Project parentProject) throws OperationNotAllowedException {
-		if(!checkActivityExists(projectActivity)){
-			projectActivity.setParentProject(parentProject);
-			projectActivities.add(projectActivity);
+	public void addActivity(ProjectActivity activity, Project parentProject) throws OperationNotAllowedException {
+		if(!checkActivityExists(activity.getID())){
+			activity.setParentProject(parentProject);
+			projectActivities.add(activity);
 		}else{
 			throw new OperationNotAllowedException("Activity already exists");
 		}
 	}
 	
-	public boolean checkActivityExists(ProjectActivity projectActivity) {
-		//contains(obj o) uses object's equals() method
-		return projectActivities.contains(projectActivity);
+	public boolean checkActivityExists(ActivityID activityID) {	
+		for(ProjectActivity listActivity : projectActivities){
+			if(listActivity.matches(activityID)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
-	public Activity getActivity(ProjectActivity projectActivity){
-		for(ProjectActivity projAct : projectActivities){
-			if(projAct.equals(projectActivity)){
-				return projAct;
+	public Activity getActivity(ActivityID activityID){
+		for(ProjectActivity listActivity : projectActivities){
+			if(listActivity.matches(activityID)){
+				return listActivity;
 			}
 		}
 		return new NullActivity();

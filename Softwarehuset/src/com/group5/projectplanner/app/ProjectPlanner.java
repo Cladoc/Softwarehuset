@@ -62,58 +62,58 @@ public class ProjectPlanner {
 		}
 	}
 
-	public void assignDeveloper(ProjectActivity projectActivity, ProjectID projectID, Developer devLeader, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
+	public void assignDeveloper(ActivityID activityID, ProjectID projectID, Developer devLeader, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
 		if(checkDeveloperExist(devLeader) && checkDeveloperExist(assignedDeveloper)){
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
-			proj.assignDeveloper(projectActivity, devLeader, assignedDeveloper);
+			proj.assignDeveloper(activityID, devLeader, assignedDeveloper);
 		}else{
 			throw new OperationNotAllowedException("Developer not registered in project planner");
 		}
 		
 	}
 
-	public boolean checkDeveloperAssigned(ProjectActivity projectActivity, ProjectID projectID, Developer testDeveloper) throws OperationNotAllowedException, NullObjectException {
+	public boolean checkDeveloperAssigned(ActivityID activityID, ProjectID projectID, Developer testDeveloper) throws OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(testDeveloper)){
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
-			return proj.checkDeveloperAssigned(projectActivity, testDeveloper);
+			return proj.checkDeveloperAssigned(activityID, testDeveloper);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
 
-	public void setExpectedHours(ProjectActivity projectActivity, ProjectID projectID, Developer devLeader,
+	public void setExpectedHours(ActivityID activityID, ProjectID projectID, Developer devLeader,
 			String hours) throws OperationNotAllowedException, NullObjectException, FormattingException {
 		if(checkDeveloperExist(devLeader)){
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
-			proj.setExpectedHours(projectActivity, devLeader, hours);
+			proj.setExpectedHours(activityID, devLeader, hours);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
 
-	public double getExpectedHours(ProjectActivity projectActivity, ProjectID projectID) throws NullObjectException {
+	public double getExpectedHours(ActivityID activityID, ProjectID projectID) throws NullObjectException {
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);
-		return proj.getExpectedHours(projectActivity);
+		return proj.getExpectedHours(activityID);
 	}
 
-	public void setActivityComplete(ProjectActivity projectActivity, ProjectID projectID, Developer devLeader) throws OperationNotAllowedException, NullObjectException {
+	public void setActivityComplete(ActivityID activityID, ProjectID projectID, Developer devLeader) throws OperationNotAllowedException, NullObjectException {
 		if(checkDeveloperExist(devLeader)){
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
-			proj.setActivityComplete(projectActivity, devLeader);
+			proj.setActivityComplete(activityID, devLeader);
 		}else{
 			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
 
-	public boolean isActivityComplete(ProjectActivity projectActivity, ProjectID ProjectID, Developer devLeader) throws NullObjectException {
+	public boolean isActivityComplete(ActivityID activityID, ProjectID ProjectID, Developer devLeader) throws NullObjectException {
 		AbstractProject proj = projectsRepo.getProjectRef(ProjectID);
-		return proj.isActivityComplete(projectActivity);
+		return proj.isActivityComplete(activityID);
 	}
 	
 	//Author: Casper (s163950)
-	public boolean checkActivityExists(ProjectActivity projectActivity, ProjectID projectID) throws NullObjectException {
+	public boolean checkActivityExists(ActivityID activityID, ProjectID projectID) throws NullObjectException {
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);
-		return proj.checkActivityExists(projectActivity);
+		return proj.checkActivityExists(activityID);
 	}
 	
 	public void setStartYear(ProjectID projectID, String year, Developer developer) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {

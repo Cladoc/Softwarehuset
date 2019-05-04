@@ -9,7 +9,7 @@ Then the activity with name "refactoring" is added to the project
 
 Scenario: Activity is already registered
 Given a developer is project leader on a project registered in the project planner
-And an activity is registered with the name "refactoring"
+And an activity with the name "refactoring" is added to the project
 When the project leader adds an activity with the name "refactoring" again
 Then he gets the error message "Activity already exists"
 
