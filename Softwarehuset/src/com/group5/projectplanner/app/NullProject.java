@@ -12,7 +12,7 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
-	public void setName(String name){}
+	public void setName(String name, Developer devLeader){}
 	
 	@Override
 	public String getName() { 

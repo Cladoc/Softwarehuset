@@ -287,18 +287,41 @@ public class LeaderTests {
 		}
 	}
 
-	@When("the project leader asks for the project information")
-	public void theProjectLeaderAsksForTheProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	    projectInformation = projectPlanner.getProjectInformation(projectID, devLeader);
+	@When("the project leader sets projectName to {string}")
+	public void theProjectLeaderSetsProjectNameTo(String name) throws OperationNotAllowedException {
+	    // Write code here that turns the phrase above into concrete actions
+		try {
+			projectPlanner.editProjectName(projectID, devLeader, name);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
-	@Then("projectInformation is {string}")
-	public void projectinformationIs(String string) {
-		assertTrue(projectInformation.equals(string));
+	@Then("the project has the name {string}")
+	public void theProjectHasTheName(String name) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		System.out.println(projectPlanner.getProjectName(projectID));
+		assertTrue(projectPlanner.getProjectName(projectID).equals(name));
+	   
 	}
 
+	@When("the project leader sets an invalid projectName of {string}")
+	public void theProjectLeaderSetsAnInvalidProjectNameOf(String name) throws OperationNotAllowedException {
+	    // Write code here that turns the phrase above into concrete actions
+		try {
+			projectPlanner.editProjectName(projectID, devLeader, name);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
 
-
+	@Then("he gets the invalid name error message {string}")
+	public void heGetsTheInvalidNameErrorMessage(String error) {
+	    // Write code here that turns the phrase above into concrete actions
+		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
+	}
+	
 
 
 }

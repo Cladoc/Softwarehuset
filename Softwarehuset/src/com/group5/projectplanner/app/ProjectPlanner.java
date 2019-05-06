@@ -175,11 +175,25 @@ public class ProjectPlanner {
 		return proj.getEndYear();
 	}
 	
+	public String getProjectName(ProjectID projectID) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		AbstractProject proj = projectsRepo.getProjectRef(projectID);
+		return proj.getName();
+	}
+	
 	public String getProjectInformation(ProjectID projectID, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);
 		return proj.getProjectInformation(devLeader);
 	}
 	
+	public void editProjectName(ProjectID projectID, Developer devLeader, String name) throws OperationNotAllowedException, FormattingException {
+		
+		if(checkDeveloperExist(devLeader)) {
+			AbstractProject proj = projectsRepo.getProjectRef(projectID);
+			proj.setName(name, devLeader);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
 	
 	
 	

@@ -1,6 +1,7 @@
 package com.group5.projectplanner.app;
 import java.util.*;
-
+import java.util.regex.Pattern;   
+import java.util.regex.Matcher;  
 public class Project extends AbstractProject {
 	private ActivityRepository activityRepo = new ActivityRepository();
 	private ProjectID projectID = new ProjectID();
@@ -21,8 +22,22 @@ public class Project extends AbstractProject {
 	}
 	
 	@Override
-	public void setName(String name) {
-		this.projectID.setName(name);
+	public void setName(String name, Developer devLeader) throws OperationNotAllowedException, FormattingException {
+		if(isProjectLeader(devLeader)){
+			
+			String regex = "\\A[a-zA-Z].*";
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(name);
+			boolean b = matcher.matches();
+			if(b) {
+				this.projectID.setName(name);
+			}else {
+				throw new FormattingException("An invalid project name was entered");
+			}
+			
+		}else{
+			throw new OperationNotAllowedException("ID not project leader");
+		}
 	}
 	
 	@Override
