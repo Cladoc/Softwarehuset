@@ -173,4 +173,45 @@ public class DeveloperTests {
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
 	}
+	
+	@When("the developer is removed from the project planner")
+	public void theDeveloperIsRemovedFromTheProjectPlanner() throws OperationNotAllowedException {
+		try{
+			projectPlanner.removeDeveloper(developer);
+		} catch (OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@Then("the developer is removed from the project planner successfully")
+	public void theDeveloperIsRemovedFromTheProjectPlannerSuccessfully() {
+		assertTrue(!projectPlanner.checkDeveloperExist(developer));
+
+	}
+	
+	@Given("that a developer with the ID {string} is not registered in project planner")
+	public void thatADeveloperWithTheIDIsNotRegisteredInProjectPlanner(String string) {
+	    // developer allready has id abcd
+		assertTrue(!projectPlanner.checkDeveloperExist(developer));
+	}
+
+	@When("the developer is removed")
+	public void theDeveloperIsRemoved() {
+	    // Write code here that turns the phrase above into concrete actions
+		try{
+			projectPlanner.removeDeveloper(developer);
+		} catch (OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@Then("he gets the non existant developer error message {string}")
+	public void heGetsTheNonExistantDeveloperErrorMessage(String error) {
+	    // Write code here that turns the phrase above into concrete actions
+		System.out.println(errorMessageHolder.getErrorMessage());
+		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
+	}
+
+
+
 }

@@ -20,6 +20,10 @@ public class ProjectPlanner {
 		devRepo.addDeveloper(developer);
 	}
 	
+	public void removeDeveloper(Developer developer) throws OperationNotAllowedException{
+		devRepo.removeDeveloper(developer);
+	}
+	
 	public boolean checkDeveloperExist(Developer developer) {
 		//contains() uses object's equals() method
 		return devRepo.checkDeveloperExists(developer);
