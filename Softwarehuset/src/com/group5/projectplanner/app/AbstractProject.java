@@ -27,5 +27,5 @@ public abstract class AbstractProject {
 	public abstract double getExpectedHours(ActivityID activityID) throws NullObjectException;
 	public abstract void setActivityComplete(ActivityID activityID, Developer devLeader) throws NullObjectException, OperationNotAllowedException;
 	public abstract boolean isActivityComplete(ActivityID activityID) throws NullObjectException;
-	public abstract String getProjectInformation(Developer devLeader) throws OperationNotAllowedException, NullObjectException;
+	public abstract prjData getProjectInformation(Developer devLeader) throws OperationNotAllowedException, NullObjectException;
 }

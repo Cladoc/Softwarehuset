@@ -1,6 +1,7 @@
 package com.group5.featuretests;
 
 import com.group5.projectplanner.app.ProjectPlanner;
+import com.group5.projectplanner.app.prjData;
 import com.group5.projectplanner.app.Developer;
 import com.group5.projectplanner.app.FormattingException;
 import com.group5.projectplanner.app.NullObjectException;
@@ -24,6 +25,7 @@ public class LeaderTests {
 	DeveloperHelper developerHelper;
 	Developer devLeader;
 	Developer testDeveloper;
+	prjData prjData;
 	Project project;
 	ProjectID projectID;
 	ProjectActivity projectActivity;
@@ -321,7 +323,17 @@ public class LeaderTests {
 	    // Write code here that turns the phrase above into concrete actions
 		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
 	}
-	
+	@When("the project leader requests projectInformation")
+	public void theProjectLeaderRequestsProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+	   prjData = projectPlanner.getProjectInformation(projectID, devLeader);
+	}
+
+	@Then("the project leader have access to projectInformation")
+	public void theProjectLeaderHaveAccessToProjectInformation() {
+	    // Write code here that turns the phrase above into concrete actions
+	    assertTrue(prjData != null);
+	}
 
 
 }

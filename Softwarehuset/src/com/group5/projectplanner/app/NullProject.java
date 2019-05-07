@@ -46,7 +46,7 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
-	public String getProjectInformation(Developer devLeader) throws NullObjectException{
+	public prjData getProjectInformation(Developer devLeader) throws NullObjectException{
 		throw new NullObjectException("Project does not exist");
 	}
 	

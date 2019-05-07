@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 public class Project extends AbstractProject {
 	private ActivityRepository activityRepo = new ActivityRepository();
 	private ProjectID projectID = new ProjectID();
+	
 	private Developer leader;
 	private int startYear;
 	private int startWeek;
@@ -143,9 +144,16 @@ public class Project extends AbstractProject {
 	}
 	
 	@Override
-	public String getProjectInformation(Developer devLeader) throws OperationNotAllowedException {
+	public prjData getProjectInformation(Developer devLeader) throws OperationNotAllowedException {
 		if(isProjectLeader(devLeader)){
-			return "project information";
+			prjData prjData = new prjData();
+			prjData.setEndWeek(this.endWeek);
+			prjData.setEndYear(this.endYear);
+			prjData.setLeader(this.leader);
+			prjData.setProjectID(this.projectID);
+			prjData.setStartWeek(this.startWeek);
+			prjData.setStartYear(this.startYear);
+			return prjData;
 		}else{
 			throw new OperationNotAllowedException("ID not project leader");
 		}
