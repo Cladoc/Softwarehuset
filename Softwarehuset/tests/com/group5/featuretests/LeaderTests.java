@@ -317,12 +317,6 @@ public class LeaderTests {
 		}
 	}
 	
-
-	@Then("he gets the invalid name error message {string}")
-	public void heGetsTheInvalidNameErrorMessage(String error) {
-	    // Write code here that turns the phrase above into concrete actions
-		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
-	}
 	@When("the project leader requests projectInformation")
 	public void theProjectLeaderRequestsProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 	    // Write code here that turns the phrase above into concrete actions
@@ -335,5 +329,6 @@ public class LeaderTests {
 	    assertTrue(prjData != null);
 	}
 
+	
 
 }

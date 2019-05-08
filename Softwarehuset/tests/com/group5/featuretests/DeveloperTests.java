@@ -205,12 +205,6 @@ public class DeveloperTests {
 		}
 	}
 	
-	@Then("he gets the non existant developer error message {string}")
-	public void heGetsTheNonExistantDeveloperErrorMessage(String error) {
-	    // Write code here that turns the phrase above into concrete actions
-		System.out.println(errorMessageHolder.getErrorMessage());
-		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
-	}
 
 
 
