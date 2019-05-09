@@ -198,12 +198,67 @@ public class ProjectPlanner {
 			throw new OperationNotAllowedException("Invalid ID");
 		}
 	}
+
 	
+	public void setActivityStartWeek(String week, ActivityID activityID, ProjectID projectID, Developer devLeader) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		if(checkDeveloperExist(devLeader)){
+			AbstractProject proj = projectsRepo.getProjectRef(projectID);
+			proj.setActivityStartWeek(week, activityID, devLeader);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+		
+	}
+
+	public void setActivityStartYear(String year, ActivityID activityID, ProjectID projectID, Developer devLeader) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		if(checkDeveloperExist(devLeader)){
+			AbstractProject proj = projectsRepo.getProjectRef(projectID);
+			proj.setActivityStartYear(year, activityID, devLeader);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+		
+	}
 	
+	public void setActivityEndWeek(String week, ActivityID activityID, ProjectID projectID, Developer devLeader) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		if(checkDeveloperExist(devLeader)){
+			AbstractProject proj = projectsRepo.getProjectRef(projectID);
+			proj.setActivityEndWeek(week, activityID, devLeader);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+		
+	}
+
+	public void setActivityEndYear(String year, ActivityID activityID, ProjectID projectID, Developer devLeader) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		if(checkDeveloperExist(devLeader)){
+			AbstractProject proj = projectsRepo.getProjectRef(projectID);
+			proj.setActivityEndYear(year, activityID, devLeader);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+		
+	}
+
+	public int getActivityStartWeek(ActivityID activityID, ProjectID projectID) throws NullObjectException {
+		AbstractProject proj = projectsRepo.getProjectRef(projectID);
+		return proj.getActivityStartWeek(activityID);
+	}
 	
+	public int getActivityStartYear(ActivityID activityID, ProjectID projectID) throws NullObjectException {
+		AbstractProject proj = projectsRepo.getProjectRef(projectID);
+		return proj.getActivityStartYear(activityID);
+	}
 	
+	public int getActivityEndYear(ActivityID activityID, ProjectID projectID) throws NullObjectException {
+		AbstractProject proj = projectsRepo.getProjectRef(projectID);
+		return proj.getActivityEndYear(activityID);
+	}
 	
-	
+	public int getActivityEndWeek(ActivityID activityID, ProjectID projectID) throws NullObjectException {
+		AbstractProject proj = projectsRepo.getProjectRef(projectID);
+		return proj.getActivityEndWeek(activityID);
+	}
 	
 	
 	

@@ -251,4 +251,62 @@ public class Project extends AbstractProject {
 		return abstractActivity.isActivityComplete();
 	}
 	
+	public void setActivityStartWeek(String week,ActivityID activityID, Developer devLeader) throws OperationNotAllowedException, FormattingException, NullObjectException {
+		if(isProjectLeader(devLeader)){
+			Activity abstractActivity = activityRepo.getActivity(activityID);
+			abstractActivity.setActivityStartWeek(week);
+		}else{
+			throw new OperationNotAllowedException("Id is not leader");
+		}
+	}
+	
+	
+	public void setActivityStartYear(String year,ActivityID activityID, Developer devLeader) throws OperationNotAllowedException, FormattingException, NullObjectException {
+		if(isProjectLeader(devLeader)){
+			Activity abstractActivity = activityRepo.getActivity(activityID);
+			abstractActivity.setActivityStartYear(year);
+		}else{
+			throw new OperationNotAllowedException("Id is not leader");
+		}
+	}
+	
+	public void setActivityEndWeek(String week,ActivityID activityID, Developer devLeader) throws OperationNotAllowedException, FormattingException, NullObjectException {
+		if(isProjectLeader(devLeader)){
+			Activity abstractActivity = activityRepo.getActivity(activityID);
+			abstractActivity.setActivityEndWeek(week);
+		}else{
+			throw new OperationNotAllowedException("Id is not leader");
+		}
+	}
+	
+	
+	public void setActivityEndYear(String year,ActivityID activityID, Developer devLeader) throws OperationNotAllowedException, FormattingException, NullObjectException {
+		if(isProjectLeader(devLeader)){
+			Activity abstractActivity = activityRepo.getActivity(activityID);
+			abstractActivity.setActivityEndYear(year);
+		}else{
+			throw new OperationNotAllowedException("Id is not leader");
+		}
+	}
+	
+	public int getActivityStartWeek(ActivityID activityID) throws NullObjectException {
+		Activity abstractActivity = activityRepo.getActivity(activityID);
+		return abstractActivity.getActivityStartWeek();
+	}
+	
+	public int getActivityStartYear(ActivityID activityID) throws NullObjectException {
+		Activity abstractActivity = activityRepo.getActivity(activityID);
+		return abstractActivity.getActivityStartYear();
+	}
+	
+	
+	public int getActivityEndWeek(ActivityID activityID) throws NullObjectException {
+		Activity abstractActivity = activityRepo.getActivity(activityID);
+		return abstractActivity.getActivityEndWeek();
+	}
+	
+	public int getActivityEndYear(ActivityID activityID) throws NullObjectException {
+		Activity abstractActivity = activityRepo.getActivity(activityID);
+		return abstractActivity.getActivityEndYear();
+	}
 }

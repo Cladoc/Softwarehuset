@@ -13,4 +13,12 @@ public abstract class Activity {
 	public abstract double getExpectedWorkHours() throws NullObjectException;
 	public abstract void setActivityComplete() throws NullObjectException;
 	public abstract boolean isActivityComplete() throws NullObjectException;
+	public abstract void setActivityStartWeek(String week) throws NullObjectException, FormattingException;
+	public abstract void setActivityStartYear(String year) throws NullObjectException, FormattingException;
+	public abstract void setActivityEndWeek(String week) throws NullObjectException, FormattingException;
+	public abstract void setActivityEndYear(String year) throws NullObjectException, FormattingException;
+	public abstract int getActivityStartWeek() throws NullObjectException;
+	public abstract int getActivityStartYear() throws NullObjectException;
+	public abstract int getActivityEndWeek() throws NullObjectException;
+	public abstract int getActivityEndYear() throws NullObjectException;
 }

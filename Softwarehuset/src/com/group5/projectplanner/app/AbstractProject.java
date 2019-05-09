@@ -28,4 +28,12 @@ public abstract class AbstractProject {
 	public abstract void setActivityComplete(ActivityID activityID, Developer devLeader) throws NullObjectException, OperationNotAllowedException;
 	public abstract boolean isActivityComplete(ActivityID activityID) throws NullObjectException;
 	public abstract prjData getProjectInformation(Developer devLeader) throws OperationNotAllowedException, NullObjectException;
+	public abstract void setActivityStartWeek(String week, ActivityID activityID, Developer devLeader) throws OperationNotAllowedException, NullObjectException, FormattingException;
+	public abstract void setActivityStartYear(String year,ActivityID activityID, Developer devLeader) throws OperationNotAllowedException, NullObjectException, FormattingException;
+	public abstract void setActivityEndWeek(String week, ActivityID activityID, Developer devLeader) throws OperationNotAllowedException, NullObjectException, FormattingException;
+	public abstract void setActivityEndYear(String year,ActivityID activityID, Developer devLeader) throws OperationNotAllowedException, NullObjectException, FormattingException;
+	public abstract int getActivityStartWeek(ActivityID activityID) throws NullObjectException;
+	public abstract int getActivityStartYear(ActivityID activityID) throws NullObjectException;
+	public abstract int getActivityEndWeek(ActivityID activityID) throws NullObjectException;
+	public abstract int getActivityEndYear(ActivityID activityID) throws NullObjectException;
 }
