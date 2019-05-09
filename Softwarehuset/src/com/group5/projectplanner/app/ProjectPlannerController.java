@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 public class ProjectPlannerController {
 	private ProjectPlanner projectPlanner;
-	private static ProjectPlannerView projectPlannerView;
-	private static Scanner console;
-	private DeveloperID signInDeveloper;
+	private ProjectPlannerView projectPlannerView;
+	private Scanner console;
+	//private DeveloperID signInDeveloper;
+	private Developer signInDeveloper;
 	
 	// Anders (s163952)
 	public void ProjectPlannerController(ProjectPlanner projectPlanner, 
@@ -17,7 +18,7 @@ public class ProjectPlannerController {
 	}
 	
 	// Anders (s163952)
-	public static void startMenu() {
+	public void startMenu() {
 		int choice = console.nextInt();
 		while (choice < 1 || choice > 2) {
 			projectPlannerView.startMenuFail();
@@ -26,12 +27,14 @@ public class ProjectPlannerController {
 		if (choice == 1) { //developer sign-in
 			System.out.println("Type 4 capital initials for your developer ID");
 			String id = console.next();
-			/*Developer developer = new Developer();
+			//*
+			Developer developer = new Developer();
 			developer.setID(id); 
-			*/
-			if(projectPlanner.checkDeveloperExist(id)) {
+			//*/
+			if(projectPlanner.checkDeveloperExist(developer)) {
 				projectPlannerView.mainMenu();
-				signInDeveloper = projectPlanner.getDeveloper(id);
+				//signInDeveloper = projectPlanner.getDeveloper(developer);
+				signInDeveloper = developer;
 				mainMenu();
 			}
 			else {
@@ -43,16 +46,17 @@ public class ProjectPlannerController {
 		else if (choice == 2) { //add developer
 			System.out.println("Type 4 capital initials for the developer you want to add");
 			String id = console.next();
-			/*Developer developer = new Developer();
+			//*
+			Developer developer = new Developer();
 			developer.setID(id);
-			*/
+			//*/
 			try { 
-				projectPlanner.addDeveloper(id); 
+				projectPlanner.addDeveloper(developer); 
 			} catch (OperationNotAllowedException e) {
 				projectPlannerView.fail(e.getMessage()); //write the fail message for addDeveloper
 			}
-			if (!projectPlanner.checkDeveloperExist(id)) {
-				signInDeveloper = id;
+			if (!projectPlanner.checkDeveloperExist(developer)) {
+				signInDeveloper = developer;
 				mainMenu();
 			}
 			else {
@@ -64,7 +68,7 @@ public class ProjectPlannerController {
 	}
 	
 	// Anders (s163952)
-	public static void mainMenu() {
+	public void mainMenu() {
 		projectPlannerView.mainMenu();
 		int choice = console.nextInt();
 		while (choice < 1 || choice > 3) {
@@ -82,13 +86,15 @@ public class ProjectPlannerController {
 	
 	// Anders (s163952)
 	public void makeProject() {
-		try { 
+		/*try { 
 			projectPlanner.addProject(Project project, Developer signInDeveloper); 
 		} catch (OperationNotAllowedException e) {
 			projectPlannerView.fail(e.getMessage()); //write the fail message for addDeveloper
 		}
+		*/
 				
 	}
+	
 	
 	// Anders (s163952)
 	public void editProject() {
@@ -97,6 +103,7 @@ public class ProjectPlannerController {
 	
 	// Anders (s163952)
 	public void registerHours() {
+		
 		
 	}
 	
