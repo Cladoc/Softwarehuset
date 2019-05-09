@@ -15,7 +15,6 @@ public class ProjectPlanner {
 	//private Project currentWorkingProject;
 	//private ProjectActivity currentWorkingActivity;
 	private String invalidID = "Invalid ID";
-	private String IDNotLeader = "ID not project leader";
 
 	
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
