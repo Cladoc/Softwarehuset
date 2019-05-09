@@ -53,5 +53,49 @@ public class NullActivity extends Activity {
 	public boolean isActivityComplete() throws NullObjectException {
 		throw new NullObjectException("Activity does not exist");
 	}
+
+	@Override
+	public void setActivityStartWeek(String week) throws NullObjectException, FormattingException {
+		throw new NullObjectException("Activity does not exist");
+		
+	}
+
+	@Override
+	public void setActivityStartYear(String year) throws NullObjectException, FormattingException {
+		throw new NullObjectException("Activity does not exist");
+		
+	}
+	
+	@Override
+	public void setActivityEndWeek(String week) throws NullObjectException, FormattingException {
+		throw new NullObjectException("Activity does not exist");
+		
+	}
+
+	@Override
+	public void setActivityEndYear(String year) throws NullObjectException, FormattingException {
+		throw new NullObjectException("Activity does not exist");
+		
+	}
+	
+	@Override
+	public int getActivityStartWeek() throws NullObjectException {
+		throw new NullObjectException("Activity does not exist");
+	}
+	
+	@Override
+	public int getActivityStartYear() throws NullObjectException {
+		throw new NullObjectException("Activity does not exist");
+	}
+	
+	@Override
+	public int getActivityEndWeek() throws NullObjectException {
+		throw new NullObjectException("Activity does not exist");
+	}
+	
+	@Override
+	public int getActivityEndYear() throws NullObjectException {
+		throw new NullObjectException("Activity does not exist");
+	}
 	
 }

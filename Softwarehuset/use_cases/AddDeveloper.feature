@@ -11,4 +11,4 @@ Scenario: Fail on adding duplicate developer
 Given that a developer with the ID "abcd" exists
 And the developer is registered in the project planner
 When the developer is added again
-Then he gets the error message "ID already exists"
+Then he gets the error message "Developer already exists"

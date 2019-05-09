@@ -1,7 +1,7 @@
 package com.group5.projectplanner.app;
 
 import java.util.List;
-
+import java.util.ArrayList;
 //Author: Casper (s163950)
 public class NullProject extends AbstractProject{
 	
@@ -127,6 +127,26 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
+	public void setActivityStartWeek(String week ,ActivityID activityID, DeveloperID devLeader) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+	
+	@Override
+	public void setActivityStartYear(String week ,ActivityID activityID, DeveloperID devLeader) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+	
+	@Override
+	public void setActivityEndWeek(String week ,ActivityID activityID, DeveloperID devLeader) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+	
+	@Override
+	public void setActivityEndYear(String week ,ActivityID activityID, DeveloperID devLeader) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+
+	@Override
 	public boolean isActivityComplete(ActivityID activityID) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
@@ -142,7 +162,31 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
+	public int getActivityStartWeek(ActivityID activityID) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+	
+	@Override
+	public int getActivityStartYear(ActivityID activityID) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+	
+	
+	@Override
+	public int getActivityEndWeek(ActivityID activityID) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+	
+	@Override
+	public int getActivityEndYear(ActivityID activityID) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+	
+	@Override
 	public DeveloperID getProjectLeader() throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
+	
+
+	
 }

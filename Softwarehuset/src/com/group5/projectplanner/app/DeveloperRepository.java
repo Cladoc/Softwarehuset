@@ -10,11 +10,13 @@ public class DeveloperRepository {
 	//Author: Casper (s163950)
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
 		if(checkDeveloperExists(developer.getDeveloperID())){
-			throw new OperationNotAllowedException("ID already exists");
+			throw new OperationNotAllowedException("Developer already exists");
 		}else{
 			developers.add(developer);
 		}
 	}
+	
+	
 	
 	public boolean checkDeveloperExists(DeveloperID developerID) {
 		for(Developer listDeveloper: developers){
