@@ -36,7 +36,7 @@ public class ProjectPlanner {
 		if(checkDeveloperExist(developer)){
 			projectsRepo.addProject(project);
 		}else{
-			throw new OperationNotAllowedException(invalidID);
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
