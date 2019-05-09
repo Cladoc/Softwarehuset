@@ -16,6 +16,10 @@ import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
 
 import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertFalse;
 
 public class LeaderTests {
@@ -31,6 +35,7 @@ public class LeaderTests {
 	ProjectActivity projectActivity;
 	ActivityID activityID;
 	String projectInformation;
+	List<ProjectActivity> incompleteActivities;
 
 	public LeaderTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder,
 			ProjectHelper projectHelper, DeveloperHelper developerHelper) {
@@ -302,7 +307,6 @@ public class LeaderTests {
 	@Then("the project has the name {string}")
 	public void theProjectHasTheName(String name) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 	    // Write code here that turns the phrase above into concrete actions
-		System.out.println(projectPlanner.getProjectName(projectID));
 		assertTrue(projectPlanner.getProjectName(projectID).equals(name));
 	   
 	}
@@ -329,6 +333,40 @@ public class LeaderTests {
 	    assertTrue(prjData != null);
 	}
 
+	//Get Incomplete Activities feature------------------------------------------------
 	
+	//Anders (s163952)
+	@Given("there is registered {int} incomplete activity")
+	public void thereIsRegisteredIncompleteActivity(Integer int1) 
+			throws NullObjectException, OperationNotAllowedException {
+	   for (int i = 0; i<int1.intValue(); i++) {
+		   projectActivity = new ProjectActivity();
+		   activityID = new ActivityID();
+		   activityID.setName("Activity " + i);
+		   projectActivity.setID(activityID);
+		   projectPlanner.addProjectActivity(projectActivity, projectID, devLeader);
+	   }
+		
+	}
 
+	@When("the project leader requests a list of incomplete activities")
+	public void theProjectLeaderRequestsAListOfIncompleteActivities() 
+			throws OperationNotAllowedException, NullObjectException {
+		incompleteActivities = projectPlanner.getIncompleteActivities(projectID, devLeader);
+	}
+
+	@Then("the project leader gets a list of incomplete activities with {int} activity")
+	public void theProjectLeaderGetsAListOfIncompleteActivitiesWithActivity(Integer int1) {
+	    assertTrue (incompleteActivities.size() == int1);
+	}
+	
+	@When("the developer tries to get a list of incomplete activities")
+	public void theDeveloperTriesToGetAListOfIncompleteActivities()
+		throws NullObjectException, OperationNotAllowedException {
+			try {
+				projectPlanner.getIncompleteActivities(projectID, devLeader);
+			} catch (OperationNotAllowedException e) {
+				errorMessageHolder.setErrorMessage(e.getMessage());
+			}
+	}
 }

@@ -1,5 +1,7 @@
 package com.group5.projectplanner.app;
 
+import java.util.List;
+
 //Author: Casper (s163950)
 public abstract class AbstractProject {
 	
@@ -28,4 +30,5 @@ public abstract class AbstractProject {
 	public abstract void setActivityComplete(ActivityID activityID, Developer devLeader) throws NullObjectException, OperationNotAllowedException;
 	public abstract boolean isActivityComplete(ActivityID activityID) throws NullObjectException;
 	public abstract prjData getProjectInformation(Developer devLeader) throws OperationNotAllowedException, NullObjectException;
+	public abstract List<ProjectActivity> getIncompleteActivities(Developer devLeader) throws NullObjectException;
 }

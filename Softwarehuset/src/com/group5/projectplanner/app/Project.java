@@ -250,5 +250,10 @@ public class Project extends AbstractProject {
 		Activity abstractActivity = activityRepo.getActivity(activityID);
 		return abstractActivity.isActivityComplete();
 	}
+
+	@Override
+	public List<ProjectActivity> getIncompleteActivities(Developer devLeader) throws NullObjectException {
+		return activityRepo.getIncompleteActivities();
+	}
 	
 }

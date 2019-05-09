@@ -14,6 +14,8 @@ public class ProjectPlanner {
 	private ProjectRepository projectsRepo = new ProjectRepository();
 	//private Project currentWorkingProject;
 	//private ProjectActivity currentWorkingActivity;
+	private String invalidID = "Invalid ID";
+	private String IDNotLeader = "ID not project leader";
 
 	
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
@@ -34,7 +36,7 @@ public class ProjectPlanner {
 		if(checkDeveloperExist(developer)){
 			projectsRepo.addProject(project);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	
@@ -50,7 +52,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setProjectLeader(developer);	
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	
@@ -65,7 +67,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.addProjectActivity(projectActivity, devLeader);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -84,7 +86,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			return proj.checkDeveloperAssigned(activityID, testDeveloper);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -94,7 +96,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setExpectedHours(activityID, devLeader, hours);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -108,7 +110,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setActivityComplete(activityID, devLeader);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -128,7 +130,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setStartYear(year);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -137,7 +139,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setStartWeek(week, developer);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	
@@ -156,7 +158,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setEndYear(year, developer);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -165,7 +167,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setEndWeek(week, developer);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	
@@ -195,7 +197,21 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setName(name, devLeader);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
+		}
+	}
+
+	public List<ProjectActivity> getIncompleteActivities(ProjectID projectID, Developer devLeader) 
+			throws OperationNotAllowedException, NullObjectException {		
+		if (checkDeveloperExist(devLeader)) {
+			if (isProjectLeader(projectID, devLeader)) {
+			AbstractProject proj = projectsRepo.getProjectRef(projectID);
+			return proj.getIncompleteActivities(devLeader);
+			}else {
+				throw new OperationNotAllowedException(IDNotLeader);
+			}
+		}else{
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	
