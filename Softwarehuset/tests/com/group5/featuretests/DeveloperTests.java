@@ -132,6 +132,7 @@ public class DeveloperTests {
 		assertTrue(projectPlanner.checkDeveloperExist(developer));
 		return;
 	}
+	
 	//Author: Casper (s163950)
 	@Given("a project is registered in the project planner")
 	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
@@ -140,16 +141,19 @@ public class DeveloperTests {
 	    projectPlanner.addProject(project, developer);
 	    assertTrue(projectPlanner.checkProjectExist(projectID));
 	}
+	
 	//Author: Casper (s163950)
 	@When("the developer sets himself as project leader on the project")
 	public void theDeveloperSetsHimselfAsProjectLeaderOnTheProject() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 	    projectPlanner.setProjectLeader(projectID, developer);
 	}
+	
 	//Author: Casper (s163950)
 	@Then("the project has project leader with ID {string}")
 	public void theProjectHasProjectLeaderWithID(String string) throws Exception, FormattingException {
 	    assertTrue(projectPlanner.isProjectLeader(projectID, developer));
 	}
+	
 	//Author: Casper (s163950)
 	@When("the developer sets developer with ID {string} as project leader in the project")
 	public void theDeveloperSetsDeveloperWithIDAsProjectLeaderInTheProject(String badID) throws Exception, FormattingException, NullObjectException {
