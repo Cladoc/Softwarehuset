@@ -33,4 +33,14 @@ public class ActivityRepository {
 		}
 		return new NullActivity();
 	}
+	
+	public List<ProjectActivity> getIncompleteActivities() {
+		List<ProjectActivity> incompleteActivities = new ArrayList<ProjectActivity>();
+		for(ProjectActivity listActivity : projectActivities){
+			if(!listActivity.isActivityComplete()){
+				incompleteActivities.add(listActivity);
+			}
+		}
+		return incompleteActivities;
+	}
 }

@@ -1,5 +1,5 @@
-Feature: Set Expected Work Hours
-Description: Developer registers work hours
+Feature: Set Expected Work Hours for activity
+Description: Developer registers expected work hours for activity
 Actors: Project leader
 
 Scenario: Project leader sets expected work hours

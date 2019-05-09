@@ -9,7 +9,7 @@ public class ProjectActivity extends Activity {
 	private DeveloperRepository developers = new DeveloperRepository();
 	private Project parentProject;
 	private double totalExpectedHours;
-	private boolean complete;
+	private boolean complete = false;
 	
 	public ProjectActivity(){}
 	public ProjectActivity(ActivityID activityID) {
@@ -52,7 +52,7 @@ public class ProjectActivity extends Activity {
 
 
 	public void assignDeveloper(Developer assignedDeveloper) throws OperationNotAllowedException {
-		if(!developers.checkDeveloperExists(assignedDeveloper))
+		if(!developers.checkDeveloperExists(assignedDeveloper.getDeveloperID()))
 		{
 			developers.addDeveloper(assignedDeveloper);
 		}else{
@@ -61,8 +61,8 @@ public class ProjectActivity extends Activity {
 	}
 
 
-	public boolean checkDeveloperAssigned(Developer assignedDeveloper) {
-		return developers.checkDeveloperExists(assignedDeveloper);
+	public boolean checkDeveloperAssigned(DeveloperID assignedDeveloperID) {
+		return developers.checkDeveloperExists(assignedDeveloperID);
 	}
 
 

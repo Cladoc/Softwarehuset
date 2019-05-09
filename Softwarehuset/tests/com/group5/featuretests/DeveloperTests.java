@@ -11,8 +11,11 @@ import com.group5.projectplanner.app.*;
 public class DeveloperTests {
 	ProjectPlanner projectPlanner;
 	Developer developer;
+	ProjectActivity projectActivity;
 	Project project;
 	ProjectID projectID;
+	DeveloperID developerID;
+	ActivityID activityID;
 	ErrorMessageHolder errorMessageHolder;
 	ProjectHelper projectHelper;
 	DeveloperHelper developerHelper;
@@ -27,23 +30,24 @@ public class DeveloperTests {
 	//Add Developer:-----------------------------------------------
 	//Author: Casper (s163950)
 	@Given("that a developer with the ID {string} exists")
-	public void thatADeveloperWithTheIDExists(String id) {
+	public void thatADeveloperWithTheIDExists(String id)throws NullObjectException {
 	    developer = new Developer();
-	    developer.setID(id);
-	    assertTrue(developer.getID().equals(id));
+	    developer.setName(id);
+	    assertTrue(developer.getName().equals(id));
+	    assertTrue(developer.getDeveloperID()!= null);
 	}
 
 	//Author: Casper (s163950)
 	@When("the developer is added to the project planner")
-	public void theDeveloperIsAddedToTheProjectPlanner() throws OperationNotAllowedException {
+	public void theDeveloperIsAddedToTheProjectPlanner() throws OperationNotAllowedException, NullObjectException {
 	    	projectPlanner.addDeveloper(developer);
 	}
 
 	//Author: Casper (s163950)
 	@Then("the developer is added to the project planner successfully")
 	public void theDeveloperIsAddedToTheProjectPlannerSuccessfully() {
-	    assertTrue(projectPlanner.checkDeveloperExist(developer));
-	}
+	    assertTrue(projectPlanner.checkDeveloperExist(developer.getDeveloperID()));
+	}//////////// check her
 	
 	//Author: Casper (s163950)
 	@Given("the developer is registered in the project planner")
@@ -65,9 +69,10 @@ public class DeveloperTests {
 	@Given("that a developer is registered in the project planner")
 	public void thatADeveloperIsRegisteredInTheProjectPlanner() throws OperationNotAllowedException, Exception, FormattingException {
 		developer = developerHelper.getDeveloper();
-		assertTrue(developer.getID().equals("abcd"));
+		assertTrue(developer.getName().equals("abcd"));
 		projectPlanner.addDeveloper(developer);
-		assertTrue(projectPlanner.checkDeveloperExist(developer));
+		developerID = developer.getDeveloperID();
+		assertTrue(projectPlanner.checkDeveloperExist(developerID));
 		return;
 	}
 
@@ -79,14 +84,15 @@ public class DeveloperTests {
 		project.setID(projectID);
 	    try{
 	    	project.setStartYear(year);
+	    	try{
+		    	projectPlanner.addProject(project, developerID);
+		    }catch (OperationNotAllowedException e){
+		    	errorMessageHolder.setErrorMessage(e.getMessage());
+		    }
 	    }catch (FormattingException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
-	    try{
-	    	projectPlanner.addProject(project, developer);
-	    }catch (OperationNotAllowedException e){
-	    	errorMessageHolder.setErrorMessage(e.getMessage());
-	    }
+	    
 	}
 		
 	//Author: Casper (s163950)
@@ -94,6 +100,7 @@ public class DeveloperTests {
 	public void theProjectWithTheNameAndStartYearOfIsAddedToTheProjectPlanner(String name, int year) {
 	    assertTrue(project.getName().equals(name));
 		assertTrue(project.getStartYear()==year);
+		System.out.println(projectPlanner.checkProjectExist(projectID));
 		assertTrue(projectPlanner.checkProjectExist(projectID));
 	}
 
@@ -110,7 +117,7 @@ public class DeveloperTests {
 		projectID = new ProjectID(name);
 		project.setID(projectID);
 	    project.setStartYear("2020");
-	    projectPlanner.addProject(project, developer);
+	    projectPlanner.addProject(project, developerID);
 	    projectPlanner.checkProjectExist(projectID);
 	}
 
@@ -118,7 +125,7 @@ public class DeveloperTests {
 	@Given("that a developer is not registered in the project planner")
 	public void thatADeveloperIsNotRegisteredInTheProjectPlanner() {
 	    developer = new Developer();
-	    developer.setID("abcd");
+	    developer.setName("abcd");
 	}
 
 	//SetProjectLeader:------------------------
@@ -126,10 +133,10 @@ public class DeveloperTests {
 	@Given("a developer with ID {string} is registered in the project planner")
 	public void aDeveloperWithIDIsRegisteredInTheProjectPlanner(String id) throws OperationNotAllowedException{
 		developer = new Developer();
-		developer.setID(id);
-		assertTrue(developer.getID().equals(id));
+		developer.setName(id);
+		assertTrue(developer.getName().equals(id));
 		projectPlanner.addDeveloper(developer);
-		assertTrue(projectPlanner.checkDeveloperExist(developer));
+		assertTrue(projectPlanner.checkDeveloperExist(developer.getDeveloperID()));
 		return;
 	}
 	
@@ -138,29 +145,29 @@ public class DeveloperTests {
 	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = projectHelper.getProject();
 		projectID = project.getID();
-	    projectPlanner.addProject(project, developer);
+	    projectPlanner.addProject(project, developer.getDeveloperID());
 	    assertTrue(projectPlanner.checkProjectExist(projectID));
 	}
 	
 	//Author: Casper (s163950)
 	@When("the developer sets himself as project leader on the project")
 	public void theDeveloperSetsHimselfAsProjectLeaderOnTheProject() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	    projectPlanner.setProjectLeader(projectID, developer);
+	    projectPlanner.setProjectLeader(projectID, developer.getDeveloperID());
 	}
 	
 	//Author: Casper (s163950)
 	@Then("the project has project leader with ID {string}")
 	public void theProjectHasProjectLeaderWithID(String string) throws Exception, FormattingException {
-	    assertTrue(projectPlanner.isProjectLeader(projectID, developer));
+	    assertTrue(projectPlanner.isProjectLeader(projectID, developer.getDeveloperID()));
 	}
 	
 	//Author: Casper (s163950)
 	@When("the developer sets developer with ID {string} as project leader in the project")
 	public void theDeveloperSetsDeveloperWithIDAsProjectLeaderInTheProject(String badID) throws Exception, FormattingException, NullObjectException {
 	    Developer badDeveloper = new Developer();
-	    badDeveloper.setID(badID);
+	    badDeveloper.setName(badID);
 	    try{
-	    	projectPlanner.setProjectLeader(projectID, badDeveloper);
+	    	projectPlanner.setProjectLeader(projectID, badDeveloper.getDeveloperID());
 	    } catch (OperationNotAllowedException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
@@ -169,14 +176,17 @@ public class DeveloperTests {
 	@When("the developer sets registered developer with ID {string} as project leader in the project")
 	public void theDeveloperSetsRegisteredDeveloperWithIDAsProjectLeaderInTheProject(String badID) throws Exception, FormattingException, NullObjectException, OperationNotAllowedException {
 	    Developer badDeveloper = new Developer();
-	    badDeveloper.setID(badID);
+	    badDeveloper.setName(badID);
 	    projectPlanner.addDeveloper(badDeveloper);
 	    try{
-	    	projectPlanner.setProjectLeader(projectID, badDeveloper);
+	    	projectPlanner.setProjectLeader(projectID, badDeveloper.getDeveloperID());
 	    } catch (NullObjectException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
 	}
+
+
+//Remove developer feature
 	
 	@When("the developer is removed from the project planner")
 	public void theDeveloperIsRemovedFromTheProjectPlanner() throws OperationNotAllowedException {
@@ -189,14 +199,14 @@ public class DeveloperTests {
 
 	@Then("the developer is removed from the project planner successfully")
 	public void theDeveloperIsRemovedFromTheProjectPlannerSuccessfully() {
-		assertTrue(!projectPlanner.checkDeveloperExist(developer));
+		assertTrue(!projectPlanner.checkDeveloperExist(developer.getDeveloperID()));
 
 	}
 	
 	@Given("that a developer with the ID {string} is not registered in project planner")
-	public void thatADeveloperWithTheIDIsNotRegisteredInProjectPlanner(String string) {
-	    // developer allready has id abcd
-		assertTrue(!projectPlanner.checkDeveloperExist(developer));
+	public void thatADeveloperWithTheIDIsNotRegisteredInProjectPlanner(String id) {
+		 developer = new Developer();
+		 developer.setName(id);
 	}
 
 	@When("the developer is removed")

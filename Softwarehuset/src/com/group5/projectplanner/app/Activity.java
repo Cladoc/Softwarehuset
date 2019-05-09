@@ -8,7 +8,7 @@ public abstract class Activity {
 	public abstract boolean isNil();
 	public abstract boolean equals(Object obj);
 	public abstract void assignDeveloper(Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException;
-	public abstract boolean checkDeveloperAssigned(Developer assignedDeveloper) throws NullObjectException;
+	public abstract boolean checkDeveloperAssigned(DeveloperID assignedDeveloperID) throws NullObjectException;
 	public abstract void setExpectedWorkHours(String hours) throws NullObjectException, FormattingException;
 	public abstract double getExpectedWorkHours() throws NullObjectException;
 	public abstract void setActivityComplete() throws NullObjectException;
