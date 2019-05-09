@@ -1,9 +1,11 @@
 package com.group5.projectplanner.app;
 import java.util.*;
-
+import java.util.regex.Pattern;   
+import java.util.regex.Matcher;  
 public class Project extends AbstractProject {
 	private ActivityRepository activityRepo = new ActivityRepository();
 	private ProjectID projectID = new ProjectID();
+	
 	private Developer leader;
 	private int startYear;
 	private int startWeek;
@@ -21,8 +23,22 @@ public class Project extends AbstractProject {
 	}
 	
 	@Override
-	public void setName(String name) {
-		this.projectID.setName(name);
+	public void setName(String name, Developer devLeader) throws OperationNotAllowedException, FormattingException {
+		if(isProjectLeader(devLeader)){
+			
+			String regex = "\\A[a-zA-Z].*";
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(name);
+			boolean b = matcher.matches();
+			if(b) {
+				this.projectID.setName(name);
+			}else {
+				throw new FormattingException("An invalid project name was entered");
+			}
+			
+		}else{
+			throw new OperationNotAllowedException("ID not project leader");
+		}
 	}
 	
 	@Override
@@ -128,9 +144,16 @@ public class Project extends AbstractProject {
 	}
 	
 	@Override
-	public String getProjectInformation(Developer devLeader) throws OperationNotAllowedException {
+	public prjData getProjectInformation(Developer devLeader) throws OperationNotAllowedException {
 		if(isProjectLeader(devLeader)){
-			return "project information";
+			prjData prjData = new prjData();
+			prjData.setEndWeek(this.endWeek);
+			prjData.setEndYear(this.endYear);
+			prjData.setLeader(this.leader);
+			prjData.setProjectID(this.projectID);
+			prjData.setStartWeek(this.startWeek);
+			prjData.setStartYear(this.startYear);
+			return prjData;
 		}else{
 			throw new OperationNotAllowedException("ID not project leader");
 		}

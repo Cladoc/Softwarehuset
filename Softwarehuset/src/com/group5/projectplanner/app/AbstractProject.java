@@ -5,7 +5,7 @@ public abstract class AbstractProject {
 	
 	public abstract void setID(ProjectID projectID);
 	public abstract ProjectID getID();
-	public abstract void setName(String name);
+	public abstract void setName(String name, Developer devLeader) throws OperationNotAllowedException,FormattingException;
 	public abstract String getName();
 	public abstract void setStartYear(String start)  throws Exception, FormattingException, NullObjectException;
 	public abstract void setEndYear(String start, Developer devLeader)  throws Exception, FormattingException, NullObjectException, OperationNotAllowedException;
@@ -27,5 +27,5 @@ public abstract class AbstractProject {
 	public abstract double getExpectedHours(ActivityID activityID) throws NullObjectException;
 	public abstract void setActivityComplete(ActivityID activityID, Developer devLeader) throws NullObjectException, OperationNotAllowedException;
 	public abstract boolean isActivityComplete(ActivityID activityID) throws NullObjectException;
-	public abstract String getProjectInformation(Developer devLeader) throws OperationNotAllowedException, NullObjectException;
+	public abstract prjData getProjectInformation(Developer devLeader) throws OperationNotAllowedException, NullObjectException;
 }

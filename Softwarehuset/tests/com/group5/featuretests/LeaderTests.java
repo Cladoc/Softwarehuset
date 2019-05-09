@@ -1,6 +1,7 @@
 package com.group5.featuretests;
 
 import com.group5.projectplanner.app.ProjectPlanner;
+import com.group5.projectplanner.app.prjData;
 import com.group5.projectplanner.app.Developer;
 import com.group5.projectplanner.app.FormattingException;
 import com.group5.projectplanner.app.NullObjectException;
@@ -24,6 +25,7 @@ public class LeaderTests {
 	DeveloperHelper developerHelper;
 	Developer devLeader;
 	Developer testDeveloper;
+	prjData prjData;
 	Project project;
 	ProjectID projectID;
 	ProjectActivity projectActivity;
@@ -287,18 +289,46 @@ public class LeaderTests {
 		}
 	}
 
-	@When("the project leader asks for the project information")
-	public void theProjectLeaderAsksForTheProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	    projectInformation = projectPlanner.getProjectInformation(projectID, devLeader);
+	@When("the project leader sets projectName to {string}")
+	public void theProjectLeaderSetsProjectNameTo(String name) throws OperationNotAllowedException {
+	    // Write code here that turns the phrase above into concrete actions
+		try {
+			projectPlanner.editProjectName(projectID, devLeader, name);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
-	@Then("projectInformation is {string}")
-	public void projectinformationIs(String string) {
-		assertTrue(projectInformation.equals(string));
+	@Then("the project has the name {string}")
+	public void theProjectHasTheName(String name) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		System.out.println(projectPlanner.getProjectName(projectID));
+		assertTrue(projectPlanner.getProjectName(projectID).equals(name));
+	   
 	}
 
+	@When("the project leader sets an invalid projectName of {string}")
+	public void theProjectLeaderSetsAnInvalidProjectNameOf(String name) throws OperationNotAllowedException {
+	    // Write code here that turns the phrase above into concrete actions
+		try {
+			projectPlanner.editProjectName(projectID, devLeader, name);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("the project leader requests projectInformation")
+	public void theProjectLeaderRequestsProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+	   prjData = projectPlanner.getProjectInformation(projectID, devLeader);
+	}
 
+	@Then("the project leader have access to projectInformation")
+	public void theProjectLeaderHaveAccessToProjectInformation() {
+	    // Write code here that turns the phrase above into concrete actions
+	    assertTrue(prjData != null);
+	}
 
-
+	
 
 }

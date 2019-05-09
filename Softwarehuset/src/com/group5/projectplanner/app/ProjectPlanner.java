@@ -20,6 +20,10 @@ public class ProjectPlanner {
 		devRepo.addDeveloper(developer);
 	}
 	
+	public void removeDeveloper(Developer developer) throws OperationNotAllowedException{
+		devRepo.removeDeveloper(developer);
+	}
+	
 	public boolean checkDeveloperExist(Developer developer) {
 		//contains() uses object's equals() method
 		return devRepo.checkDeveloperExists(developer);
@@ -175,11 +179,25 @@ public class ProjectPlanner {
 		return proj.getEndYear();
 	}
 	
-	public String getProjectInformation(ProjectID projectID, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	public String getProjectName(ProjectID projectID) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+		AbstractProject proj = projectsRepo.getProjectRef(projectID);
+		return proj.getName();
+	}
+	
+	public prjData getProjectInformation(ProjectID projectID, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);
 		return proj.getProjectInformation(devLeader);
 	}
 	
+	public void editProjectName(ProjectID projectID, Developer devLeader, String name) throws OperationNotAllowedException, FormattingException {
+		
+		if(checkDeveloperExist(devLeader)) {
+			AbstractProject proj = projectsRepo.getProjectRef(projectID);
+			proj.setName(name, devLeader);
+		}else{
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+	}
 	
 	
 	

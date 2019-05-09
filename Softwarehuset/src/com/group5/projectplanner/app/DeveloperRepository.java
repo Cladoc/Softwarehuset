@@ -21,5 +21,13 @@ public class DeveloperRepository {
 		//contains() uses object's equals() method
 		return developers.contains(developer);
 	}
+	
+	public void removeDeveloper(Developer developer) throws OperationNotAllowedException{
+		if(!checkDeveloperExists(developer)){
+			throw new OperationNotAllowedException("Developer does not exist");
+		}else{
+			developers.remove(developer);
+		}
+	}
 
 }
