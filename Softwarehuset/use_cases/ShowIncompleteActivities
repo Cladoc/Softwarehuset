@@ -3,4 +3,3 @@ Description: A project leader requests a list of the incomplete activities of a 
 Actor: Project Leader
 
 Scenario: Request list of incomplete activities
- 
