@@ -1,5 +1,7 @@
 package com.group5.projectplanner.app;
 
+import java.util.List;
+
 //Author: Casper (s163950)
 public class NullProject extends AbstractProject{
 	
@@ -126,6 +128,11 @@ public class NullProject extends AbstractProject{
 
 	@Override
 	public boolean isActivityComplete(ActivityID activityID) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+
+	@Override
+	public List<ProjectActivity> getIncompleteActivities(DeveloperID developerID) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 	

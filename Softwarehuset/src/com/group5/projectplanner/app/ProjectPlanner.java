@@ -14,6 +14,7 @@ public class ProjectPlanner {
 	private ProjectRepository projectsRepo = new ProjectRepository();
 	//private Project currentWorkingProject;
 	//private ProjectActivity currentWorkingActivity;
+	private String invalidID = "Invalid ID";
 
 	
 	public void registerHours(int week, int year, double hours, ActivityID activityID, DeveloperID developerID, ProjectID projectID) throws NullObjectException {
@@ -55,7 +56,7 @@ public class ProjectPlanner {
 		if(checkDeveloperExist(developerID)){
 			projectsRepo.addProject(project);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	
@@ -71,7 +72,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setProjectLeader(developerID);	
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	
@@ -86,7 +87,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.addProjectActivity(projectActivity, developerID);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -108,7 +109,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			return proj.checkDeveloperAssigned(activityID, developerID);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -118,7 +119,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setExpectedHours(activityID, developerID, hours);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -132,7 +133,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setActivityComplete(activityID, developerID);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -152,7 +153,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setStartYear(year);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -161,7 +162,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setStartWeek(week, developerID);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	
@@ -180,7 +181,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setEndYear(year, developerID);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 
@@ -189,7 +190,7 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setEndWeek(week, developerID);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	
@@ -219,7 +220,17 @@ public class ProjectPlanner {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.setName(name, developerID);
 		}else{
-			throw new OperationNotAllowedException("Invalid ID");
+			throw new OperationNotAllowedException(invalidID);
+		}
+	}
+
+	public List<ProjectActivity> getIncompleteActivities(ProjectID projectID, DeveloperID developerID) 
+			throws OperationNotAllowedException, NullObjectException {		
+		if (checkDeveloperExist(developerID)) {
+			AbstractProject proj = projectsRepo.getProjectRef(projectID);
+			return proj.getIncompleteActivities(developerID);
+		}else{
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	

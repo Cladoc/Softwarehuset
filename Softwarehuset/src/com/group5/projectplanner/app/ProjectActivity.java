@@ -9,7 +9,7 @@ public class ProjectActivity extends Activity {
 	private DeveloperRepository developers = new DeveloperRepository();
 	private Project parentProject;
 	private double totalExpectedHours;
-	private boolean complete;
+	private boolean complete = false;
 	
 	public ProjectActivity(){}
 	public ProjectActivity(ActivityID activityID) {

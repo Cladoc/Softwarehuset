@@ -11,6 +11,13 @@ public class Project extends AbstractProject {
 	private int startWeek;
 	private int endYear = 3000;
 	private int endWeek;
+	
+	//Strings used in error message
+	private String invalidProjectName = "An invalid project name was entered";
+	private String IDNotLeader = "ID not project leader";
+	private String incorrectDate = "Incorrect date format";
+	private String invalidStartDate = "An invalid start date was entered";
+	private String invalidEndDate = "An invalid end date was entered";
 
 	@Override
 	public void setID(ProjectID projectID) {
@@ -38,11 +45,11 @@ public class Project extends AbstractProject {
 			if(b) {
 				this.projectID.setName(name);
 			}else {
-				throw new FormattingException("An invalid project name was entered");
+				throw new FormattingException(invalidProjectName);
 			}
 			
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -60,14 +67,14 @@ public class Project extends AbstractProject {
 			number = Integer.parseInt(start);
 			if(number < 1000 || number > 9999)
 			{
-				throw new FormattingException("Incorrect date format");
+				throw new FormattingException(incorrectDate);
 			}
 			if(this.endYear < number) {
-				throw new FormattingException("An invalid start date was entered");
+				throw new FormattingException(invalidStartDate);
 			}
 			this.startYear = number;
 		}catch (Exception e){
-				throw new FormattingException("Incorrect date format");			
+				throw new FormattingException(incorrectDate);			
 		}
 		
 	}
@@ -80,17 +87,17 @@ public class Project extends AbstractProject {
 				number = Integer.parseInt(start);
 				if(number < 1 || number > 54)
 				{
-					throw new FormattingException("Incorrect date format");
+					throw new FormattingException(incorrectDate);
 				}
 				if((this.startYear == this.endYear && this.endWeek <= number)) {
-					throw new FormattingException("An invalid start date was entered");
+					throw new FormattingException(invalidStartDate);
 				}
 				this.startWeek = number;
 			}catch (Exception e){
-				throw new FormattingException("Incorrect date format");
+				throw new FormattingException(incorrectDate);
 			}
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 		
 	}
@@ -101,17 +108,17 @@ public class Project extends AbstractProject {
 				int number = Integer.parseInt(start);
 				if(number < 1000 || number > 9999)
 				{
-					throw new FormattingException("Incorrect date format");
+					throw new FormattingException(incorrectDate);
 				}
 				if(this.startYear > number) {
-					throw new FormattingException("An invalid end date was entered");
+					throw new FormattingException(invalidEndDate);
 				}
 				this.endYear = number;
 			}catch (Exception e){
-				throw new FormattingException("Incorrect date format");
+				throw new FormattingException(incorrectDate);
 			}
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -122,17 +129,17 @@ public class Project extends AbstractProject {
 				int number = Integer.parseInt(start);
 				if(number < 1 || number > 54 )
 				{
-					throw new FormattingException("Incorrect date format");
+					throw new FormattingException(incorrectDate);
 				}
 				if((this.startYear == this.endYear && this.startWeek > number)) {
-					throw new FormattingException("An invalid end date was entered");
+					throw new FormattingException(invalidEndDate);
 				}
 				this.endWeek = number;
 			}catch (Exception e){
-				throw new FormattingException("Incorrect date format");
+				throw new FormattingException(incorrectDate);
 			}
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -160,7 +167,7 @@ public class Project extends AbstractProject {
 			prjData.setStartYear(this.startYear);
 			return prjData;
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -206,7 +213,7 @@ public class Project extends AbstractProject {
 		if(isProjectLeader(developerID)){
 			activityRepo.addActivity(projectActivity, this);
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -219,7 +226,7 @@ public class Project extends AbstractProject {
 			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.assignDeveloper(assignedDeveloper);
 		}else{
-			throw new OperationNotAllowedException("Id is not leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 
@@ -233,7 +240,7 @@ public class Project extends AbstractProject {
 			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setExpectedWorkHours(hours);
 		}else{
-			throw new OperationNotAllowedException("Id is not leader");
+			throw new OperationNotAllowedException("IDNotLeader");
 		}
 	}
 
@@ -247,13 +254,24 @@ public class Project extends AbstractProject {
 			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setActivityComplete();
 		}else{
-			throw new OperationNotAllowedException("Id is not leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 
 	public boolean isActivityComplete(ActivityID activityID) throws NullObjectException {
 		Activity abstractActivity = activityRepo.getActivity(activityID);
 		return abstractActivity.isActivityComplete();
+	}
+
+	@Override
+	public List<ProjectActivity> getIncompleteActivities(DeveloperID developerID) 
+			throws NullObjectException, OperationNotAllowedException {
+		if (isProjectLeader(developerID)) {
+			return activityRepo.getIncompleteActivities();
+		}else {
+			throw new OperationNotAllowedException(IDNotLeader);
+		}
+		
 	}
 	
 	public Activity getProjectActivity(ActivityID activityID) {
