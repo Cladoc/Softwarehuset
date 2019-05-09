@@ -1,5 +1,5 @@
 Feature: Edit project name
-Description: Project leader edits date of project
+Description: Project leader edits name of project
 Actors: Project leader
 
 Scenario: Edit project name of project successfully
