@@ -139,7 +139,7 @@ public class LeaderTests {
 	public void theDeveloperIsAssignedToTheActivity() throws OperationNotAllowedException, NullObjectException {
 	    assertTrue(projectPlanner.checkDeveloperAssigned(activityID, projectID, testDeveloper.getDeveloperID()));
 	}
-
+	
 	@When("the project leader assigns a developer to an activity under the project where he is already assigned")
 	public void theProjectLeaderAssignsADeveloperToAnActivityUnderTheProjectWhereHeIsAlreadyAssigned()
 			throws NullObjectException, OperationNotAllowedException {
@@ -310,7 +310,6 @@ public class LeaderTests {
 
 	@When("the project leader sets projectName to {string}")
 	public void theProjectLeaderSetsProjectNameTo(String name) throws OperationNotAllowedException {
-		// Write code here that turns the phrase above into concrete actions
 		try {
 			projectPlanner.editProjectName(projectID, developerID, name);
 		} catch (FormattingException e) {
@@ -337,14 +336,14 @@ public class LeaderTests {
 	
 
 
-	@When("the project leader requests projectInformation")
+	@When("the project leader requests project information")
 	public void theProjectLeaderRequestsProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 	    // Write code here that turns the phrase above into concrete actions
 	   prjData = projectPlanner.getProjectInformation(projectID, developerID);
 	}
 
-	@Then("the project leader have access to projectInformation")
-	public void theProjectLeaderHaveAccessToProjectInformation() {
+	@Then("the project leader has access to the project information")
+	public void theProjectLeaderHasAccessToProjectInformation() {
 		// Write code here that turns the phrase above into concrete actions
 		assertTrue(prjData != null);
 	}

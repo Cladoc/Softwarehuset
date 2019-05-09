@@ -9,13 +9,10 @@ import java.util.List;
 
 //Author: Casper Egholm Jørgensen (s163950)
 public class ProjectPlanner {
-	//private Developer currentSignedInDeveloper;
+	
 	private DeveloperRepository devRepo = new DeveloperRepository();
 	private ProjectRepository projectsRepo = new ProjectRepository();
-	//private Project currentWorkingProject;
-	//private ProjectActivity currentWorkingActivity;
-	private String invalidID = "Invalid ID";
-
+	String invalidID = "Invalid ID";
 	
 	public void registerHours(int week, int year, double hours, ActivityID activityID, DeveloperID developerID, ProjectID projectID) throws NullObjectException {
 		abstractDeveloper dev = devRepo.getDeveloper(developerID);
@@ -34,20 +31,9 @@ public class ProjectPlanner {
 	
 	public void removeDeveloper(Developer developer) throws OperationNotAllowedException{
 		devRepo.removeDeveloper(developer);
-		
-		
-		////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-		
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
 	}
 	
 	public boolean checkDeveloperExist(DeveloperID developerID) {
-		
 		return devRepo.checkDeveloperExists(developerID);
 	}
 	

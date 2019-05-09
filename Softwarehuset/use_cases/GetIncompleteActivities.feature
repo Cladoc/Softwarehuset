@@ -26,3 +26,11 @@ And a project is registered in the project planner
 And that he is not project leader on the project
 When the developer tries to get a list of incomplete activities
 Then he gets the error message "ID not project leader"
+
+#Scenario: There are no incomplete activities
+#Given a project is registered in the project planner
+#And a developer is project leader on the project
+#And there are 0 activities in the project
+#When the project leader requests a list of incomplete activities in the project
+#Then he gets the error message "No activities registered"
+
