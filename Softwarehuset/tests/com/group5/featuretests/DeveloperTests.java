@@ -100,7 +100,6 @@ public class DeveloperTests {
 	public void theProjectWithTheNameAndStartYearOfIsAddedToTheProjectPlanner(String name, int year) {
 	    assertTrue(project.getName().equals(name));
 		assertTrue(project.getStartYear()==year);
-		System.out.println(projectPlanner.checkProjectExist(projectID));
 		assertTrue(projectPlanner.checkProjectExist(projectID));
 	}
 
