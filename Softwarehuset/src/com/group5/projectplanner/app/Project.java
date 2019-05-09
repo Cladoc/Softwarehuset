@@ -6,7 +6,7 @@ public class Project extends AbstractProject {
 	private ActivityRepository activityRepo = new ActivityRepository();
 	private ProjectID projectID = new ProjectID();
 	
-	private Developer leader;
+	private DeveloperID leader;
 	private int startYear;
 	private int startWeek;
 	private int endYear = 3000;
@@ -23,8 +23,13 @@ public class Project extends AbstractProject {
 	}
 	
 	@Override
-	public void setName(String name, Developer devLeader) throws OperationNotAllowedException, FormattingException {
-		if(isProjectLeader(devLeader)){
+	public DeveloperID getProjectLeader() {
+		return this.leader;
+	}
+	
+	@Override
+	public void setName(String name, DeveloperID developerID) throws OperationNotAllowedException, FormattingException {
+		if(isProjectLeader(developerID)){
 			
 			String regex = "\\A[a-zA-Z].*";
 			Pattern pattern = Pattern.compile(regex);
@@ -68,8 +73,8 @@ public class Project extends AbstractProject {
 	}
 	
 	@Override
-	public void setStartWeek(String start, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException {
-		if(isProjectLeader(devLeader)){
+	public void setStartWeek(String start, DeveloperID developerID) throws Exception, FormattingException, OperationNotAllowedException {
+		if(isProjectLeader(developerID)){
 			int number = 0;
 			try{
 				number = Integer.parseInt(start);
@@ -90,8 +95,8 @@ public class Project extends AbstractProject {
 		
 	}
 	
-	public void setEndYear(String start, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException {
-		if(isProjectLeader(devLeader)){
+	public void setEndYear(String start, DeveloperID developerID) throws Exception, FormattingException, OperationNotAllowedException {
+		if(isProjectLeader(developerID)){
 			try{
 				int number = Integer.parseInt(start);
 				if(number < 1000 || number > 9999)
@@ -111,8 +116,8 @@ public class Project extends AbstractProject {
 	}
 	
 	@Override
-	public void setEndWeek(String start, Developer devLeader) throws Exception, FormattingException, OperationNotAllowedException {
-		if(isProjectLeader(devLeader)){
+	public void setEndWeek(String start, DeveloperID developerID) throws Exception, FormattingException, OperationNotAllowedException {
+		if(isProjectLeader(developerID)){
 			try{
 				int number = Integer.parseInt(start);
 				if(number < 1 || number > 54 )
@@ -144,8 +149,8 @@ public class Project extends AbstractProject {
 	}
 	
 	@Override
-	public prjData getProjectInformation(Developer devLeader) throws OperationNotAllowedException {
-		if(isProjectLeader(devLeader)){
+	public prjData getProjectInformation(DeveloperID developerID) throws OperationNotAllowedException {
+		if(isProjectLeader(developerID)){
 			prjData prjData = new prjData();
 			prjData.setEndWeek(this.endWeek);
 			prjData.setEndYear(this.endYear);
@@ -168,16 +173,16 @@ public class Project extends AbstractProject {
 		return this.endWeek;
 	}
 
-	public void setProjectLeader(Developer developer) {
-		leader = developer;
+	public void setProjectLeader(DeveloperID developerID) {
+		leader = developerID;
 	}
 
 	//Author: Casper (s163950)
-	public boolean isProjectLeader(Developer developer) {
+	public boolean isProjectLeader(DeveloperID developerID) {
 		if(leader == null){
 			return false;
 		}else{
-			return leader.equals(developer);
+			return leader.equals(developerID);
 		}
 	}
 	
@@ -197,8 +202,8 @@ public class Project extends AbstractProject {
 	}
 
 	@Override
-	public void addProjectActivity(ProjectActivity projectActivity, Developer devLeader) throws OperationNotAllowedException{
-		if(isProjectLeader(devLeader)){
+	public void addProjectActivity(ProjectActivity projectActivity, DeveloperID developerID) throws OperationNotAllowedException{
+		if(isProjectLeader(developerID)){
 			activityRepo.addActivity(projectActivity, this);
 		}else{
 			throw new OperationNotAllowedException("ID not project leader");
@@ -209,8 +214,8 @@ public class Project extends AbstractProject {
 		return activityRepo.checkActivityExists(activityID);
 	}
 
-	public void assignDeveloper(ActivityID activityID, Developer devLeader, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException {
-		if(isProjectLeader(devLeader)){
+	public void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException {
+		if(isProjectLeader(developerID)){
 			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.assignDeveloper(assignedDeveloper);
 		}else{
@@ -218,13 +223,13 @@ public class Project extends AbstractProject {
 		}
 	}
 
-	public boolean checkDeveloperAssigned(ActivityID activityID, Developer assignedDeveloper) throws NullObjectException {
+	public boolean checkDeveloperAssigned(ActivityID activityID, DeveloperID assignedDeveloperID) throws NullObjectException {
 		Activity abstractActivity = activityRepo.getActivity(activityID);
-		return abstractActivity.checkDeveloperAssigned(assignedDeveloper);
+		return abstractActivity.checkDeveloperAssigned(assignedDeveloperID);
 	}
 
-	public void setExpectedHours(ActivityID activityID, Developer devLeader, String hours) throws OperationNotAllowedException, FormattingException, NullObjectException {
-		if(isProjectLeader(devLeader)){
+	public void setExpectedHours(ActivityID activityID, DeveloperID developerID, String hours) throws OperationNotAllowedException, FormattingException, NullObjectException {
+		if(isProjectLeader(developerID)){
 			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setExpectedWorkHours(hours);
 		}else{
@@ -237,8 +242,8 @@ public class Project extends AbstractProject {
 		return abstractActivity.getExpectedWorkHours();
 	}
 
-	public void setActivityComplete(ActivityID activityID, Developer devLeader) throws NullObjectException, OperationNotAllowedException {
-		if(isProjectLeader(devLeader)){
+	public void setActivityComplete(ActivityID activityID, DeveloperID developerID) throws NullObjectException, OperationNotAllowedException {
+		if(isProjectLeader(developerID)){
 			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setActivityComplete();
 		}else{
@@ -249,6 +254,11 @@ public class Project extends AbstractProject {
 	public boolean isActivityComplete(ActivityID activityID) throws NullObjectException {
 		Activity abstractActivity = activityRepo.getActivity(activityID);
 		return abstractActivity.isActivityComplete();
+	}
+	
+	public Activity getProjectActivity(ActivityID activityID) {
+		Activity abstractActivity = activityRepo.getActivity(activityID);
+		return abstractActivity;
 	}
 	
 }

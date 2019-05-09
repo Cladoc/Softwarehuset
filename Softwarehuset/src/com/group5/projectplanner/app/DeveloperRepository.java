@@ -9,25 +9,41 @@ public class DeveloperRepository {
 	
 	//Author: Casper (s163950)
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
-		if(checkDeveloperExists(developer)){
+		if(checkDeveloperExists(developer.getDeveloperID())){
 			throw new OperationNotAllowedException("ID already exists");
 		}else{
 			developers.add(developer);
 		}
 	}
 	
-	//Author: Casper (s163950)
-	public boolean checkDeveloperExists(Developer developer){
-		//contains() uses object's equals() method
-		return developers.contains(developer);
+	
+	
+	public boolean checkDeveloperExists(DeveloperID developerID) {
+		for(Developer listDeveloper: developers){
+			if(listDeveloper.getName().equalsIgnoreCase(developerID.getName())){
+				return true;
+			}
+		}
+		return false;
 	}
 	
+
+	
 	public void removeDeveloper(Developer developer) throws OperationNotAllowedException{
-		if(!checkDeveloperExists(developer)){
+		if(!checkDeveloperExists(developer.getDeveloperID())){
 			throw new OperationNotAllowedException("Developer does not exist");
 		}else{
 			developers.remove(developer);
 		}
+	}
+	
+	public abstractDeveloper getDeveloper(DeveloperID developerID){
+		for(Developer listActivity : developers){
+			if(listActivity.matches(developerID)){
+				return listActivity;
+			}
+		}
+		return new NullDeveloper();
 	}
 
 }
