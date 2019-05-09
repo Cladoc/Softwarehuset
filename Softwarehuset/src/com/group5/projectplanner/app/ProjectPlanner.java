@@ -36,7 +36,7 @@ public class ProjectPlanner {
 		if(checkDeveloperExist(developer)){
 			projectsRepo.addProject(project);
 		}else{
-			throw new OperationNotAllowedException(IDNotLeader);
+			throw new OperationNotAllowedException(invalidID);
 		}
 	}
 	
@@ -204,12 +204,8 @@ public class ProjectPlanner {
 	public List<ProjectActivity> getIncompleteActivities(ProjectID projectID, Developer devLeader) 
 			throws OperationNotAllowedException, NullObjectException {		
 		if (checkDeveloperExist(devLeader)) {
-			if (isProjectLeader(projectID, devLeader)) {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			return proj.getIncompleteActivities(devLeader);
-			}else {
-				throw new OperationNotAllowedException(IDNotLeader);
-			}
 		}else{
 			throw new OperationNotAllowedException(invalidID);
 		}

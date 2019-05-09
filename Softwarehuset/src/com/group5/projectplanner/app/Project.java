@@ -11,6 +11,7 @@ public class Project extends AbstractProject {
 	private int startWeek;
 	private int endYear = 3000;
 	private int endWeek;
+	private String IDNotLeader = "ID not project leader";
 
 	@Override
 	public void setID(ProjectID projectID) {
@@ -37,7 +38,7 @@ public class Project extends AbstractProject {
 			}
 			
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -85,7 +86,7 @@ public class Project extends AbstractProject {
 				throw new FormattingException("Incorrect date format");
 			}
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 		
 	}
@@ -106,7 +107,7 @@ public class Project extends AbstractProject {
 				throw new FormattingException("Incorrect date format");
 			}
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -127,7 +128,7 @@ public class Project extends AbstractProject {
 				throw new FormattingException("Incorrect date format");
 			}
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -155,7 +156,7 @@ public class Project extends AbstractProject {
 			prjData.setStartYear(this.startYear);
 			return prjData;
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -201,7 +202,7 @@ public class Project extends AbstractProject {
 		if(isProjectLeader(devLeader)){
 			activityRepo.addActivity(projectActivity, this);
 		}else{
-			throw new OperationNotAllowedException("ID not project leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -214,7 +215,7 @@ public class Project extends AbstractProject {
 			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.assignDeveloper(assignedDeveloper);
 		}else{
-			throw new OperationNotAllowedException("Id is not leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 
@@ -242,7 +243,7 @@ public class Project extends AbstractProject {
 			Activity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setActivityComplete();
 		}else{
-			throw new OperationNotAllowedException("Id is not leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 
@@ -252,8 +253,14 @@ public class Project extends AbstractProject {
 	}
 
 	@Override
-	public List<ProjectActivity> getIncompleteActivities(Developer devLeader) throws NullObjectException {
-		return activityRepo.getIncompleteActivities();
+	public List<ProjectActivity> getIncompleteActivities(Developer devLeader) 
+			throws NullObjectException, OperationNotAllowedException {
+		if (isProjectLeader(devLeader)) {
+			return activityRepo.getIncompleteActivities();
+		}else {
+			throw new OperationNotAllowedException(IDNotLeader);
+		}
+		
 	}
 	
 }
