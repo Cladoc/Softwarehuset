@@ -1,6 +1,0 @@
-Feature: Show incomplete activities
-Description: A project leader requests a list of the incomplete activities of a project he leads
-Actor: Project Leader
-
-Scenario: Request list of incomplete activities
- 

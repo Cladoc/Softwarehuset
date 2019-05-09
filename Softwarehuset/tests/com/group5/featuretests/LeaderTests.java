@@ -167,7 +167,6 @@ public class LeaderTests {
 
 	@Then("the project has start date week {int} and year {int}")
 	public void theProjectHasStartDateWeekAndYear(Integer week, Integer year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	    // Write code here that turns the phrase above into concrete actions
 		assertTrue(year == projectPlanner.getStartYear(projectID));
 		assertTrue(week == projectPlanner.getStartWeek(projectID));
 	}
@@ -194,7 +193,6 @@ public class LeaderTests {
 
 	@Then("he gets the invalid date error message {string}")
 	public void heGetsTheInvalidDateErrorMessage(String error) {
-	    // Write code here that turns the phrase above into concrete actions
 		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
 	}
 	
@@ -211,7 +209,6 @@ public class LeaderTests {
 
 	@Then("the project has end date of week {int} and year {int}")
 	public void theProjectHasEndDateOfWeekAndYear(Integer week, Integer year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	    // Write code here that turns the phrase above into concrete actions
 		assertTrue(year == projectPlanner.getEndYear(projectID));
 		assertTrue(week == projectPlanner.getEndWeek(projectID));
 	}
@@ -239,7 +236,6 @@ public class LeaderTests {
 
 	@Then("he gets the invalid end date error message {string}")
 	public void heGetsTheInvalidEndDateErrorMessage(String error) {
-	    // Write code here that turns the phrase above into concrete actions
 		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
 	}
 	
@@ -299,7 +295,6 @@ public class LeaderTests {
 
 	@When("the project leader sets projectName to {string}")
 	public void theProjectLeaderSetsProjectNameTo(String name) throws OperationNotAllowedException {
-	    // Write code here that turns the phrase above into concrete actions
 		try {
 			projectPlanner.editProjectName(projectID, developerID, name);
 		} catch (FormattingException e) {
@@ -309,9 +304,7 @@ public class LeaderTests {
 
 	@Then("the project has the name {string}")
 	public void theProjectHasTheName(String name) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	    // Write code here that turns the phrase above into concrete actions
 		assertTrue(projectPlanner.getProjectName(projectID).equals(name));
-	   
 	}
 
 	@When("the project leader sets an invalid projectName of {string}")
@@ -324,15 +317,14 @@ public class LeaderTests {
 		}
 	}
 	
-	@When("the project leader requests projectInformation")
+	@When("the project leader requests project information")
 	public void theProjectLeaderRequestsProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 	    // Write code here that turns the phrase above into concrete actions
 	   prjData = projectPlanner.getProjectInformation(projectID, developerID);
 	}
 
-	@Then("the project leader have access to projectInformation")
-	public void theProjectLeaderHaveAccessToProjectInformation() {
-	    // Write code here that turns the phrase above into concrete actions
+	@Then("the project leader has access to the project information")
+	public void theProjectLeaderHasAccessToTheProjectInformation() {
 	    assertTrue(prjData != null);
 	}
 

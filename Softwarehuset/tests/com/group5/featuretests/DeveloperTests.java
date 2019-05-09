@@ -84,14 +84,15 @@ public class DeveloperTests {
 		project.setID(projectID);
 	    try{
 	    	project.setStartYear(year);
+	    	try{
+		    	projectPlanner.addProject(project, developerID);
+		    }catch (OperationNotAllowedException e){
+		    	errorMessageHolder.setErrorMessage(e.getMessage());
+		    }
 	    }catch (FormattingException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
-	    try{
-	    	projectPlanner.addProject(project, developerID);
-	    }catch (OperationNotAllowedException e){
-	    	errorMessageHolder.setErrorMessage(e.getMessage());
-	    }
+	    
 	}
 		
 	//Author: Casper (s163950)
@@ -182,21 +183,6 @@ public class DeveloperTests {
 	    } catch (NullObjectException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
-	}
-	
-
-
-
-	@When("the developer registers work hours {double} in week {int} and year {int} for the activity named {string}")
-	public void theDeveloperRegistersWorkHoursInWeekAndYearForTheActivityNamed(Double hours, Integer week, Integer year, String string) throws NullObjectException {
-	    // Write code here that turns the phrase above into concrete actions
-		 throw new cucumber.api.PendingException();
-	}
-
-	@Then("the developer has registered work hours {double} in week {int} and year {int} for the activity named {string}")
-	public void theDeveloperHasRegisteredWorkHoursInWeekAndYearForTheActivityNamed(Double double1, Integer int1, Integer int2, String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
 	}
 
 
