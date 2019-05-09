@@ -1,5 +1,7 @@
 package com.group5.projectplanner.app;
 
+import java.util.List;
+import java.util.ArrayList;
 //Author: Casper (s163950)
 public class NullProject extends AbstractProject{
 	
@@ -12,7 +14,7 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
-	public void setName(String name, Developer devLeader){}
+	public void setName(String name, DeveloperID developerID){}
 	
 	@Override
 	public String getName() { 
@@ -25,17 +27,17 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
-	public void setStartWeek(String start, Developer devLeader) throws NullObjectException {
+	public void setStartWeek(String start, DeveloperID developerID) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 	
 	@Override
-	public void setEndYear(String start, Developer devLeader) throws NullObjectException {
+	public void setEndYear(String start, DeveloperID developerID) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 	
 	@Override
-	public void setEndWeek(String start, Developer devLeader) throws NullObjectException {
+	public void setEndWeek(String start, DeveloperID developerID) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 	
@@ -46,7 +48,7 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
-	public prjData getProjectInformation(Developer devLeader) throws NullObjectException{
+	public prjData getProjectInformation(DeveloperID developerID) throws NullObjectException{
 		throw new NullObjectException("Project does not exist");
 	}
 	
@@ -75,17 +77,17 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
-	public void setProjectLeader(Developer developer) throws NullObjectException{
+	public void setProjectLeader(DeveloperID developerID) throws NullObjectException{
 		throw new NullObjectException("Project does not exist");
 	}
 	
 	@Override
-	public boolean isProjectLeader(Developer developer){
+	public boolean isProjectLeader(DeveloperID developerID){
 		return false;
 	}
 	
 	@Override
-	public void addProjectActivity(ProjectActivity projectActivity, Developer devLeader)
+	public void addProjectActivity(ProjectActivity projectActivity, DeveloperID developerID)
 			throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
@@ -97,18 +99,18 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
-	public void assignDeveloper(ActivityID activityID, Developer devLeader, Developer assignedDeveloper)
+	public void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer assignedDeveloper)
 			throws OperationNotAllowedException, NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 
 	@Override
-	public boolean checkDeveloperAssigned(ActivityID activityID, Developer assignedDeveloper) throws NullObjectException {
+	public boolean checkDeveloperAssigned(ActivityID activityID, DeveloperID assignedDeveloperID) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 
 	@Override
-	public void setExpectedHours(ActivityID activityID, Developer devLeader, String hours)
+	public void setExpectedHours(ActivityID activityID, DeveloperID developerID, String hours)
 			throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
@@ -119,33 +121,43 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
-	public void setActivityComplete(ActivityID activityID, Developer devLeader)
+	public void setActivityComplete(ActivityID activityID, DeveloperID developerID)
 			throws NullObjectException{
 		throw new NullObjectException("Project does not exist");
 	}
 
 	@Override
-	public void setActivityStartWeek(String week ,ActivityID activityID, Developer devLeader) throws NullObjectException {
+	public void setActivityStartWeek(String week ,ActivityID activityID, DeveloperID devLeader) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 	
 	@Override
-	public void setActivityStartYear(String week ,ActivityID activityID, Developer devLeader) throws NullObjectException {
+	public void setActivityStartYear(String week ,ActivityID activityID, DeveloperID devLeader) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 	
 	@Override
-	public void setActivityEndWeek(String week ,ActivityID activityID, Developer devLeader) throws NullObjectException {
+	public void setActivityEndWeek(String week ,ActivityID activityID, DeveloperID devLeader) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 	
 	@Override
-	public void setActivityEndYear(String week ,ActivityID activityID, Developer devLeader) throws NullObjectException {
+	public void setActivityEndYear(String week ,ActivityID activityID, DeveloperID devLeader) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 
 	@Override
 	public boolean isActivityComplete(ActivityID activityID) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+
+	@Override
+	public List<ProjectActivity> getIncompleteActivities(DeveloperID developerID) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+	
+	@Override
+	public Activity getProjectActivity(ActivityID activityID) throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 	
@@ -167,6 +179,11 @@ public class NullProject extends AbstractProject{
 	
 	@Override
 	public int getActivityEndYear(ActivityID activityID) throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
+	
+	@Override
+	public DeveloperID getProjectLeader() throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
 	

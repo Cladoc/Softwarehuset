@@ -2,7 +2,7 @@ package com.group5.projectplanner.app;
 
 public class prjData {
 	private ProjectID projectID = new ProjectID();
-	private Developer leader;
+	private DeveloperID leader;
 	private int startYear;
 	private int startWeek;
 	private int endYear = 3000;
@@ -23,10 +23,10 @@ public class prjData {
 	public void setStartYear(int startYear) {
 		this.startYear = startYear;
 	}
-	public Developer getLeader() {
+	public DeveloperID getLeader() {
 		return leader;
 	}
-	public void setLeader(Developer leader) {
+	public void setLeader(DeveloperID leader) {
 		this.leader = leader;
 	}
 	public int getStartWeek() {

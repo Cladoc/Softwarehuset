@@ -30,7 +30,7 @@ public class NullActivity extends Activity {
 	}
 
 	@Override
-	public boolean checkDeveloperAssigned(Developer assignedDeveloper) throws NullObjectException {
+	public boolean checkDeveloperAssigned(DeveloperID assignedDeveloperID) throws NullObjectException {
 		throw new NullObjectException("Activity does not exist");
 	}
 

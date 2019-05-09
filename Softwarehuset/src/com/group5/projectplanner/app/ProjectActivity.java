@@ -56,14 +56,10 @@ public class ProjectActivity extends Activity {
 	}
 
 	public void assignDeveloper(Developer assignedDeveloper) throws OperationNotAllowedException {
-		if (!developers.checkDeveloperExists(assignedDeveloper)) {
-			developers.addDeveloper(assignedDeveloper);
-		} else {
-			throw new OperationNotAllowedException("Developer already assigned");
-		}
+		developers.addDeveloper(assignedDeveloper);
 	}
 
-	public boolean checkDeveloperAssigned(Developer assignedDeveloper) {
+	public boolean checkDeveloperAssigned(DeveloperID assignedDeveloper) {
 		return developers.checkDeveloperExists(assignedDeveloper);
 	}
 
@@ -153,6 +149,8 @@ public class ProjectActivity extends Activity {
 	public void setActivityEndYear(String year) throws FormattingException, NumberFormatException {
 		int number = 0;
 		boolean x = (this.startYear == number && this.startWeek <= this.endWeek) || this.startYear < number;
+		System.out.println("valid date? "+ x);
+		System.out.println("startuge" +this.startWeek+ "starår:" +this.startYear+"slutuge"+this.endWeek+"slutår"+ this.endYear);
 		try {
 			number = Integer.valueOf(year);
 		} catch (NumberFormatException e) {
@@ -184,5 +182,7 @@ public class ProjectActivity extends Activity {
 	public int getActivityEndYear() {
 		return this.endYear;
 	}
+
+
 
 }
