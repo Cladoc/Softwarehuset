@@ -30,11 +30,11 @@ public class Developer extends abstractDeveloper{
 	
 	public double getHours(int week, int year) {
 		double temp = 0;
-		hoursWorked.forEach(hoursWorked ->{
-			if(hoursWorked.getWeek() == week && hoursWorked.getYear() == year) {
-				System.out.println(hoursWorked.getHours());
+		for(int i = 0; i < hoursWorked.size(); i++) {
+			if(hoursWorked.get(i).getWeek() == week && hoursWorked.get(i).getYear() == year ) {
+				temp += hoursWorked.get(i).getHours();
 			}
-		});
+		}
 		return temp;
 	}
 	
