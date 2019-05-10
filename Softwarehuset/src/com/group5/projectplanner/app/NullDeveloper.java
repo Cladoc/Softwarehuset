@@ -10,7 +10,7 @@ public class NullDeveloper extends abstractDeveloper {
 	}
 	
 	@Override
-	public void registerHours(int week, int year, double hours, Activity activity) throws NullObjectException {
+	public void registerHours(String week, String year, String hours, Activity activity) throws FormattingException ,NullObjectException {
 		throw new NullObjectException("Activity does not exist");
 	}
 	

@@ -14,7 +14,7 @@ public class ProjectPlanner {
 	private ProjectRepository projectsRepo = new ProjectRepository();
 	String invalidID = "Invalid ID";
 	
-	public void registerHours(int week, int year, double hours, ActivityID activityID, DeveloperID developerID, ProjectID projectID) throws NullObjectException {
+	public void registerHours(String week, String year, String hours, ActivityID activityID, DeveloperID developerID, ProjectID projectID) throws NullObjectException, FormattingException {
 		abstractDeveloper dev = devRepo.getDeveloper(developerID);
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);		
 		dev.registerHours(week, year, hours, proj.getProjectActivity(activityID));
