@@ -2,6 +2,8 @@ package com.group5.projectplanner.app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ProjectActivity extends Activity {
 	private ActivityID activityID = new ActivityID();
@@ -32,8 +34,16 @@ public class ProjectActivity extends Activity {
 	}
 
 	@Override
-	public void setName(String name) {
-		this.activityID.setName(name);
+	public void setName(String name) throws FormattingException {
+		String regex = "\\A[a-zA-Z].*";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(name);
+		boolean b = matcher.matches();
+		if(b) {
+			this.activityID.setName(name);
+		}else {
+			throw new FormattingException("An invalid activity name was entered");
+		}
 	}
 
 	@Override

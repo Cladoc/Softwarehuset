@@ -345,8 +345,19 @@ public class Project extends AbstractProject {
 	}
 
 	@Override
-	public void setActivityName(ActivityID activityID, String string) throws NullObjectException {
-		Activity abstractActivity = activityRepo.getActivity(activityID);
-		abstractActivity.setName(string);		
+	public void setActivityName(ActivityID activityID, String name, DeveloperID developerID) 
+			throws NullObjectException, FormattingException, OperationNotAllowedException {
+		if (isProjectLeader(developerID)) {
+			ActivityID idToTest = new ActivityID();
+			idToTest.setName(name);
+			if(!activityRepo.checkActivityExists(idToTest)){
+				Activity abstractActivity = activityRepo.getActivity(activityID);
+				abstractActivity.setName(name);
+			} else {
+				throw new OperationNotAllowedException("Activity name already existing");
+			}
+		} else {
+			throw new OperationNotAllowedException(IDNotLeader);
+		}
 	}
 }

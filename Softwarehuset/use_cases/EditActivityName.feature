@@ -8,29 +8,30 @@ And an activity with the name "ActivityTest" is added to the project
 When the project leader sets activity name to "TestName"
 Then the activity has the name "TestName"
 
-Scenario: Give an invalid activity name 
+#Nedestående scenarier skal også ind i EditProjectName
+
+Scenario: Give an invalid activity name 	#Dette fejl scenarium er ikke i create activity
 Given a developer is project leader on a project registered in the project planner
 And an activity with the name "ActivityTest" is added to the project
-#When the project leader sets an invalid activity name of "1TestName"
-#Then the project leader gets the error message "An invalid activity name was entered"
+When the project leader sets an invalid activity name of "1TestName"
+Then he gets the error message "An invalid activity name was entered" 
 
-#Nedestående scenarier skal også ind i EditProjectName 
+Scenario: Failure when editing an activity name to a name already existing
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+And an activity with the name "TestName" is added to the project
+When the project leader sets the activity "ActivityTest" name to "TestName"
+Then he gets the error message "Activity name already existing"
 
-#Scenario: Failure when editing an activity name to a name already existing
-#Given a developer is project leader on a project registered in the project planner
-#And an activity with the name "ActivityTest" is added to the project
-#And an activity with the name "TestName" is added to the project
-#When the project leader sets activity "ActivityTest" name to "TestName"
-#Then the project leader gets the error message "Activity name already existing"
+Scenario: Developer is not project leader
+Given that a developer is registered in the project planner
+And a project is registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+And that he is not project leader on the project
+When the developer sets activity name to "TestName"
+Then he gets the error message "ID not project leader"
 
-#Scenario: Developer is not project leader
-#Given that a developer is registered in the project planner
-#And a project is registered in the project planner
-#And that he is not project leader on the project
-#And an activity with the name "ActivityTest" is added to the project
-#When the developer sets activity name to "TestName"
-
-#Disse scenarier mangler i en masse use cases så burde skippes men kommenteres i rapporten
+#Nedenstående scenarier mangler i en masse use cases så burde skippes men kommenteres i rapporten
 
 #Scenario: Project does not exist
 #Given a project does not exist

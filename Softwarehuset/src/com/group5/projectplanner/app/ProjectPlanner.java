@@ -286,9 +286,14 @@ public class ProjectPlanner {
 		return proj.getActivityEndWeek(activityID);
 	}
 
-	public void setActivityName(ActivityID activityID, ProjectID projectID, String string) throws NullObjectException {
-		AbstractProject proj = projectsRepo.getProjectRef(projectID);
-		proj.setActivityName(activityID, string);
+	public void setActivityName(ActivityID activityID, ProjectID projectID, String name, DeveloperID developerID) 
+			throws NullObjectException, FormattingException, OperationNotAllowedException {
+		if (checkDeveloperExist(developerID)) {
+			AbstractProject proj = projectsRepo.getProjectRef(projectID);
+			proj.setActivityName(activityID, name, developerID);
+		}else{
+			throw new OperationNotAllowedException(invalidID);
+		}
 	}
 	
 	

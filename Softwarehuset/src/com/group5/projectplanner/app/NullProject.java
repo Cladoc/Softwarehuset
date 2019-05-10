@@ -190,7 +190,7 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
-	public void setActivityName(ActivityID activityID, String string) throws NullObjectException {
+	public void setActivityName(ActivityID activityID, String name, DeveloperID developerID) throws NullObjectException {
 		throw new NullObjectException(projNotExist);
 		
 	}

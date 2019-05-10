@@ -107,7 +107,7 @@ public class LeaderTests {
 	// Author: Casper (s163950)
 	@When("the project leader adds an activity with the name {string} again")
 	public void theProjectLeaderAddsAnActivityWithTheNameAgain(String name)
-			throws NullObjectException, OperationNotAllowedException {
+			throws NullObjectException, OperationNotAllowedException, FormattingException {
 		ProjectActivity projectActivity2 = new ProjectActivity();
 		projectActivity2.setName(name);
 		try {
@@ -123,6 +123,7 @@ public class LeaderTests {
 		project = projectHelper.getProject();
 		projectID = project.getID();
 		devLeader = developerHelper.getDeveloper();
+		devleaderID = devLeader.getDeveloperID();
 		assertFalse(projectPlanner.isProjectLeader(projectID, developerID));
 	}
 
@@ -430,7 +431,7 @@ public class LeaderTests {
 	public void theProjectLeaderRequestsAListOfIncompleteActivities() 
 			throws OperationNotAllowedException, NullObjectException {
 		try {
-			incompleteActivities = projectPlanner.getIncompleteActivities(projectID, devLeader.getDeveloperID());
+			incompleteActivities = projectPlanner.getIncompleteActivities(projectID, devleaderID);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -459,7 +460,7 @@ public class LeaderTests {
 			   activityID.setName("Activity " + i);
 			   projectActivity.setID(activityID);
 			   projectActivity.setActivityComplete();
-			   projectPlanner.addProjectActivity(projectActivity, projectID, devLeader.getDeveloperID());
+			   projectPlanner.addProjectActivity(projectActivity, projectID, devleaderID);
 		   }
 	}
 	
@@ -467,8 +468,9 @@ public class LeaderTests {
 	
 	//Anders (s163952)
 	@When("the project leader sets activity name to {string}")
-	public void theProjectLeaderSetsActivityNameTo(String string) throws NullObjectException {
-		projectPlanner.setActivityName(activityID, projectID, string);
+	public void theProjectLeaderSetsActivityNameTo(String name) 
+			throws NullObjectException, FormattingException, OperationNotAllowedException {
+		projectPlanner.setActivityName(activityID, projectID, name, devleaderID);
 	}
 	
 	@Then("the activity has the name {string}")
@@ -476,6 +478,38 @@ public class LeaderTests {
 		activityID = new ActivityID();
 		activityID.setName(string);
 		assertTrue(projectPlanner.checkActivityExists(activityID, projectID));
+	}
+	
+	@When("the project leader sets an invalid activity name of {string}")
+	public void theProjectLeaderSetsAnInvalidActivityNameOf(String string) 
+			throws NullObjectException, FormattingException, OperationNotAllowedException {
+		try {
+			projectPlanner.setActivityName(activityID, projectID, string, devleaderID);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+		
+	}
+	
+	@When("the project leader sets the activity {string} name to {string}")
+	public void theProjectLeaderSetsTheActivityNameTo(String name, String name2) 
+			throws NullObjectException, FormattingException, OperationNotAllowedException {
+	    ActivityID activityID = new ActivityID();
+	    activityID.setName(name);
+	    try {
+			projectPlanner.setActivityName(activityID, projectID, name2, devleaderID);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("the developer sets activity name to {string}")
+	public void theDeveloperSetsActivityNameTo(String name) throws NullObjectException, FormattingException {
+		try {
+			projectPlanner.setActivityName(activityID, projectID, name, devleaderID);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
 }
