@@ -1,6 +1,6 @@
 package com.group5.projectplanner.app;
 
-public abstract class abstractDeveloper {
+public abstract class AbstractDeveloper {
 
 	public abstract void setName(String name);
 	public abstract String getName();	

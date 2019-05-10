@@ -1,6 +1,6 @@
 package com.group5.projectplanner.app;
 
-public class NullDeveloper extends abstractDeveloper {
+public class NullDeveloper extends AbstractDeveloper {
 	
 	@Override
 	public void setName(String name) {}

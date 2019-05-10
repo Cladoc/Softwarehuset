@@ -3,7 +3,7 @@ package com.group5.projectplanner.app;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Developer extends abstractDeveloper{
+public class Developer extends AbstractDeveloper{
 	private DeveloperID developerID  = new DeveloperID();
 	private List<WorkHours> hoursWorked = new ArrayList<WorkHours>();
 	
