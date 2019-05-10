@@ -15,4 +15,14 @@ public class DeveloperID {
 	public String getName(){
 		return this.name;
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		if(obj instanceof DeveloperID){
+			DeveloperID idToTest = (DeveloperID) obj;
+			return this.name.equals(idToTest.getName());
+		}else{
+			return false;
+		}
+	}
 }

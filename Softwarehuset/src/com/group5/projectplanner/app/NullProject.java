@@ -186,6 +186,11 @@ public class NullProject extends AbstractProject{
 	public DeveloperID getProjectLeader() throws NullObjectException {
 		throw new NullObjectException("Project does not exist");
 	}
+
+	@Override
+	public List<ActivityID> getActivityIDs() throws NullObjectException {
+		throw new NullObjectException("Project does not exist");
+	}
 	
 
 	

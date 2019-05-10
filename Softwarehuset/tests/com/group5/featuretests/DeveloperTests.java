@@ -5,6 +5,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import static org.junit.Assert.assertFalse;
 import com.group5.projectplanner.app.*;
 
@@ -13,8 +16,11 @@ public class DeveloperTests {
 	Developer developer;
 	ProjectActivity projectActivity;
 	Project project;
+	Project project2; 
 	ProjectID projectID;
+	ProjectID projectID2; 
 	DeveloperID developerID;
+	List<ProjectID> projectIDs;
 	ActivityID activityID;
 	ErrorMessageHolder errorMessageHolder;
 	ProjectHelper projectHelper;
@@ -94,12 +100,51 @@ public class DeveloperTests {
 	    }
 	    
 	}
+	
+	@When("the developer adds another project with the name {string} and start year of {string}")
+	public void theDeveloperAddsAnotherProjectWithTheNameAndStartYearOf(String name, String year) throws Exception, NullObjectException {
+		project2 = new Project();
+		projectID2 = new ProjectID(name);
+		project2.setID(projectID2);
+	    try{
+	    	project2.setStartYear(year);
+	    	try{
+		    	projectPlanner.addProject(project2, developerID);
+		    }catch (OperationNotAllowedException e){
+		    	errorMessageHolder.setErrorMessage(e.getMessage());
+		    }
+	    }catch (FormattingException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	}
+	
+	@Then("the projects are added to the project planner")
+	public void theProjectsAreAddedToTheProjectPlanner() {
+		/*
+		projectIDs = projectPlanner.getProjectIDs();
+		for(ProjectID projectIDs : projectNameList){
+			
+			assertTrue(projectIDs.getStartYear()== "2020");
+			assertTrue(projectPlanner.checkProjectExist(projectIDs));
+			System.out.println("I'm here1");
+			System.out.println(k + ". Project name: " + "\"" + projectID.getName() + "\"");
+		}
+		*/
+
+		assertTrue(project.getName().equals("Robot Software"));
+		assertTrue(project.getStartYear()== 2020);
+		assertTrue(projectPlanner.checkProjectExist(projectID));
+		assertTrue(project2.getName().equals("Robot Software II"));
+		assertTrue(project2.getStartYear()== 2020);
+		assertTrue(projectPlanner.checkProjectExist(projectID2));
+	}
 		
 	//Author: Casper (s163950)
 	@Then("the project with the name {string} and start year of {int} is added to the project planner")
 	public void theProjectWithTheNameAndStartYearOfIsAddedToTheProjectPlanner(String name, int year) {
 	    assertTrue(project.getName().equals(name));
 		assertTrue(project.getStartYear()==year);
+		
 		assertTrue(projectPlanner.checkProjectExist(projectID));
 	}
 

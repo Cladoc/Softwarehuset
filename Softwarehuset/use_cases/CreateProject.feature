@@ -7,6 +7,12 @@ Given that a developer is registered in the project planner
 When the developer adds a project with the name "Robot Software" and start year of "2020"  
 Then the project with the name "Robot Software" and start year of 2020 is added to the project planner
 
+Scenario: Create multiple projects successfully
+Given that a developer is registered in the project planner
+When the developer adds a project with the name "Robot Software" and start year of "2020"
+And the developer adds another project with the name "Robot Software II" and start year of "2020"
+Then the projects are added to the project planner
+
 Scenario: Add a project with letters for date  
 Given that a developer is registered in the project planner
 When the developer adds a project with the name "Robot Software" and start year of "abc"

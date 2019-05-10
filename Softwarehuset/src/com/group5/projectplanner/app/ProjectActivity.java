@@ -107,7 +107,6 @@ public class ProjectActivity extends Activity {
 			throw new FormattingException("An invalid start date was entered");
 		}
 		this.startWeek = number;
-
 	}
 
 	public void setActivityStartYear(String year) throws FormattingException, NumberFormatException {
@@ -148,9 +147,6 @@ public class ProjectActivity extends Activity {
 
 	public void setActivityEndYear(String year) throws FormattingException, NumberFormatException {
 		int number = 0;
-		boolean x = (this.startYear == number && this.startWeek <= this.endWeek) || this.startYear < number;
-		System.out.println("valid date? "+ x);
-		System.out.println("startuge" +this.startWeek+ "starår:" +this.startYear+"slutuge"+this.endWeek+"slutår"+ this.endYear);
 		try {
 			number = Integer.valueOf(year);
 		} catch (NumberFormatException e) {

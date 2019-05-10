@@ -280,6 +280,16 @@ public class ProjectPlanner {
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);
 		return proj.getActivityEndWeek(activityID);
 	}
+
+	public List<ProjectID> getProjectIDs() {
+		return projectsRepo.getProjectIDs();
+	}
+
+	public List<ActivityID> getActivityIDs(ProjectID selectedProjectID, DeveloperID signedInDeveloperID) throws NullObjectException {
+		AbstractProject proj = projectsRepo.getProjectRef(selectedProjectID);
+		return proj.getActivityIDs();
+		
+	}
 	
 	
 	

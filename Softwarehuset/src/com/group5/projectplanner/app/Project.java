@@ -7,10 +7,10 @@ public class Project extends AbstractProject {
 	private ProjectID projectID = new ProjectID();
 	
 	private DeveloperID leader;
-	private int startYear;
-	private int startWeek;
+	private int startYear = 1989;
+	private int startWeek = 1;
 	private int endYear = 3000;
-	private int endWeek;
+	private int endWeek = 52;
 	
 	//Strings used in error message
 	private String invalidProjectName = "An invalid project name was entered";
@@ -69,7 +69,7 @@ public class Project extends AbstractProject {
 			{
 				throw new FormattingException(incorrectDate);
 			}
-			if(this.endYear < number) {
+			if((this.endYear < number) || (this.endYear == number && this.startWeek > this.endWeek)) {
 				throw new FormattingException(invalidStartDate);
 			}
 			this.startYear = number;
@@ -85,7 +85,7 @@ public class Project extends AbstractProject {
 			int number = 0;
 			try{
 				number = Integer.parseInt(start);
-				if(number < 1 || number > 54)
+				if(number < 1 || number > 52)
 				{
 					throw new FormattingException(incorrectDate);
 				}
@@ -110,7 +110,7 @@ public class Project extends AbstractProject {
 				{
 					throw new FormattingException(incorrectDate);
 				}
-				if(this.startYear > number) {
+				if((this.startYear > number) || (this.startYear == number && this.startWeek > this.endWeek)) {
 					throw new FormattingException(invalidEndDate);
 				}
 				this.endYear = number;
@@ -127,7 +127,7 @@ public class Project extends AbstractProject {
 		if(isProjectLeader(developerID)){
 			try{
 				int number = Integer.parseInt(start);
-				if(number < 1 || number > 54 )
+				if(number < 1 || number > 52 )
 				{
 					throw new FormattingException(incorrectDate);
 				}
@@ -337,4 +337,9 @@ public class Project extends AbstractProject {
 		Activity abstractActivity = activityRepo.getActivity(activityID);
 		return abstractActivity.getActivityEndYear();
 	}
+	
+	public List<ActivityID> getActivityIDs() {
+		return activityRepo.getActivityIDs();
+	}
+	
 }

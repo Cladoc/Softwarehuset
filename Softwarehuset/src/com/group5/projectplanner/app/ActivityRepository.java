@@ -43,4 +43,12 @@ public class ActivityRepository {
 		}
 		return incompleteActivities;
 	}
+
+	public List<ActivityID> getActivityIDs() {
+		List<ActivityID> activityIDs = new ArrayList<>(); 
+		for(ProjectActivity listActivity : projectActivities){
+			activityIDs.add(listActivity.getID());
+		}
+		return activityIDs;
+	}
 }

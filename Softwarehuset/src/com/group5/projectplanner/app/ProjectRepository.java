@@ -52,4 +52,12 @@ public class ProjectRepository {
 		serial++;
 		return projectID;
 	}
+
+	public List<ProjectID> getProjectIDs() {
+		List<ProjectID> projectIDs = new ArrayList<>(); 
+		for(Project listProject : projects){
+			projectIDs.add(listProject.getID());
+		}
+		return projectIDs;
+	}
 }
