@@ -1,6 +1,6 @@
 package com.group5.projectplanner.app;
 
-public class NullActivity extends Activity {
+public class NullActivity extends AbstractActivity {
 	
 	private String activNotExist = "Activity does not exist";
 	

@@ -15,13 +15,13 @@ public class ProjectPlanner {
 	String invalidID = "Invalid ID";
 	
 	public void registerHours(int week, int year, double hours, ActivityID activityID, DeveloperID developerID, ProjectID projectID) throws NullObjectException {
-		abstractDeveloper dev = devRepo.getDeveloper(developerID);
+		AbstractDeveloper dev = devRepo.getDeveloper(developerID);
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);		
 		dev.registerHours(week, year, hours, proj.getProjectActivity(activityID));
 	}
 	
 	public double getHours(int week, int year, DeveloperID developerID) throws NullObjectException {
-		abstractDeveloper dev = devRepo.getDeveloper(developerID);
+		AbstractDeveloper dev = devRepo.getDeveloper(developerID);
 		return dev.getHours(week, year);
 	}
 	
@@ -73,7 +73,7 @@ public class ProjectPlanner {
 	}
 
 	//Author: Casper (s163950)
-	public void addProjectActivity(ProjectActivity projectActivity, ProjectID projectID, DeveloperID developerID) throws NullObjectException, OperationNotAllowedException {
+	public void addProjectActivity(Activity projectActivity, ProjectID projectID, DeveloperID developerID) throws NullObjectException, OperationNotAllowedException {
 		if(checkDeveloperExist(developerID)){
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.addProjectActivity(projectActivity, developerID);
@@ -215,7 +215,7 @@ public class ProjectPlanner {
 		}
 	}
 
-	public List<ProjectActivity> getIncompleteActivities(ProjectID projectID, DeveloperID developerID) 
+	public List<Activity> getIncompleteActivities(ProjectID projectID, DeveloperID developerID) 
 			throws OperationNotAllowedException, NullObjectException {		
 		if (checkDeveloperExist(developerID)) {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);

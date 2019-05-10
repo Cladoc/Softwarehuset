@@ -3,9 +3,9 @@ package com.group5.projectplanner.app;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Developer extends abstractDeveloper{
+public class Developer extends AbstractDeveloper{
 	private DeveloperID developerID  = new DeveloperID();
-	private List<workHours> hoursWorked = new ArrayList<workHours>();
+	private List<WorkHours> hoursWorked = new ArrayList<WorkHours>();
 	
 	public void setName(String name) {
 		this.developerID.setName(name);
@@ -19,8 +19,8 @@ public class Developer extends abstractDeveloper{
 		return this.developerID;
 	}
 	
-	public void registerHours(int week, int year, double hours, Activity activity) {
-		workHours workHours = new workHours();
+	public void registerHours(int week, int year, double hours, AbstractActivity activity) {
+		WorkHours workHours = new WorkHours();
 		workHours.setWeek(week);
 		workHours.setYear(year);
 		workHours.setHours(hours);

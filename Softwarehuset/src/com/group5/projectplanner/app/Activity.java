@@ -1,24 +1,194 @@
 package com.group5.projectplanner.app;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public abstract class Activity {
-	
-	public abstract void setName(String name) throws FormattingException;
-	public abstract String getName();
-	public abstract boolean isNil();
-	public abstract boolean equals(Object obj);
-	public abstract void assignDeveloper(Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException;
-	public abstract boolean checkDeveloperAssigned(DeveloperID assignedDeveloper) throws NullObjectException;
-	public abstract void setExpectedWorkHours(String hours) throws NullObjectException, FormattingException;
-	public abstract double getExpectedWorkHours() throws NullObjectException;
-	public abstract void setActivityComplete() throws NullObjectException;
-	public abstract boolean isActivityComplete() throws NullObjectException;
-	public abstract void setActivityStartWeek(String week) throws NullObjectException, FormattingException;
-	public abstract void setActivityStartYear(String year) throws NullObjectException, FormattingException;
-	public abstract void setActivityEndWeek(String week) throws NullObjectException, FormattingException;
-	public abstract void setActivityEndYear(String year) throws NullObjectException, FormattingException;
-	public abstract int getActivityStartWeek() throws NullObjectException;
-	public abstract int getActivityStartYear() throws NullObjectException;
-	public abstract int getActivityEndWeek() throws NullObjectException;
-	public abstract int getActivityEndYear() throws NullObjectException;
+public class Activity extends AbstractActivity {
+	private ActivityID activityID = new ActivityID();
+	private DeveloperRepository developers = new DeveloperRepository();
+	private Project parentProject;
+	private double totalExpectedHours;
+	private boolean complete;
+	private int startWeek = 1;
+	private int startYear = 0;
+	private int endWeek = 52;
+	private int endYear = 3000;
+
+	public Activity() {
+	}
+
+	public Activity(ActivityID activityID) {
+		this.activityID = activityID;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof AbstractActivity) {
+			AbstractActivity act = (AbstractActivity) obj;
+			return this.activityID.getName().equalsIgnoreCase(act.getName());
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public void setName(String name) throws FormattingException {
+		String regex = "\\A[a-zA-Z].*";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(name);
+		boolean b = matcher.matches();
+		if(b) {
+			this.activityID.setName(name);
+		}else {
+			throw new FormattingException("An invalid activity name was entered");
+		}
+	}
+
+	@Override
+	public String getName() {
+		return this.activityID.getName();
+	}
+
+	public void setID(ActivityID activityID) {
+		this.activityID = activityID;
+	}
+
+	public ActivityID getID() {
+		return this.activityID;
+	}
+
+	@Override
+	public boolean isNil() {
+		return false;
+	}
+
+	public void assignDeveloper(Developer assignedDeveloper) throws OperationNotAllowedException {
+		developers.addDeveloper(assignedDeveloper);
+	}
+
+	public boolean checkDeveloperAssigned(DeveloperID assignedDeveloper) {
+		return developers.checkDeveloperExists(assignedDeveloper);
+	}
+
+	public void setExpectedWorkHours(String hours) throws FormattingException {
+		try {
+			this.totalExpectedHours = Double.valueOf(hours);
+		} catch (NumberFormatException e) {
+			throw new FormattingException("Work hours incorrect format");
+		}
+	}
+
+	public double getExpectedWorkHours() {
+		return this.totalExpectedHours;
+	}
+
+	public void setActivityComplete() {
+		this.complete = true;
+	}
+
+	public boolean isActivityComplete() {
+		return this.complete;
+	}
+
+	public void setParentProject(Project parentProject) {
+		this.parentProject = parentProject;
+	}
+
+	public boolean matches(ActivityID activityID) {
+		return this.activityID.getName().equalsIgnoreCase(activityID.getName());
+	}
+
+	public void setActivityStartWeek(String week) throws FormattingException, NumberFormatException {
+		int number = 0;
+		try {
+			number = Integer.valueOf(week);
+
+		} catch (NumberFormatException e) {
+			throw new FormattingException("Incorrect date format");
+		}
+		if (number <= 1 || number >= 53) {
+
+			throw new FormattingException("Incorrect date format");
+		}
+		if (!((this.startYear == this.endYear && number <= this.endWeek) || this.startYear < this.endYear)) {
+			throw new FormattingException("An invalid start date was entered");
+		}
+		this.startWeek = number;
+
+	}
+
+	public void setActivityStartYear(String year) throws FormattingException, NumberFormatException {
+		int number = 0;
+		try {
+			number = Integer.valueOf(year);
+		} catch (NumberFormatException e) {
+			throw new FormattingException("Incorrect date format");
+		}
+		if (number < 1000 || number > 9999) {
+			throw new FormattingException("Incorrect date format");
+		}
+		if (!((number == this.endYear && this.startWeek <= this.endWeek) || number < this.endYear)) {
+			throw new FormattingException("An invalid start date was entered");
+		}
+		this.startYear = number;
+	}
+
+	public void setActivityEndWeek(String week) throws FormattingException, NumberFormatException {
+		int number = 0;
+		try {
+			number = Integer.valueOf(week);
+
+		} catch (NumberFormatException e) {
+			throw new FormattingException("Incorrect date format");
+		}
+
+		if (number < 1 || number > 52) {
+			throw new FormattingException("Incorrect date format");
+		}
+		if (((this.startYear == this.endYear && this.startWeek <= number) || this.startYear < this.endYear)) {
+			this.endWeek = number;
+		}else {
+			throw new FormattingException("An invalid end date was entered");
+		}
+
+	}
+
+	public void setActivityEndYear(String year) throws FormattingException, NumberFormatException {
+		int number = 0;
+		try {
+			number = Integer.valueOf(year);
+		} catch (NumberFormatException e) {
+			throw new FormattingException("Incorrect date format");
+		}
+		if (number < 1000 || number > 9999) {
+			throw new FormattingException("Incorrect date format");
+		}
+		if (((this.startYear == number && this.startWeek <= this.endWeek) || this.startYear < number)) {
+			this.endYear = number;
+		}else {
+			throw new FormattingException("An invalid end date was entered");
+		}
+		
+	}
+
+	public int getActivityStartWeek() {
+		return this.startWeek;
+	}
+
+	public int getActivityStartYear() {
+		return this.startYear;
+	}
+
+	public int getActivityEndWeek() {
+		return this.endWeek;
+	}
+
+	public int getActivityEndYear() {
+		return this.endYear;
+	}
+
+
+
 }

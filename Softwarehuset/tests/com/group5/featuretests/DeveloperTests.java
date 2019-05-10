@@ -11,7 +11,7 @@ import com.group5.projectplanner.app.*;
 public class DeveloperTests {
 	ProjectPlanner projectPlanner;
 	Developer developer;
-	ProjectActivity projectActivity;
+	Activity projectActivity;
 	Project project;
 	ProjectID projectID;
 	DeveloperID developerID;

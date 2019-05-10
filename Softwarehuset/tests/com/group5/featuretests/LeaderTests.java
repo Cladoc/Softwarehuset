@@ -8,7 +8,7 @@ import com.group5.projectplanner.app.FormattingException;
 import com.group5.projectplanner.app.NullObjectException;
 import com.group5.projectplanner.app.Project;
 import com.group5.projectplanner.app.ProjectID;
-import com.group5.projectplanner.app.ProjectActivity;
+import com.group5.projectplanner.app.Activity;
 import com.group5.projectplanner.app.ActivityID;
 import com.group5.projectplanner.app.OperationNotAllowedException;
 
@@ -33,12 +33,12 @@ public class LeaderTests {
 	ProjectData prjData;
 	Project project;
 	ProjectID projectID;
-	ProjectActivity projectActivity;
+	Activity projectActivity;
 	ActivityID activityID;
 	DeveloperID developerID;
 	DeveloperID devleaderID;
 	String projectInformation;
-	List<ProjectActivity> incompleteActivities;
+	List<Activity> incompleteActivities;
 
 	public LeaderTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder,
 			ProjectHelper projectHelper, DeveloperHelper developerHelper) {
@@ -71,7 +71,7 @@ public class LeaderTests {
 			throws NullObjectException, OperationNotAllowedException {
 		activityID = new ActivityID();
 		activityID.setName(name);
-		projectActivity = new ProjectActivity(activityID);
+		projectActivity = new Activity(activityID);
 		assertTrue(projectActivity.getName().equals(name));
 		projectPlanner.addProjectActivity(projectActivity, projectID, devleaderID);
 	}
@@ -90,7 +90,7 @@ public class LeaderTests {
 			throws NullObjectException, OperationNotAllowedException, Exception, FormattingException {
 		activityID = new ActivityID();
 		activityID.setName(name);
-		projectActivity = new ProjectActivity(activityID);
+		projectActivity = new Activity(activityID);
 		devLeader = new Developer();
 		devLeader.setName("abcd");
 		projectID = new ProjectID("Test");
@@ -108,7 +108,7 @@ public class LeaderTests {
 	@When("the project leader adds an activity with the name {string} again")
 	public void theProjectLeaderAddsAnActivityWithTheNameAgain(String name)
 			throws NullObjectException, OperationNotAllowedException, FormattingException {
-		ProjectActivity projectActivity2 = new ProjectActivity();
+		Activity projectActivity2 = new Activity();
 		projectActivity2.setName(name);
 		try {
 			projectPlanner.addProjectActivity(projectActivity2, projectID, devleaderID);
@@ -418,7 +418,7 @@ public class LeaderTests {
 	public void thereIsRegisteredIncompleteActivity(Integer int1) 
 			throws NullObjectException, OperationNotAllowedException {
 	   for (int i = 0; i<int1.intValue(); i++) {
-		   projectActivity = new ProjectActivity();
+		   projectActivity = new Activity();
 		   activityID = new ActivityID();
 		   activityID.setName("Activity " + i);
 		   projectActivity.setID(activityID);
@@ -455,7 +455,7 @@ public class LeaderTests {
 	@Given("there is registered {int} complete activities in the project")
 	public void thereIsRegisteredCompleteActivitiesInTheProject(Integer int1) throws NullObjectException, OperationNotAllowedException {
 		for (int i = 0; i<int1.intValue(); i++) {
-			   projectActivity = new ProjectActivity();
+			   projectActivity = new Activity();
 			   activityID = new ActivityID();
 			   activityID.setName("Activity " + i);
 			   projectActivity.setID(activityID);

@@ -1,6 +1,6 @@
 package com.group5.projectplanner.app;
 
-public class NullDeveloper extends abstractDeveloper {
+public class NullDeveloper extends AbstractDeveloper {
 	
 	@Override
 	public void setName(String name) {}
@@ -10,7 +10,7 @@ public class NullDeveloper extends abstractDeveloper {
 	}
 	
 	@Override
-	public void registerHours(int week, int year, double hours, Activity activity) throws NullObjectException {
+	public void registerHours(int week, int year, double hours, AbstractActivity activity) throws NullObjectException {
 		throw new NullObjectException("Activity does not exist");
 	}
 	

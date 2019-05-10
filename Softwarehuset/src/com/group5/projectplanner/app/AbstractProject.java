@@ -22,7 +22,7 @@ public abstract class AbstractProject {
 	public abstract boolean isNil();
 	public abstract void setProjectLeader(DeveloperID developerID) throws NullObjectException;
 	public abstract boolean isProjectLeader(DeveloperID developerID);
-	public abstract void addProjectActivity(ProjectActivity projectActivity, DeveloperID developerID) throws OperationNotAllowedException, NullObjectException;
+	public abstract void addProjectActivity(Activity projectActivity, DeveloperID developerID) throws OperationNotAllowedException, NullObjectException;
 	public abstract boolean checkActivityExists(ActivityID activityID) throws NullObjectException;
 	public abstract void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException;
 	public abstract boolean checkDeveloperAssigned(ActivityID activityID, DeveloperID assignedDeveloperID) throws OperationNotAllowedException, NullObjectException;
@@ -31,8 +31,8 @@ public abstract class AbstractProject {
 	public abstract void setActivityComplete(ActivityID activityID, DeveloperID developerID) throws NullObjectException, OperationNotAllowedException;
 	public abstract boolean isActivityComplete(ActivityID activityID) throws NullObjectException;
 	public abstract ProjectData getProjectInformation(DeveloperID developerID) throws OperationNotAllowedException, NullObjectException;
-	public abstract Activity getProjectActivity(ActivityID activityID) throws NullObjectException;
-	public abstract List<ProjectActivity> getIncompleteActivities(DeveloperID developerID) throws NullObjectException, OperationNotAllowedException;
+	public abstract AbstractActivity getProjectActivity(ActivityID activityID) throws NullObjectException;
+	public abstract List<Activity> getIncompleteActivities(DeveloperID developerID) throws NullObjectException, OperationNotAllowedException;
 	public abstract void setActivityStartWeek(String week,ActivityID activityID, DeveloperID developerID) throws OperationNotAllowedException, NullObjectException, FormattingException;
 	public abstract void setActivityStartYear(String week,ActivityID activityID, DeveloperID developerID) throws OperationNotAllowedException, NullObjectException, FormattingException;
 	public abstract void setActivityEndWeek(String week,ActivityID activityID, DeveloperID developerID) throws OperationNotAllowedException, NullObjectException, FormattingException;

@@ -89,7 +89,7 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
-	public void addProjectActivity(ProjectActivity projectActivity, DeveloperID developerID)
+	public void addProjectActivity(Activity projectActivity, DeveloperID developerID)
 			throws NullObjectException {
 		throw new NullObjectException(projNotExist);
 	}
@@ -154,12 +154,12 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
-	public List<ProjectActivity> getIncompleteActivities(DeveloperID developerID) throws NullObjectException {
+	public List<Activity> getIncompleteActivities(DeveloperID developerID) throws NullObjectException {
 		throw new NullObjectException(projNotExist);
 	}
 	
 	@Override
-	public Activity getProjectActivity(ActivityID activityID) throws NullObjectException {
+	public AbstractActivity getProjectActivity(ActivityID activityID) throws NullObjectException {
 		throw new NullObjectException(projNotExist);
 	}
 	

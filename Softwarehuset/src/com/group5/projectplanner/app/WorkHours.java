@@ -1,12 +1,12 @@
 package com.group5.projectplanner.app;
 
-public class workHours {
+public class WorkHours {
 	private int week;
 	private int year;
 	private double hours;
-	private Activity activity;
+	private AbstractActivity activity;
 	
-	public workHours() {}
+	public WorkHours() {}
 	
 	public int getWeek() {
 		return week;
@@ -29,10 +29,10 @@ public class workHours {
 		this.hours = hours;
 	}
 	
-	public Activity getActivity() {
+	public AbstractActivity getActivity() {
 		return activity;
 	}
-	public void setActivity(Activity activity) {
+	public void setActivity(AbstractActivity activity) {
 		this.activity = activity;
 	}
 	

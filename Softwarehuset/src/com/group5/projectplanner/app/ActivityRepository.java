@@ -5,9 +5,9 @@ import java.util.List;
 //Author: Marko (s163964)
 public class ActivityRepository {
 	
-	private List<ProjectActivity> projectActivities = new ArrayList<ProjectActivity>();
+	private List<Activity> projectActivities = new ArrayList<Activity>();
 	
-	public void addActivity(ProjectActivity activity, Project parentProject) throws OperationNotAllowedException {
+	public void addActivity(Activity activity, Project parentProject) throws OperationNotAllowedException {
 		if(!checkActivityExists(activity.getID())){
 			activity.setParentProject(parentProject);
 			projectActivities.add(activity);
@@ -17,7 +17,7 @@ public class ActivityRepository {
 	}
 	
 	public boolean checkActivityExists(ActivityID activityID) {	
-		for(ProjectActivity listActivity : projectActivities){
+		for(Activity listActivity : projectActivities){
 			if(listActivity.matches(activityID)){
 				return true;
 			}
@@ -25,8 +25,8 @@ public class ActivityRepository {
 		return false;
 	}
 	
-	public Activity getActivity(ActivityID activityID){
-		for(ProjectActivity listActivity : projectActivities){
+	public AbstractActivity getActivity(ActivityID activityID){
+		for(Activity listActivity : projectActivities){
 			if(listActivity.matches(activityID)){
 				return listActivity;
 			}
@@ -34,9 +34,9 @@ public class ActivityRepository {
 		return new NullActivity();
 	}
 	
-	public List<ProjectActivity> getIncompleteActivities() {
-		List<ProjectActivity> incompleteActivities = new ArrayList<ProjectActivity>();
-		for(ProjectActivity listActivity : projectActivities){
+	public List<Activity> getIncompleteActivities() {
+		List<Activity> incompleteActivities = new ArrayList<Activity>();
+		for(Activity listActivity : projectActivities){
 			if(!listActivity.isActivityComplete()){
 				incompleteActivities.add(listActivity);
 			}
