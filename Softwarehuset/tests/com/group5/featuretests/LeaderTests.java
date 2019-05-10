@@ -417,22 +417,38 @@ public class LeaderTests {
 	@When("the project leader requests a list of incomplete activities")
 	public void theProjectLeaderRequestsAListOfIncompleteActivities() 
 			throws OperationNotAllowedException, NullObjectException {
-		incompleteActivities = projectPlanner.getIncompleteActivities(projectID, devLeader.getDeveloperID());
+		try {
+			incompleteActivities = projectPlanner.getIncompleteActivities(projectID, devLeader.getDeveloperID());
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
 	@Then("the project leader gets a list of incomplete activities with {int} activity")
 	public void theProjectLeaderGetsAListOfIncompleteActivitiesWithActivity(Integer int1) {
-	    assertTrue (incompleteActivities.size() == int1);
+		assertTrue (incompleteActivities.size() == int1);
 	}
 	
 	@When("the developer tries to get a list of incomplete activities")
 	public void theDeveloperTriesToGetAListOfIncompleteActivities()
 		throws NullObjectException, OperationNotAllowedException {
 			try {
-				projectPlanner.getIncompleteActivities(projectID, devLeader.getDeveloperID());
+				incompleteActivities = projectPlanner.getIncompleteActivities(projectID, devLeader.getDeveloperID());
 			} catch (OperationNotAllowedException e) {
 				errorMessageHolder.setErrorMessage(e.getMessage());
 			}
+	}
+	
+	@Given("there is registered {int} complete activities in the project")
+	public void thereIsRegisteredCompleteActivitiesInTheProject(Integer int1) throws NullObjectException, OperationNotAllowedException {
+		for (int i = 0; i<int1.intValue(); i++) {
+			   projectActivity = new ProjectActivity();
+			   activityID = new ActivityID();
+			   activityID.setName("Activity " + i);
+			   projectActivity.setID(activityID);
+			   projectActivity.setActivityComplete();
+			   projectPlanner.addProjectActivity(projectActivity, projectID, devLeader.getDeveloperID());
+		   }
 	}
 
 }

@@ -267,7 +267,13 @@ public class Project extends AbstractProject {
 	public List<ProjectActivity> getIncompleteActivities(DeveloperID developerID) 
 			throws NullObjectException, OperationNotAllowedException {
 		if (isProjectLeader(developerID)) {
-			return activityRepo.getIncompleteActivities();
+			List<ProjectActivity> checklist = activityRepo.getIncompleteActivities();
+			if (checklist.size() <= 0) {
+				throw new OperationNotAllowedException("There are no incomplete activities");
+			}
+			else {
+				return checklist;
+			}
 		}else {
 			throw new OperationNotAllowedException(IDNotLeader);
 		}
