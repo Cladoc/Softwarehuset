@@ -37,7 +37,7 @@ public class DeveloperRepository {
 		}
 	}
 	
-	public AbstractDeveloper getDeveloper(DeveloperID developerID){
+	public abstractDeveloper getDeveloper(DeveloperID developerID){
 		for(Developer listActivity : developers){
 			if(listActivity.matches(developerID)){
 				return listActivity;

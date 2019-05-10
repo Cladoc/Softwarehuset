@@ -14,14 +14,15 @@ public class ProjectPlanner {
 	private ProjectRepository projectsRepo = new ProjectRepository();
 	String invalidID = "Invalid ID";
 	
-	public void registerHours(int week, int year, double hours, ActivityID activityID, DeveloperID developerID, ProjectID projectID) throws NullObjectException {
-		AbstractDeveloper dev = devRepo.getDeveloper(developerID);
+	public void registerHours(String week, String year, String hours, ActivityID activityID, DeveloperID developerID, ProjectID projectID) 
+			throws NullObjectException, FormattingException {
+		abstractDeveloper dev = devRepo.getDeveloper(developerID);
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);		
 		dev.registerHours(week, year, hours, proj.getProjectActivity(activityID));
 	}
 	
 	public double getHours(int week, int year, DeveloperID developerID) throws NullObjectException {
-		AbstractDeveloper dev = devRepo.getDeveloper(developerID);
+		abstractDeveloper dev = devRepo.getDeveloper(developerID);
 		return dev.getHours(week, year);
 	}
 	
