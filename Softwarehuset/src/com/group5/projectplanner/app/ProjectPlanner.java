@@ -20,6 +20,11 @@ public class ProjectPlanner {
 		dev.registerHours(week, year, hours, proj.getProjectActivity(activityID));
 	}
 	
+	public double getHours(int week, int year, DeveloperID developerID) throws NullObjectException {
+		abstractDeveloper dev = devRepo.getDeveloper(developerID);
+		return dev.getHours(week, year);
+	}
+	
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
 		devRepo.addDeveloper(developer);
 	}

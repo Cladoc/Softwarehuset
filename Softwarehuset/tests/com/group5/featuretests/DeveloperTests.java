@@ -184,6 +184,22 @@ public class DeveloperTests {
 	    }
 	}
 
+	@When("the developer registers work hours {double} in week {int} and year {int} for the activity named {string}")
+	public void theDeveloperRegistersWorkHoursInWeekAndYearForTheActivityNamed(Double hours, Integer week, Integer year, String name) throws NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		ActivityID testActivityID = new ActivityID();
+		testActivityID.setName(name);
+		DeveloperID developerID = developer.getDeveloperID();
+	    projectPlanner.registerHours(week, year, hours, testActivityID, developerID, projectID);
+	}
+
+	@Then("the developer has registered work hours {double} in week {int} and year {int} for the activity named {string}")
+	public void theDeveloperHasRegisteredWorkHoursInWeekAndYearForTheActivityNamed(Double hours, Integer week, Integer year, String string) throws NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		DeveloperID developerID = developer.getDeveloperID();
+		assertTrue(projectPlanner.getHours(week, year, developerID) == hours);
+	}
+	
 
 //Remove developer feature
 	
@@ -218,6 +234,8 @@ public class DeveloperTests {
 		}
 	}
 	
+	
+
 
 
 

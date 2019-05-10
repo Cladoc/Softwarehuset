@@ -15,6 +15,11 @@ public class NullDeveloper extends abstractDeveloper {
 	}
 	
 	@Override
+	public double getHours(int week, int year) throws NullObjectException {
+		throw new NullObjectException("Activity does not exist");
+	}
+	
+	@Override
 	//Author: Casper (s163950)
 	public boolean matches(DeveloperID developerID) throws NullObjectException{
 		throw new NullObjectException("Activity does not exist");
