@@ -14,10 +14,16 @@ public class ProjectPlanner {
 	private ProjectRepository projectsRepo = new ProjectRepository();
 	String invalidID = "Invalid ID";
 	
-	public void registerHours(int week, int year, double hours, ActivityID activityID, DeveloperID developerID, ProjectID projectID) throws NullObjectException {
-		abstractDeveloper dev = devRepo.getDeveloper(developerID);
+	public void registerHours(String week, String year, String hours, ActivityID activityID, DeveloperID developerID, ProjectID projectID) 
+			throws NullObjectException, FormattingException {
+		AbstractDeveloper dev = devRepo.getDeveloper(developerID);
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);		
 		dev.registerHours(week, year, hours, proj.getProjectActivity(activityID));
+	}
+	
+	public double getHours(int week, int year, DeveloperID developerID) throws NullObjectException {
+		AbstractDeveloper dev = devRepo.getDeveloper(developerID);
+		return dev.getHours(week, year);
 	}
 	
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
@@ -68,7 +74,7 @@ public class ProjectPlanner {
 	}
 
 	//Author: Casper (s163950)
-	public void addProjectActivity(ProjectActivity projectActivity, ProjectID projectID, DeveloperID developerID) throws NullObjectException, OperationNotAllowedException {
+	public void addProjectActivity(Activity projectActivity, ProjectID projectID, DeveloperID developerID) throws NullObjectException, OperationNotAllowedException {
 		if(checkDeveloperExist(developerID)){
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.addProjectActivity(projectActivity, developerID);
@@ -81,9 +87,6 @@ public class ProjectPlanner {
 		if(checkDeveloperExist(developerID) && checkDeveloperExist(assignedDeveloper.getDeveloperID())){
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
 			proj.assignDeveloper(activityID, developerID, assignedDeveloper);
-			//////////////////////////////////////////////////////////////////7
-			/////////////////////////////////////////////////////////7
-			///////////////////////////////////////////////////////77
 		}else{
 			throw new OperationNotAllowedException("Developer not registered in project planner");
 		}
@@ -195,7 +198,7 @@ public class ProjectPlanner {
 		return proj.getName();
 	}
 	
-	public prjData getProjectInformation(ProjectID projectID, DeveloperID developerID) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	public ProjectData getProjectInformation(ProjectID projectID, DeveloperID developerID) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);
 		return proj.getProjectInformation(developerID);
 	}
@@ -210,7 +213,7 @@ public class ProjectPlanner {
 		}
 	}
 
-	public List<ProjectActivity> getIncompleteActivities(ProjectID projectID, DeveloperID developerID) 
+	public List<Activity> getIncompleteActivities(ProjectID projectID, DeveloperID developerID) 
 			throws OperationNotAllowedException, NullObjectException {		
 		if (checkDeveloperExist(developerID)) {
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
@@ -289,6 +292,16 @@ public class ProjectPlanner {
 		AbstractProject proj = projectsRepo.getProjectRef(selectedProjectID);
 		return proj.getActivityIDs();
 		
+	}
+
+	public void setActivityName(ActivityID activityID, ProjectID projectID, String name, DeveloperID developerID) 
+			throws NullObjectException, FormattingException, OperationNotAllowedException {
+		if (checkDeveloperExist(developerID)) {
+			AbstractProject proj = projectsRepo.getProjectRef(projectID);
+			proj.setActivityName(activityID, name, developerID);
+		}else{
+			throw new OperationNotAllowedException(invalidID);
+		}
 	}
 	
 	

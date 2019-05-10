@@ -5,19 +5,19 @@ import java.util.List;
 //Author: Marko (s163964)
 public class ActivityRepository {
 	
-	private List<ProjectActivity> projectActivities = new ArrayList<ProjectActivity>();
+	private List<Activity> activities = new ArrayList<Activity>();
 	
-	public void addActivity(ProjectActivity activity, Project parentProject) throws OperationNotAllowedException {
+	public void addActivity(Activity activity, Project parentProject) throws OperationNotAllowedException {
 		if(!checkActivityExists(activity.getID())){
 			activity.setParentProject(parentProject);
-			projectActivities.add(activity);
+			activities.add(activity);
 		}else{
 			throw new OperationNotAllowedException("Activity already exists");
 		}
 	}
 	
 	public boolean checkActivityExists(ActivityID activityID) {	
-		for(ProjectActivity listActivity : projectActivities){
+		for(Activity listActivity : activities){
 			if(listActivity.matches(activityID)){
 				return true;
 			}
@@ -25,8 +25,8 @@ public class ActivityRepository {
 		return false;
 	}
 	
-	public Activity getActivity(ActivityID activityID){
-		for(ProjectActivity listActivity : projectActivities){
+	public AbstractActivity getActivity(ActivityID activityID){
+		for(Activity listActivity : activities){
 			if(listActivity.matches(activityID)){
 				return listActivity;
 			}
@@ -34,9 +34,9 @@ public class ActivityRepository {
 		return new NullActivity();
 	}
 	
-	public List<ProjectActivity> getIncompleteActivities() {
-		List<ProjectActivity> incompleteActivities = new ArrayList<ProjectActivity>();
-		for(ProjectActivity listActivity : projectActivities){
+	public List<Activity> getIncompleteActivities() {
+		List<Activity> incompleteActivities = new ArrayList<Activity>();
+		for(Activity listActivity : activities){
 			if(!listActivity.isActivityComplete()){
 				incompleteActivities.add(listActivity);
 			}
@@ -46,7 +46,7 @@ public class ActivityRepository {
 
 	public List<ActivityID> getActivityIDs() {
 		List<ActivityID> activityIDs = new ArrayList<>(); 
-		for(ProjectActivity listActivity : projectActivities){
+		for(Activity listActivity : activities){
 			activityIDs.add(listActivity.getID());
 		}
 		return activityIDs;

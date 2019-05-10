@@ -202,7 +202,7 @@ public class ProjectPlannerController {
 			} else if (choice == 7) {
 				System.out.println("Enter the name of the new activity");
 				String name = console.nextLine();
-				ProjectActivity activity = new ProjectActivity();
+				Activity activity = new Activity();
 				ActivityID activityID = new ActivityID();
 				activityID.setName(name);
 				activity.setID(activityID);

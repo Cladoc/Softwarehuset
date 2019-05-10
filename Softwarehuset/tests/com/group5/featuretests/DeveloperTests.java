@@ -14,7 +14,7 @@ import com.group5.projectplanner.app.*;
 public class DeveloperTests {
 	ProjectPlanner projectPlanner;
 	Developer developer;
-	ProjectActivity projectActivity;
+	Activity projectActivity;
 	Project project;
 	Project project2; 
 	ProjectID projectID;
@@ -79,7 +79,6 @@ public class DeveloperTests {
 		projectPlanner.addDeveloper(developer);
 		developerID = developer.getDeveloperID();
 		assertTrue(projectPlanner.checkDeveloperExist(developerID));
-		return;
 	}
 
 	//Author: Casper (s163950)
@@ -120,17 +119,6 @@ public class DeveloperTests {
 	
 	@Then("the projects are added to the project planner")
 	public void theProjectsAreAddedToTheProjectPlanner() {
-		/*
-		projectIDs = projectPlanner.getProjectIDs();
-		for(ProjectID projectIDs : projectNameList){
-			
-			assertTrue(projectIDs.getStartYear()== "2020");
-			assertTrue(projectPlanner.checkProjectExist(projectIDs));
-			System.out.println("I'm here1");
-			System.out.println(k + ". Project name: " + "\"" + projectID.getName() + "\"");
-		}
-		*/
-
 		assertTrue(project.getName().equals("Robot Software"));
 		assertTrue(project.getStartYear()== 2020);
 		assertTrue(projectPlanner.checkProjectExist(projectID));
@@ -229,6 +217,30 @@ public class DeveloperTests {
 	    }
 	}
 
+	@When("the developer registers work hours {string} in week {string} and year {string} for the activity named {string}")
+	public void theDeveloperRegistersWorkHoursInWeekAndYearForTheActivityNamed(String hours, String week, String year, String name) throws NullObjectException, FormattingException {
+	    // Write code here that turns the phrase above into concrete actions
+		ActivityID testActivityID = new ActivityID();
+		testActivityID.setName(name);
+		DeveloperID developerID = developer.getDeveloperID();
+		try{
+			 projectPlanner.registerHours(week, year, hours, testActivityID, developerID, projectID);
+	    } catch (FormattingException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	   
+	}
+
+	@Then("the developer has registered work hours {double} in week {int} and year {int} for the activity named {string}")
+	public void theDeveloperHasRegisteredWorkHoursInWeekAndYearForTheActivityNamed(Double hours, Integer week, Integer year, String string) throws NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		DeveloperID developerID = developer.getDeveloperID();
+	
+		assertTrue(projectPlanner.getHours(week, year, developerID) == hours);
+	}
+	
+
+	
 
 //Remove developer feature
 	
@@ -263,6 +275,8 @@ public class DeveloperTests {
 		}
 	}
 	
+	
+
 
 
 

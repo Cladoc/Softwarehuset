@@ -1,6 +1,6 @@
 package com.group5.projectplanner.app;
 
-public class prjData {
+public class ProjectData {
 	private ProjectID projectID = new ProjectID();
 	private DeveloperID leader;
 	private int startYear;
@@ -8,7 +8,7 @@ public class prjData {
 	private int endYear = 3000;
 	private int endWeek;
 	
-	public prjData() {}
+	public ProjectData() {}
 	
 	public ProjectID getProjectID() {
 		return projectID;
