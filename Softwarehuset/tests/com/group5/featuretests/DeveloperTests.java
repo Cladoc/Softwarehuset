@@ -202,11 +202,11 @@ public class DeveloperTests {
 	public void theDeveloperHasRegisteredWorkHoursInWeekAndYearForTheActivityNamed(Double hours, Integer week, Integer year, String string) throws NullObjectException {
 	    // Write code here that turns the phrase above into concrete actions
 		DeveloperID developerID = developer.getDeveloperID();
-		
-		
+	
 		assertTrue(projectPlanner.getHours(week, year, developerID) == hours);
 	}
 	
+
 	
 
 //Remove developer feature

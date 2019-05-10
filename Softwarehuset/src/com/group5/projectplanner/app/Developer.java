@@ -70,9 +70,12 @@ public class Developer extends abstractDeveloper{
 	
 	public double getHours(int week, int year) {
 		double temp = 0;
+		System.out.println("Week is :" + week + " year is :" + year);
 		for(int i = 0; i < hoursWorked.size(); i++) {
 			if(hoursWorked.get(i).getWeek() == week && hoursWorked.get(i).getYear() == year ) {
-				temp += hoursWorked.get(i).getHours();
+				
+				temp = temp + hoursWorked.get(i).getHours();
+				System.out.println("Iteration :"+ i + " temp is :" + temp);
 			}
 		}
 		return temp;
