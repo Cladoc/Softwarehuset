@@ -77,7 +77,9 @@ public class LeaderTests {
 
 	// Author: Casper (s163950)
 	@Then("the activity with name {string} is added to the project")
-	public void theActivityWithNameIsAddedToTheProject(String string) throws NullObjectException {
+	public void theActivityWithNameIsAddedToTheProject(String name) throws NullObjectException {
+		activityID = new ActivityID();
+		activityID.setName(name);
 		assertTrue(projectPlanner.checkActivityExists(activityID, projectID));
 	}
 
@@ -398,7 +400,7 @@ public class LeaderTests {
 		projectPlanner.setActivityStartYear(year, activityID, projectID, developerID);
 	}
 	
-		//Get Incomplete Activities feature------------------------------------------------
+	//Get Incomplete Activities feature------------------------------------------------
 	
 	//Anders (s163952)
 	@Given("there is registered {int} incomplete activity")
@@ -449,6 +451,21 @@ public class LeaderTests {
 			   projectActivity.setActivityComplete();
 			   projectPlanner.addProjectActivity(projectActivity, projectID, devLeader.getDeveloperID());
 		   }
+	}
+	
+	//Edit activity name feature------------------------------------------------
+	
+	//Anders (s163952)
+	@When("the project leader sets activity name to {string}")
+	public void theProjectLeaderSetsActivityNameTo(String string) throws NullObjectException {
+		projectPlanner.setActivityName(activityID, projectID, string);
+	}
+	
+	@Then("the activity has the name {string}")
+	public void theActivityHasTheName(String string) throws NullObjectException {
+		activityID = new ActivityID();
+		activityID.setName(string);
+		assertTrue(projectPlanner.checkActivityExists(activityID, projectID));
 	}
 
 }

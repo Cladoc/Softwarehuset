@@ -343,4 +343,10 @@ public class Project extends AbstractProject {
 		Activity abstractActivity = activityRepo.getActivity(activityID);
 		return abstractActivity.getActivityEndYear();
 	}
+
+	@Override
+	public void setActivityName(ActivityID activityID, String string) throws NullObjectException {
+		Activity abstractActivity = activityRepo.getActivity(activityID);
+		abstractActivity.setName(string);		
+	}
 }

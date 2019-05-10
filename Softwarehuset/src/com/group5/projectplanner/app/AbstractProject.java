@@ -41,6 +41,8 @@ public abstract class AbstractProject {
 	public abstract int getActivityStartYear(ActivityID activityID) throws NullObjectException;
 	public abstract int getActivityEndWeek(ActivityID activityID) throws NullObjectException;
 	public abstract int getActivityEndYear(ActivityID activityID) throws NullObjectException;
+	public abstract void setActivityName(ActivityID activityID, String string) throws NullObjectException;
+	
 	
 	
 }

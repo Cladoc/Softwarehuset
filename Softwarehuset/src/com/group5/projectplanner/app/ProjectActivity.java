@@ -5,7 +5,6 @@ import java.util.List;
 
 public class ProjectActivity extends Activity {
 	private ActivityID activityID = new ActivityID();
-	private String name = "";
 	private DeveloperRepository developers = new DeveloperRepository();
 	private Project parentProject;
 	private double totalExpectedHours;
@@ -148,9 +147,6 @@ public class ProjectActivity extends Activity {
 
 	public void setActivityEndYear(String year) throws FormattingException, NumberFormatException {
 		int number = 0;
-		boolean x = (this.startYear == number && this.startWeek <= this.endWeek) || this.startYear < number;
-		System.out.println("valid date? "+ x);
-		System.out.println("startuge" +this.startWeek+ "starår:" +this.startYear+"slutuge"+this.endWeek+"slutår"+ this.endYear);
 		try {
 			number = Integer.valueOf(year);
 		} catch (NumberFormatException e) {
