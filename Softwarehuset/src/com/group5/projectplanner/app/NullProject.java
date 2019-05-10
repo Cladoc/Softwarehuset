@@ -50,7 +50,7 @@ public class NullProject extends AbstractProject{
 	}
 	
 	@Override
-	public prjData getProjectInformation(DeveloperID developerID) throws NullObjectException{
+	public ProjectData getProjectInformation(DeveloperID developerID) throws NullObjectException{
 		throw new NullObjectException(projNotExist);
 	}
 	

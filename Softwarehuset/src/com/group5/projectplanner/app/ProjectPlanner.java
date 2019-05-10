@@ -200,7 +200,7 @@ public class ProjectPlanner {
 		return proj.getName();
 	}
 	
-	public prjData getProjectInformation(ProjectID projectID, DeveloperID developerID) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
+	public ProjectData getProjectInformation(ProjectID projectID, DeveloperID developerID) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);
 		return proj.getProjectInformation(developerID);
 	}

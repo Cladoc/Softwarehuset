@@ -1,7 +1,7 @@
 package com.group5.featuretests;
 
 import com.group5.projectplanner.app.ProjectPlanner;
-import com.group5.projectplanner.app.prjData;
+import com.group5.projectplanner.app.ProjectData;
 import com.group5.projectplanner.app.Developer;
 import com.group5.projectplanner.app.DeveloperID;
 import com.group5.projectplanner.app.FormattingException;
@@ -30,7 +30,7 @@ public class LeaderTests {
 	DeveloperHelper developerHelper;
 	Developer devLeader;
 	Developer testDeveloper;
-	prjData prjData;
+	ProjectData prjData;
 	Project project;
 	ProjectID projectID;
 	ProjectActivity projectActivity;

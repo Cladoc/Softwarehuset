@@ -156,9 +156,9 @@ public class Project extends AbstractProject {
 	}
 	
 	@Override
-	public prjData getProjectInformation(DeveloperID developerID) throws OperationNotAllowedException {
+	public ProjectData getProjectInformation(DeveloperID developerID) throws OperationNotAllowedException {
 		if(isProjectLeader(developerID)){
-			prjData prjData = new prjData();
+			ProjectData prjData = new ProjectData();
 			prjData.setEndWeek(this.endWeek);
 			prjData.setEndYear(this.endYear);
 			prjData.setLeader(this.leader);

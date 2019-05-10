@@ -30,7 +30,7 @@ public abstract class AbstractProject {
 	public abstract double getExpectedHours(ActivityID activityID) throws NullObjectException;
 	public abstract void setActivityComplete(ActivityID activityID, DeveloperID developerID) throws NullObjectException, OperationNotAllowedException;
 	public abstract boolean isActivityComplete(ActivityID activityID) throws NullObjectException;
-	public abstract prjData getProjectInformation(DeveloperID developerID) throws OperationNotAllowedException, NullObjectException;
+	public abstract ProjectData getProjectInformation(DeveloperID developerID) throws OperationNotAllowedException, NullObjectException;
 	public abstract Activity getProjectActivity(ActivityID activityID) throws NullObjectException;
 	public abstract List<ProjectActivity> getIncompleteActivities(DeveloperID developerID) throws NullObjectException, OperationNotAllowedException;
 	public abstract void setActivityStartWeek(String week,ActivityID activityID, DeveloperID developerID) throws OperationNotAllowedException, NullObjectException, FormattingException;
