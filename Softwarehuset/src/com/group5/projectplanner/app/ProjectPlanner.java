@@ -87,10 +87,10 @@ public class ProjectPlanner {
 		}
 	}
 
-	public void assignDeveloper(ActivityID activityID, ProjectID projectID, DeveloperID developerID, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
-		if(checkDeveloperExist(developerID) && checkDeveloperExist(assignedDeveloper.getDeveloperID())){
+	public void assignDeveloper(ActivityID activityID, ProjectID projectID, DeveloperID developerID, Developer devToAssign) throws NullObjectException, OperationNotAllowedException{
+		if(checkDeveloperExist(developerID) && checkDeveloperExist(devToAssign.getDeveloperID())){
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
-			proj.assignDeveloper(activityID, developerID, assignedDeveloper);
+			proj.assignDeveloper(activityID, developerID, devToAssign);
 		}else{
 			throw new OperationNotAllowedException("Developer not registered in project planner");
 		}
