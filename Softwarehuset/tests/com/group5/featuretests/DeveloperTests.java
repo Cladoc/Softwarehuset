@@ -179,6 +179,7 @@ public class DeveloperTests {
 	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = projectHelper.getProject();
 		projectID = project.getID();
+		
 	    projectPlanner.addProject(project, developer.getDeveloperID());
 	    assertTrue(projectPlanner.checkProjectExist(projectID));
 	}

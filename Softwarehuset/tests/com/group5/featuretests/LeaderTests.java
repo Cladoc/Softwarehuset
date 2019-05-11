@@ -528,14 +528,7 @@ public class LeaderTests {
 		}
 	}
 	
-	@When("the developer sets activity name to {string}")
-	public void theDeveloperSetsActivityNameTo(String name) throws NullObjectException, FormattingException {
-		try {
-			projectPlanner.setActivityName(activityID, projectID, name, devLeaderID);
-		} catch (OperationNotAllowedException e) {
-			errorMessageHolder.setErrorMessage(e.getMessage());
-		}
-	}
+
 
 	@Given("the developer with the id {string} has registered work hours {string} in week {string} and year {string} for the activity named {string}")
 	public void theDeveloperWithTheIdHasRegisteredWorkHoursInWeekAndYearForTheActivityNamed(String id, String hours, String week, String year, String string5) throws NullObjectException, FormattingException {
