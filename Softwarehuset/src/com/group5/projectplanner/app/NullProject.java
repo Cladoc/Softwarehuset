@@ -101,7 +101,7 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
-	public void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer assignedDeveloper)
+	public void assignDeveloper(ActivityID activityID, DeveloperID developerID, DeveloperID devIDToAssign)
 			throws OperationNotAllowedException, NullObjectException {
 		throw new NullObjectException(projNotExist);
 	}

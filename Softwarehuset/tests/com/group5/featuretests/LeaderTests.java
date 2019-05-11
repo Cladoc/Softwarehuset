@@ -149,8 +149,10 @@ public class LeaderTests {
 	public void theProjectLeaderAssignsADeveloperToTheActivity() throws NullObjectException, OperationNotAllowedException {
 	    testDeveloper = new Developer();
 	    testDeveloper.setName("test");
+	    developerID = new DeveloperID();
+	    developerID.setName("test");
 	    projectPlanner.addDeveloper(testDeveloper);
-	    projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, testDeveloper);
+	    projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developerID);
 	}
 	
 	@Then("the developer is assigned to the activity")
@@ -163,10 +165,12 @@ public class LeaderTests {
 			throws NullObjectException, OperationNotAllowedException {
 		testDeveloper = new Developer();
 		testDeveloper.setName("test");
+		developerID = new DeveloperID();
+	    developerID.setName("test");
 		projectPlanner.addDeveloper(testDeveloper);
-		projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, testDeveloper);
+		projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developerID);
 		try {
-			projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, testDeveloper);
+			projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developerID);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
