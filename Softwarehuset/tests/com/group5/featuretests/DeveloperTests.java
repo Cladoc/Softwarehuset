@@ -329,7 +329,7 @@ public class DeveloperTests {
 	@Given("the developer is registered in the activity")
 	public void theDeveloperIsRegisteredInTheActivity() 
 			throws NullObjectException, OperationNotAllowedException {
-		projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developer);
+		projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developerID);
 	}
 	
 	@Then("the developer has access to all the activity information")
