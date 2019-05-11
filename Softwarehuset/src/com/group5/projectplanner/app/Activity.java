@@ -95,6 +95,10 @@ public class Activity extends AbstractActivity {
 	public void setParentProject(Project parentProject) {
 		this.parentProject = parentProject;
 	}
+	
+	public Project getParentProject() {
+		return this.parentProject;
+	}
 
 	public boolean matches(ActivityID activityID) {
 		return this.activityID.getName().equalsIgnoreCase(activityID.getName());
@@ -187,6 +191,22 @@ public class Activity extends AbstractActivity {
 
 	public int getActivityEndYear() {
 		return this.endYear;
+	}
+
+	@Override
+	public ActivityData getActivityInformation(DeveloperID developerID) {
+		ActivityData activityData = new ActivityData();
+		activityData.setActivityID(this.activityID);
+		//private DeveloperRepository developers = new DeveloperRepository();
+		activityData.setParentProject(parentProject);
+		activityData.setExpectedWorkHours(this.totalExpectedHours);
+		activityData.setActivityCompleteness(this.complete);
+		activityData.setEndWeek(this.endWeek);
+		activityData.setEndYear(this.endYear);
+		activityData.setStartWeek(this.startWeek);
+		activityData.setStartYear(this.startYear);
+		
+		return activityData;
 	}
 
 

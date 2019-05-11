@@ -30,10 +30,12 @@ public class ProjectPlanner {
 		devRepo.addDeveloper(developer);
 	}
 	
+	/*
 	public DeveloperID getProjectLeader(ProjectID projectID) throws NullObjectException {
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);
 		return proj.getProjectLeader();
 	}
+	*/
 	
 	public void removeDeveloper(Developer developer) throws OperationNotAllowedException{
 		devRepo.removeDeveloper(developer);
@@ -302,6 +304,12 @@ public class ProjectPlanner {
 		}else{
 			throw new OperationNotAllowedException(invalidID);
 		}
+	}
+
+	public ActivityData getActivityInformation(ProjectID projectID, ActivityID activityID, 
+			DeveloperID developerID)	throws NullObjectException {
+		AbstractProject proj = projectsRepo.getProjectRef(projectID);
+		return proj.getActivityInformation(activityID, developerID);
 	}
 	
 	

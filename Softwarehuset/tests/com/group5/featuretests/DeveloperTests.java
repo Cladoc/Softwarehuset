@@ -25,12 +25,18 @@ public class DeveloperTests {
 	ErrorMessageHolder errorMessageHolder;
 	ProjectHelper projectHelper;
 	DeveloperHelper developerHelper;
+	ActivityData activityData;
+	ActivityHelper activityHelper;
+	DeveloperID devLeaderID;
+	Developer devLeader;
 
-	public DeveloperTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder, ProjectHelper projectHelper, DeveloperHelper developerHelper){
+	public DeveloperTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder, 
+			ProjectHelper projectHelper, DeveloperHelper developerHelper, ActivityHelper activityHelper){
 		this.projectPlanner = projectPlanner;
 		this.errorMessageHolder = errorMessageHolder;
 		this.projectHelper = projectHelper;
 		this.developerHelper = developerHelper;
+		this.activityHelper = activityHelper;
 	}
 
 	//Add Developer:-----------------------------------------------
@@ -256,9 +262,77 @@ public class DeveloperTests {
 		}
 	}
 	
+	//Get Activity Information feature
 	
+	@Given("a developer is registered in the project planner")
+	public void aDeveloperIsRegisteredInTheProjectPlanner() 
+			throws OperationNotAllowedException, Exception, FormattingException {
+		developer = developerHelper.getDeveloper();
+		assertTrue(developer.getName().equals("abcd"));
+		projectPlanner.addDeveloper(developer);
+		developerID = developer.getDeveloperID();
+		assertTrue(projectPlanner.checkDeveloperExist(developerID));
+	}
+	
+	
+	@Given("the project has an activity registered")
+	public void theProjectHasAnActivityRegistered() 
+			throws NullObjectException, OperationNotAllowedException, FormattingException, Exception {
+		projectActivity = activityHelper.getActivity();
+		activityID = projectActivity.getID();
+		devLeaderID = new DeveloperID();
+		devLeaderID.setName("LEAD");
+		Developer devLeader = new Developer();
+		devLeader.setName("LEAD");
+		projectPlanner.addDeveloper(devLeader);
+		projectPlanner.setProjectLeader(projectID, devLeaderID);
+		projectPlanner.addProjectActivity(projectActivity, projectID, devLeaderID);
+	    assertTrue(projectPlanner.checkActivityExists(activityID, projectID));
+	}
 
-
-
+	@When("the developer requests activity information")
+	public void theDeveloperRequestsActivityInformation() 
+			throws NullObjectException {
+		activityData = projectPlanner.getActivityInformation(projectID, activityID,developerID);
+	}
+	
+	@Then("the developer has access to the activity information")
+	public void theDeveloperHasAccessToTheActivityInformation() {
+		assertTrue(activityData != null);
+		assertTrue(activityData.getStartYear() == projectActivity.getActivityStartYear());
+	}
+	
+	@Given("the activity has start year {string}, end year {string}, start week {string} and end week {string}")
+	public void theActivityHasStartYearEndYearStartWeekAndEndWeek
+	(String startYear, String endYear, String startWeek, String endWeek) 
+			throws OperationNotAllowedException, NullObjectException, FormattingException {
+		projectPlanner.setActivityStartYear(startYear, activityID, projectID, devLeaderID);
+	    projectPlanner.setActivityEndYear(endYear, activityID, projectID, devLeaderID);
+	    projectPlanner.setActivityStartWeek(startWeek, activityID, projectID, devLeaderID);
+	    projectPlanner.setActivityEndWeek(endWeek, activityID, projectID, devLeaderID);
+	}
+	
+	@Given("the activity has total expected hours {string}")
+	public void theActivityHasTotalExpectedHoursAndItIsIncomplete (String totalExpectedHours) 
+			throws OperationNotAllowedException, NullObjectException, FormattingException {
+		projectPlanner.setExpectedHours(activityID, projectID, devLeaderID, totalExpectedHours);
+	}
+	
+	@Given("the activity is complete")
+	public void theActivityIsComplete() throws OperationNotAllowedException, NullObjectException {
+		projectPlanner.setActivityComplete(activityID, projectID, devLeaderID);
+	}
+	
+	@Then("the developer has access to all the activity information")
+	public void theDeveloperHasAccessToAllTheActivityInformation() throws NullObjectException {
+		activityData = projectPlanner.getActivityInformation(projectID, activityID,developerID);
+	    assertTrue(activityData.getStartYear() == projectActivity.getActivityStartYear());
+		assertTrue(activityData.getStartWeek() == projectActivity.getActivityStartWeek());
+		assertTrue(activityData.getEndYear() == projectActivity.getActivityEndYear());
+		assertTrue(activityData.getEndWeek() == projectActivity.getActivityEndWeek());
+		assertTrue(activityData.getActivityID().getName() == projectActivity.getName());
+		//assertTrue(activityData.getDevelopers().equals(devLeaderID));
+	}
+	
 
 }

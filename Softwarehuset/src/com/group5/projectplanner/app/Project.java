@@ -365,4 +365,11 @@ public class Project extends AbstractProject {
 			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
+
+	@Override
+	public ActivityData getActivityInformation(ActivityID activityID, DeveloperID developerID) 
+			throws NullObjectException {
+		AbstractActivity abstractActivity = activityRepo.getActivity(activityID);
+		return abstractActivity.getActivityInformation(developerID);
+	}
 }

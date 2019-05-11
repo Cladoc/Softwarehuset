@@ -190,14 +190,21 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
-	public void setActivityName(ActivityID activityID, String name, DeveloperID developerID) throws NullObjectException {
+	public void setActivityName(ActivityID activityID, String name, DeveloperID developerID) 
+			throws NullObjectException {
 		throw new NullObjectException(projNotExist);
 		
 	}
 
 	@Override
 	public List<ActivityID> getActivityIDs() throws NullObjectException {
-		throw new NullObjectException("Project does not exist");
+		throw new NullObjectException(projNotExist);
+	}
+
+	@Override
+	public ActivityData getActivityInformation(ActivityID activityID, DeveloperID developerID)
+			throws NullObjectException {
+		throw new NullObjectException(projNotExist);
 	}
 	
 

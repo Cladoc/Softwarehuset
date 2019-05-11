@@ -21,4 +21,5 @@ public abstract class AbstractActivity {
 	public abstract int getActivityStartYear() throws NullObjectException;
 	public abstract int getActivityEndWeek() throws NullObjectException;
 	public abstract int getActivityEndYear() throws NullObjectException;
+	public abstract ActivityData getActivityInformation(DeveloperID developerID) throws NullObjectException;
 }

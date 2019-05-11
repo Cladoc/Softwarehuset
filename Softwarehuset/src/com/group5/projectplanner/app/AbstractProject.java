@@ -43,6 +43,7 @@ public abstract class AbstractProject {
 	public abstract int getActivityEndYear(ActivityID activityID) throws NullObjectException;
 	public abstract List<ActivityID> getActivityIDs() throws NullObjectException; 
 	public abstract void setActivityName(ActivityID activityID, String string, DeveloperID developerID) throws NullObjectException, FormattingException, OperationNotAllowedException;
+	public abstract ActivityData getActivityInformation(ActivityID activityID, DeveloperID developerID) throws NullObjectException;
 	
 	
 	
