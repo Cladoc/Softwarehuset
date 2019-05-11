@@ -213,8 +213,12 @@ public class ProjectPlannerController {
 					projectPlannerView.failMessage(e.getMessage());
 				}
 			} else if (choice == 8) {
+				try {
 				ProjectData projData = projectPlanner.getProjectInformation(selectedProjectID, signedInDeveloperID);
 				ProjectPlannerView.printProjectData(projData);
+			} catch (OperationNotAllowedException e) {
+				projectPlannerView.failMessage(e.getMessage());
+			}
 			} else if (choice == 9) {
 				try {
 				List<Activity> activityList = projectPlanner.getIncompleteActivities(selectedProjectID, signedInDeveloperID);
@@ -256,18 +260,6 @@ public class ProjectPlannerController {
 				choice = readInt();
 			}
 			
-			//delete
-			System.out.println("1.  Assign developer");
-			System.out.println("2.  Edit activity name");
-			System.out.println("3.  Edit activity start year");
-			System.out.println("4.  Edit activity start week");
-			System.out.println("5.  Edit activity end year");
-			System.out.println("6.  Edit activity end week");
-			System.out.println("6.  Set expected work hours");
-			System.out.println("7.  Mark activity as completed");
-			System.out.println("8. Remove developer");
-			System.out.println("9. Show activity information");
-			System.out.println("10. Back");
 			if (choice == 1) {
 				System.out.println("enter a name");
 				String name = console.nextLine();
@@ -354,8 +346,8 @@ public class ProjectPlannerController {
 				}
 				
 			} else if (choice == 10) {
-				System.out.println("Show Activity Information has yet to be implemented");
-				projectPlanner.getActivityInformation(selectedProjectID, selectedActivityID, signedInDeveloperID);
+				ActivityData activityData = projectPlanner.getActivityInformation(selectedProjectID, selectedActivityID, signedInDeveloperID);
+				ProjectPlannerView.printActivityData(activityData);
 				
 			} else if (choice == 11) {
 				return;

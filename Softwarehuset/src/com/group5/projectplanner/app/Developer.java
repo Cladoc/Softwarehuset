@@ -5,7 +5,8 @@ import java.util.List;
 
 public class Developer extends AbstractDeveloper{
 	private DeveloperID developerID  = new DeveloperID();
-	private List<WorkHours> hoursWorked = new ArrayList<WorkHours>();
+	private List<WorkHours> hoursWorked = new ArrayList<>();
+	private List<Activity> activities = new ArrayList<>();
 	
 	// Strings used for error messages
 	private String incorrectInput = "Incorrect input";
@@ -84,5 +85,16 @@ public class Developer extends AbstractDeveloper{
 	@Override
 	public boolean isNil() {
 		return false;
+	}
+
+	public void assignActivity(Activity activityToAssign) {
+		activities.add(activityToAssign);
+	}
+	
+	public void unAssignDeveloper() throws OperationNotAllowedException {
+		for(Activity activity : activities) {
+			activity.unassignDeveloper(this);
+		}
+		activities.clear();	
 	}
 }

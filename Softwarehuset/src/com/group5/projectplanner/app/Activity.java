@@ -67,6 +67,7 @@ public class Activity extends AbstractActivity {
 	
 	public void assignDeveloper(Developer devToAssign) throws OperationNotAllowedException {
 		developers.addDeveloper(devToAssign);
+		devToAssign.assignActivity(this);
 	}
 	
 	public boolean checkDeveloperAssigned(DeveloperID assignedDeveloper) {
@@ -218,6 +219,12 @@ public class Activity extends AbstractActivity {
 		
 		return activityData;
 	}
+	
+	public void unassignDeveloper(Developer dev) throws OperationNotAllowedException {
+		developers.removeDeveloper(dev);
+		
+	}
+	
 
 
 

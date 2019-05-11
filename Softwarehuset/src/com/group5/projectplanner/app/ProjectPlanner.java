@@ -38,6 +38,7 @@ public class ProjectPlanner {
 		if (checkDeveloperExist(devID)) {
 			AbstractDeveloper abstractDeveloper = devRepo.getDeveloper(devID);
 			Developer developer = (Developer) abstractDeveloper;
+			developer.unAssignDeveloper();
 			devRepo.removeDeveloper(developer);
 		} else {
 			throw new OperationNotAllowedException("Developer not registered in project planner");
