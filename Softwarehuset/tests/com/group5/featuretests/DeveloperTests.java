@@ -25,14 +25,21 @@ public class DeveloperTests {
 	ErrorMessageHolder errorMessageHolder;
 	ProjectHelper projectHelper;
 	DeveloperHelper developerHelper;
+	ActivityData activityData;
+	ActivityHelper activityHelper;
+	DeveloperID devLeaderID;
+	Developer devLeader;
 
-	public DeveloperTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder, ProjectHelper projectHelper, DeveloperHelper developerHelper){
+	public DeveloperTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder, 
+			ProjectHelper projectHelper, DeveloperHelper developerHelper, ActivityHelper activityHelper){
 		this.projectPlanner = projectPlanner;
 		this.errorMessageHolder = errorMessageHolder;
 		this.projectHelper = projectHelper;
 		this.developerHelper = developerHelper;
+		this.activityHelper = activityHelper;
 	}
-
+	
+	
 	
 
 

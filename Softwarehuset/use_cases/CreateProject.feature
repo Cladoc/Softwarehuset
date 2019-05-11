@@ -8,8 +8,8 @@ And a project exists
 When the developer adds a project to the project planner
 Then the project is added to the project planner
 
-#Scenario: Create multiple projects successfully
-#Given that a developer is registered in the project planner
+Scenario: Create multiple projects successfully
+Given that a developer is registered in the project planner
 #When the developer adds a project with the name "Robot Software" and start year of "2020"
 #And the developer adds another project with the name "Robot Software II" and start year of "2020"
 #Then the projects are added to the project planner
