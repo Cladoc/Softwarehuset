@@ -16,6 +16,10 @@ public class Developer extends AbstractDeveloper{
 	public void setName(String name) {
 		this.developerID.setName(name);
 	}
+	
+	public void setID(DeveloperID developerID) {
+		this.developerID = developerID;
+	}
 
 	public String getName() {
 		return this.developerID.getName();
