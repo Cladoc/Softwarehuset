@@ -6,6 +6,10 @@ import java.util.List;
 public class DeveloperRepository {
 	
 	private List<Developer> developers = new ArrayList<>();
+	// Error messages
+	private String incorrectInput = "Incorrect input";
+	private String invalidWeek = "Invalid week entered";
+	private String invalidYear = "Invalid year entered";
 	
 	//Author: Casper (s163950)
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
@@ -16,7 +20,36 @@ public class DeveloperRepository {
 		}
 	}
 	
-	
+	// Author: Mads (s144009)
+	public List<DeveloperID> getAvailableDevelopers(String week, String year) throws FormattingException {
+		int weekInteger = 0;
+		int yearInteger = 0;
+		List<DeveloperID> developerIDs= new ArrayList<>();
+		try {
+			weekInteger = Integer.parseInt(week);
+			yearInteger = Integer.parseInt(year);
+			for(int i = 0; i < developers.size(); i++) {
+				developers.get(i).getHours(weekInteger, yearInteger);			
+				if(developers.get(i).getHours(weekInteger, yearInteger) < 40.0 ) {
+					developerIDs.add(developers.get(i).getDeveloperID());
+				}
+			}
+			
+			
+			if(weekInteger > 53 || weekInteger < 1) {		
+				throw new FormattingException(invalidWeek);
+			}
+			else if(yearInteger >= 3000 || yearInteger < 2000)
+			{
+				throw new FormattingException(invalidYear);
+			}
+			
+			return developerIDs;
+		}catch (Exception e)
+		{
+			throw new FormattingException(incorrectInput);			
+		}	
+	}
 	
 	public boolean checkDeveloperExists(DeveloperID developerID) {
 		for(Developer listDeveloper: developers){

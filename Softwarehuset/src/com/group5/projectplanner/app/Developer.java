@@ -63,6 +63,7 @@ public class Developer extends AbstractDeveloper{
 	
 	public double getHours(int week, int year) {
 		double temp = 0;
+		
 		for(int i = 0; i < hoursWorked.size(); i++) {
 			if(hoursWorked.get(i).getWeek() == week && hoursWorked.get(i).getYear() == year ) {
 				temp = temp + hoursWorked.get(i).getHours();

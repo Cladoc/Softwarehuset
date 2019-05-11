@@ -21,6 +21,10 @@ public class ProjectPlanner {
 		dev.registerHours(week, year, hours, proj.getProjectActivity(activityID));
 	}
 	
+	public List<DeveloperID> getAvailableDevelopers(String week, String year) throws FormattingException {		
+		return devRepo.getAvailableDevelopers(week, year);
+	}
+	
 	public double getHours(int week, int year, DeveloperID developerID) throws NullObjectException {
 		AbstractDeveloper dev = devRepo.getDeveloper(developerID);
 		return dev.getHours(week, year);
