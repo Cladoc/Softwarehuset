@@ -1,8 +1,8 @@
 package com.group5.projectplanner.app;
 
 public class ProjectID {
-	int serialNumber;
-	int year;
+	int serialNumber = -1;
+	int year = -1;
 	String name = "";
 	
 	public ProjectID(){}
@@ -11,11 +11,6 @@ public class ProjectID {
 		this.name = name;
 	}
 	
-	public ProjectID(int year, int serialNumber, String name){
-		setYear(year);
-		setSerialNumber(serialNumber);
-		setName(name);
-	}
 	
 	public void setYear(int year){
 		this.year = year;

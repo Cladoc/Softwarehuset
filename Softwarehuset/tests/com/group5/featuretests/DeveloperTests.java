@@ -182,10 +182,6 @@ public class DeveloperTests {
 	}
 	
 	//Author: Casper (s163950)
-	@When("the developer sets himself as project leader on the project")
-	public void theDeveloperSetsHimselfAsProjectLeaderOnTheProject() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
-	    projectPlanner.setProjectLeader(projectID, developer.getDeveloperID());
-	}
 	
 	//Author: Casper (s163950)
 	@Then("the project has project leader with ID {string}")
@@ -200,19 +196,7 @@ public class DeveloperTests {
 	    badDeveloper.setName(badID);
 	    try{
 	    	projectPlanner.setProjectLeader(projectID, badDeveloper.getDeveloperID());
-	    } catch (OperationNotAllowedException e){
-	    	errorMessageHolder.setErrorMessage(e.getMessage());
-	    }
-	}
-	
-	@When("the developer sets registered developer with ID {string} as project leader in the project")
-	public void theDeveloperSetsRegisteredDeveloperWithIDAsProjectLeaderInTheProject(String badID) throws Exception, FormattingException, NullObjectException, OperationNotAllowedException {
-	    Developer badDeveloper = new Developer();
-	    badDeveloper.setName(badID);
-	    projectPlanner.addDeveloper(badDeveloper);
-	    try{
-	    	projectPlanner.setProjectLeader(projectID, badDeveloper.getDeveloperID());
-	    } catch (NullObjectException e){
+	    } catch (OperationNotAllowedException | NullObjectException e){
 	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
 	}
@@ -239,9 +223,6 @@ public class DeveloperTests {
 		assertTrue(projectPlanner.getHours(week, year, developerID) == hours);
 	}
 	
-
-	
-
 //Remove developer feature
 	
 	@When("the developer is removed from the project planner")

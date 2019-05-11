@@ -32,6 +32,7 @@ public class WorkHours {
 	public AbstractActivity getActivity() {
 		return activity;
 	}
+	
 	public void setActivity(AbstractActivity activity) {
 		this.activity = activity;
 	}

@@ -15,10 +15,10 @@ public class Activity extends AbstractActivity {
 	private int startYear = 0;
 	private int endWeek = 52;
 	private int endYear = 3000;
-
+	
 	public Activity() {
 	}
-
+	
 	public Activity(ActivityID activityID) {
 		this.activityID = activityID;
 	}
@@ -32,7 +32,7 @@ public class Activity extends AbstractActivity {
 			return false;
 		}
 	}
-
+	
 	@Override
 	public void setName(String name) throws FormattingException {
 		String regex = "\\A[a-zA-Z].*";
@@ -45,7 +45,7 @@ public class Activity extends AbstractActivity {
 			throw new FormattingException("An invalid activity name was entered");
 		}
 	}
-
+	
 	@Override
 	public String getName() {
 		return this.activityID.getName();
@@ -63,15 +63,15 @@ public class Activity extends AbstractActivity {
 	public boolean isNil() {
 		return false;
 	}
-
+	
 	public void assignDeveloper(Developer assignedDeveloper) throws OperationNotAllowedException {
 		developers.addDeveloper(assignedDeveloper);
 	}
-
+	
 	public boolean checkDeveloperAssigned(DeveloperID assignedDeveloper) {
 		return developers.checkDeveloperExists(assignedDeveloper);
 	}
-
+	
 	public void setExpectedWorkHours(String hours) throws FormattingException {
 		try {
 			this.totalExpectedHours = Double.valueOf(hours);
@@ -79,7 +79,7 @@ public class Activity extends AbstractActivity {
 			throw new FormattingException("Work hours incorrect format");
 		}
 	}
-
+	
 	public double getExpectedWorkHours() {
 		return this.totalExpectedHours;
 	}
@@ -99,7 +99,7 @@ public class Activity extends AbstractActivity {
 	public boolean matches(ActivityID activityID) {
 		return this.activityID.getName().equalsIgnoreCase(activityID.getName());
 	}
-
+	
 	public void setActivityStartWeek(String week) throws FormattingException, NumberFormatException {
 		int number = 0;
 		try {
@@ -116,7 +116,7 @@ public class Activity extends AbstractActivity {
 			throw new FormattingException("An invalid start date was entered");
 		}
 		this.startWeek = number;
-
+		
 	}
 
 	public void setActivityStartYear(String year) throws FormattingException, NumberFormatException {
