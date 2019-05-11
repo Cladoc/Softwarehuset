@@ -322,7 +322,7 @@ public class ProjectPlannerController {
 					projectPlannerView.failMessage(e.getMessage());
 				}
 				
-			} else if (choice == 7) {
+			} else if (choice == 7) { // yet to be tested
 				try {
 					projectPlanner.setActivityComplete(selectedActivityID, selectedProjectID, signedInDeveloperID);
 					projectPlannerView.successMessage();
@@ -330,26 +330,32 @@ public class ProjectPlannerController {
 					projectPlannerView.failMessage(e.getMessage());
 				}
 				
-			} else if (choice == 8) {
-				System.out.println("Yet to be implemented");
-				
-				System.out.println("Enter the Developer you wish to assign");
+			} else if (choice == 8) { // yet to be tested
+				System.out.println("Enter the developer name");
 				String assignedDeveloper = readDevID();
-				DeveloperID DevID = new DeveloperID();
-				DevID.setName(assignedDeveloper);
-				
 				try {
-					projectPlanner.assignDeveloper(selectedActivityID, selectedProjectID, signedInDeveloperID, DevID);
+					DeveloperID assignedDeveloperID = new DeveloperID();
+					assignedDeveloperID.setName(assignedDeveloper);
+					projectPlanner.assignDeveloper(selectedActivityID, selectedProjectID, signedInDeveloperID, assignedDeveloperID);
 					projectPlannerView.successMessage();
 				} catch (OperationNotAllowedException e) {
 					projectPlannerView.failMessage(e.getMessage());
 				}
 			} else if (choice == 9) {
-				System.out.println("Yet to be implemented");
-				//System.out.println("Enter name of developer you want to remove ");
+				System.out.println("Enter the developer name");
+				String DevIDToRemove = readDevID();
+				try {
+					DeveloperID assignedDeveloperID = new DeveloperID();
+					assignedDeveloperID.setName(DevIDToRemove);
+					projectPlanner.removeDeveloper(assignedDeveloperID);
+					projectPlannerView.successMessage();
+				} catch (OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
 				
 			} else if (choice == 10) {
 				System.out.println("Show Activity Information has yet to be implemented");
+				projectPlanner.getActivityInformation(selectedProjectID, selectedActivityID, signedInDeveloperID);
 				
 			} else if (choice == 11) {
 				return;

@@ -45,6 +45,8 @@ public class DeveloperTests {
 	public void thatADeveloperWithTheIDExists(String id)throws NullObjectException {
 	    developer = new Developer();
 	    developer.setName(id);
+	    developerID = new DeveloperID();
+	    developerID.setName(developer.getName());
 	    assertTrue(developer.getName().equals(id));
 	    assertTrue(developer.getDeveloperID()!= null);
 	}
@@ -237,7 +239,7 @@ public class DeveloperTests {
 	@When("the developer is removed from the project planner")
 	public void theDeveloperIsRemovedFromTheProjectPlanner() throws OperationNotAllowedException {
 		try{
-			projectPlanner.removeDeveloper(developer);
+			projectPlanner.removeDeveloper(developerID); // ER devID oprettet!?????????? !***!
 		} catch (OperationNotAllowedException e){
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -253,16 +255,8 @@ public class DeveloperTests {
 	public void thatADeveloperWithTheIDIsNotRegisteredInProjectPlanner(String id) {
 		 developer = new Developer();
 		 developer.setName(id);
-	}
-
-	@When("the developer is removed")
-	public void theDeveloperIsRemoved() {
-	    // Write code here that turns the phrase above into concrete actions
-		try{
-			projectPlanner.removeDeveloper(developer);
-		} catch (OperationNotAllowedException e){
-			errorMessageHolder.setErrorMessage(e.getMessage());
-		}
+		 developerID = new DeveloperID();
+		 developerID.setName(developer.getName());
 	}
 	
 	//Get Activity Information feature

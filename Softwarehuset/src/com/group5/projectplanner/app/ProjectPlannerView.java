@@ -100,4 +100,22 @@ public class ProjectPlannerView {
 		System.out.println("11. Back");
 		
 	}
+	
+	public static void printActivityData(ActivityData activityData) {
+		ActivityID activityID = activityData.getID();
+		System.out.println("The project with the name "+activityID.getName()+" has the following information:");
+		System.out.println("Hash code: "+activityData.hashCode());
+		System.out.println("Expected work hours: "+activityData.getExpectedWorkHours());
+		System.out.println("The activity starts at week "+activityData.getStartWeek()+" in year "+activityData.getStartYear());
+		System.out.println("The activity ends at week "+activityData.getEndWeek()+" in year "+activityData.getEndYear());
+		System.out.println("The list of developers: ");
+		List<Developer> developerList = activityData.getDevelopers().getDeveloperList();
+		int k = 0;
+		for(Developer developer : developerList){
+			k++;
+			System.out.println(k+".  Activity name: " + "\"" + developer.getName());
+		}
+		System.out.println(" \n\n");
+		
+	}
 }

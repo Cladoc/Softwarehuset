@@ -26,7 +26,7 @@ public class NullActivity extends AbstractActivity {
 	}
 
 	@Override
-	public void assignDeveloper(DeveloperID assignedDeveloper) throws NullObjectException {
+	public void assignDeveloper(Developer assignedDeveloper) throws NullObjectException {
 		throw new NullObjectException(activNotExist);
 		
 	}

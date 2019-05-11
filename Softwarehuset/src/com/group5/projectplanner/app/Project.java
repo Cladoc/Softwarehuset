@@ -18,7 +18,6 @@ public class Project extends AbstractProject {
 	private String incorrectDate = "Incorrect date format";
 	private String invalidStartDate = "An invalid start date was entered";
 	private String invalidEndDate = "An invalid end date was entered";
-	private String alreadyAssigned = "Developer already exists";
 
 	@Override
 	public void setID(ProjectID projectID) {
@@ -222,14 +221,10 @@ public class Project extends AbstractProject {
 		return activityRepo.checkActivityExists(activityID);
 	}
 
-	public void assignDeveloper(ActivityID activityID, DeveloperID developerID, DeveloperID devIDToAssign) throws OperationNotAllowedException, NullObjectException {
+	public void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer devToAssign) throws OperationNotAllowedException, NullObjectException {
 		if(isProjectLeader(developerID)){
-			if (!checkDeveloperAssigned(activityID, devIDToAssign)) {
 			AbstractActivity abstractActivity = activityRepo.getActivity(activityID);
-			abstractActivity.assignDeveloper(devIDToAssign);
-			} else {
-				throw new OperationNotAllowedException(alreadyAssigned);
-			}
+			abstractActivity.assignDeveloper(devToAssign);
 		}else{
 			throw new OperationNotAllowedException(IDNotLeader);
 		}

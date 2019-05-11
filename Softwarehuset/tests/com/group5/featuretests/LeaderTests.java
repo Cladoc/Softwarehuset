@@ -149,8 +149,7 @@ public class LeaderTests {
 	public void theProjectLeaderAssignsADeveloperToTheActivity() throws NullObjectException, OperationNotAllowedException {
 	    testDeveloper = new Developer();
 	    testDeveloper.setName("test");
-	    developerID = new DeveloperID();
-	    developerID.setName("test");
+	    developerID = testDeveloper.getDeveloperID();
 	    projectPlanner.addDeveloper(testDeveloper);
 	    projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developerID);
 	}

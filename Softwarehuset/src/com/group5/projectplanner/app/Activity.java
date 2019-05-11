@@ -65,12 +65,12 @@ public class Activity extends AbstractActivity {
 		return false;
 	}
 	
-	public void assignDeveloper(DeveloperID devIDToAssign) throws OperationNotAllowedException {
-		developerIDs.add(devIDToAssign);
+	public void assignDeveloper(Developer devToAssign) throws OperationNotAllowedException {
+		developers.addDeveloper(devToAssign);
 	}
 	
 	public boolean checkDeveloperAssigned(DeveloperID assignedDeveloper) {
-		return developerIDs.contains(assignedDeveloper);
+		return developers.checkDeveloperExists(assignedDeveloper);
 	}
 	
 	public DeveloperRepository getDevelopers() {
