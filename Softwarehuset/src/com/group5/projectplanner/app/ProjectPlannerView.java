@@ -24,11 +24,12 @@ public class ProjectPlannerView {
 	
 	// Anders (s163952)
 	public void mainMenu() {
-		System.out.println("Type 1, 2, 3 or 4 to select following options:");
-		System.out.println("1. Make a new project");
-		System.out.println("2. Edit a project");
-		System.out.println("3. Remove developer");
-		System.out.print("4. Sign out\n\n");
+		System.out.println("Type 1, 2, 3, 4 or 5 to select following options:");
+		System.out.println("1. View Work hours");
+		System.out.println("2. Make a new project");
+		System.out.println("3. Edit a project");
+		System.out.println("4. Remove developer");
+		System.out.print("5. Sign out\n\n");
 	}
 
 	public void successMessage() {
