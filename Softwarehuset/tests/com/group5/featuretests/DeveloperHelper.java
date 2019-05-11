@@ -8,18 +8,30 @@ public class DeveloperHelper {
 
 //Author: Casper (s163950)
 private Developer developer;
-
 	
-	public Developer getDeveloper() throws Exception, FormattingException {
-		if (developer == null) {
-			developer = exampleDeveloper();
-		}
-		return this.developer;
-	}
-	
-	private Developer exampleDeveloper() throws Exception, FormattingException {
+	public Developer exampleDevLead() throws Exception, FormattingException {
 		Developer developer = new Developer();
-		developer.setName("abcd");
+		developer.setName("Lead");
 		return developer;
 	}
+	
+	public Developer exampleDeveloper() throws Exception, FormattingException {
+		Developer developer = new Developer();
+		developer.setName("DevA");
+		return developer;
+	}
+	
+	public Developer exampleDeveloperTwo() throws Exception, FormattingException {
+		Developer developer = new Developer();
+		developer.setName("DevB");
+		return developer;
+	}
+	
+	public Developer exampleDeveloperThree() throws Exception, FormattingException {
+		Developer developer = new Developer();
+		developer.setName("DevC");
+		return developer;
+	}
+	
+	
 }
