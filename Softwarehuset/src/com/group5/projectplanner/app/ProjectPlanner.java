@@ -89,10 +89,10 @@ public class ProjectPlanner {
 		}
 	}
 
-	public void assignDeveloper(ActivityID activityID, ProjectID projectID, DeveloperID developerID, Developer devToAssign) throws NullObjectException, OperationNotAllowedException{
-		if(checkDeveloperExist(developerID) && checkDeveloperExist(devToAssign.getDeveloperID())){
+	public void assignDeveloper(ActivityID activityID, ProjectID projectID, DeveloperID developerID, DeveloperID devID) throws NullObjectException, OperationNotAllowedException{
+		if(checkDeveloperExist(developerID) && checkDeveloperExist(devID)){
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
-			proj.assignDeveloper(activityID, developerID, devToAssign);
+			proj.assignDeveloper(activityID, developerID, devID);
 		}else{
 			throw new OperationNotAllowedException("Developer not registered in project planner");
 		}
@@ -297,7 +297,6 @@ public class ProjectPlanner {
 	public List<ActivityID> getActivityIDs(ProjectID selectedProjectID, DeveloperID signedInDeveloperID) throws NullObjectException {
 		AbstractProject proj = projectsRepo.getProjectRef(selectedProjectID);
 		return proj.getActivityIDs();
-		
 	}
 
 	public void setActivityName(ActivityID activityID, ProjectID projectID, String name, DeveloperID developerID) 
@@ -315,6 +314,8 @@ public class ProjectPlanner {
 		AbstractProject proj = projectsRepo.getProjectRef(projectID);
 		return proj.getActivityInformation(activityID, developerID);
 	}
+	
+	
 	
 	
 	

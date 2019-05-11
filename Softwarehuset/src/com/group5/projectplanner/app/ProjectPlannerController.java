@@ -332,15 +332,18 @@ public class ProjectPlannerController {
 				
 			} else if (choice == 8) {
 				System.out.println("Yet to be implemented");
-				/*
-				System.out.println("Enter the Expected work hours");
+				
+				System.out.println("Enter the Developer you wish to assign");
 				String assignedDeveloper = readDevID();
+				DeveloperID DevID = new DeveloperID();
+				DevID.setName(assignedDeveloper);
+				
 				try {
-					projectPlanner.assignDeveloper(selectedActivityID, selectedProjectID, signedInDeveloperID, assignedDeveloper);
+					projectPlanner.assignDeveloper(selectedActivityID, selectedProjectID, signedInDeveloperID, DevID);
 					projectPlannerView.successMessage();
-				} catch (FormattingException | OperationNotAllowedException e) {
+				} catch (OperationNotAllowedException e) {
 					projectPlannerView.failMessage(e.getMessage());
-				}*/
+				}
 			} else if (choice == 9) {
 				System.out.println("Yet to be implemented");
 				//System.out.println("Enter name of developer you want to remove ");

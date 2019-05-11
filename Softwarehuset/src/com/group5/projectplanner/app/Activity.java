@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class Activity extends AbstractActivity {
 	private ActivityID activityID = new ActivityID();
 	private DeveloperRepository developers = new DeveloperRepository();
+	private List<DeveloperID> developerIDs = new ArrayList<>();
 	private Project parentProject;
 	private double totalExpectedHours;
 	private boolean complete;
@@ -64,12 +65,12 @@ public class Activity extends AbstractActivity {
 		return false;
 	}
 	
-	public void assignDeveloper(Developer assignedDeveloper) throws OperationNotAllowedException {
-		developers.addDeveloper(assignedDeveloper);
+	public void assignDeveloper(DeveloperID devIDToAssign) throws OperationNotAllowedException {
+		developerIDs.add(devIDToAssign);
 	}
 	
 	public boolean checkDeveloperAssigned(DeveloperID assignedDeveloper) {
-		return developers.checkDeveloperExists(assignedDeveloper);
+		return developerIDs.contains(assignedDeveloper);
 	}
 	
 	public DeveloperRepository getDevelopers() {
