@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
 public class Activity extends AbstractActivity {
 	private ActivityID activityID = new ActivityID();
 	private DeveloperRepository developers = new DeveloperRepository();
-	private List<DeveloperID> developerIDs = new ArrayList<>();
-	private Project parentProject;
 	private double totalExpectedHours;
 	private boolean complete;
 	private int startWeek = 1;
@@ -96,19 +94,6 @@ public class Activity extends AbstractActivity {
 
 	public boolean isActivityComplete() {
 		return this.complete;
-	}
-	
-	public void setCompleteness(boolean complete) {
-		this.complete = complete;
-	}
-	
-
-	public void setParentProject(Project parentProject) {
-		this.parentProject = parentProject;
-	}
-	
-	public Project getParentProject() {
-		return this.parentProject;
 	}
 
 	public boolean matches(ActivityID activityID) {
@@ -209,7 +194,6 @@ public class Activity extends AbstractActivity {
 		ActivityData activityData = new ActivityData();
 		activityData.setID(this.activityID);
 		activityData.setDevelopers(this.developers);
-		activityData.setParentProject(parentProject);
 		activityData.setExpectedWorkHours(this.totalExpectedHours);
 		activityData.setCompleteness(this.complete);
 		activityData.setEndWeek(this.endWeek);

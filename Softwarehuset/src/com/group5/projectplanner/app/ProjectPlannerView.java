@@ -27,7 +27,7 @@ public class ProjectPlannerView {
 		System.out.println("Type 1, 2, 3 or 4 to select following options:");
 		System.out.println("1. Make a new project");
 		System.out.println("2. Edit a project");
-		System.out.println("3. Register work hours");
+		System.out.println("3. Remove developer");
 		System.out.print("4. Sign out\n\n");
 	}
 
@@ -89,15 +89,15 @@ public class ProjectPlannerView {
 	}
 
 	public void editActivityMenuMessage() {
-		System.out.println("1.  Edit activity name");
-		System.out.println("2.  Edit activity start year");
-		System.out.println("3.  Edit activity start week");
-		System.out.println("4.  Edit activity end year");
-		System.out.println("5.  Edit activity end week");
-		System.out.println("6.  Set expected work hours");
-		System.out.println("7.  Mark activity as completed");
-		System.out.println("8.  Assign Developer");
-		System.out.println("9. Remove developer");
+		System.out.println("1.  Register hours");
+		System.out.println("2.  Edit activity name");
+		System.out.println("3.  Edit activity start year");
+		System.out.println("4.  Edit activity start week");
+		System.out.println("5.  Edit activity end year");
+		System.out.println("6.  Edit activity end week");
+		System.out.println("7.  Set expected work hours");
+		System.out.println("8.  Mark activity as completed");
+		System.out.println("9.  Assign Developer");
 		System.out.println("10. Show activity information");
 		System.out.println("11. Back");
 		System.out.println(" \n\n");
