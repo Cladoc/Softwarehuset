@@ -55,16 +55,49 @@ public class ProjectPlannerView {
 	}
 
 	public void editProjectMenuMessage() {
-		System.out.println("1. Set project leader");
-		System.out.println("2. Edit project name");
-		System.out.println("3. Edit project start year");
-		System.out.println("4. Edit project start week");
-		System.out.println("5. Edit project end year");
-		System.out.println("6. Edit project end week");
-		System.out.println("7. Create activity");
-		System.out.println("8. Show project information");
-		System.out.println("9. Show incomlete activities");
+		System.out.println("1.  Set project leader");
+		System.out.println("2.  Edit project name");
+		System.out.println("3.  Edit project start year");
+		System.out.println("4.  Edit project start week");
+		System.out.println("5.  Edit project end year");
+		System.out.println("6.  Edit project end week");
+		System.out.println("7.  Create activity");
+		System.out.println("8.  Show project information");
+		System.out.println("9.  Show incomlete activities");
 		System.out.println("10. Edit activity");
 		System.out.println("11. Back");
+	}
+
+	public static void printProjectData(ProjectData projData) {
+		ProjectID projectID = projData.getProjectID();
+		System.out.println("The project with the name "+projectID.getName()+" has the following information:");
+		System.out.println("Serial number: "+projectID.getSerialNumber());
+		System.out.println("Project starts at week "+projData.getStartWeek()+ "   in year " + projData.getStartYear());
+		System.out.println("Project ends at week "+projData.getEndWeek()+ "   in year " + projData.getEndYear());
+	}
+
+	public void printIncompleteActivityList(List<Activity> activityList) {
+		System.out.println("The list of incomplete activities: ");
+		int k = 0;
+		for(Activity activity : activityList){
+			k++;
+			System.out.println(k+".  Activity name: " + "\"" + activity.getName());
+		}
+		System.out.println(" \n\n");
+	}
+
+	public void editActivityMenuMessage() {
+		System.out.println("1.  Edit activity name");
+		System.out.println("2.  Edit activity start year");
+		System.out.println("3.  Edit activity start week");
+		System.out.println("4.  Edit activity end year");
+		System.out.println("5.  Edit activity end week");
+		System.out.println("6.  Set expected work hours");
+		System.out.println("7.  Mark activity as completed");
+		System.out.println("8.  Assign Developer");
+		System.out.println("9. Remove developer");
+		System.out.println("10. Show activity information");
+		System.out.println("11. Back");
+		
 	}
 }

@@ -21,6 +21,10 @@ public class ProjectPlanner {
 		dev.registerHours(week, year, hours, proj.getProjectActivity(activityID));
 	}
 	
+	public List<DeveloperID> getAvailableDevelopers(String week, String year) throws FormattingException {		
+		return devRepo.getAvailableDevelopers(week, year);
+	}
+	
 	public double getHours(int week, int year, DeveloperID developerID) throws NullObjectException {
 		AbstractDeveloper dev = devRepo.getDeveloper(developerID);
 		return dev.getHours(week, year);
@@ -85,10 +89,10 @@ public class ProjectPlanner {
 		}
 	}
 
-	public void assignDeveloper(ActivityID activityID, ProjectID projectID, DeveloperID developerID, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
-		if(checkDeveloperExist(developerID) && checkDeveloperExist(assignedDeveloper.getDeveloperID())){
+	public void assignDeveloper(ActivityID activityID, ProjectID projectID, DeveloperID developerID, Developer devToAssign) throws NullObjectException, OperationNotAllowedException{
+		if(checkDeveloperExist(developerID) && checkDeveloperExist(devToAssign.getDeveloperID())){
 			AbstractProject proj = projectsRepo.getProjectRef(projectID);
-			proj.assignDeveloper(activityID, developerID, assignedDeveloper);
+			proj.assignDeveloper(activityID, developerID, devToAssign);
 		}else{
 			throw new OperationNotAllowedException("Developer not registered in project planner");
 		}

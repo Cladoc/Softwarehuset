@@ -172,6 +172,8 @@ public class DeveloperTests {
 	public void aDeveloperWithIDIsRegisteredInTheProjectPlanner(String id) throws OperationNotAllowedException{
 		developer = new Developer();
 		developer.setName(id);
+		DeveloperID developerID = new DeveloperID();
+	    developerID.setName(id);
 		assertTrue(developer.getName().equals(id));
 		projectPlanner.addDeveloper(developer);
 		assertTrue(projectPlanner.checkDeveloperExist(developer.getDeveloperID()));
@@ -183,6 +185,7 @@ public class DeveloperTests {
 	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = projectHelper.getProject();
 		projectID = project.getID();
+		
 	    projectPlanner.addProject(project, developer.getDeveloperID());
 	    assertTrue(projectPlanner.checkProjectExist(projectID));
 	}
