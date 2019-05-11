@@ -16,5 +16,8 @@ And the project has an activity registered
 And the activity has start year "2020", end year "2021", start week "20" and end week "20"
 And the activity has total expected hours "9000"
 And the activity is complete
+And that a developer with the ID "ANDE" exists
+And the developer is registered in the project planner
+And the developer is registered in the activity 
 When the developer requests activity information
-#Then the developer has access to all the activity information
+Then the developer has access to all the activity information

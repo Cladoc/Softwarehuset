@@ -13,16 +13,28 @@ public class ActivityData {
 	
 	public ActivityData() {}
 	
-	public ActivityID getActivityID() {
+	public ActivityID getID() {
 		return activityID;
 	}
 	
-	public void setActivityID(ActivityID activityID) {
+	public void setID(ActivityID activityID) {
 		this.activityID = activityID;
+	}
+	
+	public void setDevelopers(DeveloperRepository developers) {
+		this.developers = developers;
+	}
+	
+	public DeveloperRepository getDevelopers() {
+		return this.developers;
 	}
 	
 	public void setParentProject(Project parentProject) {
 		this.parentProject = parentProject;
+	}
+	
+	public Project getParentProject() {
+		return this.parentProject;
 	}
 	
 	public void setExpectedWorkHours(double hours) {
@@ -33,8 +45,12 @@ public class ActivityData {
 		return this.totalExpectedHours;
 	}
 	
-	public void setActivityCompleteness(boolean complete) {
+	public void setCompleteness(boolean complete) {
 		this.complete = complete;
+	}
+	
+	public boolean getCompleteness() {
+		return this.complete;
 	}
 	
 	public int getStartYear() {

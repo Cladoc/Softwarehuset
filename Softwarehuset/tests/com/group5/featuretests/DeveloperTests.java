@@ -326,15 +326,25 @@ public class DeveloperTests {
 		projectPlanner.setActivityComplete(activityID, projectID, devLeaderID);
 	}
 	
+	@Given("the developer is registered in the activity")
+	public void theDeveloperIsRegisteredInTheActivity() 
+			throws NullObjectException, OperationNotAllowedException {
+		projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developer);
+	}
+	
 	@Then("the developer has access to all the activity information")
 	public void theDeveloperHasAccessToAllTheActivityInformation() throws NullObjectException {
 		activityData = projectPlanner.getActivityInformation(projectID, activityID,developerID);
-	    assertTrue(activityData.getStartYear() == projectActivity.getActivityStartYear());
+		assertTrue(activityData.getID() == projectActivity.getID());
+		assertTrue(activityData.getDevelopers() == projectActivity.getDevelopers());
+		assertTrue(activityData.getExpectedWorkHours() == projectActivity.getExpectedWorkHours());
+		assertTrue(activityData.getCompleteness() == projectActivity.isActivityComplete());
+		assertTrue(activityData.getStartYear() == projectActivity.getActivityStartYear());
 		assertTrue(activityData.getStartWeek() == projectActivity.getActivityStartWeek());
 		assertTrue(activityData.getEndYear() == projectActivity.getActivityEndYear());
 		assertTrue(activityData.getEndWeek() == projectActivity.getActivityEndWeek());
-		assertTrue(activityData.getActivityID().getName() == projectActivity.getName());
-		//assertTrue(activityData.getDevelopers().equals(devLeaderID));
+		
+		
 	}
 	
 

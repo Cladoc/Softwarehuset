@@ -72,6 +72,10 @@ public class Activity extends AbstractActivity {
 		return developers.checkDeveloperExists(assignedDeveloper);
 	}
 	
+	public DeveloperRepository getDevelopers() {
+		return this.developers;
+	}
+	
 	public void setExpectedWorkHours(String hours) throws FormattingException {
 		try {
 			this.totalExpectedHours = Double.valueOf(hours);
@@ -91,6 +95,11 @@ public class Activity extends AbstractActivity {
 	public boolean isActivityComplete() {
 		return this.complete;
 	}
+	
+	public void setCompleteness(boolean complete) {
+		this.complete = complete;
+	}
+	
 
 	public void setParentProject(Project parentProject) {
 		this.parentProject = parentProject;
@@ -196,11 +205,11 @@ public class Activity extends AbstractActivity {
 	@Override
 	public ActivityData getActivityInformation(DeveloperID developerID) {
 		ActivityData activityData = new ActivityData();
-		activityData.setActivityID(this.activityID);
-		//private DeveloperRepository developers = new DeveloperRepository();
+		activityData.setID(this.activityID);
+		activityData.setDevelopers(this.developers);
 		activityData.setParentProject(parentProject);
 		activityData.setExpectedWorkHours(this.totalExpectedHours);
-		activityData.setActivityCompleteness(this.complete);
+		activityData.setCompleteness(this.complete);
 		activityData.setEndWeek(this.endWeek);
 		activityData.setEndYear(this.endYear);
 		activityData.setStartWeek(this.startWeek);
