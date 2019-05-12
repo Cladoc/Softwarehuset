@@ -62,7 +62,7 @@ public class DeveloperTests {
 	@Then("the developer is added to the project planner successfully")
 	public void theDeveloperIsAddedToTheProjectPlannerSuccessfully() {
 	    assertTrue(projectPlanner.checkDeveloperExist(developer.getDeveloperID()));
-	}//////////// check her
+	}
 	
 	//Author: Casper (s163950)
 	@Given("the developer is registered in the project planner")
