@@ -31,6 +31,7 @@ Then the developer has access to a list of 1 activity IDs
 
 Scenario: Developer gets a list of 5 project IDs
 Given that a developer is registered in the project planner
-And 5 project is registered in the project planner
-When the developer requests a list of project IDs
-Then the developer has access to a list of 5 project IDs
+And a project is registered in the project planner
+And 5 activity is registered on the project
+When the developer requests a list of activity IDs
+Then the developer has access to a list of 5 activity IDs
