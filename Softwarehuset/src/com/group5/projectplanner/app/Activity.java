@@ -68,7 +68,11 @@ public class Activity extends AbstractActivity {
 	
 	public void setExpectedWorkHours(String hours) throws FormattingException {
 		try {
-			this.totalExpectedHours = Double.valueOf(hours);
+			double temp = Double.valueOf(hours);
+			if(0 > temp) {
+				throw new FormattingException("Work hours incorrect format");
+			}
+			this.totalExpectedHours = temp;
 		} catch (NumberFormatException e) {
 			throw new FormattingException("Work hours incorrect format");
 		}

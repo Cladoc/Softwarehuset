@@ -127,6 +127,10 @@ public class ProjectPlannerController {
 				} catch (OperationNotAllowedException e) {
 					projectPlannerView.failMessage(e.getMessage());
 				}
+				if(signedInDeveloperID.getName().equalsIgnoreCase(DevIDToRemove)) {
+					signedInDeveloperID = null;
+					return;
+				}
 			} else if (choice == 5) {
 				signedInDeveloperID = null;
 				return;
@@ -294,9 +298,15 @@ public class ProjectPlannerController {
 				
 			}
 			else if (choice == 2) {
-				System.out.println("enter a name");
-				String name = console.nextLine();
-				projectPlanner.setActivityName(selectedActivityID, selectedProjectID, name, signedInDeveloperID);
+				try {
+					System.out.println("enter a name");
+					String name = console.nextLine();
+					projectPlanner.setActivityName(selectedActivityID, selectedProjectID, name, signedInDeveloperID);
+					System.out.println("Success");
+				}catch(FormattingException e) {
+					System.out.println("Invalid name entered");
+				}
+				
 			} else if (choice == 3) {
 				System.out.println("Enter the start year");
 				String startYear = console.nextLine();
