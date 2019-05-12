@@ -31,7 +31,7 @@ public class ProjectRepository {
 		return false;
 	}
 	
-	public AbstractProject getProjectRef(ProjectID projectID){	
+	public AbstractProject getProject(ProjectID projectID){	
 		for(Project listProject : projects){
 			if(listProject.getName().equalsIgnoreCase(projectID.getName())){
 				return listProject;
