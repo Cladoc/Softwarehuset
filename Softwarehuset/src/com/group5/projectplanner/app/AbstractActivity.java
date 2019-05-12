@@ -7,7 +7,7 @@ public abstract class AbstractActivity {
 	public abstract String getName();
 	public abstract boolean isNil();
 	public abstract boolean equals(Object obj);
-	public abstract void assignDeveloper(Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException;
+	public abstract void assignDeveloper(Developer devToAssign) throws NullObjectException, OperationNotAllowedException;
 	public abstract boolean checkDeveloperAssigned(DeveloperID assignedDeveloper) throws NullObjectException;
 	public abstract void setExpectedWorkHours(String hours) throws NullObjectException, FormattingException;
 	public abstract double getExpectedWorkHours() throws NullObjectException;
@@ -21,4 +21,5 @@ public abstract class AbstractActivity {
 	public abstract int getActivityStartYear() throws NullObjectException;
 	public abstract int getActivityEndWeek() throws NullObjectException;
 	public abstract int getActivityEndYear() throws NullObjectException;
+	public abstract ActivityData getActivityInformation(DeveloperID developerID) throws NullObjectException;
 }

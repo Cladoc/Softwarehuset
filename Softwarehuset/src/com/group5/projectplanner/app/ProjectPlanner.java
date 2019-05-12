@@ -20,7 +20,11 @@ public class ProjectPlanner {
 		AbstractProject proj = projectsRepo.getProject(projectID);		
 		dev.registerHours(week, year, hours, proj.getProjectActivity(activityID));
 	}
-	
+
+	public List<DeveloperID> getAvailableDevelopers(String week, String year) throws FormattingException {
+		return devRepo.getAvailableDevelopers(week, year);
+	}
+
 	public double getHours(int week, int year, DeveloperID developerID) throws NullObjectException {
 		AbstractDeveloper dev = devRepo.getDeveloper(developerID);
 		return dev.getHours(week, year);
@@ -33,6 +37,16 @@ public class ProjectPlanner {
 	public DeveloperID getProjectLeader(ProjectID projectID) throws NullObjectException {
 		AbstractProject proj = projectsRepo.getProject(projectID);
 		return proj.getProjectLeader();
+	}
+	public void removeDeveloper(DeveloperID devID) throws OperationNotAllowedException {
+		if (checkDeveloperExist(devID)) {
+			AbstractDeveloper abstractDeveloper = devRepo.getDeveloper(devID);
+			Developer developer = (Developer) abstractDeveloper;
+			developer.unAssignDeveloper();
+			devRepo.removeDeveloper(developer);
+		} else {
+			throw new OperationNotAllowedException("Developer not registered in project planner");
+		}
 	}
 	
 	public void removeDeveloper(Developer developer) throws OperationNotAllowedException{
@@ -83,11 +97,14 @@ public class ProjectPlanner {
 		}
 	}
 
-	public void assignDeveloper(ActivityID activityID, ProjectID projectID, DeveloperID developerID, Developer assignedDeveloper) throws NullObjectException, OperationNotAllowedException{
-		if(checkDeveloperExist(developerID) && checkDeveloperExist(assignedDeveloper.getDeveloperID())){
+	public void assignDeveloper(ActivityID activityID, ProjectID projectID, DeveloperID devLeaderID,
+			DeveloperID devIDToAssign) throws NullObjectException, OperationNotAllowedException {
+		if (checkDeveloperExist(devLeaderID) && checkDeveloperExist(devIDToAssign)) {
+			AbstractDeveloper abstractDeveloper = devRepo.getDeveloper(devIDToAssign);
 			AbstractProject proj = projectsRepo.getProject(projectID);
-			proj.assignDeveloper(activityID, developerID, assignedDeveloper);
-		}else{
+			Developer developer = (Developer) abstractDeveloper;
+			proj.assignDeveloper(activityID, devLeaderID, developer);
+		} else {
 			throw new OperationNotAllowedException("Developer not registered in project planner");
 		}
 		
@@ -303,8 +320,12 @@ public class ProjectPlanner {
 			throw new OperationNotAllowedException(invalidID);
 		}
 	}
-	
-	
-	
+
+	public ActivityData getActivityInformation(ProjectID projectID, ActivityID activityID, DeveloperID developerID)
+			throws NullObjectException {
+		AbstractProject proj = projectsRepo.getProject(projectID);
+		return proj.getActivityInformation(activityID, developerID);
+	}
+
 }
 

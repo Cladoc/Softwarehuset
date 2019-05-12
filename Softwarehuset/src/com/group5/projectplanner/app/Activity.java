@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 public class Activity extends AbstractActivity {
 	private ActivityID activityID = new ActivityID();
 	private DeveloperRepository developers = new DeveloperRepository();
-	private Project parentProject;
 	private double totalExpectedHours;
 	private boolean complete;
 	private int startWeek = 1;
@@ -64,12 +63,17 @@ public class Activity extends AbstractActivity {
 		return false;
 	}
 	
-	public void assignDeveloper(Developer assignedDeveloper) throws OperationNotAllowedException {
-		developers.addDeveloper(assignedDeveloper);
+	public void assignDeveloper(Developer devToAssign) throws OperationNotAllowedException {
+		developers.addDeveloper(devToAssign);
+		devToAssign.assignActivity(this);
 	}
 	
 	public boolean checkDeveloperAssigned(DeveloperID assignedDeveloper) {
 		return developers.checkDeveloperExists(assignedDeveloper);
+	}
+	
+	public DeveloperRepository getDevelopers() {
+		return this.developers;
 	}
 	
 	public void setExpectedWorkHours(String hours) throws FormattingException {
@@ -90,10 +94,6 @@ public class Activity extends AbstractActivity {
 
 	public boolean isActivityComplete() {
 		return this.complete;
-	}
-
-	public void setParentProject(Project parentProject) {
-		this.parentProject = parentProject;
 	}
 
 	public boolean matches(ActivityID activityID) {
@@ -188,6 +188,27 @@ public class Activity extends AbstractActivity {
 	public int getActivityEndYear() {
 		return this.endYear;
 	}
+
+	@Override
+	public ActivityData getActivityInformation(DeveloperID developerID) {
+		ActivityData activityData = new ActivityData();
+		activityData.setID(this.activityID);
+		activityData.setDevelopers(this.developers);
+		activityData.setExpectedWorkHours(this.totalExpectedHours);
+		activityData.setCompleteness(this.complete);
+		activityData.setEndWeek(this.endWeek);
+		activityData.setEndYear(this.endYear);
+		activityData.setStartWeek(this.startWeek);
+		activityData.setStartYear(this.startYear);
+		
+		return activityData;
+	}
+	
+	public void unassignDeveloper(Developer dev) throws OperationNotAllowedException {
+		developers.removeDeveloper(dev);
+		
+	}
+	
 
 
 

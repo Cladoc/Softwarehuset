@@ -13,6 +13,7 @@ public class ProjectData {
 	public ProjectID getProjectID() {
 		return projectID;
 	}
+	
 	public void setProjectID(ProjectID projectID) {
 		this.projectID = projectID;
 	}

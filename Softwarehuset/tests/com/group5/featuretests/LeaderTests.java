@@ -39,6 +39,7 @@ public class LeaderTests {
 	DeveloperID devLeaderID;
 	String projectInformation;
 	List<Activity> incompleteActivities;
+	List<DeveloperID> developerIDs= new ArrayList<>();
 
 	public LeaderTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder,
 			ProjectHelper projectHelper, DeveloperHelper developerHelper) {
@@ -148,8 +149,9 @@ public class LeaderTests {
 	public void theProjectLeaderAssignsADeveloperToTheActivity() throws NullObjectException, OperationNotAllowedException {
 	    testDeveloper = new Developer();
 	    testDeveloper.setName("test");
+	    developerID = testDeveloper.getDeveloperID();
 	    projectPlanner.addDeveloper(testDeveloper);
-	    projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, testDeveloper);
+	    projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developerID);
 	}
 	
 	@Then("the developer is assigned to the activity")
@@ -162,10 +164,12 @@ public class LeaderTests {
 			throws NullObjectException, OperationNotAllowedException {
 		testDeveloper = new Developer();
 		testDeveloper.setName("test");
+		developerID = new DeveloperID();
+	    developerID.setName("test");
 		projectPlanner.addDeveloper(testDeveloper);
-		projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, testDeveloper);
+		projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developerID);
 		try {
-			projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, testDeveloper);
+			projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developerID);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -523,13 +527,28 @@ public class LeaderTests {
 		}
 	}
 	
-	@When("the developer sets activity name to {string}")
-	public void theDeveloperSetsActivityNameTo(String name) throws NullObjectException, FormattingException {
+
+
+	@Given("the developer with the id {string} has registered work hours {string} in week {string} and year {string} for the activity named {string}")
+	public void theDeveloperWithTheIdHasRegisteredWorkHoursInWeekAndYearForTheActivityNamed(String id, String hours, String week, String year, String string5) throws NullObjectException, FormattingException {
+		DeveloperID developerID = new DeveloperID();
+	    developerID.setName(id);
+	    projectPlanner.registerHours(week, year, hours, activityID, developerID, projectID);
+	}
+
+	@When("the project leader requests a list of available developer IDs in week {string} an year {string}")
+	public void theProjectLeaderRequestsAListOfAvailableDeveloperIDsInWeekAnYear(String week, String year) throws FormattingException {	
 		try {
-			projectPlanner.setActivityName(activityID, projectID, name, devLeaderID);
-		} catch (OperationNotAllowedException e) {
+			developerIDs = projectPlanner.getAvailableDevelopers(week, year);
+		} catch (FormattingException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
+	}
+	
+	@Then("the project leader gets a list of available developers ID with {int} developerIDs")
+	public void theProjectLeaderGetsAListOfAvailableDevelopersIDWithDeveloperIDs(Integer int1) {
+	    // Write code here that turns the phrase above into concrete actions
+	   assertTrue(developerIDs.size() == int1);
 	}
 
 }

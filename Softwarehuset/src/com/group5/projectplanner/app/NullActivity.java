@@ -99,5 +99,11 @@ public class NullActivity extends AbstractActivity {
 	public int getActivityEndYear() throws NullObjectException {
 		throw new NullObjectException(activNotExist);
 	}
+
+	@Override
+	public ActivityData getActivityInformation(DeveloperID developerID) 
+			throws NullObjectException {
+		throw new NullObjectException(activNotExist);
+	}
 	
 }

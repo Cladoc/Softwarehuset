@@ -221,10 +221,10 @@ public class Project extends AbstractProject {
 		return activityRepo.checkActivityExists(activityID);
 	}
 
-	public void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException {
+	public void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer devToAssign) throws OperationNotAllowedException, NullObjectException {
 		if(isProjectLeader(developerID)){
 			AbstractActivity abstractActivity = activityRepo.getActivity(activityID);
-			abstractActivity.assignDeveloper(assignedDeveloper);
+			abstractActivity.assignDeveloper(devToAssign);
 		}else{
 			throw new OperationNotAllowedException(IDNotLeader);
 		}
@@ -364,5 +364,12 @@ public class Project extends AbstractProject {
 		} else {
 			throw new OperationNotAllowedException(IDNotLeader);
 		}
+	}
+
+	@Override
+	public ActivityData getActivityInformation(ActivityID activityID, DeveloperID developerID) 
+			throws NullObjectException {
+		AbstractActivity abstractActivity = activityRepo.getActivity(activityID);
+		return abstractActivity.getActivityInformation(developerID);
 	}
 }

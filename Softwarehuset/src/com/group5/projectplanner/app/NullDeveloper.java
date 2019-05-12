@@ -4,6 +4,10 @@ public class NullDeveloper extends AbstractDeveloper {
 	
 	@Override
 	public void setName(String name) {}
+	
+	@Override
+	public void setID(DeveloperID developerID) {}
+	
 	@Override
 	public String getName() {
 		return "Null Activity";

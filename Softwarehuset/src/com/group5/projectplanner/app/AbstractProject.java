@@ -24,7 +24,7 @@ public abstract class AbstractProject {
 	public abstract boolean isProjectLeader(DeveloperID developerID);
 	public abstract void addProjectActivity(Activity projectActivity, DeveloperID developerID) throws OperationNotAllowedException, NullObjectException;
 	public abstract boolean checkActivityExists(ActivityID activityID) throws NullObjectException;
-	public abstract void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer assignedDeveloper) throws OperationNotAllowedException, NullObjectException;
+	public abstract void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer developer) throws OperationNotAllowedException, NullObjectException;
 	public abstract boolean checkDeveloperAssigned(ActivityID activityID, DeveloperID assignedDeveloperID) throws OperationNotAllowedException, NullObjectException;
 	public abstract void setExpectedHours(ActivityID activityID, DeveloperID developerID, String hours) throws OperationNotAllowedException, NullObjectException, FormattingException;
 	public abstract double getExpectedHours(ActivityID activityID) throws NullObjectException;
@@ -43,6 +43,7 @@ public abstract class AbstractProject {
 	public abstract int getActivityEndYear(ActivityID activityID) throws NullObjectException;
 	public abstract List<ActivityID> getActivityIDs() throws NullObjectException; 
 	public abstract void setActivityName(ActivityID activityID, String string, DeveloperID developerID) throws NullObjectException, FormattingException, OperationNotAllowedException;
+	public abstract ActivityData getActivityInformation(ActivityID activityID, DeveloperID developerID) throws NullObjectException;
 	
 	
 	

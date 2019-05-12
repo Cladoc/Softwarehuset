@@ -9,7 +9,6 @@ public class ActivityRepository {
 	
 	public void addActivity(Activity activity, Project parentProject) throws OperationNotAllowedException {
 		if(!checkActivityExists(activity.getID())){
-			activity.setParentProject(parentProject);
 			activities.add(activity);
 		}else{
 			throw new OperationNotAllowedException("Activity already exists");

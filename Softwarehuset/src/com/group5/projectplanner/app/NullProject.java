@@ -101,7 +101,7 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
-	public void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer assignedDeveloper)
+	public void assignDeveloper(ActivityID activityID, DeveloperID developerID, Developer devIDToAssign)
 			throws OperationNotAllowedException, NullObjectException {
 		throw new NullObjectException(projNotExist);
 	}
@@ -190,14 +190,21 @@ public class NullProject extends AbstractProject{
 	}
 
 	@Override
-	public void setActivityName(ActivityID activityID, String name, DeveloperID developerID) throws NullObjectException {
+	public void setActivityName(ActivityID activityID, String name, DeveloperID developerID) 
+			throws NullObjectException {
 		throw new NullObjectException(projNotExist);
 		
 	}
 
 	@Override
 	public List<ActivityID> getActivityIDs() throws NullObjectException {
-		throw new NullObjectException("Project does not exist");
+		throw new NullObjectException(projNotExist);
+	}
+
+	@Override
+	public ActivityData getActivityInformation(ActivityID activityID, DeveloperID developerID)
+			throws NullObjectException {
+		throw new NullObjectException(projNotExist);
 	}
 	
 

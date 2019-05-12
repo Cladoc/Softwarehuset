@@ -83,10 +83,18 @@ public class ProjectPlannerController {
 			projectPlannerView.mainMenu();
 			int choice = readInt();
 			while (choice < 1 || choice > 4) {
-				System.out.println("You haven't typed 1, 2, 3 or 4");
+				System.out.println("You haven't typed 1, 2, 3, 4 or 5");
 				choice = readInt();
 			}
 			if (choice == 1) {
+				System.out.println("enter the week number in which you've worked");
+				int week = readInt();
+				System.out.println("enter the year in which you've worked");
+				int year = readInt();
+				double hours = projectPlanner.getHours(week, year, signedInDeveloperID);
+				System.out.print("you have worked \""+hours+"\" at week \""+week+"\" for the year \""+year+"\""  );
+				
+			}else if (choice == 2) {
 				System.out.println("Enter a name");
 				String name = console.nextLine();
 				Project project = new Project();
@@ -106,11 +114,20 @@ public class ProjectPlannerController {
 				} catch (FormattingException e) {
 					projectPlannerView.failMessage(e.getMessage());
 				}
-			} else if (choice == 2) {
-				selectAProject();
 			} else if (choice == 3) {
-				System.out.print("Yet to be implemented\n\n");
+				selectAProject();
 			} else if (choice == 4) {
+				System.out.println("Enter the developer name");
+				String DevIDToRemove = readDevID();
+				try {
+					DeveloperID assignedDeveloperID = new DeveloperID();
+					assignedDeveloperID.setName(DevIDToRemove);
+					projectPlanner.removeDeveloper(assignedDeveloperID);
+					projectPlannerView.successMessage();
+				} catch (OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
+			} else if (choice == 5) {
 				signedInDeveloperID = null;
 				return;
 			}
@@ -206,16 +223,27 @@ public class ProjectPlannerController {
 				ActivityID activityID = new ActivityID();
 				activityID.setName(name);
 				activity.setID(activityID);
-				try{
+				try {
 					projectPlanner.addProjectActivity(activity, selectedProjectID, signedInDeveloperID);
 					projectPlannerView.successMessage();
-				}catch(OperationNotAllowedException e){
+				} catch (OperationNotAllowedException e) {
 					projectPlannerView.failMessage(e.getMessage());
 				}
 			} else if (choice == 8) {
-				//ProjectData projectData = projectPlanner.getProjectInformation(selectedProjectID, signedInDeveloperID);
+				try {
+					ProjectData projData = projectPlanner.getProjectInformation(selectedProjectID, signedInDeveloperID);
+					ProjectPlannerView.printProjectData(projData);
+				} catch (OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
 			} else if (choice == 9) {
-				System.out.println("Not yet implemented");
+				try {
+					List<Activity> activityList = projectPlanner.getIncompleteActivities(selectedProjectID,
+							signedInDeveloperID);
+					projectPlannerView.printIncompleteActivityList(activityList);
+				} catch (OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
 			} else if (choice == 10) {
 				selectAnActivity();
 			} else if (choice == 11) {
@@ -223,8 +251,8 @@ public class ProjectPlannerController {
 			}
 		}
 	}
-	
-	public void selectAnActivity() throws NullObjectException{
+
+	public void selectAnActivity() throws NullObjectException, FormattingException, OperationNotAllowedException {
 		List<ActivityID> activityIDList = projectPlanner.getActivityIDs(selectedProjectID, signedInDeveloperID);
 		if (activityIDList.size() <= 0) {
 			projectPlannerView.failMessage("There are no activities!");
@@ -240,9 +268,116 @@ public class ProjectPlannerController {
 			editActivityMenu();
 		}
 	}
-	
-	public void editActivityMenu(){
-		
+
+	public void editActivityMenu() throws NullObjectException, FormattingException, OperationNotAllowedException{
+		while (true) {
+			projectPlannerView.editActivityMenuMessage();
+			int choice = readInt();
+			while (choice < 1 || choice > 11) {
+				projectPlannerView.failMessage("You haven't typed a number between 1 and 10");
+				choice = readInt();
+			}
+			
+			if (choice == 1) {
+				System.out.println("enter the amount of hours you've worked");
+				String hours = console.nextLine();
+				System.out.println("enter the week number in which you've worked");
+				String week = console.nextLine();
+				System.out.println("enter the year in which you've worked");
+				String year = console.nextLine();
+				try {
+					projectPlanner.registerHours(week, year, hours, selectedActivityID, signedInDeveloperID, selectedProjectID);
+				} catch (FormattingException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
+				
+			}
+			else if (choice == 2) {
+				System.out.println("enter a name");
+				String name = console.nextLine();
+				projectPlanner.setActivityName(selectedActivityID, selectedProjectID, name, signedInDeveloperID);
+			} else if (choice == 3) {
+				System.out.println("Enter the start year");
+				String startYear = console.nextLine();
+				try {
+					projectPlanner.setActivityStartYear(startYear, selectedActivityID, selectedProjectID, signedInDeveloperID);
+					projectPlannerView.successMessage();
+				} catch (FormattingException | OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
+				
+			} else if (choice == 4) {
+				System.out.println("Enter the start week");
+				String startWeek = console.nextLine();
+				try {
+					projectPlanner.setActivityStartWeek(startWeek, selectedActivityID, selectedProjectID, signedInDeveloperID);
+					projectPlannerView.successMessage();
+				} catch (FormattingException | OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
+				
+			} else if (choice == 5) {
+				System.out.println("Enter the end year");
+				String endYear = console.nextLine();
+				try {
+					projectPlanner.setActivityEndYear(endYear, selectedActivityID, selectedProjectID, signedInDeveloperID);
+					projectPlannerView.successMessage();
+				} catch (FormattingException | OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
+				
+			} else if (choice == 6) {
+				System.out.println("Enter the end week");
+				String endWeek = console.nextLine();
+				try {
+					projectPlanner.setActivityEndWeek(endWeek, selectedActivityID, selectedProjectID, signedInDeveloperID);
+					projectPlannerView.successMessage();
+				} catch (FormattingException | OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
+				
+			} else if (choice == 7) {
+				System.out.println("Enter the Expected work hours");
+				String hours = console.nextLine();
+				try {
+					projectPlanner.setExpectedHours(selectedActivityID, selectedProjectID, signedInDeveloperID, hours);
+					projectPlannerView.successMessage();
+				} catch (FormattingException | OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
+				
+			} else if (choice == 8) { // yet to be tested
+				try {
+					projectPlanner.setActivityComplete(selectedActivityID, selectedProjectID, signedInDeveloperID);
+					projectPlannerView.successMessage();
+				} catch (OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
+				
+			} else if (choice == 9) { // yet to be tested
+				System.out.println("Enter the developer name");
+				String assignedDeveloper = readDevID();
+				try {
+					DeveloperID assignedDeveloperID = new DeveloperID();
+					assignedDeveloperID.setName(assignedDeveloper);
+					projectPlanner.assignDeveloper(selectedActivityID, selectedProjectID, signedInDeveloperID, assignedDeveloperID);
+					projectPlannerView.successMessage();
+				} catch (OperationNotAllowedException e) {
+					projectPlannerView.failMessage(e.getMessage());
+				}
+			} else if (choice == 10) {
+				ActivityData activityData = projectPlanner.getActivityInformation(selectedProjectID, selectedActivityID, signedInDeveloperID);
+				ProjectPlannerView.printActivityData(activityData);
+				
+			} else if (choice == 11) {
+				return;
+				
+			}
+			
+			
+			
+			}
+
 	}
 
 	public int readInt() {
