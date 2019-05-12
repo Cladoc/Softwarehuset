@@ -1,8 +1,6 @@
 package com.group5.projectplanner.app;
 
 public class NullActivity extends AbstractActivity {
-	//Author: Casper (s163950)
-	//Author: Marko (s163964) 
 	private String activNotExist = "Activity does not exist";
 	
 	@Override

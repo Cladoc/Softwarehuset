@@ -8,7 +8,6 @@ public class ProjectPlannerView {
 		System.out.print("Welcome to the project planner\n\n");
 	}
 	
-	// Anders (s163952)
 	public void startMenuMessage() {
 		System.out.println("Type 1 or 2 to select following options:");
 		System.out.println("1. Developer sign-in");
@@ -16,13 +15,10 @@ public class ProjectPlannerView {
 		System.out.print("3. Exit project planner\n\n");
 	}
 	
-	
-	// Anders (s163952)
 	public void failMessage(String failMessage) {
 		System.out.print("Failed with: "+"\""+failMessage+"\""+"\n\n");
 	}
 	
-	// Anders (s163952)
 	public void mainMenu() {
 		System.out.println("Type 1, 2, 3, 4 or 5 to select following options:");
 		System.out.println("1. View Work hours");

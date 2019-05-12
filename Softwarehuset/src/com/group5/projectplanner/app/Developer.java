@@ -77,7 +77,6 @@ public class Developer extends AbstractDeveloper{
 		return temp;
 	}
 	
-	//Author: Casper (s163950)
 	public boolean matches(DeveloperID developerID){
 		return this.developerID.getName().equalsIgnoreCase(developerID.getName());
 	}

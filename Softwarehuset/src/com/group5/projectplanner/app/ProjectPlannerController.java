@@ -12,7 +12,6 @@ public class ProjectPlannerController {
 	private ProjectID selectedProjectID;
 	private ActivityID selectedActivityID;
 
-	// Anders (s163952)
 	public ProjectPlannerController(ProjectPlanner projectPlanner, ProjectPlannerView projectPlannerView,
 			Scanner console) {
 		this.projectPlanner = projectPlanner;
@@ -20,7 +19,6 @@ public class ProjectPlannerController {
 		this.console = console;
 	}
 
-	// Anders (s163952)
 	// Main loop
 	public void startMenu() throws OperationNotAllowedException, Exception, NullObjectException, FormattingException {
 		int choice = -1;
@@ -32,7 +30,7 @@ public class ProjectPlannerController {
 				projectPlannerView.failMessage("You haven't typed 1, 2 or 3");
 				choice = readInt();
 			}
-			if (choice == 1) { // developer sign-in
+			if (choice == 1) {
 				System.out.println("Type 4 initials for your developer ID");
 				String id = readDevID();
 				if (!id.equals("")) {
@@ -49,7 +47,7 @@ public class ProjectPlannerController {
 					projectPlannerView.failMessage("ID must consist of 4 letters");
 				}
 
-			} else if (choice == 2) { // add developer
+			} else if (choice == 2) {
 				System.out.println("Type 4 initials for the developer you want to add");
 				String id = readDevID();
 				if (!id.equals("")) {
@@ -59,12 +57,7 @@ public class ProjectPlannerController {
 						projectPlanner.addDeveloper(developer);
 						projectPlannerView.successMessage();
 					} catch (OperationNotAllowedException e) {
-						projectPlannerView.failMessage(e.getMessage()); // write
-																		// the
-																		// fail
-																		// message
-																		// for
-																		// addDeveloper
+						projectPlannerView.failMessage(e.getMessage());
 					}
 				} else {
 					projectPlannerView.failMessage("ID must consist of 4 letters");
@@ -385,11 +378,8 @@ public class ProjectPlannerController {
 				return;
 				
 			}
-			
-			
-			
-			}
 
+		}
 	}
 
 	public int readInt() {

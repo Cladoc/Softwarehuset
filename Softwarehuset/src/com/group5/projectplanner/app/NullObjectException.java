@@ -1,6 +1,5 @@
 package com.group5.projectplanner.app;
 
-//Author: Casper (s163950)
 public class NullObjectException extends Throwable{
 	String errorMessage = "";
 	
