@@ -107,10 +107,16 @@ public class ProjectPlannerView {
 	
 	public static void printActivityData(ActivityData activityData) {
 		ActivityID activityID = activityData.getID();
-		System.out.println("The project with the name "+activityID.getName()+" has the following information:");
+		System.out.println("The activity with the name "+activityID.getName()+" has the following information:");
 		System.out.println("Expected work hours: "+activityData.getExpectedWorkHours());
 		System.out.println("The activity starts at week "+activityData.getStartWeek()+" in year "+activityData.getStartYear());
 		System.out.println("The activity ends at week "+activityData.getEndWeek()+" in year "+activityData.getEndYear());
+		System.out.print("The activity is ");
+		if(activityData.getCompleteness()) {
+			System.out.println("complete");
+		}else {
+			System.out.println("incomplete");
+		}
 		System.out.println("The list of developers: ");
 		List<Developer> developerList = activityData.getDevelopers().getDeveloperList();
 		int k = 0;

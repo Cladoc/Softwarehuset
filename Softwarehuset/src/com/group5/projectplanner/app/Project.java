@@ -157,7 +157,7 @@ public class Project extends AbstractProject {
 	
 	@Override
 	public ProjectData getProjectInformation(DeveloperID developerID) throws OperationNotAllowedException {
-		if(isProjectLeader(developerID)){
+		
 			ProjectData prjData = new ProjectData();
 			prjData.setEndWeek(this.endWeek);
 			prjData.setEndYear(this.endYear);
@@ -166,9 +166,6 @@ public class Project extends AbstractProject {
 			prjData.setStartWeek(this.startWeek);
 			prjData.setStartYear(this.startYear);
 			return prjData;
-		}else{
-			throw new OperationNotAllowedException(IDNotLeader);
-		}
 	}
 	
 	public int getEndYear() {
