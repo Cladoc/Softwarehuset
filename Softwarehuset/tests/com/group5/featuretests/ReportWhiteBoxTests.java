@@ -23,10 +23,14 @@ public class ReportWhiteBoxTests {
 	Project project2;
 	ProjectID projectID1;
 	ProjectID projectID2;
+	Activity activity1;
+	ActivityID activityID1;
 	String projectName1;
+	String activityName1;
 	List<Project> listState1;
 	List<Project> listState2;
 	boolean devRegistered = false;
+	int savedStartWeek;
 	
 	public ReportWhiteBoxTests(ProjectPlanner projectPlanner, ErrorMessageHolder errorMessageHolder){
 		this.projectPlanner = projectPlanner;
@@ -34,7 +38,6 @@ public class ReportWhiteBoxTests {
 	}
 	
 	//DeveloperRepository.addDeveloper------------------------------------
-	//Test1
 	@Given("a developer exists with an ID")
 	public void aDeveloperExistsWithAnID() {
 		developer1 = new Developer();
@@ -63,7 +66,6 @@ public class ReportWhiteBoxTests {
 	    assertTrue(projectPlanner.checkDeveloperExist(developerID1));
 	}
 	
-	//Test2
 	@Given("another developer exists with an ID of the same name")
 	public void anotherDeveloperExistsWithAnIDOfTheSameName() {
 		developer2 = new Developer();
@@ -94,7 +96,6 @@ public class ReportWhiteBoxTests {
 	}
 	
 	//ProjectRepository.addProject
-	//Test1
 	@Given("the developer is in the project planner")
 	public void theDeveloperIsInTheProjectPlanner() throws OperationNotAllowedException {
 	    projectPlanner.addDeveloper(developer1);
@@ -181,7 +182,6 @@ public class ReportWhiteBoxTests {
 	}
 	
 	//DeveloperRepository.CheckDeveloperExist()
-	//Test1
 	@When("a developer checks if the developer is registered in the project planner")
 	public void aDeveloperChecksIfTheDeveloperIsRegisteredInTheProjectPlanner() {
 		devRegistered = projectPlanner.checkDeveloperExist(developerID1);
@@ -192,13 +192,10 @@ public class ReportWhiteBoxTests {
 	    assertTrue(devRegistered);
 	}
 	
-	//Test2
 	@Then("it is refuted that the developer is registered in the project planner")
 	public void itIsRefutedThatTheDeveloperIsRegisteredInTheProjectPlanner() {
 		assertFalse(devRegistered);
 	}
-	
-	//Test3
 	
 	@Given("a second developer exists with a different ID from the first developer")
 	public void aSecondDeveloperExistsWithADifferentIDFromTheFirstDeveloper() {
@@ -214,5 +211,76 @@ public class ReportWhiteBoxTests {
 		assertFalse(developer2.getName().equals(developer1.getName()));
 	}
 	
+	//Activity.setActivityStartWeek()
+	@Given("the project is in the project planner")
+	public void theProjectIsInTheProjectPlanner() throws OperationNotAllowedException {
+	    projectPlanner.addProject(project1, developerID1);
+	}
+	
+	@Given("an activity exists with an ID")
+	public void anActivityExistsWithAnID() {
+		activity1 = new Activity();
+		activityID1 = new ActivityID();
+		activityName1 = "Test";
+		activityID1.setName(activityName1);
+		activity1.setID(activityID1);
+		assertTrue(activity1 != null);
+		assertTrue(activityID1 != null);
+		assertTrue(activity1.getName().equals(activityName1));
+	}
+
+	@Given("the activity is added to the project")
+	public void theActivityIsAddedToTheProject() throws NullObjectException, OperationNotAllowedException, Exception, FormattingException {
+		projectPlanner.setProjectLeader(projectID1, developerID1);
+	    projectPlanner.addProjectActivity(activity1, projectID1, developerID1);
+	}
+	
+	@Given("the activity has start year {string}")
+	public void theActivityHasStartYear(String startYear) throws OperationNotAllowedException, NullObjectException, FormattingException {
+	    projectPlanner.setActivityStartYear(startYear, activityID1, projectID1, developerID1);
+	    assertTrue(projectPlanner.getActivityStartYear(activityID1, projectID1) == Integer.valueOf(startYear));
+	}
+
+	@Given("the activity has start week {string}")
+	public void theActivityHasStartWeek(String startWeek) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		projectPlanner.setActivityStartWeek(startWeek, activityID1, projectID1, developerID1);
+	    assertTrue(projectPlanner.getActivityStartWeek(activityID1, projectID1) == Integer.valueOf(startWeek));
+	}
+
+	@Given("the activity has end year {string}")
+	public void theActivityHasEndYear(String endYear) throws NumberFormatException, NullObjectException, OperationNotAllowedException, FormattingException {
+		projectPlanner.setActivityEndYear(endYear, activityID1, projectID1, developerID1);
+	    assertTrue(projectPlanner.getActivityEndYear(activityID1, projectID1) == Integer.valueOf(endYear));
+	}
+
+	@Given("the activity has end week {string}")
+	public void theActivityHasEndWeek(String endWeek) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		projectPlanner.setActivityEndWeek(endWeek, activityID1, projectID1, developerID1);
+	    assertTrue(projectPlanner.getActivityEndWeek(activityID1, projectID1) == Integer.valueOf(endWeek));
+	}
+	
+	@When("the developer sets start week {string}")
+	public void theDeveloperSetsStartWeek(String startWeek) throws OperationNotAllowedException, NullObjectException, FormattingException {
+		try{
+			projectPlanner.setActivityStartWeek(startWeek, activityID1, projectID1, developerID1);
+		}catch (FormattingException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@Then("the activity will have start week {int}")
+	public void theActivityWillHaveStartWeek(Integer startWeek) throws NullObjectException {
+	    assertTrue(projectPlanner.getActivityStartWeek(activityID1, projectID1) == startWeek);
+	}
+	
+	@Given("the activity has a start week")
+	public void theActivityHasAStartWeek() throws NullObjectException {
+	    savedStartWeek = projectPlanner.getActivityStartWeek(activityID1, projectID1);
+	}
+
+	@Then("the activity start week is unchanged")
+	public void theActivityStartWeekIsUnchanged() throws NullObjectException {
+	    assertTrue(savedStartWeek == projectPlanner.getActivityStartWeek(activityID1, projectID1));
+	}
 	
 }
