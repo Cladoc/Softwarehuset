@@ -82,7 +82,7 @@ public class ProjectPlannerController {
 		while (true) {
 			projectPlannerView.mainMenu();
 			int choice = readInt();
-			while (choice < 1 || choice > 4) {
+			while (choice < 1 || choice > 5) {
 				System.out.println("You haven't typed 1, 2, 3, 4 or 5");
 				choice = readInt();
 			}

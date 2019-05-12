@@ -49,10 +49,6 @@ public class ProjectPlanner {
 		}
 	}
 	
-	public void removeDeveloper(Developer developer) throws OperationNotAllowedException{
-		devRepo.removeDeveloper(developer);
-	}
-	
 	public boolean checkDeveloperExist(DeveloperID developerID) {
 		return devRepo.checkDeveloperExists(developerID);
 	}
