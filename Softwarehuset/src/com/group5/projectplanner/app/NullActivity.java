@@ -14,16 +14,9 @@ public class NullActivity extends AbstractActivity {
 		return "Null Activity";
 	}
 
-
 	@Override
 	public boolean isNil() {
 		return true;
-	}
-
-	//Author: Casper (s163950)
-	@Override
-	public boolean equals(Object obj){
-		return false;	
 	}
 
 	@Override

@@ -11,7 +11,7 @@ Scenario: Give an invalid start date of project
 Given a developer is project leader on a project registered in the project planner
 And the project has end date of week "43" and year "2020"
 When the project leader sets an invalid start date of week "44" and year "2020"
-Then he gets the invalid date error message "An invalid start date was entered"
+Then he gets the error message "An invalid start date was entered"
 
 Scenario: Edit end date of the project 
 Given a developer is project leader on a project registered in the project planner
@@ -22,7 +22,7 @@ Scenario: Give an invalid end date of project
 Given a developer is project leader on a project registered in the project planner
 And the project has start date of week "42" and year "2020"
 When the project leader sets invalid end date of week "41" and year "2020"
-Then he gets the invalid end date error message "An invalid end date was entered"
+Then he gets the error message "An invalid end date was entered"
 
 Scenario: Give a letter as a start date of project
 Given a developer is project leader on a project registered in the project planner

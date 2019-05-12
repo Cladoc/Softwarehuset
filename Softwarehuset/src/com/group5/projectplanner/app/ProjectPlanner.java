@@ -34,10 +34,6 @@ public class ProjectPlanner {
 		devRepo.addDeveloper(developer);
 	}
 	
-	public DeveloperID getProjectLeader(ProjectID projectID) throws NullObjectException {
-		AbstractProject proj = projectsRepo.getProject(projectID);
-		return proj.getProjectLeader();
-	}
 	public void removeDeveloper(DeveloperID devID) throws OperationNotAllowedException {
 		if (checkDeveloperExist(devID)) {
 			AbstractDeveloper abstractDeveloper = devRepo.getDeveloper(devID);
@@ -217,7 +213,6 @@ public class ProjectPlanner {
 	}
 	
 	public void editProjectName(ProjectID projectID, DeveloperID developerID, String name) throws OperationNotAllowedException, FormattingException {
-		
 		if(checkDeveloperExist(developerID)) {
 			AbstractProject proj = projectsRepo.getProject(projectID);
 			proj.setName(name, developerID);

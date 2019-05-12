@@ -79,9 +79,8 @@ public class DeveloperRepository {
 		}
 		return new NullDeveloper();
 	}
-	
+
 	public List<Developer> getDeveloperList(){
 		return developers;
 	}
-
 }

@@ -35,8 +35,8 @@ public class LeaderTests {
 	ProjectID projectID;
 	Activity projectActivity;
 	ActivityID activityID;
-	DeveloperID developerID;
 	DeveloperID devLeaderID;
+	DeveloperID developerID;
 	String projectInformation;
 	List<Activity> incompleteActivities;
 	List<DeveloperID> developerIDs= new ArrayList<>();
@@ -218,12 +218,6 @@ public class LeaderTests {
 		}
 	}
 
-	@Then("he gets the invalid date error message {string}")
-	public void heGetsTheInvalidDateErrorMessage(String error) {
-		// Write code here that turns the phrase above into concrete actions
-		assertTrue(errorMessageHolder.getErrorMessage().equals(error));
-	}
-
 	@When("the Project leader sets end date of week {string} and year {string}")
 	public void theProjectLeaderSetsEndDateOfWeekAndYear(String week, String year)
 			throws FormattingException, OperationNotAllowedException, NullObjectException {
@@ -354,14 +348,6 @@ public class LeaderTests {
 	public void theProjectLeaderRequestsProjectInformation() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 	    // Write code here that turns the phrase above into concrete actions
 	   prjData = projectPlanner.getProjectInformation(projectID, devLeaderID);
-	}
-
-	@Then("the project leader has access to the project information")
-	public void theProjectLeaderHasAccessToProjectInformation() {
-		// Write code here that turns the phrase above into concrete actions
-		assertTrue(prjData != null);
-		assertTrue(prjData.getStartYear() == project.getStartYear());
-		
 	}
 	
 	@Given("the project has start year {string}, end year {string}, start week {string} and end week {string}")
@@ -547,8 +533,6 @@ public class LeaderTests {
 	
 	@Then("the project leader gets a list of available developers ID with {int} developerIDs")
 	public void theProjectLeaderGetsAListOfAvailableDevelopersIDWithDeveloperIDs(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
 	   assertTrue(developerIDs.size() == int1);
 	}
-
 }

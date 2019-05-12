@@ -7,7 +7,6 @@ public abstract class AbstractProject {
 	
 	public abstract void setID(ProjectID projectID);
 	public abstract ProjectID getID();
-	public abstract DeveloperID getProjectLeader() throws NullObjectException;
 	public abstract void setName(String name, DeveloperID developerID) throws OperationNotAllowedException,FormattingException;
 	public abstract String getName();
 	public abstract void setStartYear(String start)  throws Exception, FormattingException, NullObjectException;
@@ -18,7 +17,6 @@ public abstract class AbstractProject {
 	public abstract int getEndWeek() throws NullObjectException;
 	public abstract void setStartWeek(String start, DeveloperID developerID) throws Exception, FormattingException, NullObjectException, OperationNotAllowedException;
 	public abstract void setEndWeek(String start, DeveloperID developerID) throws Exception, FormattingException, NullObjectException, OperationNotAllowedException;
-	public abstract boolean equals(Object obj);
 	public abstract boolean isNil();
 	public abstract void setProjectLeader(DeveloperID developerID) throws NullObjectException;
 	public abstract boolean isProjectLeader(DeveloperID developerID);
@@ -44,7 +42,5 @@ public abstract class AbstractProject {
 	public abstract List<ActivityID> getActivityIDs() throws NullObjectException; 
 	public abstract void setActivityName(ActivityID activityID, String string, DeveloperID developerID) throws NullObjectException, FormattingException, OperationNotAllowedException;
 	public abstract ActivityData getActivityInformation(ActivityID activityID, DeveloperID developerID) throws NullObjectException;
-	
-	
 	
 }

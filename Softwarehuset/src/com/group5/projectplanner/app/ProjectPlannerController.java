@@ -33,7 +33,7 @@ public class ProjectPlannerController {
 				choice = readInt();
 			}
 			if (choice == 1) { // developer sign-in
-				System.out.println("Type 4 capital initials for your developer ID");
+				System.out.println("Type 4 initials for your developer ID");
 				String id = readDevID();
 				if (!id.equals("")) {
 					DeveloperID developerID = new DeveloperID();
@@ -50,7 +50,7 @@ public class ProjectPlannerController {
 				}
 
 			} else if (choice == 2) { // add developer
-				System.out.println("Type 4 capital initials for the developer you want to add");
+				System.out.println("Type 4 initials for the developer you want to add");
 				String id = readDevID();
 				if (!id.equals("")) {
 					Developer developer = new Developer();
@@ -92,7 +92,7 @@ public class ProjectPlannerController {
 				System.out.println("enter the year in which you've worked");
 				int year = readInt();
 				double hours = projectPlanner.getHours(week, year, signedInDeveloperID);
-				System.out.print("you have worked \""+hours+"\" at week \""+week+"\" for the year \""+year+"\""  );
+				System.out.print("you have worked \""+hours+"\" hours at week \""+week+"\" for the year \""+year+"\"\n\n"  );
 				
 			}else if (choice == 2) {
 				System.out.println("Enter a name");
@@ -251,6 +251,7 @@ public class ProjectPlannerController {
 			} else if (choice == 10) {
 				selectAnActivity();
 			} else if (choice == 11) {
+				selectedProjectID = null;
 				return;
 			}
 		}
@@ -380,6 +381,7 @@ public class ProjectPlannerController {
 				ProjectPlannerView.printActivityData(activityData);
 				
 			} else if (choice == 11) {
+				selectedActivityID = null;
 				return;
 				
 			}

@@ -3,8 +3,7 @@ Description:
 Actors: Developer
 
 Scenario: Remove a developer successfully
-Given that a developer with the ID "abcd" exists
-And the developer is added to the project planner
+Given that a developer is registered in the project planner
 When the developer is removed from the project planner
 Then the developer is removed from the project planner successfully
 

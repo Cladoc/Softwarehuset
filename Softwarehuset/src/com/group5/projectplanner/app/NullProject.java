@@ -68,10 +68,6 @@ public class NullProject extends AbstractProject{
 	public int getEndWeek() throws NullObjectException{
 		throw new NullObjectException(projNotExist);
 	}
-	@Override
-	public boolean equals(Object obj) {
-		return false;
-	}
 	
 	@Override
 	public boolean isNil(){
@@ -183,11 +179,6 @@ public class NullProject extends AbstractProject{
 	public int getActivityEndYear(ActivityID activityID) throws NullObjectException {
 		throw new NullObjectException(projNotExist);
 	}
-	
-	@Override
-	public DeveloperID getProjectLeader() throws NullObjectException {
-		throw new NullObjectException(projNotExist);
-	}
 
 	@Override
 	public void setActivityName(ActivityID activityID, String name, DeveloperID developerID) 
@@ -206,7 +197,4 @@ public class NullProject extends AbstractProject{
 			throws NullObjectException {
 		throw new NullObjectException(projNotExist);
 	}
-	
-
-	
 }

@@ -21,16 +21,6 @@ public class Activity extends AbstractActivity {
 	public Activity(ActivityID activityID) {
 		this.activityID = activityID;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof AbstractActivity) {
-			AbstractActivity act = (AbstractActivity) obj;
-			return this.activityID.getName().equalsIgnoreCase(act.getName());
-		} else {
-			return false;
-		}
-	}
 	
 	@Override
 	public void setName(String name) throws FormattingException {
@@ -209,11 +199,7 @@ public class Activity extends AbstractActivity {
 	}
 	
 	public void unassignDeveloper(Developer dev) throws OperationNotAllowedException {
-		developers.removeDeveloper(dev);
-		
+		developers.removeDeveloper(dev);		
 	}
-	
-
-
 
 }

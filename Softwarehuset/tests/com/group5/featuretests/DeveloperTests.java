@@ -22,6 +22,7 @@ public class DeveloperTests {
 	DeveloperID developerID;
 	List<ProjectID> projectIDs;
 	ActivityID activityID;
+	List<ActivityID> activityIDs;
 	ErrorMessageHolder errorMessageHolder;
 	ProjectHelper projectHelper;
 	DeveloperHelper developerHelper;
@@ -193,8 +194,6 @@ public class DeveloperTests {
 	}
 	
 	//Author: Casper (s163950)
-	
-	//Author: Casper (s163950)
 	@Then("the project has project leader with ID {string}")
 	public void theProjectHasProjectLeaderWithID(String string) throws Exception, FormattingException {
 	    assertTrue(projectPlanner.isProjectLeader(projectID, developer.getDeveloperID()));
@@ -239,7 +238,7 @@ public class DeveloperTests {
 	@When("the developer is removed from the project planner")
 	public void theDeveloperIsRemovedFromTheProjectPlanner() throws OperationNotAllowedException {
 		try{
-			projectPlanner.removeDeveloper(developerID); // ER devID oprettet!?????????? !***!
+			projectPlanner.removeDeveloper(developerID);
 		} catch (OperationNotAllowedException e){
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -260,17 +259,6 @@ public class DeveloperTests {
 	}
 	
 	//Get Activity Information feature
-	
-	@Given("a developer is registered in the project planner")
-	public void aDeveloperIsRegisteredInTheProjectPlanner() 
-			throws OperationNotAllowedException, Exception, FormattingException {
-		developer = developerHelper.getDeveloper();
-		assertTrue(developer.getName().equals("abcd"));
-		projectPlanner.addDeveloper(developer);
-		developerID = developer.getDeveloperID();
-		assertTrue(projectPlanner.checkDeveloperExist(developerID));
-	}
-	
 	
 	@Given("the project has an activity registered")
 	public void theProjectHasAnActivityRegistered() 
@@ -336,10 +324,60 @@ public class DeveloperTests {
 		assertTrue(activityData.getStartYear() == projectActivity.getActivityStartYear());
 		assertTrue(activityData.getStartWeek() == projectActivity.getActivityStartWeek());
 		assertTrue(activityData.getEndYear() == projectActivity.getActivityEndYear());
-		assertTrue(activityData.getEndWeek() == projectActivity.getActivityEndWeek());
-		
-		
+		assertTrue(activityData.getEndWeek() == projectActivity.getActivityEndWeek());	
 	}
 	
+	@Given("{int} project is registered in the project planner")
+	public void projectIsRegisteredInTheProjectPlanner(Integer count) throws Exception, FormattingException, NullObjectException, OperationNotAllowedException {
+	    
+	    for(int i = 0; i < count; i++){
+	    	project = new Project();
+		    project.setStartYear("2020");
+		    projectID = new ProjectID();
+	    	String name= "Test"+i;
+	    	projectID.setName(name);
+	    	project.setID(projectID);
+	    	projectPlanner.addProject(project, developerID);
+	    }
+	}
 
+	@When("the developer requests a list of project IDs")
+	public void theDeveloperRequestsAListOfProjectIDs() {
+		projectIDs = projectPlanner.getProjectIDs();
+	}
+	
+	@Then("the developer has access to a list of {int} project IDs")
+	public void theDeveloperHasAccessToAListOfProjectIDs(Integer count) {
+	    assertTrue(projectIDs != null);
+	    assertTrue(projectIDs.size() == count);
+	}
+
+	@Given("{int} activity is registered on the project")
+	public void activityIsRegisteredOnTheProject(Integer count) throws OperationNotAllowedException, Exception, FormattingException, NullObjectException {
+		Developer devLeader = new Developer();
+		devLeaderID = new DeveloperID();
+		devLeaderID.setName("Test2");
+		devLeader.setID(devLeaderID);
+		projectPlanner.addDeveloper(devLeader);
+		projectPlanner.setProjectLeader(projectID, devLeaderID);
+		for(int i = 0; i < count; i++){
+	    	Activity activity = new Activity();
+		    ActivityID activityID = new ActivityID();
+		    String name = "Test"+i;
+		    activityID.setName(name);
+	    	activity.setID(activityID);
+	    	projectPlanner.addProjectActivity(activity, projectID, devLeaderID);
+	    }
+	}
+	
+	@When("the developer requests a list of activity IDs")
+	public void theDeveloperRequestsAListOfActivityIDs() throws NullObjectException {
+	    activityIDs = projectPlanner.getActivityIDs(projectID, developerID);
+	}
+	
+	@Then("the developer has access to a list of {int} activity IDs")
+	public void theDeveloperHasAccessToAListOfActivityIDs(Integer count) {
+	    assertTrue(activityIDs != null);
+	    assertTrue(activityIDs.size() == count);
+	}
 }
