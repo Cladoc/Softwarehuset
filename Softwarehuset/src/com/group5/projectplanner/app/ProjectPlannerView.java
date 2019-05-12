@@ -19,7 +19,7 @@ public class ProjectPlannerView {
 	
 	// Anders (s163952)
 	public void failMessage(String failMessage) {
-		System.out.print(failMessage+"\n\n");
+		System.out.print("Failed with: "+"\""+failMessage+"\""+"\n\n");
 	}
 	
 	// Anders (s163952)
@@ -74,7 +74,7 @@ public class ProjectPlannerView {
 	public static void printProjectData(ProjectData projData) {
 		ProjectID projectID = projData.getProjectID();
 		System.out.println("The project with the name "+projectID.getName()+" has the following information:");
-		System.out.println("Serial number: "+projectID.getSerialNumber());
+		System.out.println("Serial number: "+projectID.getYear()+projectID.getSerialNumber());
 		System.out.println("Project starts at week "+projData.getStartWeek()+ "   in year " + projData.getStartYear());
 		System.out.println("Project ends at week "+projData.getEndWeek()+ "   in year " + projData.getEndYear());
 	}
@@ -116,7 +116,7 @@ public class ProjectPlannerView {
 		int k = 0;
 		for(Developer developer : developerList){
 			k++;
-			System.out.println(k+".  Activity name: " + "\"" + developer.getName());
+			System.out.println(k+".  Activity name: " + "\"" + developer.getName()+"\"");
 		}
 		System.out.println(" \n\n");
 		

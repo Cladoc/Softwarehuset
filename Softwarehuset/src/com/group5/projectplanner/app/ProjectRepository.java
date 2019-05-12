@@ -33,7 +33,7 @@ public class ProjectRepository {
 	
 	public AbstractProject getProject(ProjectID projectID){	
 		for(Project listProject : projects){
-			if(listProject.getName().equalsIgnoreCase(projectID.getName())){
+			if(listProject.matches(projectID)){
 				return listProject;
 			}
 		}

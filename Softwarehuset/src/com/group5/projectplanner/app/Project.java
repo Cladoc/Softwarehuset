@@ -12,7 +12,7 @@ public class Project extends AbstractProject {
 	private int endYear = 3000;
 	private int endWeek = 52;
 	
-	//Strings used in error message
+	//Strings used in error messages
 	private String invalidProjectName = "An invalid project name was entered";
 	private String IDNotLeader = "ID not project leader";
 	private String incorrectDate = "Incorrect date format";
@@ -27,11 +27,6 @@ public class Project extends AbstractProject {
 	@Override
 	public ProjectID getID() {
 		return this.projectID;
-	}
-	
-	@Override
-	public DeveloperID getProjectLeader() {
-		return this.leader;
 	}
 	
 	@Override
@@ -143,8 +138,6 @@ public class Project extends AbstractProject {
 		}
 	}
 	
-	
-	
 	@Override
 	public int getStartYear() {
 		return this.startYear;
@@ -190,16 +183,6 @@ public class Project extends AbstractProject {
 			return false;
 		}else{
 			return leader.equals(developerID);
-		}
-	}
-	
-	@Override
-	public boolean equals(Object obj){
-		if(obj instanceof ProjectID){
-			ProjectID projectID = (ProjectID) obj;
-			return projectID.getName().equalsIgnoreCase(this.projectID.getName());
-		}else{
-			return false;
 		}
 	}
 	
@@ -371,5 +354,9 @@ public class Project extends AbstractProject {
 			throws NullObjectException {
 		AbstractActivity abstractActivity = activityRepo.getActivity(activityID);
 		return abstractActivity.getActivityInformation(developerID);
+	}
+
+	public boolean matches(ProjectID projectID) {
+		return this.projectID.getName().equalsIgnoreCase(projectID.getName());
 	}
 }

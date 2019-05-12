@@ -6,7 +6,6 @@ public abstract class AbstractActivity {
 	public abstract void setName(String name) throws FormattingException;
 	public abstract String getName();
 	public abstract boolean isNil();
-	public abstract boolean equals(Object obj);
 	public abstract void assignDeveloper(Developer devToAssign) throws NullObjectException, OperationNotAllowedException;
 	public abstract boolean checkDeveloperAssigned(DeveloperID assignedDeveloper) throws NullObjectException;
 	public abstract void setExpectedWorkHours(String hours) throws NullObjectException, FormattingException;

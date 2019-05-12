@@ -16,18 +16,18 @@ public class NullDeveloper extends AbstractDeveloper {
 	@Override
 	public void registerHours(String week, String year, String hours, AbstractActivity activity) 
 			throws NullObjectException {
-		throw new NullObjectException("Activity does not exist");
+		throw new NullObjectException("Developer does not exist");
 	}
 	
 	@Override
 	public double getHours(int week, int year) throws NullObjectException {
-		throw new NullObjectException("Activity does not exist");
+		throw new NullObjectException("Developer does not exist");
 	}
 	
 	@Override
 	//Author: Casper (s163950)
 	public boolean matches(DeveloperID developerID) throws NullObjectException{
-		throw new NullObjectException("Activity does not exist");
+		throw new NullObjectException("Developer does not exist");
 	}
 	@Override
 	public boolean isNil() {
