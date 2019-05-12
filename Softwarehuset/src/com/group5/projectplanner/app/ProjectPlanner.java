@@ -318,5 +318,9 @@ public class ProjectPlanner {
 		return proj.getActivityInformation(activityID, developerID);
 	}
 
+	public List<Project> getProjects() {
+		return projectsRepo.getProjects();
+	}
+
 }
 

@@ -60,4 +60,8 @@ public class ProjectRepository {
 		}
 		return projectIDs;
 	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
 }

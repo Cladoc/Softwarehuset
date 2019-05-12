@@ -53,7 +53,6 @@ public class DeveloperRepository {
 	
 	public boolean checkDeveloperExists(DeveloperID developerID) {
 		for(Developer listDeveloper: developers){
-			
 			if(listDeveloper.getName().equalsIgnoreCase(developerID.getName())){
 				return true;
 			}
