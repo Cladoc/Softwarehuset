@@ -1,7 +1,8 @@
 package com.group5.projectplanner.app;
 
 public class NullDeveloper extends AbstractDeveloper {
-	
+	//Author: Casper (s163950)
+	// Author: Mads (s144009)
 	@Override
 	public void setName(String name) {}
 	
