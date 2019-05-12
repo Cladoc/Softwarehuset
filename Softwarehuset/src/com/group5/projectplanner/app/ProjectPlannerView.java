@@ -77,6 +77,11 @@ public class ProjectPlannerView {
 		System.out.println("Serial number: "+projectID.getYear()+projectID.getSerialNumber());
 		System.out.println("Project starts at week "+projData.getStartWeek()+ "   in year " + projData.getStartYear());
 		System.out.println("Project ends at week "+projData.getEndWeek()+ "   in year " + projData.getEndYear());
+		if(projData.getLeader() == null){
+			System.out.print("Leader: There is no leader\n\n");
+		}else{
+			System.out.print("Project leader is: "+projData.getLeader().getName()+"\n\n");
+		}
 	}
 
 	public void printIncompleteActivityList(List<Activity> activityList) {
