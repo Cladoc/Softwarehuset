@@ -2,7 +2,7 @@ Feature: Edit activity date
 Description: Edit start or end date of activity 
 Actors: Project leader
 
-Scenario: Edit start date of activity #ændret fra rapport 1
+Scenario: Edit start date of activity
 Given a developer is project leader on a project registered in the project planner
 And an activity with the name "ActivityTest" is added to the project
 When the project leader sets activity start date of week "42" and year "2020"
@@ -64,3 +64,15 @@ Given a developer is project leader on a project registered in the project plann
 And an activity with the name "ActivityTest" is added to the project
 When an unregistered developer tries to set the activity end week
 Then he gets the error message "Invalid ID"
+
+Scenario: Fail when leader sets activity start year with wrong format
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When the project leader sets activity start year to "twentytwenty"
+Then he gets the error message "Incorrect date format"
+
+Scenario: Fail when leader sets activity start year with wrong format
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When the project leader sets activity start year of "-30"
+Then he gets the error message "Incorrect date format"

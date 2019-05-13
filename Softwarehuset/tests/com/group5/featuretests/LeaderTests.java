@@ -711,4 +711,22 @@ public class LeaderTests {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
+	
+	@When("the project leader sets activity start year to {string}")
+	public void theProjectLeaderSetsActivityStartYearTo(String year) throws NullObjectException, FormattingException, OperationNotAllowedException {
+		try {
+			projectPlanner.setActivityStartYear(year, activityID, projectID, devLeaderID);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		} 
+	}
+	
+	@When("the project leader sets activity start year of {string}")
+	public void theProjectLeaderSetsActivityStartYearOf(String year) throws OperationNotAllowedException, NullObjectException {
+		try {
+			projectPlanner.setActivityStartYear(year, activityID, projectID, devLeaderID);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		} 
+	}
 }
