@@ -20,7 +20,7 @@ And a second developer exists but is not registered in the project planner
 When the second developer tries to add an activity to the project
 Then he gets the error message "Invalid ID"
 
-Scenario: Developer is not project leader
+Scenario: Fail to add acitivity while not project leader
 Given that a developer is registered in the project planner
 And a project is registered in the project planner
 And that he is not project leader on the project
