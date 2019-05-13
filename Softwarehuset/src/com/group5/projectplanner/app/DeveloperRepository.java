@@ -58,16 +58,6 @@ public class DeveloperRepository {
 		return false;
 	}
 	
-
-	
-	public void removeDeveloper(Developer developer) throws OperationNotAllowedException{
-		if(!checkDeveloperExists(developer.getDeveloperID())){
-			throw new OperationNotAllowedException("Developer does not exist");
-		}else{
-			developers.remove(developer);
-		}
-	}
-	
 	public AbstractDeveloper getDeveloper(DeveloperID developerID){
 		for(Developer listActivity : developers){
 			if(listActivity.matches(developerID)){

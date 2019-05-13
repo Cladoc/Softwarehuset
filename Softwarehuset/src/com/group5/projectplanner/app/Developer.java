@@ -89,11 +89,4 @@ public class Developer extends AbstractDeveloper{
 	public void assignActivity(Activity activityToAssign) {
 		activities.add(activityToAssign);
 	}
-	
-	public void unAssignDeveloper() throws OperationNotAllowedException {
-		for(Activity activity : activities) {
-			activity.unassignDeveloper(this);
-		}
-		activities.clear();	
-	}
 }

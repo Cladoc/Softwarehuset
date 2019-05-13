@@ -75,8 +75,8 @@ public class ProjectPlannerController {
 		while (true) {
 			projectPlannerView.mainMenu();
 			int choice = readInt();
-			while (choice < 1 || choice > 5) {
-				System.out.println("You haven't typed 1, 2, 3, 4 or 5");
+			while (choice < 1 || choice > 4) {
+				System.out.println("You haven't typed 1, 2, 3 or 4");
 				choice = readInt();
 			}
 			if (choice == 1) {
@@ -110,21 +110,6 @@ public class ProjectPlannerController {
 			} else if (choice == 3) {
 				selectAProject();
 			} else if (choice == 4) {
-				System.out.println("Enter the developer name");
-				String DevIDToRemove = readDevID();
-				try {
-					DeveloperID assignedDeveloperID = new DeveloperID();
-					assignedDeveloperID.setName(DevIDToRemove);
-					projectPlanner.removeDeveloper(assignedDeveloperID);
-					projectPlannerView.successMessage();
-				} catch (OperationNotAllowedException e) {
-					projectPlannerView.failMessage(e.getMessage());
-				}
-				if(signedInDeveloperID.getName().equalsIgnoreCase(DevIDToRemove)) {
-					signedInDeveloperID = null;
-					return;
-				}
-			} else if (choice == 5) {
 				signedInDeveloperID = null;
 				return;
 			}

@@ -33,3 +33,9 @@ And there is registered 3 complete activities in the project
 When the project leader requests a list of incomplete activities
 Then he gets the error message "There are no incomplete activities"
 
+Scenario: Fail when non registered developer gets a list of incomplete activities
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When an unregistered developer tries to get a list of incomplete activities for the project
+Then he gets the error message "Invalid ID"
+

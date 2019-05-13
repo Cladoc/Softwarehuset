@@ -196,9 +196,5 @@ public class Activity extends AbstractActivity {
 		
 		return activityData;
 	}
-	
-	public void unassignDeveloper(Developer dev) throws OperationNotAllowedException {
-		developers.removeDeveloper(dev);		
-	}
 
 }

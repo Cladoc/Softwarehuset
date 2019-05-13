@@ -14,12 +14,15 @@ import com.group5.projectplanner.app.*;
 public class DeveloperTests {
 	ProjectPlanner projectPlanner;
 	Developer developer;
+	DeveloperID developerID;
+	Developer developer2;
+	DeveloperID developerID2;
 	Activity projectActivity;
 	Project project;
 	Project project2; 
 	ProjectID projectID;
 	ProjectID projectID2; 
-	DeveloperID developerID;
+	
 	List<ProjectID> projectIDs;
 	ActivityID activityID;
 	List<ActivityID> activityIDs;
@@ -68,6 +71,15 @@ public class DeveloperTests {
 	@Given("the developer is registered in the project planner")
 	public void theDeveloperIsRegisteredInTheProjectPlanner() throws OperationNotAllowedException{
 	    projectPlanner.addDeveloper(developer);
+	}
+	
+	@Given("a second developer exists but is not registered in the project planner")
+	public void aSecondDeveloperExistsButIsNotRegisteredInTheProjectPlanner() {
+	    developer2 = new Developer();
+	    developerID2 = new DeveloperID();
+	    developerID2.setName("BadT");
+	    developer2.setID(developerID2);
+	    assertFalse(projectPlanner.checkDeveloperExist(developerID2));
 	}
 	
 	//Author: Casper (s163950)
@@ -199,6 +211,11 @@ public class DeveloperTests {
 	    assertTrue(projectPlanner.isProjectLeader(projectID, developer.getDeveloperID()));
 	}
 	
+	@Given("the developer is not project leader on the project")
+	public void theDeveloperIsNotProjectLeaderOnTheProject() {
+	    assertFalse(projectPlanner.isProjectLeader(projectID, developerID));
+	}
+	
 	//Author: Casper (s163950)
 	@When("the developer sets developer with ID {string} as project leader in the project")
 	public void theDeveloperSetsDeveloperWithIDAsProjectLeaderInTheProject(String badID) throws Exception, FormattingException, NullObjectException {
@@ -231,33 +248,8 @@ public class DeveloperTests {
 		DeveloperID developerID = developer.getDeveloperID();
 	
 		assertTrue(projectPlanner.getHours(week, year, developerID) == hours);
-	}
-	
-//Remove developer feature
-	
-	@When("the developer is removed from the project planner")
-	public void theDeveloperIsRemovedFromTheProjectPlanner() throws OperationNotAllowedException {
-		try{
-			projectPlanner.removeDeveloper(developerID);
-		} catch (OperationNotAllowedException e){
-			errorMessageHolder.setErrorMessage(e.getMessage());
-		}
-	}
+	}	
 
-	@Then("the developer is removed from the project planner successfully")
-	public void theDeveloperIsRemovedFromTheProjectPlannerSuccessfully() {
-		assertTrue(!projectPlanner.checkDeveloperExist(developer.getDeveloperID()));
-
-	}
-	
-	@Given("that a developer with the ID {string} is not registered in project planner")
-	public void thatADeveloperWithTheIDIsNotRegisteredInProjectPlanner(String id) {
-		 developer = new Developer();
-		 developer.setName(id);
-		 developerID = new DeveloperID();
-		 developerID.setName(developer.getName());
-	}
-	
 	//Get Activity Information feature
 	
 	@Given("the project has an activity registered")
@@ -306,6 +298,19 @@ public class DeveloperTests {
 	@Given("the activity is complete")
 	public void theActivityIsComplete() throws OperationNotAllowedException, NullObjectException {
 		projectPlanner.setActivityComplete(activityID, projectID, devLeaderID);
+	}
+	
+	@When("the second developer tries to add an activity to the project")
+	public void theSecondDeveloperTriesToAddAnActivityToTheProject() throws NullObjectException {
+	    projectActivity = new Activity();
+	    activityID = new ActivityID();
+	    activityID.setName("Testing");
+	    projectActivity.setID(activityID);
+		try{
+	    	projectPlanner.addProjectActivity(projectActivity, projectID, developerID2);
+	    }catch (OperationNotAllowedException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
 	}
 	
 	@Given("the developer is registered in the activity")
@@ -380,4 +385,6 @@ public class DeveloperTests {
 	    assertTrue(activityIDs != null);
 	    assertTrue(activityIDs.size() == count);
 	}
+	
+	
 }

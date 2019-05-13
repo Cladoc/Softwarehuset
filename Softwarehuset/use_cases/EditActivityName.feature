@@ -20,3 +20,9 @@ And an activity with the name "ActivityTest" is added to the project
 And an activity with the name "TestName" is added to the project
 When the project leader sets the activity "ActivityTest" name to "TestName"
 Then he gets the error message "Activity name already existing"
+
+Scenario: Fail when non registered developer sets activity name
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When an unregistered developer tries to set the activity name
+Then he gets the error message "Invalid ID"
