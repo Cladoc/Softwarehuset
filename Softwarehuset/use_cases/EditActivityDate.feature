@@ -40,3 +40,27 @@ Given a developer is project leader on a project registered in the project plann
 And an activity with the name "ActivityTest" is added to the project
 When the project leader sets activity end date of week "twenty" and year "twentytwenty"
 Then he gets the error message "Incorrect date format"
+
+Scenario: Fail when non registered developer sets activity start year
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When an unregistered developer tries to set the activity start year
+Then he gets the error message "Invalid ID"
+
+Scenario: Fail when non registered developer sets activity start week
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When an unregistered developer tries to set the activity start week
+Then he gets the error message "Invalid ID"
+
+Scenario: Fail when non registered developer sets activity end year
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When an unregistered developer tries to set the activity end year
+Then he gets the error message "Invalid ID"
+
+Scenario: Fail when non registered developer sets activity end week
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When an unregistered developer tries to set the activity end week
+Then he gets the error message "Invalid ID"

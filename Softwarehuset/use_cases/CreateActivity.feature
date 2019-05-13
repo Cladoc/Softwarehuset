@@ -13,6 +13,13 @@ And an activity with the name "refactoring" is added to the project
 When the project leader adds an activity with the name "refactoring" again
 Then he gets the error message "Activity already exists"
 
+Scenario: Developer is not registered when trying to create activity
+Given that a developer is registered in the project planner
+And a project is registered in the project planner
+And a second developer exists but is not registered in the project planner
+When the second developer tries to add an activity to the project
+Then he gets the error message "Invalid ID"
+
 Scenario: Fail to add acitivity while not project leader
 Given that a developer is registered in the project planner
 And a project is registered in the project planner

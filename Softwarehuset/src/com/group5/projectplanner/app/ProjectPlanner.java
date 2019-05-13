@@ -34,17 +34,6 @@ public class ProjectPlanner {
 		devRepo.addDeveloper(developer);
 	}
 	
-	public void removeDeveloper(DeveloperID devID) throws OperationNotAllowedException {
-		if (checkDeveloperExist(devID)) {
-			AbstractDeveloper abstractDeveloper = devRepo.getDeveloper(devID);
-			Developer developer = (Developer) abstractDeveloper;
-			developer.unAssignDeveloper();
-			devRepo.removeDeveloper(developer);
-		} else {
-			throw new OperationNotAllowedException("Developer not registered in project planner");
-		}
-	}
-	
 	public boolean checkDeveloperExist(DeveloperID developerID) {
 		return devRepo.checkDeveloperExists(developerID);
 	}
@@ -93,7 +82,7 @@ public class ProjectPlanner {
 			Developer developer = (Developer) abstractDeveloper;
 			proj.assignDeveloper(activityID, devLeaderID, developer);
 		} else {
-			throw new OperationNotAllowedException("Developer not registered in project planner");
+			throw new OperationNotAllowedException(invalidID);
 		}
 		
 	}

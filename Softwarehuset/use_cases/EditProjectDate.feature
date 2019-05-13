@@ -33,3 +33,23 @@ Scenario: Give a letter as an end date of project
 Given a developer is project leader on a project registered in the project planner
 When the project leader sets end date as letters of week "twenty" and year "twentytwenty"
 Then he gets the error message "Incorrect date format"
+
+Scenario: Fail when non registered developer sets project start year
+Given a developer is project leader on a project registered in the project planner
+When an unregistered developer tries to set the project start year
+Then he gets the error message "Invalid ID"
+
+Scenario: Fail when non registered developer sets project start week
+Given a developer is project leader on a project registered in the project planner
+When an unregistered developer tries to set the project start week
+Then he gets the error message "Invalid ID"
+
+Scenario: Fail when non registered developer sets project end year
+Given a developer is project leader on a project registered in the project planner
+When an unregistered developer tries to set the project end year
+Then he gets the error message "Invalid ID"
+
+Scenario: Fail when non registered developer sets project end week
+Given a developer is project leader on a project registered in the project planner
+When an unregistered developer tries to set the project end week
+Then he gets the error message "Invalid ID"

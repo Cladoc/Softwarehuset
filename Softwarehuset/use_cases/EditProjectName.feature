@@ -11,3 +11,8 @@ Scenario: Give an invalid project name
 Given a developer is project leader on a project registered in the project planner
 When the project leader sets an invalid projectName of "1TestName"
 Then he gets the error message "An invalid project name was entered"
+
+Scenario: Fail when non registered developer sets the name of a project
+Given a developer is project leader on a project registered in the project planner
+When an unregistered developer tries to set the project name
+Then he gets the error message "Invalid ID"
