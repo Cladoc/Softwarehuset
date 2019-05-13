@@ -8,6 +8,12 @@ And an activity with the name "ActivityTest" is added to the project
 When the project leader assigns a developer to the activity
 Then the developer is assigned to the activity
 
+Scenario: Assign developer to activity as developer
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When a developer assigns a developer to the activity
+Then he gets the error message "ID not project leader"
+
 Scenario: Assign developer again
 Given a developer is project leader on a project registered in the project planner
 And an activity with the name "ActivityTest" is added to the project

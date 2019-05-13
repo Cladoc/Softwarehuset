@@ -40,3 +40,28 @@ Given a developer is project leader on a project registered in the project plann
 And an activity with the name "ActivityTest" is added to the project
 When the project leader sets activity end date of week "twenty" and year "twentytwenty"
 Then he gets the error message "Incorrect date format"
+
+Scenario: Developer attempts to edit start year
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When a developers sets activity start year "2020"
+Then he gets the error message "ID not project leader"
+
+Scenario: Developer attempts to edit end year
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When a developers sets activity end year "2020"
+Then he gets the error message "ID not project leader"
+
+
+Scenario: Developer attempts to edit start week
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When a developers sets activity start week of "42"
+Then he gets the error message "ID not project leader"
+
+Scenario: Developer attempts to edit end week
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When a developers sets activity end week of "42"
+Then he gets the error message "ID not project leader"

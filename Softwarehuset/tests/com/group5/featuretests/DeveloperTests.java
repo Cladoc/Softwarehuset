@@ -20,6 +20,8 @@ public class DeveloperTests {
 	ProjectID projectID;
 	ProjectID projectID2; 
 	DeveloperID developerID;
+	DeveloperID testDeveloperID;
+	Developer testDeveloper;
 	List<ProjectID> projectIDs;
 	ActivityID activityID;
 	List<ActivityID> activityIDs;
@@ -258,6 +260,242 @@ public class DeveloperTests {
 		 developerID.setName(developer.getName());
 	}
 	
+// Checks if Dev attempts project leader actions
+	
+	@When("a developer assigns a developer to the activity")
+	public void aDeveloperAssignsADeveloperToTheActivity() throws OperationNotAllowedException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		 developer = new Developer();
+		 developer.setName("bcde");
+		 developerID = new DeveloperID();
+		 developerID.setName(developer.getName());
+		 projectPlanner.addDeveloper(developer);
+		 testDeveloper = new Developer();
+		 testDeveloper.setName("test");
+		 testDeveloperID = testDeveloper.getDeveloperID();
+		 projectPlanner.addDeveloper(testDeveloper);
+		 System.out.println(activityID);
+		 activityID = new ActivityID();
+		 activityID.setName("ActivityTest");
+		 projectID = new ProjectID();
+		 projectID.setName("Test");
+		 try {
+			 projectPlanner.assignDeveloper(activityID, projectID, developerID, testDeveloperID);
+		 }catch  (OperationNotAllowedException e) {
+				errorMessageHolder.setErrorMessage(e.getMessage());
+		 };
+	}
+	
+
+	@When("a developer sets expected work hours to {string}")
+	public void aDeveloperSetsExpectedWorkHoursTo(String hours) throws NullObjectException, FormattingException, OperationNotAllowedException {
+		// Write code here that turns the phrase above into concrete actions
+		 developer = new Developer();
+		 developer.setName("bcde");
+		 developerID = new DeveloperID();
+		 developerID.setName(developer.getName());
+		 projectPlanner.addDeveloper(developer);
+		 testDeveloper = new Developer();
+		 testDeveloper.setName("test");
+		 testDeveloperID = testDeveloper.getDeveloperID();
+		 projectPlanner.addDeveloper(testDeveloper);
+		 System.out.println(activityID);
+		 activityID = new ActivityID();
+		 activityID.setName("ActivityTest");
+		 projectID = new ProjectID();
+		 projectID.setName("Test");
+		 try {
+			 projectPlanner.setExpectedHours(activityID, projectID, developerID, hours);
+		 }catch  (OperationNotAllowedException e) {
+				errorMessageHolder.setErrorMessage(e.getMessage());
+		 };
+	
+	}
+	
+
+	@When("a developer sets the activity as complete")
+	public void aDeveloperSetsTheActivityAsComplete() throws OperationNotAllowedException, NullObjectException {
+		// Write code here that turns the phrase above into concrete actions
+		// Write code here that turns the phrase above into concrete actions
+		 developer = new Developer();
+		 developer.setName("bcde");
+		 developerID = new DeveloperID();
+		 developerID.setName(developer.getName());
+		 projectPlanner.addDeveloper(developer);
+		 testDeveloper = new Developer();
+		 testDeveloper.setName("test");
+		 testDeveloperID = testDeveloper.getDeveloperID();
+		 projectPlanner.addDeveloper(testDeveloper);
+		 System.out.println(activityID);
+		 activityID = new ActivityID();
+		 activityID.setName("ActivityTest");
+		 projectID = new ProjectID();
+		 projectID.setName("Test");
+		 try {
+			 projectPlanner.setActivityComplete(activityID, projectID, developerID);
+		 }catch  (OperationNotAllowedException e) {
+				errorMessageHolder.setErrorMessage(e.getMessage());
+		 };
+	}
+	
+	@When("a developers sets activity start year {string}")
+	public void aDevelopersSetsActivityStartYear(String year) throws NullObjectException, FormattingException, OperationNotAllowedException {
+		// Write code here that turns the phrase above into concrete actions
+		// Write code here that turns the phrase above into concrete actions
+		 developer = new Developer();
+		 developer.setName("bcde");
+		 developerID = new DeveloperID();
+		 developerID.setName(developer.getName());
+		 projectPlanner.addDeveloper(developer);
+		 testDeveloper = new Developer();
+		 testDeveloper.setName("test");
+		 testDeveloperID = testDeveloper.getDeveloperID();
+		 projectPlanner.addDeveloper(testDeveloper);
+		 System.out.println(activityID);
+		 activityID = new ActivityID();
+		 activityID.setName("ActivityTest");
+		 projectID = new ProjectID();
+		 projectID.setName("Test");
+		 try {
+			 	projectPlanner.setActivityStartYear(year, activityID, projectID, developerID);
+		 }catch  (OperationNotAllowedException e) {
+				errorMessageHolder.setErrorMessage(e.getMessage());
+		 };
+	}
+
+	@When("a developers sets activity end year {string}")
+	public void aDevelopersSetsActivityEndYear(String year) throws NullObjectException, FormattingException, OperationNotAllowedException {
+	    // Write code here that turns the phrase above into concrete actions
+		 developer = new Developer();
+		 developer.setName("bcde");
+		 developerID = new DeveloperID();
+		 developerID.setName(developer.getName());
+		 projectPlanner.addDeveloper(developer);
+		 testDeveloper = new Developer();
+		 testDeveloper.setName("test");
+		 testDeveloperID = testDeveloper.getDeveloperID();
+		 projectPlanner.addDeveloper(testDeveloper);
+		 System.out.println(activityID);
+		 activityID = new ActivityID();
+		 activityID.setName("ActivityTest");
+		 projectID = new ProjectID();
+		 projectID.setName("Test");
+		 try {
+			 	projectPlanner.setActivityEndYear(year, activityID, projectID, developerID);
+		 }catch  (OperationNotAllowedException e) {
+				errorMessageHolder.setErrorMessage(e.getMessage());
+		 };
+	}
+
+	@When("a developers sets activity start week of {string}")
+	public void aDevelopersSetsActivityStartWeekOf(String week) throws NullObjectException, FormattingException, OperationNotAllowedException {
+		// Write code here that turns the phrase above into concrete actions
+		// Write code here that turns the phrase above into concrete actions
+		 developer = new Developer();
+		 developer.setName("bcde");
+		 developerID = new DeveloperID();
+		 developerID.setName(developer.getName());
+		 projectPlanner.addDeveloper(developer);
+		 testDeveloper = new Developer();
+		 testDeveloper.setName("test");
+		 testDeveloperID = testDeveloper.getDeveloperID();
+		 projectPlanner.addDeveloper(testDeveloper);
+		 System.out.println(activityID);
+		 activityID = new ActivityID();
+		 activityID.setName("ActivityTest");
+		 projectID = new ProjectID();
+		 projectID.setName("Test");
+		 try {
+			 	projectPlanner.setActivityStartWeek(week, activityID, projectID, developerID);
+		 }catch  (OperationNotAllowedException e) {
+				errorMessageHolder.setErrorMessage(e.getMessage());
+		 };
+	}
+
+	@When("a developers sets activity end week of {string}")
+	public void aDevelopersSetsActivityEndWeekOf(String week) throws OperationNotAllowedException, NullObjectException, FormattingException {
+	    // Write code here that turns the phrase above into concrete actions
+		 developer = new Developer();
+		 developer.setName("bcde");
+		 developerID = new DeveloperID();
+		 developerID.setName(developer.getName());
+		 projectPlanner.addDeveloper(developer);
+		 testDeveloper = new Developer();
+		 testDeveloper.setName("test");
+		 testDeveloperID = testDeveloper.getDeveloperID();
+		 projectPlanner.addDeveloper(testDeveloper);
+		 System.out.println(activityID);
+		 activityID = new ActivityID();
+		 activityID.setName("ActivityTest");
+		 projectID = new ProjectID();
+		 projectID.setName("Test");
+		 try {
+			 	projectPlanner.setActivityEndWeek(week, activityID, projectID, developerID);
+		 }catch  (OperationNotAllowedException e) {
+				errorMessageHolder.setErrorMessage(e.getMessage());
+		 };
+	}
+	
+	@When("a developer sets activity name to {string}")
+	public void aDeveloperSetsActivityNameTo(String name) throws NullObjectException, FormattingException, OperationNotAllowedException {
+	    // Write code here that turns the phrase above into concrete actions
+		 developer = new Developer();
+		 developer.setName("bcde");
+		 developerID = new DeveloperID();
+		 developerID.setName(developer.getName());
+		 projectPlanner.addDeveloper(developer);
+		 testDeveloper = new Developer();
+		 testDeveloper.setName("test");
+		 testDeveloperID = testDeveloper.getDeveloperID();
+		 projectPlanner.addDeveloper(testDeveloper);
+		 System.out.println(activityID);
+		 activityID = new ActivityID();
+		 activityID.setName("ActivityTest");
+		 projectID = new ProjectID();
+		 projectID.setName("Test");
+		 try {
+			 	projectPlanner.setActivityName(activityID, projectID, name, developerID);
+		 }catch  (OperationNotAllowedException e) {
+				errorMessageHolder.setErrorMessage(e.getMessage());
+		 };
+	}
+	
+	
+	
+	@When("the developer sets projectName to {string}")
+	public void theDeveloperSetsProjectNameTo(String name) throws OperationNotAllowedException, FormattingException {
+	    // Write code here that turns the phrase above into concrete actions
+		try {
+			projectPlanner.editProjectName(projectID, developerID, name);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("the developer sets start date of week {string} and year {string}")
+	public void theDeveloperSetsStartDateOfWeekAndYear(String week, String year) throws Exception, FormattingException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		try {
+			projectPlanner.setStartWeek(projectID, week, developerID);
+			projectPlanner.setStartYear(projectID, year, developerID);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		};
+	}
+	
+	@When("the developer sets end date of week {string} and year {string}")
+	public void theDeveloperSetsEndDateOfWeekAndYear(String week, String year) throws Exception, FormattingException, NullObjectException {
+	    // Write code here that turns the phrase above into concrete actions
+		try {
+			projectPlanner.setEndWeek(projectID, week, developerID);
+			projectPlanner.setEndYear(projectID, year, developerID);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		};
+	}
+
+	
+	
 	//Get Activity Information feature
 	
 	@Given("the project has an activity registered")
@@ -280,6 +518,7 @@ public class DeveloperTests {
 			throws NullObjectException {
 		activityData = projectPlanner.getActivityInformation(projectID, activityID,developerID);
 	}
+
 	
 	@Then("the developer has access to the activity information")
 	public void theDeveloperHasAccessToTheActivityInformation() {

@@ -80,6 +80,7 @@ public class Project extends AbstractProject {
 			int number = 0;
 			try{
 				number = Integer.parseInt(start);
+				System.out.println(number);
 				if(number < 1 || number > 52)
 				{
 					throw new FormattingException(incorrectDate);
@@ -98,7 +99,6 @@ public class Project extends AbstractProject {
 	}
 	
 	public void setEndYear(String start, DeveloperID developerID) throws Exception, FormattingException, OperationNotAllowedException {
-		if(isProjectLeader(developerID)){
 			try{
 				int number = Integer.parseInt(start);
 				if(number < 1000 || number > 9999)
@@ -112,9 +112,7 @@ public class Project extends AbstractProject {
 			}catch (Exception e){
 				throw new FormattingException(incorrectDate);
 			}
-		}else{
-			throw new OperationNotAllowedException(IDNotLeader);
-		}
+
 	}
 	
 	@Override
@@ -220,7 +218,7 @@ public class Project extends AbstractProject {
 			AbstractActivity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setExpectedWorkHours(hours);
 		}else{
-			throw new OperationNotAllowedException("IDNotLeader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 
@@ -270,7 +268,7 @@ public class Project extends AbstractProject {
 			AbstractActivity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setActivityStartWeek(week);
 		}else{
-			throw new OperationNotAllowedException("Id is not leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -280,7 +278,7 @@ public class Project extends AbstractProject {
 			AbstractActivity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setActivityStartYear(year);
 		}else{
-			throw new OperationNotAllowedException("Id is not leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -289,7 +287,7 @@ public class Project extends AbstractProject {
 			AbstractActivity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setActivityEndWeek(week);
 		}else{
-			throw new OperationNotAllowedException("Id is not leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	
@@ -299,7 +297,7 @@ public class Project extends AbstractProject {
 			AbstractActivity abstractActivity = activityRepo.getActivity(activityID);
 			abstractActivity.setActivityEndYear(year);
 		}else{
-			throw new OperationNotAllowedException("Id is not leader");
+			throw new OperationNotAllowedException(IDNotLeader);
 		}
 	}
 	

@@ -228,6 +228,17 @@ public class LeaderTests {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
+	
+	@When("the project leader sets an invalid end date of week {string} and year {string}")
+	public void theProjectLeaderSetsAnInvalidEndDateOfWeekAndYear(String week, String year) throws FormattingException, OperationNotAllowedException, NullObjectException, Exception {
+	    // Write code here that turns the phrase above into concrete actions
+		try {
+			projectPlanner.setEndYear(projectID, year, devLeaderID);
+			projectPlanner.setEndWeek(projectID, week, devLeaderID);
+		} catch (FormattingException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
 
 	@Then("the project has end date of week {int} and year {int}")
 	public void theProjectHasEndDateOfWeekAndYear(Integer week, Integer year)

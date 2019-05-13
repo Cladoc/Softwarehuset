@@ -36,3 +36,9 @@ Then he gets the error message "Activity name already existing"
 #Given a developer is project leader on a project registered in the project planner
 #When the project leader sets activity "ActivityTest" name to "TestName"
 #Then the project leader gets the error message "Activity does not exist"
+
+Scenario: Developer attempts to edit activityName
+Given a developer is project leader on a project registered in the project planner
+And an activity with the name "ActivityTest" is added to the project
+When a developer sets activity name to "name test"
+Then he gets the error message "ID not project leader"
