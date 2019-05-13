@@ -442,9 +442,6 @@ public class DeveloperTests {
 		};
 	}
 
-	
-	
-
 	@Given("the project has an activity registered")
 	public void theProjectHasAnActivityRegistered() 
 			throws NullObjectException, OperationNotAllowedException, FormattingException, Exception {
