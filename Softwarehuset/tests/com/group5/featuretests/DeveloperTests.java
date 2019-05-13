@@ -45,8 +45,8 @@ public class DeveloperTests {
 		this.activityHelper = activityHelper;
 	}
 
-	//Add Developer:-----------------------------------------------
-	//Author: Casper (s163950)
+
+	
 	@Given("that a developer with the ID {string} exists")
 	public void thatADeveloperWithTheIDExists(String id)throws NullObjectException {
 	    developer = new Developer();
@@ -57,19 +57,19 @@ public class DeveloperTests {
 	    assertTrue(developer.getDeveloperID()!= null);
 	}
 
-	//Author: Casper (s163950)
+
 	@When("the developer is added to the project planner")
 	public void theDeveloperIsAddedToTheProjectPlanner() throws OperationNotAllowedException, NullObjectException {
 	    	projectPlanner.addDeveloper(developer);
 	}
 
-	//Author: Casper (s163950)
+
 	@Then("the developer is added to the project planner successfully")
 	public void theDeveloperIsAddedToTheProjectPlannerSuccessfully() {
 	    assertTrue(projectPlanner.checkDeveloperExist(developer.getDeveloperID()));
 	}
 	
-	//Author: Casper (s163950)
+
 	@Given("the developer is registered in the project planner")
 	public void theDeveloperIsRegisteredInTheProjectPlanner() throws OperationNotAllowedException{
 	    projectPlanner.addDeveloper(developer);
@@ -84,7 +84,7 @@ public class DeveloperTests {
 	    assertFalse(projectPlanner.checkDeveloperExist(developerID2));
 	}
 	
-	//Author: Casper (s163950)
+
 	@When("the developer is added again")
 	public void theDeveloperIsAddedAgain() throws OperationNotAllowedException{
 		try{
@@ -94,7 +94,7 @@ public class DeveloperTests {
 		}
 	}
 	
-	//Author: Casper (s163950)
+
 	@Given("that a developer is registered in the project planner")
 	public void thatADeveloperIsRegisteredInTheProjectPlanner() throws OperationNotAllowedException, Exception, FormattingException {
 		developer = developerHelper.getDeveloper();
@@ -104,7 +104,7 @@ public class DeveloperTests {
 		assertTrue(projectPlanner.checkDeveloperExist(developerID));
 	}
 
-	//Author: Casper (s163950)
+
 	@When("the developer adds a project with the name {string} and start year of {string}")
 	public void theDeveloperAddsAProjectWithTheNameAndStartYearOf(String name, String year) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = new Project();
@@ -150,7 +150,7 @@ public class DeveloperTests {
 		assertTrue(projectPlanner.checkProjectExist(projectID2));
 	}
 		
-	//Author: Casper (s163950)
+
 	@Then("the project with the name {string} and start year of {int} is added to the project planner")
 	public void theProjectWithTheNameAndStartYearOfIsAddedToTheProjectPlanner(String name, int year) {
 	    assertTrue(project.getName().equals(name));
@@ -159,13 +159,13 @@ public class DeveloperTests {
 		assertTrue(projectPlanner.checkProjectExist(projectID));
 	}
 
-	//Author: Casper (s163950)
+
 	@Then("he gets the error message {string}")
 	public void heGetsTheErrorMessage(String error) {
 	    assertTrue(errorMessageHolder.getErrorMessage().equals(error));
 	}
 
-	//Author: Casper (s163950)
+
 	@Given("a project is registered with the name {string}")
 	public void aProjectIsRegisteredWithTheName(String name) throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = new Project();
@@ -176,15 +176,13 @@ public class DeveloperTests {
 	    projectPlanner.checkProjectExist(projectID);
 	}
 
-	//Author: Casper (s163950)
+
 	@Given("that a developer is not registered in the project planner")
 	public void thatADeveloperIsNotRegisteredInTheProjectPlanner() {
 	    developer = new Developer();
 	    developer.setName("abcd");
 	}
-
-	//SetProjectLeader:------------------------
-	//Author: Casper (s163950)
+	
 	@Given("a developer with ID {string} is registered in the project planner")
 	public void aDeveloperWithIDIsRegisteredInTheProjectPlanner(String id) throws OperationNotAllowedException{
 		developer = new Developer();
@@ -197,7 +195,7 @@ public class DeveloperTests {
 		return;
 	}
 	
-	//Author: Casper (s163950)
+	
 	@Given("a project is registered in the project planner")
 	public void aProjectIsRegisteredInTheProjectPlanner() throws Exception, FormattingException, OperationNotAllowedException, NullObjectException {
 		project = projectHelper.getProject();
@@ -207,13 +205,13 @@ public class DeveloperTests {
 	    assertTrue(projectPlanner.checkProjectExist(projectID));
 	}
 	
-	//Author: Casper (s163950)
+	
 	@Then("the project has project leader with ID {string}")
 	public void theProjectHasProjectLeaderWithID(String string) throws Exception, FormattingException {
 	    assertTrue(projectPlanner.isProjectLeader(projectID, developer.getDeveloperID()));
 	}
 	
-	//Author: Casper (s163950)
+	
 	@When("the developer sets developer with ID {string} as project leader in the project")
 	public void theDeveloperSetsDeveloperWithIDAsProjectLeaderInTheProject(String badID) throws Exception, FormattingException, NullObjectException {
 	    Developer badDeveloper = new Developer();
@@ -227,7 +225,6 @@ public class DeveloperTests {
 
 	@When("the developer registers work hours {string} in week {string} and year {string} for the activity named {string}")
 	public void theDeveloperRegistersWorkHoursInWeekAndYearForTheActivityNamed(String hours, String week, String year, String name) throws NullObjectException, FormattingException {
-	    // Write code here that turns the phrase above into concrete actions
 		ActivityID testActivityID = new ActivityID();
 		testActivityID.setName(name);
 		DeveloperID developerID = developer.getDeveloperID();
@@ -241,14 +238,12 @@ public class DeveloperTests {
 
 	@Then("the developer has registered work hours {double} in week {int} and year {int} for the activity named {string}")
 	public void theDeveloperHasRegisteredWorkHoursInWeekAndYearForTheActivityNamed(Double hours, Integer week, Integer year, String string) throws NullObjectException {
-	    // Write code here that turns the phrase above into concrete actions
 		DeveloperID developerID = developer.getDeveloperID();
 	
 		assertTrue(projectPlanner.getHours(week, year, developerID) == hours);
 	}
 	
-//Remove developer feature
-	
+
 
 	@Then("the developer is removed from the project planner successfully")
 	public void theDeveloperIsRemovedFromTheProjectPlannerSuccessfully() {
@@ -263,12 +258,10 @@ public class DeveloperTests {
 		 developerID = new DeveloperID();
 		 developerID.setName(developer.getName());
 	}
-	
-// Checks if Dev attempts project leader actions
+
 	
 	@When("a developer assigns a developer to the activity")
 	public void aDeveloperAssignsADeveloperToTheActivity() throws OperationNotAllowedException, NullObjectException {
-	    // Write code here that turns the phrase above into concrete actions
 		 developer = new Developer();
 		 developer.setName("bcde");
 		 developerID = new DeveloperID();
@@ -292,7 +285,6 @@ public class DeveloperTests {
 
 	@When("a developer sets expected work hours to {string}")
 	public void aDeveloperSetsExpectedWorkHoursTo(String hours) throws NullObjectException, FormattingException, OperationNotAllowedException {
-		// Write code here that turns the phrase above into concrete actions
 		 developer = new Developer();
 		 developer.setName("bcde");
 		 developerID = new DeveloperID();
@@ -313,8 +305,6 @@ public class DeveloperTests {
 
 	@When("a developer sets the activity as complete")
 	public void aDeveloperSetsTheActivityAsComplete() throws OperationNotAllowedException, NullObjectException {
-		// Write code here that turns the phrase above into concrete actions
-		// Write code here that turns the phrase above into concrete actions
 		 developer = new Developer();
 		 developer.setName("bcde");
 		 developerID = new DeveloperID();
@@ -333,8 +323,6 @@ public class DeveloperTests {
 	
 	@When("a developers sets activity start year {string}")
 	public void aDevelopersSetsActivityStartYear(String year) throws NullObjectException, FormattingException, OperationNotAllowedException {
-		// Write code here that turns the phrase above into concrete actions
-		// Write code here that turns the phrase above into concrete actions
 		 developer = new Developer();
 		 developer.setName("bcde");
 		 developerID = new DeveloperID();
@@ -353,7 +341,6 @@ public class DeveloperTests {
 
 	@When("a developers sets activity end year {string}")
 	public void aDevelopersSetsActivityEndYear(String year) throws NullObjectException, FormattingException, OperationNotAllowedException {
-	    // Write code here that turns the phrase above into concrete actions
 		 developer = new Developer();
 		 developer.setName("bcde");
 		 developerID = new DeveloperID();
@@ -372,8 +359,6 @@ public class DeveloperTests {
 
 	@When("a developers sets activity start week of {string}")
 	public void aDevelopersSetsActivityStartWeekOf(String week) throws NullObjectException, FormattingException, OperationNotAllowedException {
-		// Write code here that turns the phrase above into concrete actions
-		// Write code here that turns the phrase above into concrete actions
 		 developer = new Developer();
 		 developer.setName("bcde");
 		 developerID = new DeveloperID();
@@ -392,7 +377,6 @@ public class DeveloperTests {
 
 	@When("a developers sets activity end week of {string}")
 	public void aDevelopersSetsActivityEndWeekOf(String week) throws OperationNotAllowedException, NullObjectException, FormattingException {
-	    // Write code here that turns the phrase above into concrete actions
 		 developer = new Developer();
 		 developer.setName("bcde");
 		 developerID = new DeveloperID();
@@ -411,7 +395,6 @@ public class DeveloperTests {
 	
 	@When("a developer sets activity name to {string}")
 	public void aDeveloperSetsActivityNameTo(String name) throws NullObjectException, FormattingException, OperationNotAllowedException {
-	    // Write code here that turns the phrase above into concrete actions
 		 developer = new Developer();
 		 developer.setName("bcde");
 		 developerID = new DeveloperID();
@@ -432,7 +415,6 @@ public class DeveloperTests {
 	
 	@When("the developer sets projectName to {string}")
 	public void theDeveloperSetsProjectNameTo(String name) throws OperationNotAllowedException, FormattingException {
-	    // Write code here that turns the phrase above into concrete actions
 		try {
 			projectPlanner.editProjectName(projectID, developerID, name);
 		} catch (OperationNotAllowedException e) {
@@ -442,7 +424,6 @@ public class DeveloperTests {
 	
 	@When("the developer sets start date of week {string} and year {string}")
 	public void theDeveloperSetsStartDateOfWeekAndYear(String week, String year) throws Exception, FormattingException, NullObjectException {
-	    // Write code here that turns the phrase above into concrete actions
 		try {
 			projectPlanner.setStartWeek(projectID, week, developerID);
 			projectPlanner.setStartYear(projectID, year, developerID);
@@ -453,7 +434,6 @@ public class DeveloperTests {
 	
 	@When("the developer sets end date of week {string} and year {string}")
 	public void theDeveloperSetsEndDateOfWeekAndYear(String week, String year) throws Exception, FormattingException, NullObjectException {
-	    // Write code here that turns the phrase above into concrete actions
 		try {
 			projectPlanner.setEndWeek(projectID, week, developerID);
 			projectPlanner.setEndYear(projectID, year, developerID);
@@ -464,8 +444,7 @@ public class DeveloperTests {
 
 	
 	
-	//Get Activity Information feature
-	
+
 	@Given("the project has an activity registered")
 	public void theProjectHasAnActivityRegistered() 
 			throws NullObjectException, OperationNotAllowedException, FormattingException, Exception {
