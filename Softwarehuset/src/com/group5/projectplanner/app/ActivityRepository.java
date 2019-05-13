@@ -2,7 +2,6 @@ package com.group5.projectplanner.app;
 
 import java.util.ArrayList;
 import java.util.List;
-//Author: Marko (s163964)
 public class ActivityRepository {
 	
 	private List<Activity> activities = new ArrayList<Activity>();

@@ -3,7 +3,7 @@ package com.group5.projectplanner.app;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-//Author: Casper (s163950)
+
 public class ProjectRepository {
 
 	private int year = 0;
@@ -21,7 +21,6 @@ public class ProjectRepository {
 		}
 	}
 
-	//Author: Casper (s163950)
 	public boolean checkProjectExist(ProjectID projectID) {
 		for(Project listProject : projects){
 			if(listProject.getName().equalsIgnoreCase(projectID.getName())){
@@ -40,7 +39,6 @@ public class ProjectRepository {
 		return new NullProject();
 	}
 
-	//Internal helper methods
 	private ProjectID modifyProjectID(ProjectID projectID){
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		if(year < currentYear){
@@ -59,5 +57,9 @@ public class ProjectRepository {
 			projectIDs.add(listProject.getID());
 		}
 		return projectIDs;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
 	}
 }

@@ -8,7 +8,6 @@ public class ProjectPlannerView {
 		System.out.print("Welcome to the project planner\n\n");
 	}
 	
-	// Anders (s163952)
 	public void startMenuMessage() {
 		System.out.println("Type 1 or 2 to select following options:");
 		System.out.println("1. Developer sign-in");
@@ -16,20 +15,16 @@ public class ProjectPlannerView {
 		System.out.print("3. Exit project planner\n\n");
 	}
 	
-	
-	// Anders (s163952)
 	public void failMessage(String failMessage) {
 		System.out.print("Failed with: "+"\""+failMessage+"\""+"\n\n");
 	}
 	
-	// Anders (s163952)
 	public void mainMenu() {
-		System.out.println("Type 1, 2, 3, 4 or 5 to select following options:");
+		System.out.println("Type 1, 2, 3 or 4 to select following options:");
 		System.out.println("1. View Work hours");
 		System.out.println("2. Make a new project");
 		System.out.println("3. Edit a project");
-		System.out.println("4. Remove developer");
-		System.out.print("5. Sign out\n\n");
+		System.out.print("4. Sign out\n\n");
 	}
 
 	public void successMessage() {
@@ -77,6 +72,11 @@ public class ProjectPlannerView {
 		System.out.println("Serial number: "+projectID.getYear()+projectID.getSerialNumber());
 		System.out.println("Project starts at week "+projData.getStartWeek()+ "   in year " + projData.getStartYear());
 		System.out.println("Project ends at week "+projData.getEndWeek()+ "   in year " + projData.getEndYear());
+		if(projData.getLeader() == null){
+			System.out.print("Leader: There is no leader\n\n");
+		}else{
+			System.out.print("Project leader is: "+projData.getLeader().getName()+"\n\n");
+		}
 	}
 
 	public void printIncompleteActivityList(List<Activity> activityList) {

@@ -40,7 +40,7 @@ Given a developer is project leader on a project registered in the project plann
 And an activity with the name "ActivityTest" is added to the project
 When the project leader sets activity end date of week "twenty" and year "twentytwenty"
 Then he gets the error message "Incorrect date format"
-
+ 
 Scenario: Developer attempts to edit start year
 Given a developer is project leader on a project registered in the project planner
 And an activity with the name "ActivityTest" is added to the project
@@ -53,7 +53,6 @@ And an activity with the name "ActivityTest" is added to the project
 When a developers sets activity end year "2020"
 Then he gets the error message "ID not project leader"
 
-
 Scenario: Developer attempts to edit start week
 Given a developer is project leader on a project registered in the project planner
 And an activity with the name "ActivityTest" is added to the project
@@ -65,3 +64,23 @@ Given a developer is project leader on a project registered in the project plann
 And an activity with the name "ActivityTest" is added to the project
 When a developers sets activity end week of "42"
 Then he gets the error message "ID not project leader"
+
+Scenario: Fail when non registered developer sets project start year
+Given a developer is project leader on a project registered in the project planner
+When an unregistered developer tries to set the project start year
+Then he gets the error message "Invalid ID"
+
+Scenario: Fail when non registered developer sets project start week
+Given a developer is project leader on a project registered in the project planner
+When an unregistered developer tries to set the project start week
+Then he gets the error message "Invalid ID"
+
+Scenario: Fail when non registered developer sets project end year
+Given a developer is project leader on a project registered in the project planner
+When an unregistered developer tries to set the project end year
+Then he gets the error message "Invalid ID"
+
+Scenario: Fail when non registered developer sets project end week
+Given a developer is project leader on a project registered in the project planner
+When an unregistered developer tries to set the project end week
+Then he gets the error message "Invalid ID"

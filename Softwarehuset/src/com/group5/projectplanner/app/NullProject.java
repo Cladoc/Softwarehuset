@@ -2,7 +2,6 @@ package com.group5.projectplanner.app;
 
 import java.util.List;
 import java.util.ArrayList;
-//Author: Casper (s163950)
 public class NullProject extends AbstractProject{
 	
 	private String projNotExist = "Project does not exist";

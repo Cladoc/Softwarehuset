@@ -1,8 +1,7 @@
 package com.group5.projectplanner.app;
 
 public class NullDeveloper extends AbstractDeveloper {
-	//Author: Casper (s163950)
-	// Author: Mads (s144009)
+
 	@Override
 	public void setName(String name) {}
 	
@@ -26,7 +25,6 @@ public class NullDeveloper extends AbstractDeveloper {
 	}
 	
 	@Override
-	//Author: Casper (s163950)
 	public boolean matches(DeveloperID developerID) throws NullObjectException{
 		throw new NullObjectException("Developer does not exist");
 	}

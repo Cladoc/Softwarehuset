@@ -11,7 +11,6 @@ public class DeveloperRepository {
 	private String invalidWeek = "Invalid week entered";
 	private String invalidYear = "Invalid year entered";
 	
-	//Author: Casper (s163950)
 	public void addDeveloper(Developer developer) throws OperationNotAllowedException{
 		if(checkDeveloperExists(developer.getDeveloperID())){
 			throw new OperationNotAllowedException("Developer already exists");
@@ -20,7 +19,6 @@ public class DeveloperRepository {
 		}
 	}
 	
-	// Author: Mads (s144009)
 	public List<DeveloperID> getAvailableDevelopers(String week, String year) throws FormattingException {
 		int weekInteger = 0;
 		int yearInteger = 0;
@@ -53,22 +51,11 @@ public class DeveloperRepository {
 	
 	public boolean checkDeveloperExists(DeveloperID developerID) {
 		for(Developer listDeveloper: developers){
-			
 			if(listDeveloper.getName().equalsIgnoreCase(developerID.getName())){
 				return true;
 			}
 		}
 		return false;
-	}
-	
-
-	
-	public void removeDeveloper(Developer developer) throws OperationNotAllowedException{
-		if(!checkDeveloperExists(developer.getDeveloperID())){
-			throw new OperationNotAllowedException("Developer does not exist");
-		}else{
-			developers.remove(developer);
-		}
 	}
 	
 	public AbstractDeveloper getDeveloper(DeveloperID developerID){

@@ -53,7 +53,6 @@ public class Project extends AbstractProject {
 		return this.projectID.getName();
 	}
 	
-	//Author: Casper (s163950)
 	@Override
 	public void setStartYear(String start) throws Exception, FormattingException, NullObjectException {
 		
@@ -80,7 +79,6 @@ public class Project extends AbstractProject {
 			int number = 0;
 			try{
 				number = Integer.parseInt(start);
-				System.out.println(number);
 				if(number < 1 || number > 52)
 				{
 					throw new FormattingException(incorrectDate);
@@ -172,7 +170,6 @@ public class Project extends AbstractProject {
 		leader = developerID;
 	}
 
-	//Author: Casper (s163950)
 	public boolean isProjectLeader(DeveloperID developerID) {
 		if(leader == null){
 			return false;

@@ -546,4 +546,180 @@ public class LeaderTests {
 	public void theProjectLeaderGetsAListOfAvailableDevelopersIDWithDeveloperIDs(Integer int1) {
 	   assertTrue(developerIDs.size() == int1);
 	}
+	
+	@When("an unregistered developer tries to assign a developer to the activity")
+	public void anUnregisteredDeveloperTriesToAssignADeveloperToTheActivity() throws NullObjectException {
+	    developerID = new DeveloperID();
+	    developerID.setName("BadT");
+	    try{
+	    	projectPlanner.assignDeveloper(activityID, projectID, devLeaderID, developerID);
+	    }catch(OperationNotAllowedException e){
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	}
+	
+	@When("the user checks if a non registered developer is assigned to the activity")
+	public void theUserChecksIfANonRegisteredDeveloperIsAssignedToTheActivity() throws NullObjectException {
+	   developerID = new DeveloperID();
+	   developerID.setName("BadT");
+	   try{
+		   projectPlanner.checkDeveloperAssigned(activityID, projectID, developerID);
+	   }catch(OperationNotAllowedException e){
+		   errorMessageHolder.setErrorMessage(e.getMessage());
+	   }
+	}
+	
+	@When("an unregistered developer tries to set expected work hours of the activity")
+	public void anUnregisteredDeveloperTriesToSetExpectedWorkHoursOfTheActivity() throws NullObjectException, FormattingException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String hours = "20";
+		try{
+			projectPlanner.setExpectedHours(activityID, projectID, developerID, hours);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("an unregistered developer tries to set the activity as complete")
+	public void anUnregisteredDeveloperTriesToSetTheActivityAsComplete() throws NullObjectException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		try{
+			projectPlanner.setActivityComplete(activityID, projectID, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("an unregistered developer tries to set the project start year")
+	public void anUnregisteredDeveloperTriesToSetTheProjectStartYear() throws Exception, FormattingException, NullObjectException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String year = "2020";
+		try{
+			projectPlanner.setStartYear(projectID, year, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("an unregistered developer tries to set the project start week")
+	public void anUnregisteredDeveloperTriesToSetTheProjectStartWeek() throws Exception, FormattingException, NullObjectException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String week = "40";
+		try{
+			projectPlanner.setStartWeek(projectID, week, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("an unregistered developer tries to set the project end year")
+	public void anUnregisteredDeveloperTriesToSetTheProjectEndYear() throws Exception, FormattingException, NullObjectException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String year = "2021";
+		try{
+			projectPlanner.setEndYear(projectID, year, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("an unregistered developer tries to set the project end week")
+	public void anUnregisteredDeveloperTriesToSetTheProjectEndWeek() throws Exception, FormattingException, NullObjectException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String week = "40";
+		try{
+			projectPlanner.setEndWeek(projectID, week, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("an unregistered developer tries to set the project name")
+	public void anUnregisteredDeveloperTriesToSetTheProjectName() throws FormattingException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String name = "FailingTest";
+		try{
+			projectPlanner.editProjectName(projectID, developerID, name);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("an unregistered developer tries to get a list of incomplete activities for the project")
+	public void anUnregisteredDeveloperTriesToGetAListOfIncompleteActivitiesForTheProject() throws NullObjectException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		try{
+			incompleteActivities = projectPlanner.getIncompleteActivities(projectID, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("an unregistered developer tries to set the activity start year")
+	public void anUnregisteredDeveloperTriesToSetTheActivityStartYear() throws NullObjectException, FormattingException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String year = "2020";
+		try{
+			projectPlanner.setActivityStartYear(year, activityID, projectID, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@When("an unregistered developer tries to set the activity start week")
+	public void anUnregisteredDeveloperTriesToSetTheActivityStartWeek() throws NullObjectException, FormattingException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String week = "40";
+		try{
+			projectPlanner.setActivityStartWeek(week, activityID, projectID, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@When("an unregistered developer tries to set the activity end year")
+	public void anUnregisteredDeveloperTriesToSetTheActivityEndYear() throws NullObjectException, FormattingException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String year = "2021";
+		try{
+			projectPlanner.setActivityEndYear(year, activityID, projectID, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@When("an unregistered developer tries to set the activity end week")
+	public void anUnregisteredDeveloperTriesToSetTheActivityEndWeek() throws NullObjectException, FormattingException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String week = "41";
+		try{
+			projectPlanner.setActivityEndWeek(week, activityID, projectID, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("an unregistered developer tries to set the activity name")
+	public void anUnregisteredDeveloperTriesToSetTheActivityName() throws NullObjectException, FormattingException {
+		developerID = new DeveloperID();
+		developerID.setName("BadT");
+		String name = "BadTest";
+		try{
+			projectPlanner.setActivityName(activityID, projectID, name, developerID);
+		}catch(OperationNotAllowedException e){
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
 }

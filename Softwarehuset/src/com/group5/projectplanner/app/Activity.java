@@ -103,7 +103,6 @@ public class Activity extends AbstractActivity {
 			throw new FormattingException("Incorrect date format");
 		}
 		if (number <= 1 || number >= 53) {
-
 			throw new FormattingException("Incorrect date format");
 		}
 		if (!((this.startYear == this.endYear && number <= this.endWeek) || this.startYear < this.endYear)) {
@@ -196,10 +195,6 @@ public class Activity extends AbstractActivity {
 		activityData.setStartYear(this.startYear);
 		
 		return activityData;
-	}
-	
-	public void unassignDeveloper(Developer dev) throws OperationNotAllowedException {
-		developers.removeDeveloper(dev);		
 	}
 
 }

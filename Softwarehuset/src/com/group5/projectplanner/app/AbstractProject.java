@@ -2,9 +2,7 @@ package com.group5.projectplanner.app;
 
 import java.util.List;
 
-//Author: Casper (s163950)
 public abstract class AbstractProject {
-	
 	public abstract void setID(ProjectID projectID);
 	public abstract ProjectID getID();
 	public abstract void setName(String name, DeveloperID developerID) throws OperationNotAllowedException,FormattingException;

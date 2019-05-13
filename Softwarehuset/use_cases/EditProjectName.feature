@@ -17,3 +17,8 @@ Given that a developer is registered in the project planner
 And a project is registered in the project planner
 When the developer sets projectName to "TestName"
 Then he gets the error message "ID not project leader"
+
+Scenario: Fail when non registered developer sets the name of a project
+Given a developer is project leader on a project registered in the project planner
+When an unregistered developer tries to set the project name
+Then he gets the error message "Invalid ID"
