@@ -294,8 +294,12 @@ public class ProjectPlannerController {
 				try {
 					System.out.println("enter a name");
 					String name = console.nextLine();
-					projectPlanner.setActivityName(selectedActivityID, selectedProjectID, name, signedInDeveloperID);
-					System.out.println("Success");
+					try{
+						projectPlanner.setActivityName(selectedActivityID, selectedProjectID, name, signedInDeveloperID);
+						System.out.println("Success");
+					}catch(OperationNotAllowedException e){
+						projectPlannerView.failMessage(e.getMessage());
+					}
 				}catch(FormattingException e) {
 					System.out.println("Invalid name entered");
 				}
